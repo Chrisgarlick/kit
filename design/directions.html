@@ -1,0 +1,443 @@
+<title>Kit Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Bodoni+Moda:opsz,wght@6..96,400;600&family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600&family=Fragment+Mono&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&family=Martian+Mono:wght@300;400;500&family=Outfit:wght@400;500;600&family=Public+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;600&family=Unbounded:wght@400;600&display=swap">
+<style>
+:root {
+  --page: #f4f5f7;
+  --ink: #14171c;
+  --ink-2: #4e5663;
+  --ink-3: #6b7380;
+  --rule: #dfe2e7;
+  --card: #ffffff;
+  --focus: #2d5bd8;
+  --chip: #e9ecf0;
+  --star: #b7791f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0f12; --ink: #e7eaee; --ink-2: #a9b0bb; --ink-3: #8a929e;
+    --rule: #252a31; --card: #14171c; --focus: #8aa8ff; --chip: #1e2228; --star: #f0b84a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0f12; --ink: #e7eaee; --ink-2: #a9b0bb; --ink-3: #8a929e;
+  --rule: #252a31; --card: #14171c; --focus: #8aa8ff; --chip: #1e2228; --star: #f0b84a;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+}
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.wrap { max-width: 1240px; margin-inline: auto; }
+.top {
+  display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: flex-end; justify-content: space-between;
+  padding-block: 40px 28px; border-bottom: 1px solid var(--rule); margin-bottom: 28px;
+}
+.top h1 { margin: 0 0 6px; font-size: 1.9rem; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; }
+.top p { margin: 0; max-width: 62ch; color: var(--ink-2); }
+.top .eyebrow { font: 500 0.72rem/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; display: block; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; padding: 2px; background: var(--card); }
+.seg button {
+  font: inherit; font-size: 0.85rem; border: 0; background: transparent; color: var(--ink-2);
+  padding: 6px 12px; border-radius: 6px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--chip); color: var(--ink); font-weight: 600; }
+.filter { font-size: 0.85rem; color: var(--ink-2); display: inline-flex; gap: 8px; align-items: center; }
+.filter input { width: 16px; height: 16px; accent-color: var(--focus); }
+
+.grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 540px), 1fr)); }
+.route { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.meta { padding: 20px 22px 18px; display: grid; gap: 12px; }
+.meta-head { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
+.meta h2 { margin: 0; font-size: 1.15rem; letter-spacing: -0.01em; }
+.meta .thesis { margin: 2px 0 0; color: var(--ink-2); font-size: 0.92rem; max-width: 60ch; }
+.star {
+  flex: none; font: inherit; font-size: 0.82rem; border: 1px solid var(--rule); background: transparent; color: var(--ink-2);
+  border-radius: 999px; padding: 4px 11px; cursor: pointer; white-space: nowrap;
+}
+.star[aria-pressed="true"] { color: var(--star); border-color: currentColor; font-weight: 600; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; font-size: 0.84rem; }
+.facts dt { color: var(--ink-3); }
+.facts dd { margin: 0; color: var(--ink); }
+.swatches { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.sw { width: 22px; height: 22px; border-radius: 6px; border: 1px solid rgb(0 0 0 / 0.12); }
+.sw-label { font-size: 0.78rem; color: var(--ink-3); margin-left: 4px; }
+.cost { font: 500 0.72rem/1 ui-monospace, "SF Mono", Menlo, monospace; padding: 5px 8px; border-radius: 6px; background: var(--chip); color: var(--ink-2); }
+.cost.zero { color: #fff; background: #1f7a4d; }
+
+/* ---------- Specimen: everything below reads the route's own tokens ---------- */
+.stage {
+  background: var(--k-stage); color: var(--k-fg);
+  padding: 22px; border-top: 1px solid var(--rule); flex: 1;
+  font-family: var(--k-body); font-size: 14px; line-height: 1.5;
+}
+.spec {
+  background: var(--k-surface); color: var(--k-fg);
+  border: var(--k-bw) solid var(--k-line); border-radius: var(--k-r);
+  box-shadow: var(--k-shadow);
+  -webkit-backdrop-filter: var(--k-blur); backdrop-filter: var(--k-blur);
+  padding: 18px; display: grid; gap: 16px;
+}
+.spec-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.spec-title { font-family: var(--k-display); font-weight: var(--k-dw); letter-spacing: var(--k-dt); font-size: 1.25rem; line-height: 1.15; text-transform: var(--k-dcase); }
+.lbl { font-family: var(--k-label-font); font-size: 0.72rem; text-transform: var(--k-lcase); letter-spacing: var(--k-lt); color: var(--k-muted); }
+.badge {
+  font-size: 0.72rem; font-weight: 600; padding: 3px 9px; border-radius: var(--k-pill);
+  background: color-mix(in srgb, var(--k-pos) 14%, transparent); color: var(--k-pos);
+  border: var(--k-bw) solid color-mix(in srgb, var(--k-pos) 30%, transparent);
+}
+.stat { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--k-line); }
+.big { display: block; font-family: var(--k-num); font-weight: var(--k-nw); font-size: 2.6rem; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin-top: 4px; }
+.delta { font-size: 0.8rem; color: var(--k-pos); font-variant-numeric: tabular-nums; }
+.spark { width: 46%; max-width: 190px; height: 56px; flex: none; }
+.spark .area { fill: color-mix(in srgb, var(--k-accent) 16%, transparent); }
+.spark .line { fill: none; stroke: var(--k-accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.spark .dot { fill: var(--k-accent); stroke: var(--k-surface); stroke-width: 2; }
+.bars { display: grid; gap: 7px; }
+.bar { display: grid; grid-template-columns: 7.5em 1fr 2.2em; gap: 10px; align-items: center; font-size: 0.82rem; }
+.bar .track { height: 8px; border-radius: var(--k-pill); background: color-mix(in srgb, var(--k-fg) 8%, transparent); overflow: hidden; }
+.bar .fill { display: block; height: 100%; border-radius: inherit; }
+.bar .val { text-align: right; font-family: var(--k-num); font-variant-numeric: tabular-nums; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+th { text-align: left; font-weight: 500; padding: 0 0 6px; border-bottom: 1px solid var(--k-line); }
+td { padding: 7px 0; border-bottom: 1px solid var(--k-line); }
+tr:last-child td { border-bottom: 0; }
+td.n, th.n { text-align: right; font-family: var(--k-num); font-variant-numeric: tabular-nums; }
+td.path { font-family: var(--k-mono); font-size: 0.8rem; }
+.pill { display: inline-block; min-width: 2.4em; text-align: center; padding: 1px 7px; border-radius: var(--k-pill); font-weight: 600; font-family: var(--k-num); }
+.pill.good { color: var(--k-pos); background: color-mix(in srgb, var(--k-pos) 13%, transparent); }
+.pill.warn { color: var(--k-warn); background: color-mix(in srgb, var(--k-warn) 15%, transparent); }
+.audit { display: flex; gap: 8px; flex-wrap: wrap; }
+.audit input {
+  flex: 1 1 10em; min-width: 0; font: inherit; color: var(--k-fg); background: var(--k-field);
+  border: var(--k-bw) solid var(--k-line); border-radius: var(--k-rs); padding: 8px 11px;
+}
+.audit input:focus-visible { outline: 2px solid var(--k-accent); outline-offset: 1px; }
+.btn {
+  font: inherit; font-weight: 600; font-size: 0.86rem; cursor: pointer; border-radius: var(--k-rs);
+  padding: 8px 14px; border: var(--k-bw) solid transparent; transition: transform 120ms, filter 120ms;
+}
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--k-accent); color: var(--k-accent-fg); box-shadow: var(--k-btn-shadow); border-color: var(--k-btn-border); }
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.ghost { background: transparent; color: var(--k-fg); border-color: var(--k-line); }
+.btn:focus-visible { outline: 2px solid var(--k-accent); outline-offset: 2px; }
+.btn[aria-busy="true"] { cursor: progress; opacity: 0.75; }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.86rem; }
+.switch {
+  flex: none; position: relative; width: 38px; height: 22px; border-radius: 999px; cursor: pointer;
+  border: var(--k-bw) solid var(--k-switch-border); background: color-mix(in srgb, var(--k-fg) 16%, transparent); padding: 0;
+  transition: background 160ms;
+}
+.switch::after {
+  content: ""; position: absolute; top: 50%; left: 3px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--k-knob); transform: translateY(-50%); transition: left 160ms;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+}
+.switch[aria-checked="true"] { background: var(--k-accent); }
+.switch[aria-checked="true"]::after { left: calc(100% - 19px); }
+.switch:focus-visible { outline: 2px solid var(--k-accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .switch, .switch::after { transition: none; }
+}
+@media (max-width: 30rem) {
+  .meta, .stage { padding-inline: 16px; }
+  .bar { grid-template-columns: 6.5em 1fr 2.2em; }
+  .big { font-size: 2.2rem; }
+}
+.empty { padding: 40px; text-align: center; color: var(--ink-2); border: 1px dashed var(--rule); border-radius: 12px; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <span class="eyebrow">kit · design system · routes</span>
+      <h1>Ten directions for kit</h1>
+      <p>Each route is the same real content: a site-health panel with a stat, a sparkline, category bars, a page table, an audit form and a toggle, so you can compare type, colour, depth and data density side by side. Every route has a light and a dark mode. Star the ones you like; your shortlist stays in this browser.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Colour scheme">
+        <button type="button" data-scheme="system" aria-pressed="true">System</button>
+        <button type="button" data-scheme="light" aria-pressed="false">Light</button>
+        <button type="button" data-scheme="dark" aria-pressed="false">Dark</button>
+      </div>
+      <label class="filter" for="only-shortlist"><input type="checkbox" id="only-shortlist"> Shortlist only <span id="shortlist-count">(0)</span></label>
+    </div>
+  </header>
+  <main class="grid" id="routes" aria-live="polite"></main>
+</div>
+
+<script>
+const routes = [
+  {
+    id: 'graphite', name: 'Graphite',
+    thesis: 'Swiss precision. Nothing decorative; every pixel aligned, one cobalt accent doing all the work.',
+    suits: 'App UIs, admin, dashboards',
+    fonts: { display: 'Geist', body: 'Geist', num: 'Geist', mono: 'Geist Mono' }, families: 2,
+    shape: { r: '8px', rs: '6px', bw: '1px', dw: 600, dt: '-0.02em', nw: 600, lcase: 'uppercase', lt: '0.08em', labelFont: 'mono' },
+    light: { stage: '#f7f8fa', surface: '#ffffff', field: '#ffffff', fg: '#0e1116', muted: '#5b6472', line: '#e3e6eb', accent: '#2a54d6', accentFg: '#ffffff', pos: '#0f7b4a', warn: '#a3560b', c: ['#2a54d6', '#5b7de3', '#8ea4ec', '#b9c7f2'], shadow: '0 1px 2px rgb(15 20 30 / 0.06), 0 8px 24px -12px rgb(15 20 30 / 0.18)' },
+    dark: { stage: '#0c0e12', surface: '#14171d', field: '#0f1216', fg: '#e8ebf0', muted: '#8b94a3', line: '#262b34', accent: '#7d9bff', accentFg: '#0c0e12', pos: '#4cc38a', warn: '#e6a23c', c: ['#7d9bff', '#6380e0', '#4b63b5', '#38498a'], shadow: '0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -14px rgb(0 0 0 / 0.7)' },
+  },
+  {
+    id: 'indigo', name: 'Indigo Night',
+    thesis: "Kritano's current look, grown up: deep indigo, an amber spark, soft layered glass and a serif headline.",
+    suits: 'Kritano, product marketing',
+    fonts: { display: 'Instrument Serif', body: 'Outfit', num: 'Outfit', mono: 'JetBrains Mono' }, families: 3,
+    shape: { r: '16px', rs: '999px', bw: '1px', dw: 400, dt: '-0.01em', nw: 500, lcase: 'none', lt: '0', labelFont: 'body' },
+    light: { stage: 'radial-gradient(120% 90% at 100% 0%, #c7d2fe 0%, transparent 55%), radial-gradient(90% 80% at 0% 100%, #fde68a 0%, transparent 55%), #eef0fb', surface: 'rgb(255 255 255 / 0.82)', field: 'rgb(255 255 255 / 0.9)', fg: '#1b1a33', muted: '#5a5878', line: '#dcdff3', accent: '#4f46e5', accentFg: '#ffffff', pos: '#15803d', warn: '#a16207', c: ['#4f46e5', '#6366f1', '#a5b4fc', '#fbbf24'], shadow: '0 24px 48px -24px rgb(30 27 75 / 0.35)', blur: 'blur(14px)' },
+    dark: { stage: 'radial-gradient(120% 90% at 100% 0%, rgb(67 56 202 / 0.45) 0%, transparent 55%), radial-gradient(90% 80% at 0% 100%, rgb(251 191 36 / 0.12) 0%, transparent 55%), #100f24', surface: 'rgb(27 25 56 / 0.78)', field: 'rgb(16 15 36 / 0.7)', fg: '#e9e8f5', muted: '#a3a2c2', line: '#2c2a52', accent: '#8b93ff', accentFg: '#0e0d24', pos: '#4ade80', warn: '#fbbf24', c: ['#8b93ff', '#6366f1', '#4338ca', '#fbbf24'], shadow: '0 24px 56px -24px rgb(0 0 0 / 0.8)', blur: 'blur(14px)' },
+  },
+  {
+    id: 'ledger', name: 'Ledger',
+    thesis: 'A financial report you would frame: serif figures, ruled lines, ink on cool paper and a forest-green accent.',
+    suits: 'Reports, analytics, PDFs',
+    fonts: { display: 'Source Serif 4', body: 'Public Sans', num: 'Source Serif 4', mono: 'IBM Plex Mono' }, families: 3,
+    shape: { r: '3px', rs: '3px', bw: '1px', dw: 600, dt: '-0.01em', nw: 600, lcase: 'uppercase', lt: '0.1em', labelFont: 'body' },
+    light: { stage: '#eef0ed', surface: '#ffffff', field: '#fbfcfb', fg: '#15201b', muted: '#5e6b64', line: '#d6dcd7', accent: '#1f6b4a', accentFg: '#ffffff', pos: '#1f6b4a', warn: '#9a4b14', c: ['#1f6b4a', '#4f8f6d', '#8bb59d', '#c27c4a'], shadow: 'none' },
+    dark: { stage: '#0b100e', surface: '#141b18', field: '#0f1512', fg: '#e6ece8', muted: '#93a29a', line: '#27312c', accent: '#6cc99b', accentFg: '#0b100e', pos: '#6cc99b', warn: '#e39a62', c: ['#6cc99b', '#4ea37a', '#367a5a', '#e39a62'], shadow: 'none' },
+  },
+  {
+    id: 'console', name: 'Console',
+    thesis: 'For people who live in a terminal: monospace throughout, dense and quiet, with a cool cyan signal.',
+    suits: 'Developer tools, the API and docs',
+    fonts: { display: 'Martian Mono', body: 'Martian Mono', num: 'Martian Mono', mono: 'Martian Mono' }, families: 1,
+    shape: { r: '4px', rs: '3px', bw: '1px', dw: 500, dt: '-0.03em', nw: 400, lcase: 'uppercase', lt: '0.06em', labelFont: 'mono' },
+    light: { stage: '#f1f2ef', surface: '#ffffff', field: '#f7f8f6', fg: '#1d2021', muted: '#5c6466', line: '#d9dcd8', accent: '#0b7380', accentFg: '#ffffff', pos: '#1d7a3e', warn: '#985a07', c: ['#0b7380', '#3b98a3', '#7fbcc3', '#b8d9dc'], shadow: 'none' },
+    dark: { stage: '#0e1011', surface: '#151819', field: '#101314', fg: '#d7dbd9', muted: '#838e8c', line: '#262b2c', accent: '#5ad1df', accentFg: '#071315', pos: '#6ad48c', warn: '#e5b45a', c: ['#5ad1df', '#3fa7b3', '#2c7c86', '#1f5a61'], shadow: 'none' },
+  },
+  {
+    id: 'carbon', name: 'Carbon Lab',
+    thesis: 'A scientific instrument: condensed type, flat square planes and a palette tuned for telling series apart.',
+    suits: 'Data analysis, monitoring',
+    fonts: { display: 'IBM Plex Sans Condensed', body: 'IBM Plex Sans Condensed', num: 'IBM Plex Mono', mono: 'IBM Plex Mono' }, families: 2,
+    shape: { r: '0px', rs: '0px', bw: '1px', dw: 600, dt: '-0.01em', nw: 500, lcase: 'none', lt: '0.02em', labelFont: 'body' },
+    light: { stage: '#e9ecf1', surface: '#ffffff', field: '#f4f6f9', fg: '#161616', muted: '#525a63', line: '#d0d5dd', accent: '#00756f', accentFg: '#ffffff', pos: '#0e7a3e', warn: '#a35a00', c: ['#00756f', '#e2711d', '#7a5ac8', '#1f7ac2'], shadow: 'none' },
+    dark: { stage: '#0f1316', surface: '#181d21', field: '#121619', fg: '#f2f4f8', muted: '#a2a9b0', line: '#2d343a', accent: '#3ddbd9', accentFg: '#062221', pos: '#42be65', warn: '#f1a33c', c: ['#3ddbd9', '#ff8a3d', '#a98bf0', '#5aa9f0'], shadow: 'none' },
+  },
+  {
+    id: 'atelier', name: 'Atelier',
+    thesis: 'Luxury restraint: a high-contrast Didone, ivory and black, wide spacing and a single champagne detail.',
+    suits: 'Portfolio, case studies, premium marketing',
+    fonts: { display: 'Bodoni Moda', body: 'Hanken Grotesk', num: 'Hanken Grotesk', mono: 'Hanken Grotesk' }, families: 2,
+    shape: { r: '2px', rs: '0px', bw: '1px', dw: 400, dt: '0', nw: 400, lcase: 'uppercase', lt: '0.18em', labelFont: 'body' },
+    light: { stage: '#f6f4ef', surface: '#ffffff', field: '#ffffff', fg: '#0b0b0c', muted: '#66645f', line: '#e4e0d8', accent: '#0b0b0c', accentFg: '#f6f4ef', pos: '#2f6b3f', warn: '#8a5a12', c: ['#0b0b0c', '#5a564f', '#a7a196', '#a8884a'], shadow: '0 30px 60px -40px rgb(20 18 14 / 0.35)' },
+    dark: { stage: '#0a0a0b', surface: '#131313', field: '#0e0e0f', fg: '#f3f1ec', muted: '#9c988f', line: '#2a2826', accent: '#f3f1ec', accentFg: '#0a0a0b', pos: '#8cc79b', warn: '#d9b46a', c: ['#f3f1ec', '#b9b4aa', '#77736b', '#cfb27a'], shadow: '0 30px 60px -40px rgb(0 0 0 / 0.9)' },
+  },
+  {
+    id: 'aurora', name: 'Aurora',
+    thesis: 'Dark-first and luminous: frosted panels floating over a slow teal-to-lime glow, with a confident wide display face.',
+    suits: 'Launch pages, showcases, the kit site itself',
+    fonts: { display: 'Unbounded', body: 'Figtree', num: 'Figtree', mono: 'DM Mono' }, families: 3,
+    shape: { r: '20px', rs: '12px', bw: '1px', dw: 600, dt: '-0.02em', nw: 600, lcase: 'none', lt: '0.01em', labelFont: 'body' },
+    light: { stage: 'radial-gradient(110% 80% at 0% 0%, #b8f2e4 0%, transparent 55%), radial-gradient(90% 70% at 100% 100%, #e4f7a8 0%, transparent 55%), #eef6f4', surface: 'rgb(255 255 255 / 0.68)', field: 'rgb(255 255 255 / 0.8)', fg: '#0b1f1d', muted: '#48605d', line: 'rgb(11 31 29 / 0.1)', accent: '#0b7a6b', accentFg: '#ffffff', pos: '#11795a', warn: '#946200', c: ['#0b7a6b', '#2fb39c', '#8fd16b', '#c9e86b'], shadow: '0 30px 60px -30px rgb(11 31 29 / 0.3)', blur: 'blur(18px)' },
+    dark: { stage: 'radial-gradient(110% 80% at 0% 0%, rgb(20 184 166 / 0.35) 0%, transparent 55%), radial-gradient(90% 70% at 100% 100%, rgb(163 230 53 / 0.18) 0%, transparent 55%), #061312', surface: 'rgb(16 38 36 / 0.55)', field: 'rgb(4 20 18 / 0.55)', fg: '#e6f4f1', muted: '#8fb3ad', line: 'rgb(255 255 255 / 0.09)', accent: '#5eead4', accentFg: '#04201c', pos: '#5eead4', warn: '#fcd34d', c: ['#5eead4', '#2dd4bf', '#a3e635', '#d9f99d'], shadow: '0 30px 70px -30px rgb(0 0 0 / 0.8)', blur: 'blur(18px)' },
+  },
+  {
+    id: 'brutal', name: 'Brutal',
+    thesis: 'Neo-brutalist and unapologetic: thick black rules, hard offset shadows and a sunflower-yellow primary.',
+    suits: 'Personality-led marketing, side projects',
+    fonts: { display: 'Archivo', body: 'Archivo', num: 'Archivo', mono: 'DM Mono' }, families: 2,
+    shape: { r: '0px', rs: '0px', bw: '2px', dw: 800, dt: '-0.02em', nw: 800, lcase: 'uppercase', lt: '0.04em', labelFont: 'mono', dcase: 'uppercase' },
+    light: { stage: '#efeee8', surface: '#ffffff', field: '#ffffff', fg: '#0a0a0a', muted: '#3d3d3a', line: '#0a0a0a', accent: '#ffd60a', accentFg: '#0a0a0a', pos: '#0b7a3b', warn: '#9a4d00', c: ['#0a0a0a', '#ffd60a', '#ff6b35', '#3a86ff'], shadow: '5px 5px 0 #0a0a0a', btnShadow: '3px 3px 0 #0a0a0a', btnBorder: '#0a0a0a', switchBorder: '#0a0a0a', knob: '#ffffff' },
+    dark: { stage: '#111111', surface: '#1b1b1b', field: '#111111', fg: '#f5f5f0', muted: '#c8c8c0', line: '#f5f5f0', accent: '#ffd60a', accentFg: '#0a0a0a', pos: '#5ee08f', warn: '#ffb35c', c: ['#f5f5f0', '#ffd60a', '#ff6b35', '#6aa6ff'], shadow: '5px 5px 0 #f5f5f0', btnShadow: '3px 3px 0 #f5f5f0', btnBorder: '#f5f5f0', switchBorder: '#f5f5f0', knob: '#0a0a0a' },
+  },
+  {
+    id: 'nordic', name: 'Nordic',
+    thesis: 'Calm and airy: stone and sage, generous radii and soft shadows. Nothing shouts, everything breathes.',
+    suits: 'Settings, forms, long sessions',
+    fonts: { display: 'Instrument Sans', body: 'Instrument Sans', num: 'Instrument Sans', mono: 'Fragment Mono' }, families: 2,
+    shape: { r: '18px', rs: '12px', bw: '1px', dw: 600, dt: '-0.02em', nw: 500, lcase: 'none', lt: '0', labelFont: 'body' },
+    light: { stage: '#eef0eb', surface: '#fbfbf9', field: '#ffffff', fg: '#22261f', muted: '#646c5f', line: '#e0e3da', accent: '#4a7355', accentFg: '#ffffff', pos: '#3f7a4f', warn: '#8f6a14', c: ['#4a7355', '#7c9c84', '#b5c9b9', '#c9a46b'], shadow: '0 2px 4px rgb(34 38 31 / 0.04), 0 18px 36px -24px rgb(34 38 31 / 0.25)' },
+    dark: { stage: '#121411', surface: '#1b1e1a', field: '#151814', fg: '#e5e8e1', muted: '#9aa293', line: '#2c302a', accent: '#9cc7a6', accentFg: '#121411', pos: '#9cc7a6', warn: '#dcbc78', c: ['#9cc7a6', '#77a283', '#557a60', '#dcbc78'], shadow: '0 18px 40px -24px rgb(0 0 0 / 0.7)' },
+  },
+  {
+    id: 'native', name: 'Native',
+    thesis: "Zero font downloads: the platform's own type, polished like a first-party app, and the fastest route by far.",
+    suits: 'Everything that must be instant',
+    fonts: { display: 'system-ui', body: 'system-ui', num: 'system-ui', mono: 'ui-monospace' }, families: 0,
+    shape: { r: '14px', rs: '10px', bw: '1px', dw: 600, dt: '-0.02em', nw: 600, lcase: 'none', lt: '0', labelFont: 'body' },
+    light: { stage: '#f2f2f5', surface: '#ffffff', field: '#f5f5f7', fg: '#1d1d1f', muted: '#6e6e73', line: '#e3e3e8', accent: '#0a66d8', accentFg: '#ffffff', pos: '#1a7f37', warn: '#9a5b00', c: ['#0a66d8', '#34a3f0', '#7d7aff', '#ff9f0a'], shadow: '0 1px 3px rgb(0 0 0 / 0.06), 0 12px 32px -16px rgb(0 0 0 / 0.18)' },
+    dark: { stage: '#000000', surface: '#1c1c1e', field: '#2c2c2e', fg: '#f5f5f7', muted: '#a1a1a6', line: '#2f2f33', accent: '#4a94ff', accentFg: '#00142e', pos: '#30d158', warn: '#ffb340', c: ['#4a94ff', '#64d2ff', '#a29bff', '#ffb340'], shadow: '0 12px 32px -16px rgb(0 0 0 / 0.8)' },
+  },
+];
+
+const stack = {
+  'Geist': '"Geist", system-ui, sans-serif', 'Geist Mono': '"Geist Mono", ui-monospace, monospace',
+  'Instrument Serif': '"Instrument Serif", Georgia, serif', 'Outfit': '"Outfit", system-ui, sans-serif',
+  'JetBrains Mono': '"JetBrains Mono", ui-monospace, monospace', 'Source Serif 4': '"Source Serif 4", Georgia, serif',
+  'Public Sans': '"Public Sans", system-ui, sans-serif', 'IBM Plex Mono': '"IBM Plex Mono", ui-monospace, monospace',
+  'Martian Mono': '"Martian Mono", ui-monospace, monospace', 'IBM Plex Sans Condensed': '"IBM Plex Sans Condensed", "Arial Narrow", sans-serif',
+  'Bodoni Moda': '"Bodoni Moda", Didot, "Bodoni 72", Georgia, serif', 'Hanken Grotesk': '"Hanken Grotesk", system-ui, sans-serif',
+  'Unbounded': '"Unbounded", system-ui, sans-serif', 'Figtree': '"Figtree", system-ui, sans-serif', 'DM Mono': '"DM Mono", ui-monospace, monospace',
+  'Archivo': '"Archivo", system-ui, sans-serif', 'Instrument Sans': '"Instrument Sans", system-ui, sans-serif',
+  'Fragment Mono': '"Fragment Mono", ui-monospace, monospace',
+  'system-ui': 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', 'ui-monospace': 'ui-monospace, "SF Mono", Menlo, Consolas, monospace',
+};
+
+function themeVars(t) {
+  return [
+    `--k-stage:${t.stage}`, `--k-surface:${t.surface}`, `--k-field:${t.field}`, `--k-fg:${t.fg}`, `--k-muted:${t.muted}`,
+    `--k-line:${t.line}`, `--k-accent:${t.accent}`, `--k-accent-fg:${t.accentFg}`, `--k-pos:${t.pos}`, `--k-warn:${t.warn}`,
+    `--k-c1:${t.c[0]}`, `--k-c2:${t.c[1]}`, `--k-c3:${t.c[2]}`, `--k-c4:${t.c[3]}`, `--k-shadow:${t.shadow}`,
+    `--k-blur:${t.blur || 'none'}`, `--k-btn-shadow:${t.btnShadow || 'none'}`, `--k-btn-border:${t.btnBorder || 'transparent'}`,
+    `--k-switch-border:${t.switchBorder || 'transparent'}`, `--k-knob:${t.knob || '#ffffff'}`,
+  ].join(';');
+}
+
+let css = '';
+for (const r of routes) {
+  const s = r.shape;
+  const sel = `.route[data-r="${r.id}"]`;
+  const label = s.labelFont === 'mono' ? stack[r.fonts.mono] : stack[r.fonts.body];
+  css += `${sel}{--k-display:${stack[r.fonts.display]};--k-body:${stack[r.fonts.body]};--k-num:${stack[r.fonts.num]};--k-mono:${stack[r.fonts.mono]};--k-label-font:${label};` +
+    `--k-r:${s.r};--k-rs:${s.rs};--k-pill:${s.r === '0px' ? '0px' : '999px'};--k-bw:${s.bw};--k-dw:${s.dw};--k-dt:${s.dt};--k-nw:${s.nw};` +
+    `--k-lcase:${s.lcase};--k-lt:${s.lt};--k-dcase:${s.dcase || 'none'};${themeVars(r.light)}}\n`;
+  css += `@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) ${sel} .stage{${themeVars(r.dark)};color-scheme:dark}}\n`;
+  css += `:root[data-theme="dark"] ${sel} .stage{${themeVars(r.dark)};color-scheme:dark}\n`;
+}
+const styleEl = document.createElement('style');
+styleEl.textContent = css;
+document.head.append(styleEl);
+
+// One sparkline for every route: overall score over the last eight audits.
+const history = [78, 80, 79, 82, 81, 84, 83, 87];
+function spark() {
+  const w = 190, h = 56, pad = 6, lo = 74, hi = 90;
+  const pts = history.map((v, i) => [pad + (i * (w - pad * 2)) / (history.length - 1), h - pad - ((v - lo) / (hi - lo)) * (h - pad * 2)]);
+  const line = pts.map((p) => p.map((n) => n.toFixed(1)).join(',')).join(' ');
+  const area = `M${pts[0][0].toFixed(1)},${h} L${line.replace(/ /g, ' L')} L${pts[pts.length - 1][0].toFixed(1)},${h} Z`;
+  const [ex, ey] = pts[pts.length - 1];
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Overall score over the last eight audits, rising from 78 to 87">` +
+    `<path class="area" d="${area}"/><polyline class="line" points="${line}"/><circle class="dot" cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="4"/></svg>`;
+}
+
+const categories = [['SEO', 92, 'c1'], ['Accessibility', 78, 'c2'], ['Security', 85, 'c3'], ['Performance', 64, 'c4']];
+const pages = [['/', 92, 3], ['/blog/how-often-audit', 84, 7], ['/contact', 71, 12]];
+
+function specimen(r) {
+  const bars = categories.map(([name, v, c]) =>
+    `<div class="bar"><span>${name}</span><span class="track"><span class="fill" style="width:${v}%;background:var(--k-${c})"></span></span><span class="val">${v}</span></div>`).join('');
+  const rows = pages.map(([path, score, issues]) =>
+    `<tr><td class="path">${path}</td><td class="n"><span class="pill ${score >= 80 ? 'good' : 'warn'}">${score}</span></td><td class="n">${issues}</td></tr>`).join('');
+  return `
+  <div class="stage">
+    <div class="spec" role="region" aria-label="${r.name} specimen">
+      <div class="spec-head"><span class="spec-title">chrisgarlick.com</span><span class="badge">Verified</span></div>
+      <div class="stat">
+        <div><span class="lbl">Overall score</span><span class="big">87</span><span class="delta">+4 since 26 Oct</span></div>
+        ${spark()}
+      </div>
+      <div class="bars" aria-label="Scores by category">${bars}</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="lbl">Page</th><th class="lbl n">Score</th><th class="lbl n">Issues</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <form class="audit" data-audit>
+        <label class="visually-hidden" for="site-${r.id}">Website to audit</label>
+        <input id="site-${r.id}" name="site" value="kritano.com" autocomplete="url" spellcheck="false">
+        <button class="btn primary" type="submit">Run audit</button>
+        <button class="btn ghost" type="button">Schedule</button>
+      </form>
+      <div class="toggle"><span id="tg-${r.id}">Email me when it finishes</span><button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="tg-${r.id}"></button></div>
+    </div>
+  </div>`;
+}
+
+function swatches(r) {
+  const t = r.light;
+  return [t.fg, t.accent, t.pos, ...t.c.slice(1, 4)].map((c) => `<span class="sw" style="background:${c}" title="${c}"></span>`).join('') +
+    `<span class="sw-label">light</span>` +
+    [r.dark.surface.startsWith('rgb') ? r.dark.fg : r.dark.surface, r.dark.accent].map((c) => `<span class="sw" style="background:${c}" title="${c}"></span>`).join('') +
+    `<span class="sw-label">dark</span>`;
+}
+
+function fontsLine(r) {
+  const f = r.fonts;
+  const uniq = [...new Set([f.display, f.body, f.num, f.mono])];
+  if (r.families === 0) return 'System UI and system monospace';
+  return `Display ${f.display} · Body ${f.body}${f.num !== f.body ? ` · Figures ${f.num}` : ''}${uniq.includes(f.mono) && f.mono !== f.body ? ` · Code ${f.mono}` : ''}`;
+}
+
+let shortlist = new Set();
+try { shortlist = new Set(JSON.parse(localStorage.getItem('kit-shortlist') || '[]')); } catch { /* storage unavailable */ }
+const save = () => { try { localStorage.setItem('kit-shortlist', JSON.stringify([...shortlist])); } catch { /* ignore */ } };
+
+const grid = document.getElementById('routes');
+const onlyBox = document.getElementById('only-shortlist');
+const countEl = document.getElementById('shortlist-count');
+
+function render() {
+  const list = onlyBox.checked ? routes.filter((r) => shortlist.has(r.id)) : routes;
+  countEl.textContent = `(${shortlist.size})`;
+  if (!list.length) {
+    grid.innerHTML = '<p class="empty">Nothing shortlisted yet. Star a direction to add it here.</p>';
+    return;
+  }
+  grid.innerHTML = list.map((r) => `
+    <article class="route" data-r="${r.id}" aria-labelledby="h-${r.id}">
+      <div class="meta">
+        <div class="meta-head">
+          <div><h2 id="h-${r.id}">${r.name}</h2><p class="thesis">${r.thesis}</p></div>
+          <button class="star" type="button" data-star="${r.id}" aria-pressed="${shortlist.has(r.id)}">${shortlist.has(r.id) ? '★ Shortlisted' : '☆ Shortlist'}</button>
+        </div>
+        <dl class="facts">
+          <dt>Type</dt><dd>${fontsLine(r)}</dd>
+          <dt>Suits</dt><dd>${r.suits}</dd>
+          <dt>Shape</dt><dd>${r.shape.r === '0px' ? 'Square corners' : `${r.shape.r} corners`}, ${r.shape.bw === '2px' ? 'thick rules' : 'hairline rules'}${r.light.blur ? ', frosted glass' : ''}</dd>
+        </dl>
+        <div class="swatches">${swatches(r)}
+          <span class="cost${r.families === 0 ? ' zero' : ''}" style="margin-left:auto">${r.families === 0 ? 'no webfonts' : `${r.families} webfont famil${r.families === 1 ? 'y' : 'ies'}`}</span>
+        </div>
+      </div>
+      ${specimen(r)}
+    </article>`).join('');
+}
+
+grid.addEventListener('click', (e) => {
+  const star = e.target.closest('[data-star]');
+  if (star) {
+    const id = star.dataset.star;
+    shortlist.has(id) ? shortlist.delete(id) : shortlist.add(id);
+    save();
+    render();
+    grid.querySelector(`[data-star="${id}"]`)?.focus();
+    return;
+  }
+  const sw = e.target.closest('.switch');
+  if (sw) sw.setAttribute('aria-checked', sw.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+});
+grid.addEventListener('submit', (e) => {
+  if (!e.target.matches('[data-audit]')) return;
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn.primary');
+  btn.setAttribute('aria-busy', 'true');
+  btn.textContent = 'Running…';
+  setTimeout(() => { btn.removeAttribute('aria-busy'); btn.textContent = 'Run audit'; }, 1400);
+});
+onlyBox.addEventListener('change', render);
+
+const schemeButtons = document.querySelectorAll('[data-scheme]');
+schemeButtons.forEach((b) => b.addEventListener('click', () => {
+  const s = b.dataset.scheme;
+  if (s === 'system') delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = s;
+  schemeButtons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+}));
+
+render();
+</script>

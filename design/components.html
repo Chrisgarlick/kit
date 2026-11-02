@@ -1,0 +1,1485 @@
+<title>Kit Component Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Geist+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* ============================================================
+   kit tokens: graphite neutrals, spruce accent, amber highlight
+   ============================================================ */
+:root {
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-ui: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --surface-3: #e8ebef;
+  --line: #e2e5ea;
+  --line-strong: #cdd2d9;
+  --fg: #0d1014;
+  --fg-2: #48505b;
+  --fg-3: #69717d;
+  --accent: #0f766e;
+  --accent-hover: #0b5f58;
+  --accent-soft: #e2f3f0;
+  --accent-fg: #ffffff;
+  --amber: #b45309;
+  --amber-soft: #fdf1dc;
+  --good: #157a3c;
+  --good-soft: #e3f4e8;
+  --warn: #a95c06;
+  --warn-soft: #fcf0dc;
+  --bad: #b42318;
+  --bad-soft: #fbe6e4;
+  --info: #1d55c4;
+  --info-soft: #e4ecfb;
+  --s1: #0f766e; --s2: #4f46e5; --s3: #d97706; --s4: #db2777; --s5: #0284c7; --s6: #65a30d;
+  --shadow-1: 0 1px 2px rgb(13 16 20 / 0.05);
+  --shadow-2: 0 1px 2px rgb(13 16 20 / 0.04), 0 10px 28px -14px rgb(13 16 20 / 0.22);
+  --shadow-3: 0 2px 6px rgb(13 16 20 / 0.06), 0 28px 60px -24px rgb(13 16 20 / 0.35);
+  --scrim: rgb(13 16 20 / 0.42);
+  --tip: #0d1014;
+  --tip-fg: #f5f6f8;
+
+  --r-1: 6px; --r-2: 10px; --r-3: 14px; --r-pill: 999px;
+  --ctl: 38px; --ctl-sm: 30px; --ctl-lg: 46px; --pad: 14px; --gap: 12px; --cell: 10px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: 160ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0b0d10; --surface: #12151a; --surface-2: #181c22; --surface-3: #20252c;
+    --line: #232830; --line-strong: #343b45; --fg: #e8ebef; --fg-2: #a8b0bb; --fg-3: #858e9a;
+    --accent: #2dd4bf; --accent-hover: #5eead4; --accent-soft: rgb(45 212 191 / 0.13); --accent-fg: #04201c;
+    --amber: #fbbf24; --amber-soft: rgb(251 191 36 / 0.13);
+    --good: #4ade80; --good-soft: rgb(74 222 128 / 0.13); --warn: #fbbf24; --warn-soft: rgb(251 191 36 / 0.13);
+    --bad: #f87171; --bad-soft: rgb(248 113 113 / 0.14); --info: #7aa7ff; --info-soft: rgb(122 167 255 / 0.14);
+    --s1: #2dd4bf; --s2: #818cf8; --s3: #fbbf24; --s4: #f472b6; --s5: #38bdf8; --s6: #a3e635;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 30px -14px rgb(0 0 0 / 0.75);
+    --shadow-3: 0 2px 6px rgb(0 0 0 / 0.5), 0 30px 70px -24px rgb(0 0 0 / 0.9);
+    --scrim: rgb(0 0 0 / 0.6); --tip: #e8ebef; --tip-fg: #0b0d10;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0d10; --surface: #12151a; --surface-2: #181c22; --surface-3: #20252c;
+  --line: #232830; --line-strong: #343b45; --fg: #e8ebef; --fg-2: #a8b0bb; --fg-3: #858e9a;
+  --accent: #2dd4bf; --accent-hover: #5eead4; --accent-soft: rgb(45 212 191 / 0.13); --accent-fg: #04201c;
+  --amber: #fbbf24; --amber-soft: rgb(251 191 36 / 0.13);
+  --good: #4ade80; --good-soft: rgb(74 222 128 / 0.13); --warn: #fbbf24; --warn-soft: rgb(251 191 36 / 0.13);
+  --bad: #f87171; --bad-soft: rgb(248 113 113 / 0.14); --info: #7aa7ff; --info-soft: rgb(122 167 255 / 0.14);
+  --s1: #2dd4bf; --s2: #818cf8; --s3: #fbbf24; --s4: #f472b6; --s5: #38bdf8; --s6: #a3e635;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 30px -14px rgb(0 0 0 / 0.75);
+  --shadow-3: 0 2px 6px rgb(0 0 0 / 0.5), 0 30px 70px -24px rgb(0 0 0 / 0.9);
+  --scrim: rgb(0 0 0 / 0.6); --tip: #e8ebef; --tip-fg: #0b0d10;
+}
+/* Accent themes: the same components, re-themed by four tokens. */
+:root[data-accent="indigo"] { --accent: #4f46e5; --accent-hover: #4338ca; --accent-soft: #e9e8fd; --accent-fg: #ffffff; }
+:root[data-accent="amber"] { --accent: #b45309; --accent-hover: #92400e; --accent-soft: #fdf1dc; --accent-fg: #ffffff; }
+:root[data-accent="rose"] { --accent: #be123c; --accent-hover: #9f1239; --accent-soft: #fde6ec; --accent-fg: #ffffff; }
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="indigo"]:not([data-theme="light"]) { --accent: #8b93ff; --accent-hover: #a5abff; --accent-soft: rgb(139 147 255 / 0.15); --accent-fg: #0b0c24; }
+  :root[data-accent="amber"]:not([data-theme="light"]) { --accent: #fbbf24; --accent-hover: #fcd34d; --accent-soft: rgb(251 191 36 / 0.14); --accent-fg: #1f1400; }
+  :root[data-accent="rose"]:not([data-theme="light"]) { --accent: #fb7185; --accent-hover: #fda4af; --accent-soft: rgb(251 113 133 / 0.15); --accent-fg: #2a0610; }
+}
+:root[data-theme="dark"][data-accent="indigo"] { --accent: #8b93ff; --accent-hover: #a5abff; --accent-soft: rgb(139 147 255 / 0.15); --accent-fg: #0b0c24; }
+:root[data-theme="dark"][data-accent="amber"] { --accent: #fbbf24; --accent-hover: #fcd34d; --accent-soft: rgb(251 191 36 / 0.14); --accent-fg: #1f1400; }
+:root[data-theme="dark"][data-accent="rose"] { --accent: #fb7185; --accent-hover: #fda4af; --accent-soft: rgb(251 113 133 / 0.15); --accent-fg: #2a0610; }
+:root[data-density="compact"] { --ctl: 32px; --ctl-sm: 26px; --ctl-lg: 40px; --pad: 10px; --gap: 8px; --cell: 6px; }
+@media (prefers-reduced-motion: reduce) { :root { --dur: 0ms; } }
+
+/* ============================================================ base */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 14.5px/1.55 var(--font-ui); -webkit-font-smoothing: antialiased;
+  padding-inline: 16px; padding-block: 0 80px;
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--fg-2); }
+.faint { color: var(--fg-3); }
+
+/* ============================================================ page chrome */
+.shell { max-width: 1320px; margin-inline: auto; }
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between;
+  padding-block: 14px; margin-inline: -16px; padding-inline: 16px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px); backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); }
+.mark { width: 28px; height: 28px; border-radius: 8px; background: var(--fg); display: grid; place-items: center; }
+.mark svg { width: 16px; height: 16px; }
+.mark rect { fill: var(--accent); }
+.mark rect:nth-child(2) { fill: var(--bg); }
+.wordmark { font: 700 1.25rem/1 var(--font-display); letter-spacing: -0.03em; }
+.version { font: 500 0.7rem/1 var(--font-mono); color: var(--fg-3); border: 1px solid var(--line); padding: 3px 6px; border-radius: var(--r-pill); }
+.prefs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pref-label { font-size: 0.75rem; color: var(--fg-3); margin-right: 2px; }
+.accents { display: inline-flex; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--surface); }
+.accents button { width: 22px; height: 22px; border-radius: 50%; border: 0; cursor: pointer; padding: 0; position: relative; }
+.accents button[aria-pressed="true"]::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--fg); }
+
+.intro { display: grid; gap: 14px; padding-block: 48px 36px; max-width: 70ch; }
+.intro .eyebrow { font: 500 0.72rem/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.intro h1 { font: 600 clamp(2rem, 4.6vw, 3.1rem)/1.05 var(--font-display); letter-spacing: -0.035em; }
+.intro p { font-size: 1.02rem; color: var(--fg-2); }
+.stats { display: flex; flex-wrap: wrap; gap: 8px; }
+.stats span { font: 500 0.78rem/1 var(--font-mono); padding: 6px 10px; border-radius: var(--r-pill); background: var(--surface); border: 1px solid var(--line); color: var(--fg-2); }
+
+.layout { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 1040px) { .layout { grid-template-columns: 200px minmax(0, 1fr); } }
+.toc { display: none; }
+@media (min-width: 1040px) {
+  .toc { display: block; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); align-self: start; }
+}
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.toc a { display: flex; justify-content: space-between; text-decoration: none; color: var(--fg-2); padding: 6px 10px; border-radius: var(--r-1); font-size: 0.88rem; }
+.toc a:hover { background: var(--surface-2); color: var(--fg); }
+.toc a[aria-current="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.toc .count { font: 500 0.72rem/1.6 var(--font-mono); color: var(--fg-3); }
+
+section.group { display: grid; gap: 18px; scroll-margin-top: 90px; }
+section.group + section.group { margin-top: 56px; }
+.group-head { display: grid; gap: 4px; }
+.group-head h2 { font: 600 1.55rem/1.15 var(--font-display); letter-spacing: -0.025em; }
+.group-head p { color: var(--fg-2); max-width: 70ch; }
+.cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+.cards .wide { grid-column: 1 / -1; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-3); display: flex; flex-direction: column; min-width: 0; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 16px 18px 0; }
+.card-head h3 { font: 600 0.98rem/1.3 var(--font-ui); }
+.card-desc { padding: 4px 18px 0; color: var(--fg-2); font-size: 0.86rem; }
+.demo { padding: 18px; display: grid; gap: 14px; align-content: start; flex: 1; }
+.card-foot { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 18px 14px; border-top: 1px dashed var(--line); }
+.tag { font: 500 0.68rem/1 var(--font-mono); padding: 4px 7px; border-radius: var(--r-1); background: var(--surface-2); color: var(--fg-2); letter-spacing: 0.02em; }
+.tag.t2 { background: var(--accent-soft); color: var(--accent); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* ============================================================ components */
+/* buttons */
+.btn {
+  --h: var(--ctl);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: var(--h); padding: 0 calc(var(--h) * 0.4); border-radius: var(--r-2);
+  border: 1px solid transparent; font-weight: 600; font-size: 0.88rem; cursor: pointer; white-space: nowrap;
+  transition: background var(--dur) var(--ease), border-color var(--dur), transform 80ms, box-shadow var(--dur);
+}
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn-sm { --h: var(--ctl-sm); font-size: 0.8rem; border-radius: var(--r-1); }
+.btn-lg { --h: var(--ctl-lg); font-size: 0.95rem; }
+.btn-primary { background: var(--accent); color: var(--accent-fg); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 1px 2px rgb(0 0 0 / 0.18); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--surface); border-color: var(--line-strong); color: var(--fg); box-shadow: var(--shadow-1); }
+.btn-secondary:hover { background: var(--surface-2); }
+.btn-ghost { background: transparent; color: var(--fg-2); }
+.btn-ghost:hover { background: var(--surface-2); color: var(--fg); }
+.btn-danger { background: var(--bad); color: #fff; }
+:root[data-theme="dark"] .btn-danger { color: #1f0606; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-danger { color: #1f0606; } }
+.btn-danger:hover { filter: brightness(1.07); }
+.btn-icon { width: var(--h); padding: 0; }
+.btn[aria-busy="true"] { cursor: progress; }
+.spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin 700ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 2s; } }
+kbd { font: 500 0.72rem/1 var(--font-mono); padding: 3px 6px; border-radius: 5px; border: 1px solid var(--line-strong); border-bottom-width: 2px; background: var(--surface); color: var(--fg-2); }
+
+/* segmented */
+.seg { display: inline-flex; padding: 3px; border-radius: var(--r-2); background: var(--surface-2); border: 1px solid var(--line); }
+.seg button { height: calc(var(--ctl) - 8px); padding: 0 14px; border: 0; border-radius: 7px; background: transparent; color: var(--fg-2); font-weight: 500; font-size: 0.85rem; cursor: pointer; transition: background var(--dur), color var(--dur); }
+.seg button[aria-checked="true"] { background: var(--surface); color: var(--fg); box-shadow: var(--shadow-1), 0 0 0 1px var(--line); font-weight: 600; }
+
+/* fields */
+.field { display: grid; gap: 6px; }
+.field-label { font-weight: 600; font-size: 0.84rem; display: flex; justify-content: space-between; gap: 8px; }
+.field-label .opt { font-weight: 400; color: var(--fg-3); }
+.hint { font-size: 0.8rem; color: var(--fg-3); }
+.error-text { font-size: 0.8rem; color: var(--bad); display: flex; gap: 6px; align-items: center; }
+.control {
+  display: flex; align-items: center; height: var(--ctl); border-radius: var(--r-2);
+  border: 1px solid var(--line-strong); background: var(--surface); transition: border-color var(--dur), box-shadow var(--dur);
+}
+.control:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.control input, .control select { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; padding: 0 12px; outline: none; }
+.control .affix { padding: 0 0 0 12px; color: var(--fg-3); font-family: var(--font-mono); font-size: 0.84rem; }
+.control .affix + input { padding-left: 4px; }
+.control svg { width: 16px; height: 16px; margin-left: 12px; color: var(--fg-3); flex: none; }
+.control kbd { margin-right: 8px; }
+.control.invalid { border-color: var(--bad); }
+.control.invalid:focus-within { box-shadow: 0 0 0 3px color-mix(in srgb, var(--bad) 20%, transparent); }
+.control select { appearance: none; padding-right: 34px; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2369717d' stroke-width='1.6'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E") no-repeat right 12px center / 14px; cursor: pointer; }
+.control select option { background: var(--surface); color: var(--fg); }
+
+/* checkbox, radio, switch */
+.choice { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; font-size: 0.88rem; }
+.choice small { display: block; color: var(--fg-3); font-size: 0.8rem; }
+.choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1.5px solid var(--line-strong); background: var(--surface); display: grid; place-items: center; cursor: pointer; transition: background var(--dur), border-color var(--dur); }
+.choice input[type="checkbox"] { border-radius: 5px; }
+.choice input[type="radio"] { border-radius: 50%; }
+.choice input:checked { background: var(--accent); border-color: var(--accent); }
+.choice input[type="checkbox"]:checked::after { content: ""; width: 9px; height: 5px; border: 2px solid var(--accent-fg); border-top: 0; border-right: 0; transform: translateY(-1px) rotate(-45deg); }
+.choice input[type="radio"]:checked::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-fg); }
+.choice input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.switch-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 0.88rem; }
+.switch { flex: none; position: relative; width: 40px; height: 24px; border-radius: var(--r-pill); border: 0; padding: 0; cursor: pointer; background: var(--line-strong); transition: background var(--dur) var(--ease); }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.3); transition: transform var(--dur) var(--ease); }
+.switch[aria-checked="true"] { background: var(--accent); }
+.switch[aria-checked="true"]::after { transform: translateX(16px); }
+
+/* slider */
+.slider { display: grid; gap: 8px; }
+.slider input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; --pct: 50%; }
+.slider input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: var(--r-pill); background: linear-gradient(to right, var(--accent) var(--pct), var(--surface-3) var(--pct)); }
+.slider input[type="range"]::-moz-range-track { height: 6px; border-radius: var(--r-pill); background: var(--surface-3); }
+.slider input[type="range"]::-moz-range-progress { height: 6px; border-radius: var(--r-pill); background: var(--accent); }
+.slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; margin-top: -7px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: var(--shadow-2); }
+.slider input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+.slider-ends { display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--fg-3); }
+
+/* stepper */
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: var(--r-2); height: var(--ctl); background: var(--surface); }
+.stepper button { width: var(--ctl); height: 100%; border: 0; background: transparent; cursor: pointer; color: var(--fg-2); font-size: 1.1rem; }
+.stepper button:hover { color: var(--fg); background: var(--surface-2); }
+.stepper button:first-child { border-radius: var(--r-2) 0 0 var(--r-2); }
+.stepper button:last-child { border-radius: 0 var(--r-2) var(--r-2) 0; }
+.stepper output { min-width: 3ch; text-align: center; font-family: var(--font-mono); font-weight: 500; }
+
+/* combobox */
+.combo { position: relative; }
+.listbox {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 5; margin: 0; padding: 6px; list-style: none;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2); box-shadow: var(--shadow-3); max-height: 220px; overflow-y: auto;
+}
+.listbox li { padding: 8px 10px; border-radius: 7px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; font-size: 0.88rem; }
+.listbox li small { color: var(--fg-3); font-family: var(--font-mono); font-size: 0.74rem; }
+.listbox li[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+.listbox .none { color: var(--fg-3); cursor: default; }
+
+/* tags */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: var(--ctl); padding: 5px 8px; border: 1px solid var(--line-strong); border-radius: var(--r-2); background: var(--surface); }
+.tags:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 9px; border-radius: var(--r-pill); background: var(--surface-2); font-size: 0.8rem; font-weight: 500; }
+.chip button { width: 18px; height: 18px; border-radius: 50%; border: 0; background: transparent; cursor: pointer; color: var(--fg-3); display: grid; place-items: center; padding: 0; }
+.chip button:hover { background: var(--surface-3); color: var(--fg); }
+.tags input { flex: 1; min-width: 8ch; border: 0; outline: none; background: transparent; height: 26px; }
+
+/* drop zone */
+.drop { display: grid; place-items: center; gap: 6px; text-align: center; padding: 22px; border: 1.5px dashed var(--line-strong); border-radius: var(--r-3); background: var(--surface-2); cursor: pointer; transition: border-color var(--dur), background var(--dur); }
+.drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.drop svg { width: 22px; height: 22px; color: var(--accent); }
+.drop strong { font-size: 0.9rem; }
+.files { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.files li { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 7px 10px; border-radius: var(--r-1); background: var(--surface-2); }
+
+/* alerts */
+.alert { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; padding: 12px 14px; border-radius: var(--r-2); border: 1px solid; font-size: 0.86rem; }
+.alert svg { width: 18px; height: 18px; grid-row: span 2; margin-top: 1px; }
+.alert strong { font-weight: 600; }
+.alert.info { background: var(--info-soft); border-color: color-mix(in srgb, var(--info) 25%, transparent); color: var(--fg); }
+.alert.info svg { color: var(--info); }
+.alert.good { background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 25%, transparent); }
+.alert.good svg { color: var(--good); }
+.alert.warn { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 28%, transparent); }
+.alert.warn svg { color: var(--warn); }
+.alert.bad { background: var(--bad-soft); border-color: color-mix(in srgb, var(--bad) 25%, transparent); }
+.alert.bad svg { color: var(--bad); }
+
+/* toasts */
+.toasts { position: fixed; z-index: 60; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 8px; width: min(360px, calc(100vw - 32px)); pointer-events: none; }
+.toast { pointer-events: auto; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; padding: 12px 12px 12px 14px; border-radius: var(--r-2); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-3); font-size: 0.86rem; animation: toast-in 220ms var(--ease); }
+.toast svg { width: 18px; height: 18px; margin-top: 1px; }
+.toast.good svg { color: var(--good); }
+.toast.bad svg { color: var(--bad); }
+.toast.info svg { color: var(--info); }
+.toast button { border: 0; background: transparent; cursor: pointer; color: var(--fg-3); padding: 2px; border-radius: 5px; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+@media (prefers-reduced-motion: reduce) { .toast { animation: none; } }
+
+/* progress */
+.progress { display: grid; gap: 6px; }
+.progress-top { display: flex; justify-content: space-between; font-size: 0.84rem; }
+.bar { height: 8px; border-radius: var(--r-pill); background: var(--surface-3); overflow: hidden; }
+.bar span { display: block; height: 100%; border-radius: inherit; background: var(--accent); width: 0; transition: width 600ms var(--ease); }
+.bar.indeterminate span { width: 35%; animation: slide 1.3s var(--ease) infinite; }
+@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
+@media (prefers-reduced-motion: reduce) { .bar.indeterminate span { animation: none; width: 100%; opacity: 0.4; } }
+.ring { display: flex; gap: 16px; align-items: center; }
+.ring svg { width: 88px; height: 88px; flex: none; }
+.ring .track { fill: none; stroke: var(--surface-3); stroke-width: 8; }
+.ring .val { fill: none; stroke: var(--good); stroke-width: 8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 700ms var(--ease); }
+.ring text { font: 600 22px var(--font-display); fill: var(--fg); }
+
+/* skeleton */
+.skel { display: grid; gap: 10px; }
+.sk { border-radius: var(--r-1); background: linear-gradient(90deg, var(--surface-2) 0%, var(--surface-3) 40%, var(--surface-2) 80%); background-size: 300% 100%; animation: shimmer 1.6s linear infinite; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -50% 0; } }
+@media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+
+/* empty */
+.empty { display: grid; place-items: center; gap: 8px; text-align: center; padding: 18px 10px; }
+.empty .ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.empty .ico svg { width: 22px; height: 22px; }
+.empty strong { font: 600 1rem var(--font-display); }
+
+/* dialog + drawer */
+dialog { border: 1px solid var(--line); border-radius: var(--r-3); background: var(--surface); color: var(--fg); box-shadow: var(--shadow-3); padding: 0; max-width: min(460px, calc(100vw - 32px)); width: 100%; }
+dialog::backdrop { background: var(--scrim); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+dialog[open] { animation: pop 200ms var(--ease); }
+@keyframes pop { from { opacity: 0; transform: translateY(6px) scale(0.98); } }
+.dlg-body { padding: 22px 22px 6px; display: grid; gap: 10px; }
+.dlg-body h2 { font: 600 1.2rem/1.25 var(--font-display); letter-spacing: -0.02em; }
+.dlg-foot { display: flex; justify-content: flex-end; gap: 8px; padding: 16px 22px 20px; }
+dialog.drawer { margin: 0 0 0 auto; height: 100%; max-height: 100%; max-width: min(400px, 100vw); border-radius: var(--r-3) 0 0 var(--r-3); border-right: 0; }
+dialog.drawer[open] { animation: drawer 260ms var(--ease); display: flex; flex-direction: column; }
+@keyframes drawer { from { transform: translateX(30px); opacity: 0; } }
+.drawer-body { padding: 20px 22px; display: grid; gap: 16px; overflow-y: auto; flex: 1; align-content: start; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { dialog[open], dialog.drawer[open] { animation: none; } }
+
+/* menu */
+.menu-wrap { position: relative; display: inline-block; }
+.menu { position: absolute; z-index: 6; top: calc(100% + 6px); left: 0; min-width: 220px; padding: 6px; margin: 0; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2); box-shadow: var(--shadow-3); }
+.menu [role="menuitem"] { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: 7px; background: transparent; cursor: pointer; text-align: left; font-size: 0.88rem; }
+.menu [role="menuitem"] kbd { margin-left: auto; }
+.menu [role="menuitem"]:hover, .menu [role="menuitem"]:focus-visible { background: var(--surface-2); outline: none; }
+.menu [role="menuitem"].danger { color: var(--bad); }
+.menu svg { width: 16px; height: 16px; color: var(--fg-3); }
+.menu .sep { height: 1px; background: var(--line); margin: 5px 4px; }
+
+/* tooltip */
+.tip-wrap { position: relative; display: inline-flex; }
+.tooltip { position: absolute; z-index: 7; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); padding: 6px 9px; border-radius: var(--r-1); background: var(--tip); color: var(--tip-fg); font-size: 0.78rem; font-weight: 500; white-space: nowrap; box-shadow: var(--shadow-2); pointer-events: none; }
+.tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border: 5px solid transparent; border-top-color: var(--tip); }
+
+/* command palette */
+.palette { max-width: min(560px, calc(100vw - 32px)); margin-top: 12vh; }
+.palette-input { display: flex; align-items: center; gap: 10px; padding: 0 16px; border-bottom: 1px solid var(--line); }
+.palette-input svg { width: 18px; height: 18px; color: var(--fg-3); }
+.palette-input input { flex: 1; height: 54px; border: 0; outline: none; background: transparent; font-size: 1rem; }
+.palette-list { list-style: none; margin: 0; padding: 8px; max-height: 320px; overflow-y: auto; }
+.palette-list .grp { font: 500 0.7rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); padding: 10px 10px 6px; }
+.palette-list [role="option"] { display: flex; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+.palette-list [role="option"] small { margin-left: auto; color: var(--fg-3); font-size: 0.78rem; }
+.palette-list [role="option"][aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+.palette-list [role="option"][aria-selected="true"] small { color: inherit; }
+.palette-foot { display: flex; gap: 14px; padding: 10px 16px; border-top: 1px solid var(--line); font-size: 0.76rem; color: var(--fg-3); }
+
+/* tabs */
+.tablist { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tablist [role="tab"] { position: relative; padding: 9px 12px; border: 0; background: transparent; cursor: pointer; color: var(--fg-2); font-weight: 500; font-size: 0.88rem; white-space: nowrap; }
+.tablist [role="tab"] .count { font: 500 0.72rem var(--font-mono); margin-left: 6px; color: var(--fg-3); }
+.tablist [role="tab"][aria-selected="true"] { color: var(--fg); }
+.tablist [role="tab"][aria-selected="true"]::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: -1px; height: 2px; border-radius: 2px; background: var(--accent); }
+[role="tabpanel"] { padding-top: 12px; font-size: 0.88rem; color: var(--fg-2); }
+
+/* breadcrumbs, pagination, steps */
+.crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.86rem; }
+.crumbs li { display: flex; gap: 6px; align-items: center; }
+.crumbs li + li::before { content: "/"; color: var(--fg-3); }
+.crumbs a { color: var(--fg-2); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.crumbs [aria-current] { color: var(--fg); font-weight: 600; }
+.pager { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.pager button { min-width: var(--ctl-sm); height: var(--ctl-sm); padding: 0 8px; border-radius: var(--r-1); border: 1px solid transparent; background: transparent; cursor: pointer; font: 500 0.82rem var(--font-mono); color: var(--fg-2); }
+.pager button:hover:not([disabled]) { background: var(--surface-2); }
+.pager button[aria-current="page"] { background: var(--fg); color: var(--bg); }
+.pager button[disabled] { opacity: 0.4; cursor: not-allowed; }
+.pager .gap { color: var(--fg-3); padding: 0 4px; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.steps li { display: grid; gap: 8px; font-size: 0.8rem; color: var(--fg-3); }
+.steps li::before { content: ""; height: 4px; border-radius: var(--r-pill); background: var(--surface-3); }
+.steps li.done::before, .steps li[aria-current]::before { background: var(--accent); }
+.steps li[aria-current] { color: var(--fg); font-weight: 600; }
+.steps li.done { color: var(--fg-2); }
+
+/* accordion */
+.acc { border: 1px solid var(--line); border-radius: var(--r-2); overflow: hidden; }
+.acc details + details { border-top: 1px solid var(--line); }
+.acc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; font-weight: 600; font-size: 0.9rem; }
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary svg { width: 16px; height: 16px; color: var(--fg-3); transition: transform var(--dur) var(--ease); }
+.acc details[open] summary svg { transform: rotate(180deg); }
+.acc .acc-body { padding: 0 14px 14px; color: var(--fg-2); font-size: 0.86rem; }
+
+/* badges, avatars, dots */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: var(--r-pill); font-size: 0.76rem; font-weight: 600; }
+.badge.good { background: var(--good-soft); color: var(--good); }
+.badge.warn { background: var(--warn-soft); color: var(--warn); }
+.badge.bad { background: var(--bad-soft); color: var(--bad); }
+.badge.info { background: var(--info-soft); color: var(--info); }
+.badge.neutral { background: var(--surface-2); color: var(--fg-2); }
+.badge.outline { background: transparent; border: 1px solid var(--line-strong); color: var(--fg-2); }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.dot.live { box-shadow: 0 0 0 0 currentColor; animation: pulse 1.8s ease-out infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 6px transparent; } }
+@media (prefers-reduced-motion: reduce) { .dot.live { animation: none; } }
+.avatars { display: flex; }
+.avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 600 0.78rem var(--font-ui); color: #fff; border: 2px solid var(--surface); margin-left: -8px; }
+.avatars .avatar:first-child { margin-left: 0; }
+.avatar.more { background: var(--surface-3); color: var(--fg-2); }
+
+/* kpi tiles */
+.kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); }
+.kpi { padding: 14px 16px; border-radius: var(--r-2); border: 1px solid var(--line); background: var(--surface); display: grid; gap: 4px; }
+.kpi-label { font: 500 0.7rem/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+.kpi-value { font: 600 1.9rem/1.1 var(--font-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.kpi-foot { display: flex; justify-content: space-between; align-items: end; gap: 8px; }
+.delta { font: 500 0.78rem var(--font-mono); }
+.delta.up { color: var(--good); }
+.delta.down { color: var(--bad); }
+.delta.better-down { color: var(--good); }
+.spark { width: 96px; height: 30px; flex: none; }
+.spark path.a { fill: color-mix(in srgb, var(--accent) 15%, transparent); }
+.spark polyline { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+
+/* table */
+.table-tools { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+.selection { font-size: 0.84rem; color: var(--fg-2); display: flex; gap: 8px; align-items: center; }
+.table-scroll { overflow: auto; max-height: 340px; border: 1px solid var(--line); border-radius: var(--r-2); }
+table.data { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.86rem; }
+table.data th { position: sticky; top: 0; z-index: 1; background: var(--surface-2); text-align: left; font-weight: 600; font-size: 0.78rem; color: var(--fg-2); padding: var(--cell) 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.data th button { all: unset; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; }
+table.data th button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+table.data th .arrow { width: 12px; height: 12px; color: var(--fg-3); }
+table.data th[aria-sort] .arrow { color: var(--accent); }
+table.data td { padding: var(--cell) 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.data tbody tr:hover td { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+table.data tbody tr[aria-selected="true"] td { background: var(--accent-soft); }
+table.data tr:last-child td { border-bottom: 0; }
+table.data .n { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+table.data .path { font-family: var(--font-mono); font-size: 0.8rem; }
+table.data .check { width: 36px; padding-right: 0; }
+.minibar { display: inline-block; width: 60px; height: 6px; border-radius: 3px; background: var(--surface-3); vertical-align: middle; margin-right: 8px; overflow: hidden; }
+.minibar span { display: block; height: 100%; border-radius: inherit; }
+
+/* timeline, description list, code */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; padding-bottom: 14px; position: relative; font-size: 0.86rem; }
+.timeline li::before { content: ""; position: absolute; left: 8px; top: 18px; bottom: 0; width: 2px; background: var(--line); }
+.timeline li:last-child::before { display: none; }
+.timeline .pt { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--line-strong); margin-top: 1px; }
+.timeline time { font: 500 0.75rem var(--font-mono); color: var(--fg-3); }
+dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0; font-size: 0.86rem; }
+dl.kv dt { color: var(--fg-3); }
+dl.kv dd { margin: 0; }
+.code { position: relative; border-radius: var(--r-2); background: #0d1117; color: #d7dde5; overflow: hidden; }
+.code pre { margin: 0; padding: 14px 16px; overflow-x: auto; font: 0.8rem/1.6 var(--font-mono); }
+.code .k { color: #7dd3c8; } .code .s { color: #f9d48a; } .code .c { color: #7d8794; } .code .t { color: #a5b4fc; }
+.code .copy { position: absolute; top: 8px; right: 8px; height: 28px; padding: 0 10px; border-radius: 6px; border: 1px solid rgb(255 255 255 / 0.14); background: rgb(255 255 255 / 0.06); color: #d7dde5; cursor: pointer; font-size: 0.75rem; }
+
+/* charts */
+.chart-wrap { position: relative; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .gridline { stroke: var(--line); stroke-width: 1; }
+.chart .axis-text { fill: var(--fg-3); font: 11px var(--font-mono); }
+.chart .s-area { opacity: 0.16; }
+.chart .s-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .cross { stroke: var(--fg-3); stroke-width: 1; stroke-dasharray: 3 3; }
+.chart .hit { fill: transparent; cursor: crosshair; }
+.chart-tip { position: absolute; z-index: 4; pointer-events: none; padding: 8px 10px; border-radius: var(--r-1); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-3); font-size: 0.78rem; display: grid; gap: 3px; min-width: 130px; }
+.chart-tip .tt { font-weight: 600; color: var(--fg); }
+.chart-tip .rowv { display: flex; justify-content: space-between; gap: 12px; color: var(--fg-2); }
+.chart-tip .sw { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.8rem; }
+.legend button { display: inline-flex; gap: 6px; align-items: center; border: 0; background: transparent; padding: 2px 4px; border-radius: 5px; cursor: pointer; color: var(--fg-2); }
+.legend button[aria-pressed="false"] { opacity: 0.45; text-decoration: line-through; }
+.legend .sw, .legend-static .sw { width: 10px; height: 10px; border-radius: 3px; }
+.chart-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.linkish { border: 0; background: transparent; color: var(--accent); cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 2px 4px; border-radius: 5px; }
+.chart-table { font-size: 0.8rem; }
+.donut-wrap { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.donut { width: 150px; height: 150px; flex: none; }
+.donut path { stroke: var(--surface); stroke-width: 2; transition: opacity var(--dur); cursor: pointer; }
+.donut path:hover, .donut path:focus-visible { opacity: 0.82; outline: none; }
+.donut .center-big { font: 600 26px var(--font-display); fill: var(--fg); }
+.donut .center-small { font: 11px var(--font-mono); fill: var(--fg-3); }
+.legend-static { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 0.84rem; flex: 1; min-width: 150px; }
+.legend-static li { display: grid; grid-template-columns: 10px 1fr auto; gap: 8px; align-items: center; }
+.heat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 13px); gap: 3px; overflow-x: auto; padding-bottom: 4px; }
+.heat span { width: 13px; height: 13px; border-radius: 3px; background: var(--surface-3); }
+.heat-legend { display: flex; gap: 4px; align-items: center; font-size: 0.74rem; color: var(--fg-3); justify-content: flex-end; }
+.heat-legend span { width: 11px; height: 11px; border-radius: 3px; }
+</style>
+
+<div class="shell">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="kit, back to the top">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="12" height="5" rx="1.2"/></svg></span>
+      <span class="wordmark">kit</span>
+      <span class="version">v0.1 draft</span>
+    </a>
+    <div class="prefs">
+      <div class="seg" role="radiogroup" aria-label="Colour scheme" data-pref="theme">
+        <button type="button" role="radio" aria-checked="true" data-value="system">System</button>
+        <button type="button" role="radio" aria-checked="false" data-value="light">Light</button>
+        <button type="button" role="radio" aria-checked="false" data-value="dark">Dark</button>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="Density" data-pref="density">
+        <button type="button" role="radio" aria-checked="true" data-value="comfortable">Comfortable</button>
+        <button type="button" role="radio" aria-checked="false" data-value="compact">Compact</button>
+      </div>
+      <span class="pref-label" id="accent-label">Accent</span>
+      <div class="accents" role="group" aria-labelledby="accent-label">
+        <button type="button" data-accent="spruce" aria-pressed="true" aria-label="Spruce" style="background:#0f766e"></button>
+        <button type="button" data-accent="indigo" aria-pressed="false" aria-label="Indigo" style="background:#4f46e5"></button>
+        <button type="button" data-accent="amber" aria-pressed="false" aria-label="Amber" style="background:#b45309"></button>
+        <button type="button" data-accent="rose" aria-pressed="false" aria-label="Rose" style="background:#be123c"></button>
+      </div>
+      <button class="btn btn-secondary btn-sm" type="button" data-open-palette>Search <kbd>⌘K</kbd></button>
+    </div>
+  </header>
+
+  <div class="intro" id="top">
+    <span class="eyebrow">Component catalogue</span>
+    <h1>Every piece kit could ship, working, in one system.</h1>
+    <p>These are live: type, click, drag, sort, tab through them. One set of tokens drives everything here, so the scheme, density and accent controls above re-theme the whole page at once. Each card says whether it's CSS only (tier 1) or a component with behaviour (tier 2), and which accessibility pattern it follows.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Component groups"><ol id="toc"></ol></nav>
+    <main id="main">
+
+      <!-- ===================================================== ACTIONS -->
+      <section class="group" id="actions" aria-labelledby="actions-h">
+        <div class="group-head"><h2 id="actions-h">Actions</h2><p>What people press. One primary action per view; everything else steps down.</p></div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-head"><h3>Button</h3></div>
+            <p class="card-desc">Primary, secondary, ghost and destructive, in three sizes, with a loading state that keeps focus.</p>
+            <div class="demo">
+              <div class="row">
+                <button class="btn btn-primary" type="button" data-loading-demo>Run audit</button>
+                <button class="btn btn-secondary" type="button">Export</button>
+                <button class="btn btn-ghost" type="button">Cancel</button>
+                <button class="btn btn-danger" type="button">Delete site</button>
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-sm" type="button">Small</button>
+                <button class="btn btn-primary" type="button">Medium</button>
+                <button class="btn btn-primary btn-lg" type="button">Large</button>
+                <span class="tip-wrap" data-tip="Copy link">
+                  <button class="btn btn-secondary btn-icon" type="button" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg></button>
+                </span>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">native button</span><span class="tag">aria-busy</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Segmented control</h3></div>
+            <p class="card-desc">A small set of mutually exclusive views. Arrow keys move between options.</p>
+            <div class="demo">
+              <div class="seg" role="radiogroup" aria-label="Range" data-seg-demo>
+                <button type="button" role="radio" aria-checked="false" tabindex="-1">24 hours</button>
+                <button type="button" role="radio" aria-checked="true">7 days</button>
+                <button type="button" role="radio" aria-checked="false" tabindex="-1">30 days</button>
+                <button type="button" role="radio" aria-checked="false" tabindex="-1">Year</button>
+              </div>
+              <p class="faint" style="font-size:.84rem" data-seg-output>Showing the last 7 days.</p>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">APG radio group</span><span class="tag">roving tabindex</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================== INPUTS -->
+      <section class="group" id="inputs" aria-labelledby="inputs-h">
+        <div class="group-head"><h2 id="inputs-h">Inputs</h2><p>Form controls with visible labels, hints and errors wired up for screen readers. All of them submit with a normal form.</p></div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-head"><h3>Text field</h3></div>
+            <p class="card-desc">Label, prefix, hint and an error state that says what to fix.</p>
+            <div class="demo">
+              <div class="field">
+                <label class="field-label" for="f-site">Website</label>
+                <div class="control"><span class="affix">https://</span><input id="f-site" value="kritano.com" spellcheck="false" aria-describedby="f-site-hint"></div>
+                <span class="hint" id="f-site-hint">The domain only, like example.com.</span>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-email">Email</label>
+                <div class="control invalid"><input id="f-email" value="chris@" aria-invalid="true" aria-describedby="f-email-err"></div>
+                <span class="error-text" id="f-email-err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.8v3.6M8 11h.01"/></svg>Add the part after the @, like chris@example.com.</span>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">aria-describedby</span><span class="tag">aria-invalid</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Search and select</h3></div>
+            <p class="card-desc">A search field with its shortcut, and a native select restyled.</p>
+            <div class="demo">
+              <div class="field">
+                <label class="field-label" for="f-search">Search</label>
+                <div class="control"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><input id="f-search" type="search" placeholder="Sites, audits, issues"><kbd>⌘K</kbd></div>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-tz">Timezone</label>
+                <div class="control"><select id="f-tz"><option>Europe/London (GMT)</option><option>Europe/Paris (CET)</option><option>America/New_York (EST)</option><option>Asia/Tokyo (JST)</option></select></div>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">native select</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Combobox</h3></div>
+            <p class="card-desc">Type to filter, arrows to move, Enter to choose, Escape to close.</p>
+            <div class="demo">
+              <div class="field combo" data-combo>
+                <label class="field-label" for="f-client" id="f-client-label">Client</label>
+                <div class="control"><input id="f-client" role="combobox" aria-expanded="false" aria-controls="f-client-list" aria-autocomplete="list" autocomplete="off" placeholder="Choose a client"></div>
+                <ul class="listbox" id="f-client-list" role="listbox" aria-labelledby="f-client-label" hidden></ul>
+              </div>
+              <p class="faint" style="font-size:.84rem" data-combo-out>No client chosen.</p>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">APG combobox</span><span class="tag">aria-activedescendant</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Checkbox, radio and switch</h3></div>
+            <p class="card-desc">Native inputs underneath, so forms and keyboards just work.</p>
+            <div class="demo">
+              <fieldset style="border:0;padding:0;margin:0;display:grid;gap:10px">
+                <legend class="field-label" style="margin-bottom:8px">Check</legend>
+                <label class="choice"><input type="checkbox" checked> <span>Accessibility<small>WCAG 2.2 AA rules</small></span></label>
+                <label class="choice"><input type="checkbox" checked> <span>Performance<small>Core Web Vitals in the lab</small></span></label>
+                <label class="choice"><input type="checkbox"> <span>Structured data</span></label>
+              </fieldset>
+              <fieldset style="border:0;padding:0;margin:0;display:flex;gap:16px;flex-wrap:wrap">
+                <legend class="field-label" style="margin-bottom:8px">Device</legend>
+                <label class="choice"><input type="radio" name="dev" checked> <span>Desktop</span></label>
+                <label class="choice"><input type="radio" name="dev"> <span>Mobile</span></label>
+                <label class="choice"><input type="radio" name="dev"> <span>Both</span></label>
+              </fieldset>
+              <div class="switch-row"><span id="sw1">Email me when audits finish</span><button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="sw1" data-switch></button></div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag t2">switch: tier 2</span><span class="tag">APG switch</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Slider and stepper</h3></div>
+            <p class="card-desc">A range with its value shown, and a number stepper for small counts.</p>
+            <div class="demo">
+              <div class="slider">
+                <div class="field-label"><label for="f-pages">Pages per audit</label><output for="f-pages" class="num" id="f-pages-out">250</output></div>
+                <input id="f-pages" type="range" min="10" max="1000" step="10" value="250" data-slider>
+                <div class="slider-ends num"><span>10</span><span>1,000</span></div>
+              </div>
+              <div class="switch-row">
+                <span id="st-label">Concurrent audits</span>
+                <div class="stepper" role="group" aria-labelledby="st-label">
+                  <button type="button" aria-label="Fewer" data-step="-1">−</button>
+                  <output aria-live="polite" data-step-out>3</output>
+                  <button type="button" aria-label="More" data-step="1">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">native range</span><span class="tag">output</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Tag input and file drop</h3></div>
+            <p class="card-desc">Add tags with Enter, remove with the cross or Backspace. Drop files or browse.</p>
+            <div class="demo">
+              <div class="field">
+                <label class="field-label" for="f-tag">Keywords</label>
+                <div class="tags" data-tags>
+                  <span class="chip">website audit <button type="button" aria-label="Remove website audit">×</button></span>
+                  <span class="chip">wcag <button type="button" aria-label="Remove wcag">×</button></span>
+                  <input id="f-tag" placeholder="Add a keyword">
+                </div>
+              </div>
+              <label class="drop" data-drop for="f-file">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 16V4m0 0-4 4m4-4 4 4"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+                <strong>Drop a sitemap or CSV</strong>
+                <span class="hint">or click to browse · up to 5 MB</span>
+                <input id="f-file" type="file" class="vh" multiple>
+              </label>
+              <ul class="files" data-files></ul>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">form-associated</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================== FEEDBACK -->
+      <section class="group" id="feedback" aria-labelledby="feedback-h">
+        <div class="group-head"><h2 id="feedback-h">Feedback</h2><p>Telling people what happened without stealing their focus. Colour always comes with an icon or words.</p></div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-head"><h3>Alert</h3></div>
+            <p class="card-desc">Inline messages for information, success, warnings and errors.</p>
+            <div class="demo">
+              <div class="alert info"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v4.5M10 6.5h.01"/></svg><strong>Scheduled</strong><span class="muted">The next audit runs tonight at 01:00.</span></div>
+              <div class="alert good"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="m6.8 10.2 2.2 2.2 4.2-4.6"/></svg><strong>Verified</strong><span class="muted">kritano.com is yours. Full audits are unlocked.</span></div>
+              <div class="alert warn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3.5 2.8 16h14.4L10 3.5Z"/><path d="M10 8.5v3.5M10 14h.01"/></svg><strong>Nearly at your limit</strong><span class="muted">9 of 10 audits used this month.</span></div>
+              <div class="alert bad"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="m7.5 7.5 5 5m0-5-5 5"/></svg><strong>Audit failed</strong><span class="muted">The site didn't respond within 30 seconds.</span></div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">role="status" when live</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Toast</h3></div>
+            <p class="card-desc">Short confirmations that stack in the corner, are announced, and go away by themselves.</p>
+            <div class="demo">
+              <div class="row">
+                <button class="btn btn-secondary" type="button" data-toast="good">Save settings</button>
+                <button class="btn btn-secondary" type="button" data-toast="info">Copy key</button>
+                <button class="btn btn-secondary" type="button" data-toast="bad">Fail to export</button>
+              </div>
+              <p class="faint" style="font-size:.84rem">Toasts overlay the page instead of pushing content, so nothing shifts.</p>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">announce()</span><span class="tag">no layout shift</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Progress and score ring</h3></div>
+            <p class="card-desc">Determinate and indeterminate bars, and a ring for a single score.</p>
+            <div class="demo">
+              <div class="progress">
+                <div class="progress-top"><span>Crawling pages</span><span class="num" data-prog-label>0 / 250</span></div>
+                <div class="bar" role="progressbar" aria-label="Crawling pages" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0" data-prog><span></span></div>
+              </div>
+              <div class="progress">
+                <div class="progress-top"><span>Waiting for the worker</span><span class="faint">queued</span></div>
+                <div class="bar indeterminate" role="progressbar" aria-label="Waiting for the worker"><span></span></div>
+              </div>
+              <div class="ring">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Overall score 87 out of 100"><circle class="track" cx="50" cy="50" r="40"/><circle class="val" cx="50" cy="50" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3" data-ring="87"/><text x="50" y="58" text-anchor="middle">87</text></svg>
+                <div><strong>Good</strong><p class="muted" style="font-size:.86rem">Up 4 since the last audit. Fix 3 issues to reach 90.</p></div>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">progressbar</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Skeleton and empty state</h3></div>
+            <p class="card-desc">Placeholders sized like the real content, and a helpful nothing-here-yet.</p>
+            <div class="demo">
+              <div class="skel" aria-hidden="true">
+                <div class="row" style="flex-wrap:nowrap"><div class="sk" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1;display:grid;gap:6px"><div class="sk" style="height:12px;width:55%"></div><div class="sk" style="height:10px;width:35%"></div></div></div>
+                <div class="sk" style="height:10px"></div><div class="sk" style="height:10px;width:82%"></div>
+              </div>
+              <div class="empty">
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5S9.7 5.9 12 3.5Z"/></svg></span>
+                <strong>No sites yet</strong>
+                <p class="muted" style="font-size:.86rem">Add your first site to start auditing it.</p>
+                <button class="btn btn-primary btn-sm" type="button">Add a site</button>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">reserved size, CLS 0</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================== OVERLAYS -->
+      <section class="group" id="overlays" aria-labelledby="overlays-h">
+        <div class="group-head"><h2 id="overlays-h">Overlays</h2><p>Layers above the page. Native dialog and focus handling underneath, so Escape, focus return and inert backgrounds come for free.</p></div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-head"><h3>Dialog and drawer</h3></div>
+            <p class="card-desc">A confirm dialog for destructive actions, and a side drawer for detail.</p>
+            <div class="demo">
+              <div class="row">
+                <button class="btn btn-danger" type="button" data-open="dlg-confirm">Delete site…</button>
+                <button class="btn btn-secondary" type="button" data-open="dlg-drawer">Open drawer</button>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">native dialog</span><span class="tag">APG dialog</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Menu and tooltip</h3></div>
+            <p class="card-desc">An actions menu with keyboard support, and tooltips that only ever supplement.</p>
+            <div class="demo">
+              <div class="row">
+                <div class="menu-wrap" data-menu>
+                  <button class="btn btn-secondary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="m1" id="m1-btn">Actions <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 6 4 4 4-4"/></svg></button>
+                  <div class="menu" role="menu" id="m1" aria-labelledby="m1-btn" hidden>
+                    <button role="menuitem" type="button" tabindex="-1"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 2.5v2.8h2.8"/></svg>Run again<kbd>R</kbd></button>
+                    <button role="menuitem" type="button" tabindex="-1"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2.5v8m0 0-3-3m3 3 3-3M3 13.5h10"/></svg>Download PDF<kbd>D</kbd></button>
+                    <button role="menuitem" type="button" tabindex="-1"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="4" cy="8" r="1.6"/><circle cx="12" cy="4" r="1.6"/><circle cx="12" cy="12" r="1.6"/><path d="m5.4 7.2 5.2-2.4M5.4 8.8l5.2 2.4"/></svg>Share link</button>
+                    <div class="sep" role="separator"></div>
+                    <button role="menuitem" type="button" tabindex="-1" class="danger"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.5h5.8l.6-8.5"/></svg>Delete audit</button>
+                  </div>
+                </div>
+                <span class="tip-wrap" data-tip="Scores are out of 100">
+                  <button class="btn btn-ghost btn-icon" type="button" aria-label="About scores"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 7.5v3.5M8 5.2h.01"/></svg></button>
+                </span>
+              </div>
+              <p class="faint" style="font-size:.84rem" data-menu-out>Nothing chosen yet.</p>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">APG menu button</span><span class="tag">WCAG 1.4.13</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Command palette</h3></div>
+            <p class="card-desc">Jump anywhere from the keyboard. Press <kbd>⌘K</kbd> or <kbd>Ctrl K</kbd>, or use the button.</p>
+            <div class="demo">
+              <button class="btn btn-secondary" type="button" data-open-palette style="justify-content:space-between;width:100%"><span class="row" style="gap:8px"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>Search sites, pages and actions</span><kbd>⌘K</kbd></button>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">APG combobox</span><span class="tag">dialog</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================== NAVIGATION -->
+      <section class="group" id="navigation" aria-labelledby="navigation-h">
+        <div class="group-head"><h2 id="navigation-h">Navigation</h2><p>Where am I, and how do I get to the next thing.</p></div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-head"><h3>Tabs</h3></div>
+            <p class="card-desc">Arrow keys move along the tabs, Home and End jump to the ends.</p>
+            <div class="demo" data-tabs>
+              <div class="tablist" role="tablist" aria-label="Audit">
+                <button role="tab" type="button" id="t-plan" aria-selected="true" aria-controls="p-plan">Fix plan</button>
+                <button role="tab" type="button" id="t-issues" aria-selected="false" aria-controls="p-issues" tabindex="-1">All issues<span class="count">312</span></button>
+                <button role="tab" type="button" id="t-pages" aria-selected="false" aria-controls="p-pages" tabindex="-1">Pages<span class="count">1,284</span></button>
+                <button role="tab" type="button" id="t-exp" aria-selected="false" aria-controls="p-exp" tabindex="-1">Exports</button>
+              </div>
+              <div role="tabpanel" id="p-plan" aria-labelledby="t-plan" tabindex="0">The five fixes worth most, each with how much the score gains.</div>
+              <div role="tabpanel" id="p-issues" aria-labelledby="t-issues" tabindex="0" hidden>Every issue found, worst first, filterable by category.</div>
+              <div role="tabpanel" id="p-pages" aria-labelledby="t-pages" tabindex="0" hidden>Every page crawled, with its own score and issues.</div>
+              <div role="tabpanel" id="p-exp" aria-labelledby="t-exp" tabindex="0" hidden>PDF, CSV and JSON downloads.</div>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">APG tabs</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Breadcrumbs, pagination and steps</h3></div>
+            <p class="card-desc">One way up, a way through long lists, and progress through a flow.</p>
+            <div class="demo">
+              <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="#navigation">Clients</a></li><li><a href="#navigation">Northwind Homes</a></li><li><a href="#navigation">shop.northwind.co.uk</a></li><li><span aria-current="page">Audit of 2 Nov</span></li></ol></nav>
+              <nav class="pager" aria-label="Pagination" data-pager></nav>
+              <ol class="steps" aria-label="Setup">
+                <li class="done">Add site</li><li class="done">Verify</li><li aria-current="step">First audit</li><li>Schedule</li>
+              </ol>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag t2">pager: tier 2</span><span class="tag">aria-current</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Accordion</h3></div>
+            <p class="card-desc">Native details and summary: works without JavaScript, announced as expandable.</p>
+            <div class="demo">
+              <div class="acc">
+                <details open><summary>What does an audit check?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 6 4 4 4-4"/></svg></summary><div class="acc-body">SEO, accessibility, security, performance, content and structured data, on every page it can reach.</div></details>
+                <details><summary>How long does it take?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 6 4 4 4-4"/></svg></summary><div class="acc-body">A small site takes a minute or two. Large sites crawl politely, a few pages at a time.</div></details>
+                <details><summary>Can I schedule audits?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 6 4 4 4-4"/></svg></summary><div class="acc-body">Yes, daily, weekly, fortnightly or monthly, once the site is verified.</div></details>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">native details</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================== DATA DISPLAY -->
+      <section class="group" id="data" aria-labelledby="data-h">
+        <div class="group-head"><h2 id="data-h">Data display</h2><p>Dense information that stays calm: tabular figures, quiet borders and state shown in shape as well as colour.</p></div>
+        <div class="cards">
+          <article class="card wide">
+            <div class="card-head"><h3>Stat tiles</h3></div>
+            <p class="card-desc">The number, how it changed, and its trend, at a glance. Deltas know whether up is good.</p>
+            <div class="demo"><div class="kpis" data-kpis></div></div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">tabular figures</span></div>
+          </article>
+
+          <article class="card wide">
+            <div class="card-head"><h3>Data table</h3></div>
+            <p class="card-desc">Sortable columns, row selection and a sticky header. The production version virtualises thousands of rows.</p>
+            <div class="demo">
+              <div class="table-tools">
+                <div class="selection" data-sel>No rows selected</div>
+                <div class="control" style="height:var(--ctl-sm);max-width:240px;flex:1"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><label class="vh" for="t-filter">Filter pages</label><input id="t-filter" placeholder="Filter pages" data-table-filter></div>
+              </div>
+              <div class="table-scroll">
+                <table class="data" data-table>
+                  <caption class="vh">Pages from the latest audit of kritano.com</caption>
+                  <thead><tr>
+                    <th class="check" scope="col"><label class="choice" style="gap:0"><input type="checkbox" data-select-all aria-label="Select all rows"></label></th>
+                    <th scope="col" data-key="path"><button type="button">Page<svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3-3 3 3M3 7.5l3 3 3-3"/></svg></button></th>
+                    <th scope="col" class="n" data-key="score" aria-sort="descending"><button type="button">Score<svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3 3 3-3"/></svg></button></th>
+                    <th scope="col" class="n" data-key="issues"><button type="button">Issues<svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3-3 3 3M3 7.5l3 3 3-3"/></svg></button></th>
+                    <th scope="col" class="n" data-key="lcp"><button type="button">LCP<svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3-3 3 3M3 7.5l3 3 3-3"/></svg></button></th>
+                    <th scope="col" data-key="status"><button type="button">Status<svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3-3 3 3M3 7.5l3 3 3-3"/></svg></button></th>
+                  </tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">aria-sort</span><span class="tag">virtualised in production</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Badges, status and avatars</h3></div>
+            <p class="card-desc">State as a pill or a dot, counts, and people.</p>
+            <div class="demo">
+              <div class="row"><span class="badge good"><span class="dot"></span>Passing</span><span class="badge warn"><span class="dot"></span>Needs work</span><span class="badge bad"><span class="dot"></span>Failing</span><span class="badge info"><span class="dot live"></span>Running</span></div>
+              <div class="row"><span class="badge neutral">Draft</span><span class="badge outline">v2.4.1</span><span class="badge neutral num">312 issues</span><span class="badge good">Agency</span></div>
+              <div class="row" style="justify-content:space-between">
+                <div class="avatars" aria-label="Shared with 6 people" role="img"><span class="avatar" style="background:#0f766e">CG</span><span class="avatar" style="background:#4f46e5">PS</span><span class="avatar" style="background:#b45309">AM</span><span class="avatar more">+3</span></div>
+                <span class="faint" style="font-size:.82rem">Shared with 6 people</span>
+              </div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">not colour alone</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Activity timeline</h3></div>
+            <p class="card-desc">What happened, in order, with the time on the right.</p>
+            <div class="demo">
+              <ol class="timeline">
+                <li><span class="pt" style="background:var(--good)"></span><span><strong>Audit completed</strong><br><span class="muted">Score 87, up 4</span></span><time datetime="2026-11-02T01:04">01:04</time></li>
+                <li><span class="pt" style="background:var(--info)"></span><span><strong>Schedule changed</strong><br><span class="muted">Weekly to daily</span></span><time datetime="2026-11-01T16:20">Sun</time></li>
+                <li><span class="pt" style="background:var(--warn)"></span><span><strong>3 new issues</strong><br><span class="muted">Missing alt text on /blog</span></span><time datetime="2026-10-31T09:12">Fri</time></li>
+                <li><span class="pt" style="background:var(--accent)"></span><span><strong>Site verified</strong><br><span class="muted">By DNS record</span></span><time datetime="2026-10-29T14:40">29 Oct</time></li>
+              </ol>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag">ordered list</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Details and code</h3></div>
+            <p class="card-desc">Label and value pairs, and a code block you can copy from.</p>
+            <div class="demo">
+              <dl class="kv"><dt>Plan</dt><dd>Enterprise</dd><dt>Verified</dt><dd>By DNS, 29 Oct</dd><dt>Schedule</dt><dd>Daily at 01:00 (Europe/London)</dd><dt>API key</dt><dd class="mono">kt_live_0193…7a1d</dd></dl>
+              <div class="code"><button class="copy" type="button" data-copy>Copy</button><pre data-code><span class="c">&lt;!-- any backend: Blade, Go, WordPress --&gt;</span>
+<span class="t">&lt;kit-button</span> <span class="k">variant</span>=<span class="s">"primary"</span><span class="t">&gt;</span>Run audit<span class="t">&lt;/kit-button&gt;</span></pre></div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1</span><span class="tag t2">copy: tier 2</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================== CHARTS -->
+      <section class="group" id="charts" aria-labelledby="charts-h">
+        <div class="group-head"><h2 id="charts-h">Charts</h2><p>Small, fast SVG charts on one shared scale system. Every chart has a text summary and can show its data as a table.</p></div>
+        <div class="cards">
+          <article class="card wide">
+            <div class="card-head"><h3>Line and area</h3></div>
+            <p class="card-desc">Thirty days of scores. Hover for exact values, toggle series in the legend.</p>
+            <div class="demo">
+              <div class="chart-head">
+                <div class="legend" data-legend></div>
+                <button class="linkish" type="button" aria-expanded="false" data-as-table="line">Show as table</button>
+              </div>
+              <div class="chart-wrap" data-line-wrap></div>
+              <div class="table-scroll chart-table" data-line-table hidden></div>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">SVG</span><span class="tag">table alternative</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Bar chart</h3></div>
+            <p class="card-desc">Issues by category, desktop against mobile.</p>
+            <div class="demo">
+              <div class="legend-static row" style="gap:14px;font-size:.8rem"><span class="row" style="gap:6px"><span class="sw" style="background:var(--s1)"></span>Desktop</span><span class="row" style="gap:6px"><span class="sw" style="background:var(--s2)"></span>Mobile</span></div>
+              <div class="chart-wrap" data-bars></div>
+            </div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">grouped bars</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>Donut</h3></div>
+            <p class="card-desc">Issues by severity, with the total in the middle.</p>
+            <div class="demo"><div class="donut-wrap" data-donut></div></div>
+            <div class="card-foot"><span class="tag t2">tier 2</span><span class="tag">keyboard focusable slices</span></div>
+          </article>
+
+          <article class="card wide">
+            <div class="card-head"><h3>Calendar heatmap</h3></div>
+            <p class="card-desc">Audits run per day over the last eighteen weeks.</p>
+            <div class="demo">
+              <div class="heat" data-heat role="img" aria-label="Audits per day over 18 weeks; busiest days have 6 audits"></div>
+              <div class="heat-legend"><span style="background:var(--surface-3)"></span> Less <span data-heat-key="1"></span><span data-heat-key="2"></span><span data-heat-key="3"></span><span data-heat-key="4"></span> More</div>
+            </div>
+            <div class="card-foot"><span class="tag">tier 1 render</span><span class="tag">server-renderable</span></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- overlays -->
+<dialog id="dlg-confirm" aria-labelledby="dlg-confirm-h">
+  <form method="dialog">
+    <div class="dlg-body">
+      <h2 id="dlg-confirm-h">Delete shop.northwind.co.uk?</h2>
+      <p class="muted">Its 14 audits and their reports go with it. This can't be undone.</p>
+      <div class="field"><label class="field-label" for="dlg-type">Type the domain to confirm</label><div class="control"><input id="dlg-type" autocomplete="off" spellcheck="false" placeholder="shop.northwind.co.uk"></div></div>
+    </div>
+    <div class="dlg-foot"><button class="btn btn-ghost" value="cancel" type="submit">Cancel</button><button class="btn btn-danger" value="delete" type="submit" data-confirm-delete disabled>Delete site</button></div>
+  </form>
+</dialog>
+<dialog id="dlg-drawer" class="drawer" aria-labelledby="dlg-drawer-h">
+  <div class="drawer-head"><h2 id="dlg-drawer-h" style="font:600 1.1rem var(--font-display)">Missing alt text</h2><form method="dialog"><button class="btn btn-ghost btn-icon btn-sm" type="submit" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m4 4 8 8m0-8-8 8"/></svg></button></form></div>
+  <div class="drawer-body">
+    <div class="row"><span class="badge bad"><span class="dot"></span>Critical</span><span class="badge neutral">Accessibility</span><span class="badge outline">WCAG 1.1.1</span></div>
+    <p class="muted">Images need a text alternative so people using screen readers know what they show. Decorative images take an empty <code class="mono">alt=""</code>.</p>
+    <dl class="kv"><dt>Pages</dt><dd class="num">14</dd><dt>Elements</dt><dd class="num">37</dd><dt>Score gain</dt><dd class="num">+2.4</dd></dl>
+    <div class="code"><pre><span class="t">&lt;img</span> <span class="k">src</span>=<span class="s">"team.jpg"</span> <span class="k">alt</span>=<span class="s">"The Kritano team at the 2026 offsite"</span><span class="t">&gt;</span></pre></div>
+    <button class="btn btn-primary" type="button" data-toast="good" data-toast-text="Marked as acknowledged">Acknowledge issue</button>
+  </div>
+</dialog>
+<dialog id="dlg-palette" class="palette" aria-label="Search">
+  <div class="palette-input"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><label class="vh" for="pal-q">Search sites, pages and actions</label><input id="pal-q" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" placeholder="Search sites, pages and actions"></div>
+  <ul class="palette-list" id="pal-list" role="listbox" aria-label="Results"></ul>
+  <div class="palette-foot" aria-hidden="true"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
+</dialog>
+<div class="toasts" data-toasts></div>
+<div class="vh" role="status" aria-live="polite" data-live></div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement;
+  const live = $('[data-live]');
+  const announce = (msg) => { live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 60); };
+  const store = {
+    get(k, d) { try { return localStorage.getItem('kit-' + k) ?? d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('kit-' + k, v); } catch { /* unavailable */ } },
+  };
+  const NS = 'http://www.w3.org/2000/svg';
+  const svgEl = (tag, attrs = {}) => { const e = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); return e; };
+  const fmt = new Intl.NumberFormat('en-GB');
+
+  /* ---------- roving radio groups (segmented controls) ---------- */
+  function radioGroup(group, onChange) {
+    const opts = () => $$('[role="radio"]', group);
+    const pick = (b, focus) => {
+      opts().forEach((o) => { const on = o === b; o.setAttribute('aria-checked', String(on)); o.tabIndex = on ? 0 : -1; });
+      if (focus) b.focus();
+      onChange?.(b);
+    };
+    opts().forEach((o) => { o.tabIndex = o.getAttribute('aria-checked') === 'true' ? 0 : -1; });
+    group.addEventListener('click', (e) => { const b = e.target.closest('[role="radio"]'); if (b) pick(b); });
+    group.addEventListener('keydown', (e) => {
+      const list = opts(); const i = list.indexOf(document.activeElement); if (i < 0) return;
+      let j = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % list.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + list.length) % list.length;
+      else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = list.length - 1;
+      if (j === null) return; e.preventDefault(); pick(list[j], true);
+    });
+    return pick;
+  }
+
+  /* ---------- preferences: scheme, density, accent ---------- */
+  const applyTheme = (v) => { if (v === 'system') delete root.dataset.theme; else root.dataset.theme = v; };
+  const applyDensity = (v) => { if (v === 'compact') root.dataset.density = 'compact'; else delete root.dataset.density; };
+  const applyAccent = (v) => { if (v === 'spruce') delete root.dataset.accent; else root.dataset.accent = v; };
+  const themeGroup = $('[data-pref="theme"]');
+  const densityGroup = $('[data-pref="density"]');
+  const pickTheme = radioGroup(themeGroup, (b) => { applyTheme(b.dataset.value); store.set('theme', b.dataset.value); drawAll(); });
+  const pickDensity = radioGroup(densityGroup, (b) => { applyDensity(b.dataset.value); store.set('density', b.dataset.value); });
+  const savedTheme = store.get('theme', 'system'); const savedDensity = store.get('density', 'comfortable'); const savedAccent = store.get('accent', 'spruce');
+  applyTheme(savedTheme); applyDensity(savedDensity); applyAccent(savedAccent);
+  $$('[role="radio"]', themeGroup).forEach((b) => { const on = b.dataset.value === savedTheme; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
+  $$('[role="radio"]', densityGroup).forEach((b) => { const on = b.dataset.value === savedDensity; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
+  $$('[data-accent]').forEach((b) => {
+    b.setAttribute('aria-pressed', String(b.dataset.accent === savedAccent));
+    b.addEventListener('click', () => {
+      applyAccent(b.dataset.accent); store.set('accent', b.dataset.accent);
+      $$('[data-accent]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      drawAll();
+    });
+  });
+  void pickTheme; void pickDensity;
+
+  /* ---------- buttons ---------- */
+  $('[data-loading-demo]').addEventListener('click', (e) => {
+    const b = e.currentTarget; if (b.getAttribute('aria-busy') === 'true') return;
+    const label = b.textContent; b.setAttribute('aria-busy', 'true'); b.innerHTML = '<span class="spinner" aria-hidden="true"></span>Running…';
+    setTimeout(() => { b.removeAttribute('aria-busy'); b.textContent = label; toast('good', 'Audit finished: score 87'); }, 1600);
+  });
+  radioGroup($('[data-seg-demo]'), (b) => { $('[data-seg-output]').textContent = `Showing the last ${b.textContent.toLowerCase()}.`; });
+
+  /* ---------- tooltips ---------- */
+  $$('[data-tip]').forEach((w, n) => {
+    const btn = $('button', w); let tip = null;
+    const show = () => { if (tip) return; tip = document.createElement('span'); tip.className = 'tooltip'; tip.role = 'tooltip'; tip.id = 'tip-' + n; tip.textContent = w.dataset.tip; w.append(tip); btn.setAttribute('aria-describedby', tip.id); };
+    const hide = () => { tip?.remove(); tip = null; btn.removeAttribute('aria-describedby'); };
+    btn.addEventListener('mouseenter', show); btn.addEventListener('focus', show);
+    btn.addEventListener('mouseleave', hide); btn.addEventListener('blur', hide);
+    btn.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  });
+
+  /* ---------- combobox ---------- */
+  const clients = [['Northwind Homes', '4 sites'], ['Harbour Café', '1 site'], ['Pennine Physio', '2 sites'], ['Leeds Studio Co.', '5 sites'], ['Oak & Bramble', '2 sites'], ['Ridgeway Trust', '3 sites']];
+  (() => {
+    const input = $('#f-client'); const list = $('#f-client-list'); const out = $('[data-combo-out]');
+    let items = [], active = -1;
+    const close = () => { list.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); };
+    const draw = () => {
+      const q = input.value.trim().toLowerCase();
+      items = clients.filter(([n]) => n.toLowerCase().includes(q));
+      list.replaceChildren();
+      if (!items.length) { const li = document.createElement('li'); li.className = 'none'; li.textContent = 'No clients match'; list.append(li); }
+      items.forEach(([n, s], i) => {
+        const li = document.createElement('li'); li.id = 'cl-' + i; li.role = 'option'; li.setAttribute('aria-selected', String(i === active));
+        li.append(n); const sm = document.createElement('small'); sm.textContent = s; li.append(sm); li.dataset.i = i; list.append(li);
+      });
+      list.hidden = false; input.setAttribute('aria-expanded', 'true');
+      if (active >= 0 && items[active]) input.setAttribute('aria-activedescendant', 'cl-' + active); else input.removeAttribute('aria-activedescendant');
+    };
+    const choose = (i) => { input.value = items[i][0]; out.textContent = `${items[i][0]} chosen (${items[i][1]}).`; close(); };
+    input.addEventListener('focus', () => { active = -1; draw(); });
+    input.addEventListener('input', () => { active = items.length ? 0 : -1; draw(); active = items.length ? 0 : -1; draw(); });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (list.hidden) draw(); active = Math.min(items.length - 1, active + 1); draw(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(0, active - 1); draw(); }
+      else if (e.key === 'Enter' && active >= 0 && !list.hidden) { e.preventDefault(); choose(active); }
+      else if (e.key === 'Escape') close();
+    });
+    list.addEventListener('mousedown', (e) => { const li = e.target.closest('[role="option"]'); if (li) { e.preventDefault(); choose(+li.dataset.i); } });
+    input.addEventListener('blur', () => setTimeout(close, 100));
+  })();
+
+  /* ---------- switch, slider, stepper ---------- */
+  $$('[data-switch]').forEach((s) => s.addEventListener('click', () => s.setAttribute('aria-checked', String(s.getAttribute('aria-checked') !== 'true'))));
+  const slider = $('[data-slider]');
+  const paintSlider = () => { const p = ((slider.value - slider.min) / (slider.max - slider.min)) * 100; slider.style.setProperty('--pct', p + '%'); $('#f-pages-out').textContent = fmt.format(+slider.value); };
+  slider.addEventListener('input', paintSlider); paintSlider();
+  let conc = 3; const stepOut = $('[data-step-out]');
+  $$('[data-step]').forEach((b) => b.addEventListener('click', () => { conc = Math.min(10, Math.max(1, conc + +b.dataset.step)); stepOut.textContent = conc; }));
+
+  /* ---------- tags ---------- */
+  (() => {
+    const box = $('[data-tags]'); const input = $('input', box);
+    const add = (t) => { const c = document.createElement('span'); c.className = 'chip'; c.append(t + ' '); const x = document.createElement('button'); x.type = 'button'; x.setAttribute('aria-label', 'Remove ' + t); x.textContent = '×'; c.append(x); box.insertBefore(c, input); announce(`Added ${t}`); };
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && input.value.trim()) { e.preventDefault(); add(input.value.trim()); input.value = ''; }
+      else if (e.key === 'Backspace' && !input.value) { const last = input.previousElementSibling; if (last) { announce(`Removed ${last.firstChild.textContent.trim()}`); last.remove(); } }
+    });
+    box.addEventListener('click', (e) => { const x = e.target.closest('.chip button'); if (x) { const c = x.parentElement; announce(`Removed ${c.firstChild.textContent.trim()}`); c.remove(); input.focus(); } });
+  })();
+
+  /* ---------- file drop ---------- */
+  (() => {
+    const drop = $('[data-drop]'); const input = $('#f-file'); const list = $('[data-files]');
+    const show = (files) => { list.replaceChildren(...[...files].slice(0, 4).map((f) => { const li = document.createElement('li'); const n = document.createElement('span'); n.textContent = f.name; const s = document.createElement('span'); s.className = 'num faint'; s.textContent = f.size < 1024 ? f.size + ' B' : fmt.format(Math.round(f.size / 1024)) + ' KB'; li.append(n, s); return li; })); announce(`${files.length} file${files.length === 1 ? '' : 's'} added`); };
+    ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+    ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+    drop.addEventListener('drop', (e) => { if (e.dataTransfer?.files?.length) show(e.dataTransfer.files); });
+    input.addEventListener('change', () => { if (input.files.length) show(input.files); });
+  })();
+
+  /* ---------- toasts ---------- */
+  const icons = {
+    good: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="m6.8 10.2 2.2 2.2 4.2-4.6"/></svg>',
+    info: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v4.5M10 6.5h.01"/></svg>',
+    bad: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="m7.5 7.5 5 5m0-5-5 5"/></svg>',
+  };
+  const toastText = { good: 'Settings saved', info: 'API key copied to the clipboard', bad: "Export failed: the audit hasn't finished yet" };
+  const toasts = $('[data-toasts]');
+  function toast(kind, text) {
+    const t = document.createElement('div'); t.className = 'toast ' + kind;
+    t.innerHTML = icons[kind] + '<span></span><button type="button" aria-label="Dismiss">✕</button>';
+    t.querySelector('span').textContent = text;
+    t.querySelector('button').addEventListener('click', () => t.remove());
+    toasts.append(t); announce(text);
+    while (toasts.children.length > 3) toasts.firstElementChild.remove();
+    setTimeout(() => t.remove(), 4200);
+  }
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-toast]'); if (b) toast(b.dataset.toast, b.dataset.toastText || toastText[b.dataset.toast]); });
+
+  /* ---------- progress and ring ---------- */
+  (() => {
+    const bar = $('[data-prog]'); const label = $('[data-prog-label]'); let n = 0;
+    const tick = () => { n = n >= 250 ? 0 : Math.min(250, n + 7 + Math.round(Math.random() * 9)); bar.firstElementChild.style.width = (n / 250) * 100 + '%'; bar.setAttribute('aria-valuenow', n); label.textContent = `${n} / 250`; };
+    tick(); setInterval(tick, 900);
+    const ring = $('[data-ring]'); const c = 251.3; requestAnimationFrame(() => { ring.style.strokeDashoffset = c - (c * +ring.dataset.ring) / 100; });
+  })();
+
+  /* ---------- dialogs ---------- */
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-open]'); if (b) document.getElementById(b.dataset.open).showModal(); });
+  $$('dialog').forEach((d) => d.addEventListener('click', (e) => { if (e.target === d) d.close(); }));
+  const typeIn = $('#dlg-type'); const del = $('[data-confirm-delete]');
+  typeIn.addEventListener('input', () => { del.disabled = typeIn.value.trim() !== 'shop.northwind.co.uk'; });
+  $('#dlg-confirm').addEventListener('close', (e) => { if (e.target.returnValue === 'delete') toast('good', 'shop.northwind.co.uk deleted'); typeIn.value = ''; del.disabled = true; });
+
+  /* ---------- menu button ---------- */
+  (() => {
+    const wrap = $('[data-menu]'); const btn = $('button[aria-haspopup]', wrap); const menu = $('[role="menu"]', wrap); const out = $('[data-menu-out]');
+    const items = () => $$('[role="menuitem"]', menu);
+    const open = (focusLast) => { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); (focusLast ? items().at(-1) : items()[0]).focus(); };
+    const close = (refocus) => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); if (refocus) btn.focus(); };
+    btn.addEventListener('click', () => (menu.hidden ? open() : close()));
+    btn.addEventListener('keydown', (e) => { if (e.key === 'ArrowDown') { e.preventDefault(); open(); } if (e.key === 'ArrowUp') { e.preventDefault(); open(true); } });
+    menu.addEventListener('keydown', (e) => {
+      const l = items(); const i = l.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); l[(i + 1) % l.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); l[(i - 1 + l.length) % l.length].focus(); }
+      else if (e.key === 'Home') { e.preventDefault(); l[0].focus(); }
+      else if (e.key === 'End') { e.preventDefault(); l.at(-1).focus(); }
+      else if (e.key === 'Escape') { e.preventDefault(); close(true); }
+      else if (e.key === 'Tab') close(false);
+    });
+    menu.addEventListener('click', (e) => { const it = e.target.closest('[role="menuitem"]'); if (!it) return; out.textContent = `Chose “${it.textContent.replace(/[RD]$/, '').trim()}”.`; close(true); });
+    document.addEventListener('click', (e) => { if (!wrap.contains(e.target) && !menu.hidden) close(false); });
+  })();
+
+  /* ---------- command palette ---------- */
+  (() => {
+    const dlg = $('#dlg-palette'); const q = $('#pal-q'); const list = $('#pal-list');
+    const data = [
+      ['Sites', 'kritano.com', 'Verified'], ['Sites', 'docs.kritano.com', 'Verified'], ['Sites', 'chrisgarlick.com', 'Verified'],
+      ['Clients', 'Northwind Homes', '4 sites'], ['Clients', 'Harbour Café', '1 site'],
+      ['Actions', 'Run an audit', 'R'], ['Actions', 'Add a site', 'N'], ['Actions', 'Make an API key', ''],
+      ['Settings', 'Appearance', 'Dark mode, density'], ['Settings', 'Email preferences', ''],
+    ];
+    let shown = [], active = 0;
+    const draw = () => {
+      const s = q.value.trim().toLowerCase();
+      shown = data.filter((d) => !s || (d[1] + ' ' + d[2] + ' ' + d[0]).toLowerCase().includes(s));
+      list.replaceChildren(); let grp = '';
+      if (!shown.length) { const li = document.createElement('li'); li.className = 'grp'; li.textContent = 'Nothing matches'; list.append(li); q.removeAttribute('aria-activedescendant'); return; }
+      shown.forEach((d, i) => {
+        if (d[0] !== grp) { grp = d[0]; const g = document.createElement('li'); g.className = 'grp'; g.role = 'presentation'; g.textContent = grp; list.append(g); }
+        const li = document.createElement('li'); li.role = 'option'; li.id = 'pal-' + i; li.dataset.i = i; li.setAttribute('aria-selected', String(i === active));
+        li.append(d[1]); if (d[2]) { const sm = document.createElement('small'); sm.textContent = d[2]; li.append(sm); }
+        list.append(li);
+      });
+      q.setAttribute('aria-activedescendant', 'pal-' + active);
+      $('#pal-' + active)?.scrollIntoView({ block: 'nearest' });
+    };
+    const go = (i) => { const d = shown[i]; if (!d) return; dlg.close(); toast('info', `Opened ${d[1]}`); };
+    const open = () => { if (dlg.open) return; q.value = ''; active = 0; draw(); dlg.showModal(); q.focus(); };
+    document.addEventListener('keydown', (e) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); dlg.open ? dlg.close() : open(); } });
+    document.addEventListener('click', (e) => { if (e.target.closest('[data-open-palette]')) open(); });
+    q.addEventListener('input', () => { active = 0; draw(); });
+    q.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' && shown.length) { e.preventDefault(); active = (active + 1) % shown.length; draw(); }
+      else if (e.key === 'ArrowUp' && shown.length) { e.preventDefault(); active = (active - 1 + shown.length) % shown.length; draw(); }
+      else if (e.key === 'Enter') { e.preventDefault(); go(active); }
+      else if (e.key === 'Escape') { e.preventDefault(); dlg.close(); }
+    });
+    list.addEventListener('click', (e) => { const li = e.target.closest('[role="option"]'); if (li) go(+li.dataset.i); });
+  })();
+
+  /* ---------- tabs ---------- */
+  (() => {
+    const wrap = $('[data-tabs]'); const tabs = $$('[role="tab"]', wrap);
+    const select = (t, focus) => {
+      tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+      if (focus) t.focus();
+    };
+    wrap.addEventListener('click', (e) => { const t = e.target.closest('[role="tab"]'); if (t) select(t); });
+    $('[role="tablist"]', wrap).addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(document.activeElement); if (i < 0) return; let j = null;
+      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length; else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = tabs.length - 1;
+      if (j !== null) { e.preventDefault(); select(tabs[j], true); }
+    });
+  })();
+
+  /* ---------- pagination ---------- */
+  (() => {
+    const nav = $('[data-pager]'); const total = 24; let page = 3;
+    const btn = (label, p, opts = {}) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; if (opts.aria) b.setAttribute('aria-label', opts.aria); if (p === page && !opts.nav) b.setAttribute('aria-current', 'page'); if (opts.disabled) b.disabled = true; b.addEventListener('click', () => { page = p; draw(true); }); return b; };
+    const draw = (refocus) => {
+      const nodes = [btn('‹', page - 1, { aria: 'Previous page', nav: true, disabled: page === 1 })];
+      const pages = new Set([1, total, page - 1, page, page + 1].filter((p) => p >= 1 && p <= total));
+      let last = 0;
+      [...pages].sort((a, b) => a - b).forEach((p) => { if (p - last > 1) { const g = document.createElement('span'); g.className = 'gap'; g.textContent = '…'; nodes.push(g); } nodes.push(btn(String(p), p, { aria: `Page ${p}` })); last = p; });
+      nodes.push(btn('›', page + 1, { aria: 'Next page', nav: true, disabled: page === total }));
+      nav.replaceChildren(...nodes);
+      if (refocus) nav.querySelector('[aria-current="page"]')?.focus();
+    };
+    draw();
+  })();
+
+  /* ---------- sparklines and KPI tiles ---------- */
+  function sparkSVG(vals, w = 96, h = 30) {
+    const lo = Math.min(...vals), hi = Math.max(...vals), pad = 3;
+    const pts = vals.map((v, i) => [pad + (i * (w - pad * 2)) / (vals.length - 1), h - pad - ((v - lo) / (hi - lo || 1)) * (h - pad * 2)]);
+    const line = pts.map((p) => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+    return `<svg class="spark" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path class="a" d="M${pts[0][0]},${h} L${line.split(' ').join(' L')} L${pts.at(-1)[0]},${h} Z"/><polyline points="${line}"/></svg>`;
+  }
+  const kpis = [
+    { label: 'Overall score', value: '87', delta: '+4', cls: 'up', vals: [78, 80, 79, 82, 81, 84, 83, 87] },
+    { label: 'Pages crawled', value: fmt.format(1284), delta: '+112', cls: 'up', vals: [1020, 1080, 1110, 1150, 1172, 1201, 1240, 1284] },
+    { label: 'Open issues', value: '312', delta: '−18', cls: 'better-down', vals: [380, 366, 371, 352, 345, 336, 330, 312] },
+    { label: 'Median LCP', value: '1.8 s', delta: '+0.2 s', cls: 'down', vals: [1.5, 1.6, 1.5, 1.6, 1.7, 1.6, 1.7, 1.8] },
+  ];
+  $('[data-kpis]').innerHTML = kpis.map((k) => `<div class="kpi"><span class="kpi-label">${k.label}</span><span class="kpi-value">${k.value}</span><div class="kpi-foot"><span class="delta ${k.cls}">${k.delta} <span class="faint">vs last week</span></span>${sparkSVG(k.vals)}</div></div>`).join('');
+
+  /* ---------- data table ---------- */
+  (() => {
+    const rows = [
+      ['/', 92, 3, 1.2], ['/pricing', 88, 5, 1.6], ['/blog', 84, 7, 2.1], ['/blog/how-often-audit-website', 81, 9, 2.4],
+      ['/services/accessibility', 79, 11, 1.9], ['/compare/kritano-vs-siteimprove', 76, 8, 2.7], ['/contact', 71, 12, 1.4],
+      ['/resources/wcag-quick-reference-card', 68, 15, 3.1], ['/about', 90, 2, 1.3], ['/faq', 86, 4, 1.5], ['/terms', 94, 1, 1.1],
+    ].map(([path, score, issues, lcp]) => ({ path, score, issues, lcp, status: score >= 85 ? 'Passing' : score >= 75 ? 'Needs work' : 'Failing' }));
+    const table = $('[data-table]'); const tbody = $('tbody', table); const sel = $('[data-sel]'); const all = $('[data-select-all]'); const filter = $('[data-table-filter]');
+    let sortKey = 'score', dir = -1; const picked = new Set();
+    const color = (s) => (s >= 85 ? 'var(--good)' : s >= 75 ? 'var(--warn)' : 'var(--bad)');
+    const badge = (st) => `<span class="badge ${st === 'Passing' ? 'good' : st === 'Needs work' ? 'warn' : 'bad'}"><span class="dot"></span>${st}</span>`;
+    const draw = () => {
+      const q = filter.value.trim().toLowerCase();
+      const list = rows.filter((r) => r.path.includes(q)).sort((a, b) => (a[sortKey] > b[sortKey] ? 1 : a[sortKey] < b[sortKey] ? -1 : 0) * dir);
+      tbody.innerHTML = list.map((r) => `<tr aria-selected="${picked.has(r.path)}"><td class="check"><label class="choice" style="gap:0"><input type="checkbox" data-row="${r.path}" ${picked.has(r.path) ? 'checked' : ''} aria-label="Select ${r.path}"></label></td><td class="path">${r.path}</td><td class="n"><span class="minibar"><span style="width:${r.score}%;background:${color(r.score)}"></span></span>${r.score}</td><td class="n">${r.issues}</td><td class="n">${r.lcp.toFixed(1)} s</td><td>${badge(r.status)}</td></tr>`).join('') || '<tr><td colspan="6" class="faint" style="text-align:center;padding:24px">No pages match that filter.</td></tr>';
+      sel.innerHTML = picked.size ? `<strong class="num">${picked.size}</strong> selected <button class="btn btn-secondary btn-sm" type="button" data-toast="info" data-toast-text="Exported ${picked.size} rows as CSV">Export CSV</button>` : 'No rows selected';
+      all.checked = picked.size > 0 && picked.size === rows.length; all.indeterminate = picked.size > 0 && picked.size < rows.length;
+      $$('th[data-key]', table).forEach((th) => {
+        const on = th.dataset.key === sortKey;
+        if (on) th.setAttribute('aria-sort', dir === 1 ? 'ascending' : 'descending'); else th.removeAttribute('aria-sort');
+        th.querySelector('.arrow').innerHTML = on ? (dir === 1 ? '<path d="m3 7.5 3-3 3 3"/>' : '<path d="m3 4.5 3 3 3-3"/>') : '<path d="m3 4.5 3-3 3 3M3 7.5l3 3 3-3"/>';
+      });
+    };
+    $$('th[data-key] button', table).forEach((b) => b.addEventListener('click', () => { const k = b.parentElement.dataset.key; if (k === sortKey) dir = -dir; else { sortKey = k; dir = k === 'path' || k === 'status' ? 1 : -1; } draw(); announce(`Sorted by ${b.textContent.trim()}, ${dir === 1 ? 'ascending' : 'descending'}`); }));
+    tbody.addEventListener('change', (e) => { const c = e.target.closest('[data-row]'); if (!c) return; c.checked ? picked.add(c.dataset.row) : picked.delete(c.dataset.row); draw(); });
+    all.addEventListener('change', () => { if (all.checked) rows.forEach((r) => picked.add(r.path)); else picked.clear(); draw(); });
+    filter.addEventListener('input', draw);
+    draw();
+  })();
+
+  /* ---------- copy ---------- */
+  $$('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+    const text = b.nextElementSibling.textContent;
+    try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; announce('Code copied'); }
+    catch { const r = document.createRange(); r.selectNodeContents(b.nextElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; }
+    setTimeout(() => { b.textContent = 'Copy'; }, 1500);
+  }));
+
+  /* ---------- charts: one small scale system ---------- */
+  const css = (v) => getComputedStyle(root).getPropertyValue(v).trim();
+  function niceTicks(lo, hi, n = 4) {
+    const span = hi - lo; const step0 = span / n; const mag = Math.pow(10, Math.floor(Math.log10(step0)));
+    const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= step0);
+    const start = Math.floor(lo / step) * step; const out = [];
+    for (let v = start; v <= hi + step * 0.001; v += step) out.push(+v.toFixed(6));
+    return out;
+  }
+  const linear = (d0, d1, r0, r1) => (v) => r0 + ((v - d0) / (d1 - d0)) * (r1 - r0);
+
+  // 30 days of scores, desktop and mobile (deterministic, so every render matches).
+  const days = Array.from({ length: 30 }, (_, i) => { const d = new Date(Date.UTC(2026, 9, 4 + i)); return d; });
+  const desk = days.map((_, i) => Math.round(74 + i * 0.42 + Math.sin(i / 2.2) * 2.4));
+  const mob = days.map((_, i) => Math.round(66 + i * 0.5 + Math.cos(i / 2.6) * 2.8));
+  const series = [{ name: 'Desktop', vals: desk, color: '--s1', on: true }, { name: 'Mobile', vals: mob, color: '--s2', on: true }];
+  const dayFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+
+  function drawLine() {
+    const wrap = $('[data-line-wrap]'); const W = 760, H = 240, L = 34, R = 12, T = 12, B = 26;
+    const on = series.filter((s) => s.on); const all = on.flatMap((s) => s.vals);
+    const ticks = niceTicks(Math.min(...(all.length ? all : [60])) - 2, Math.max(...(all.length ? all : [100])) + 2);
+    const y = linear(ticks[0], ticks.at(-1), H - B, T); const x = linear(0, days.length - 1, L, W - R);
+    const svg = svgEl('svg', { class: 'chart', viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `Scores over 30 days. Desktop from ${desk[0]} to ${desk.at(-1)}; mobile from ${mob[0]} to ${mob.at(-1)}.` });
+    ticks.forEach((t) => { svg.append(svgEl('line', { class: 'gridline', x1: L, x2: W - R, y1: y(t), y2: y(t) })); const tx = svgEl('text', { class: 'axis-text', x: L - 8, y: y(t) + 4, 'text-anchor': 'end' }); tx.textContent = t; svg.append(tx); });
+    [0, 7, 14, 21, 29].forEach((i) => { const tx = svgEl('text', { class: 'axis-text', x: x(i), y: H - 6, 'text-anchor': i === 0 ? 'start' : i === 29 ? 'end' : 'middle' }); tx.textContent = dayFmt.format(days[i]); svg.append(tx); });
+    on.forEach((s) => {
+      const c = css(s.color); const pts = s.vals.map((v, i) => [x(i), y(v)]);
+      svg.append(svgEl('path', { class: 's-area', fill: c, d: `M${pts[0][0]},${H - B} L${pts.map((p) => p.join(',')).join(' L')} L${pts.at(-1)[0]},${H - B} Z` }));
+      svg.append(svgEl('polyline', { class: 's-line', stroke: c, points: pts.map((p) => p.join(',')).join(' ') }));
+      svg.append(svgEl('circle', { cx: pts.at(-1)[0], cy: pts.at(-1)[1], r: 4, fill: c, stroke: css('--surface'), 'stroke-width': 2 }));
+    });
+    const cross = svgEl('line', { class: 'cross', y1: T, y2: H - B, x1: -10, x2: -10 }); svg.append(cross);
+    const dots = on.map((s) => { const d = svgEl('circle', { r: 4.5, fill: css(s.color), stroke: css('--surface'), 'stroke-width': 2, cx: -10, cy: -10 }); svg.append(d); return d; });
+    const hit = svgEl('rect', { class: 'hit', x: L, y: T, width: W - L - R, height: H - T - B }); svg.append(hit);
+    const tip = document.createElement('div'); tip.className = 'chart-tip'; tip.hidden = true;
+    const move = (clientX) => {
+      const box = svg.getBoundingClientRect(); const px = ((clientX - box.left) / box.width) * W;
+      const i = Math.max(0, Math.min(days.length - 1, Math.round(((px - L) / (W - L - R)) * (days.length - 1))));
+      cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i));
+      on.forEach((s, k) => { dots[k].setAttribute('cx', x(i)); dots[k].setAttribute('cy', y(s.vals[i])); });
+      tip.innerHTML = `<span class="tt">${dayFmt.format(days[i])}</span>` + on.map((s) => `<span class="rowv"><span><span class="sw" style="background:var(${s.color})"></span>${s.name}</span><strong class="num">${s.vals[i]}</strong></span>`).join('');
+      tip.hidden = false;
+      const left = (x(i) / W) * box.width; tip.style.left = Math.min(box.width - 150, Math.max(0, left + 12)) + 'px'; tip.style.top = '8px';
+    };
+    hit.addEventListener('pointermove', (e) => move(e.clientX));
+    hit.addEventListener('pointerleave', () => { tip.hidden = true; cross.setAttribute('x1', -10); cross.setAttribute('x2', -10); dots.forEach((d) => { d.setAttribute('cx', -10); d.setAttribute('cy', -10); }); });
+    wrap.replaceChildren(svg, tip);
+  }
+  function drawLegend() {
+    const lg = $('[data-legend]');
+    lg.replaceChildren(...series.map((s) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(s.on)); b.innerHTML = `<span class="sw" style="background:var(${s.color})"></span>`; b.append(s.name); b.addEventListener('click', () => { if (s.on && series.filter((x) => x.on).length === 1) return; s.on = !s.on; drawLegend(); drawLine(); }); return b; }));
+  }
+  (() => {
+    const btn = $('[data-as-table="line"]'); const box = $('[data-line-table]');
+    box.innerHTML = `<table class="data"><caption class="vh">Scores by day</caption><thead><tr><th scope="col">Day</th><th scope="col" class="n">Desktop</th><th scope="col" class="n">Mobile</th></tr></thead><tbody>${days.map((d, i) => `<tr><td>${dayFmt.format(d)}</td><td class="n">${desk[i]}</td><td class="n">${mob[i]}</td></tr>`).join('')}</tbody></table>`;
+    btn.addEventListener('click', () => { const show = box.hidden; box.hidden = !show; btn.setAttribute('aria-expanded', String(show)); btn.textContent = show ? 'Hide table' : 'Show as table'; });
+  })();
+
+  function drawBars() {
+    const wrap = $('[data-bars]'); const cats = [['SEO', 42, 51], ['Access.', 88, 97], ['Security', 23, 23], ['Perf.', 61, 84], ['Content', 37, 40]];
+    const W = 380, H = 210, L = 30, R = 6, T = 10, B = 24; const ticks = niceTicks(0, 100, 4);
+    const y = linear(0, ticks.at(-1), H - B, T); const band = (W - L - R) / cats.length; const bw = Math.min(18, band * 0.28);
+    const svg = svgEl('svg', { class: 'chart', viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Issues by category. Accessibility has the most: 88 on desktop, 97 on mobile.' });
+    ticks.forEach((t) => { svg.append(svgEl('line', { class: 'gridline', x1: L, x2: W - R, y1: y(t), y2: y(t) })); const tx = svgEl('text', { class: 'axis-text', x: L - 6, y: y(t) + 4, 'text-anchor': 'end' }); tx.textContent = t; svg.append(tx); });
+    cats.forEach(([name, d, m], i) => {
+      const cx = L + band * i + band / 2;
+      [[d, '--s1', -1], [m, '--s2', 1]].forEach(([v, c, side]) => {
+        const r = svgEl('rect', { x: cx + (side === -1 ? -bw - 2 : 2), y: y(v), width: bw, height: H - B - y(v), rx: 3, fill: css(c) });
+        const title = svgEl('title'); title.textContent = `${name}: ${v} ${side === -1 ? 'desktop' : 'mobile'}`; r.append(title); svg.append(r);
+      });
+      const tx = svgEl('text', { class: 'axis-text', x: cx, y: H - 6, 'text-anchor': 'middle' }); tx.textContent = name; svg.append(tx);
+    });
+    wrap.replaceChildren(svg);
+  }
+
+  function drawDonut() {
+    const wrap = $('[data-donut]'); const parts = [['Critical', 24, '--bad'], ['Serious', 71, '--warn'], ['Moderate', 138, '--s5'], ['Minor', 79, '--fg-3']];
+    const total = parts.reduce((a, p) => a + p[1], 0); const cx = 75, cy = 75, r = 64, ri = 44;
+    const svg = svgEl('svg', { class: 'donut', viewBox: '0 0 150 150', role: 'img', 'aria-label': `Issues by severity, ${total} in total` });
+    let a0 = -Math.PI / 2;
+    const center = svgEl('text', { class: 'center-big', x: cx, y: cy + 4, 'text-anchor': 'middle' }); center.textContent = total;
+    const sub = svgEl('text', { class: 'center-small', x: cx, y: cy + 20, 'text-anchor': 'middle' }); sub.textContent = 'issues';
+    parts.forEach(([name, v, c]) => {
+      const a1 = a0 + (v / total) * Math.PI * 2; const large = a1 - a0 > Math.PI ? 1 : 0;
+      const p = (rad, ang) => [cx + rad * Math.cos(ang), cy + rad * Math.sin(ang)];
+      const [x0, y0] = p(r, a0), [x1, y1] = p(r, a1), [x2, y2] = p(ri, a1), [x3, y3] = p(ri, a0);
+      const path = svgEl('path', { d: `M${x0},${y0} A${r},${r} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 ${large} 0 ${x3},${y3} Z`, fill: css(c), tabindex: 0, role: 'img', 'aria-label': `${name}: ${v}` });
+      const show = () => { center.textContent = v; sub.textContent = name.toLowerCase(); };
+      const reset = () => { center.textContent = total; sub.textContent = 'issues'; };
+      path.addEventListener('mouseenter', show); path.addEventListener('focus', show); path.addEventListener('mouseleave', reset); path.addEventListener('blur', reset);
+      svg.append(path); a0 = a1;
+    });
+    svg.append(center, sub);
+    const legend = document.createElement('ul'); legend.className = 'legend-static';
+    legend.innerHTML = parts.map(([n, v, c]) => `<li><span class="sw" style="background:var(${c})"></span><span>${n}</span><span class="num muted">${v} · ${Math.round((v / total) * 100)}%</span></li>`).join('');
+    wrap.replaceChildren(svg, legend);
+  }
+
+  function drawHeat() {
+    const wrap = $('[data-heat]'); const n = 18 * 7; const cells = [];
+    for (let i = 0; i < n; i++) { const v = Math.max(0, Math.round(2.4 + Math.sin(i * 0.37) * 2 + Math.cos(i * 0.11) * 1.6 + (i % 7 === 5 || i % 7 === 6 ? -2 : 0))); cells.push(Math.min(6, v)); }
+    const shade = (v) => (v === 0 ? 'var(--surface-3)' : `color-mix(in srgb, var(--accent) ${[0, 28, 45, 62, 80, 92, 100][v]}%, var(--surface-3))`);
+    wrap.innerHTML = cells.map((v) => `<span style="background:${shade(v)}" title="${v} audit${v === 1 ? '' : 's'}"></span>`).join('');
+    $$('[data-heat-key]').forEach((s) => { s.style.background = shade(+s.dataset.heatKey + 1); });
+  }
+
+  function drawAll() { drawLine(); drawBars(); drawDonut(); drawHeat(); }
+  drawLegend(); drawAll();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawAll);
+
+  /* ---------- table of contents with scroll spy ---------- */
+  const groups = $$('section.group');
+  $('#toc').innerHTML = groups.map((g) => `<li><a href="#${g.id}">${$('h2', g).textContent}<span class="count">${$$('.card', g).length}</span></a></li>`).join('');
+  const links = $$('#toc a');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + e.target.id))); });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  groups.forEach((g) => spy.observe(g));
+  const totalCards = $$('.card').length;
+  $('#stats').innerHTML = `<span>${totalCards} components</span><span>${groups.length} groups</span><span>WCAG 2.2 AA</span><span>light · dark · compact</span><span>no dependencies</span>`;
+})();
+</script>
