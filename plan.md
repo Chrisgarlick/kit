@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: the positioning helper, then menu, popover and tooltip; toast; then the richer form controls (switch, slider, combobox). Progress is noted under each phase below.
+> Next: toast, then the richer form controls (switch, slider, combobox), then the command palette. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -269,6 +269,8 @@ Also done (3 November):
 - **`<kit-tabs>`** (beta): APG tabs over server-rendered buttons and panels, automatic or manual activation, vertical, and every panel shown before the script loads.
 - **Dialog** (beta): the native `<dialog>`, opened and closed from markup with the platform's `commandfor`/`command` and `closedby="any"`. `dialog.js` fills them in on browsers without them (tested both ways), and returns focus to the opener. **Drawer** is a dialog variant.
 - **Accordion**: native `<details name>`, CSS only, animated where `::details-content` is supported.
+- **The positioning helper** (`core/position.js`): place and follow, flipping and sliding to stay on screen; one JS path in every browser, since CSS anchor positioning isn't in Firefox or Safari 16.4. `core/layer.js` puts overlays in the top layer where popovers exist and falls back to fixed positioning.
+- **Popover** (native `popover`, filled in for older browsers), **`<kit-menu>`** (APG menu button with typeahead) and **tooltip** (one `data-tooltip` attribute; hoverable, Escape, describedby only when it adds to the name).
 
 ### Phase 4: ui.chrisgarlick.com v1 and the registry (M)
 

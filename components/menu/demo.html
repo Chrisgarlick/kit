@@ -1,0 +1,23 @@
+<div class="kit-cluster" data-gap="3">
+  <kit-menu data-demo-note="menu-out">
+    <button class="kit-button">Actions <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+    <div class="kit-menu-list">
+      <button value="edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10.5 3 13 5.5 6 12.5H3.5V10L10.5 3Z"/></svg>Edit<kbd>E</kbd></button>
+      <button value="duplicate"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg>Duplicate<kbd>D</kbd></button>
+      <button value="archive" disabled>Archive</button>
+      <hr>
+      <button value="delete" data-tone="bad"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.5 8.5h6l.5-8.5"/></svg>Delete</button>
+    </div>
+  </kit-menu>
+  <kit-menu placement="bottom-end" data-demo-note="menu-out">
+    <button class="kit-button" data-variant="ghost" data-icon aria-label="More options"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button>
+    <div class="kit-menu-list">
+      <p class="kit-menu-label">Group label</p>
+      <button>Option one</button>
+      <button>Option two</button>
+      <hr>
+      <a href="#menu">A link item</a>
+    </div>
+  </kit-menu>
+</div>
+<p class="demo-note" id="menu-out">Selected: nothing yet</p>

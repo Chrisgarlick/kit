@@ -1,0 +1,15 @@
+/* SPDX-License-Identifier: MIT
+ * Tooltip: the label tooltip.js shows beside an element with data-tooltip.
+ * data-tooltip-placement on the element picks the side (top by default).
+ */
+.kit-tooltip:not([data-open]) { display: none; }
+.kit-tooltip {
+  z-index: 1001; max-inline-size: min(16rem, 100vw - 16px); padding: 5px 9px; border: 0; border-radius: var(--kit-radius-1);
+  background: var(--kit-fg); color: var(--kit-bg); box-shadow: var(--kit-shadow-2);
+  font: 500 var(--kit-text-xs)/1.4 var(--kit-font-ui); text-align: center; overflow: visible;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .kit-tooltip { transition: opacity 0.1s var(--kit-ease); }
+  @starting-style { .kit-tooltip[data-open] { opacity: 0; } }
+}
+@media (forced-colors: active) { .kit-tooltip { border: 1px solid CanvasText; } }

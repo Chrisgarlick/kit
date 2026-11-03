@@ -1,0 +1,12 @@
+<div class="kit-cluster" data-gap="3">
+  <button class="kit-button" popovertarget="demo-pop">Open popover</button>
+  <button class="kit-button" data-variant="ghost" popovertarget="demo-pop-top">Above</button>
+</div>
+<div popover id="demo-pop" class="kit-popover">
+  <p class="kit-popover-title">Popover title</p>
+  <p>Supporting text. Press Escape or click outside to close it.</p>
+  <div class="kit-cluster" data-gap="2"><button class="kit-button" data-size="sm" data-variant="primary" popovertarget="demo-pop" popovertargetaction="hide">Done</button></div>
+</div>
+<div popover id="demo-pop-top" class="kit-popover" data-placement="top" data-size="sm">
+  <p>This one opens above its button, when there's room.</p>
+</div>
