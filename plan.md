@@ -1,6 +1,13 @@
 # Kit: review, implementation plan and build choices
 
-Companion to `web-component-library-spec.md` (draft v0.1). Written 2 November 2026.
+Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
+
+> **Status (3 November 2026):** the repo is public at [Chrisgarlick/kit](https://github.com/Chrisgarlick/kit) under MIT. Built so far, ahead of the core runtime, because you chose the design system and site first:
+> - the design tokens (light, dark, four accents, compact density) and the three typefaces, self-hosted;
+> - four tier 1 components: button, button group, segmented control and sidebar;
+> - `kit site build` and `kit site serve` (Go), which assemble the site from the component folders.
+>
+> The site isn't deployed yet. Next: the core runtime (phase 1), starting with `<kit-segmented>`. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -153,6 +160,15 @@ Make the calls the spec leaves open, so nothing is rebuilt later:
 
 **Done when** the spec is v0.2 with every open decision answered.
 
+**Decided (2–3 November 2026):**
+- name `kit`, MIT licence, its own public repo (`~/dev/kit`, [Chrisgarlick/kit](https://github.com/Chrisgarlick/kit));
+- Go for tooling, plain JavaScript in the browser, Rust only if phase 5's benchmarks demand it;
+- typefaces: Bricolage Grotesque (display), Instrument Sans (interface) and Geist Mono (figures, code and labels), self-hosted under the SIL OFL;
+- the look: graphite neutrals with a spruce-teal accent, from the component catalogue (`design/components.html`);
+- order: the design system and the site first, then the core, then the data components.
+
+**Still open:** the tag prefix (`kit-` assumed so far), the browser support matrix, the shadow DOM default, loading defaults per backend, and the `kritano` and `chrisgarlick` brand themes. The review in part 1 hasn't been folded into the spec as v0.2 yet.
+
 ### Phase 1: core and harnesses (L)
 
 The engine and the safety nets every later component inherits.
@@ -168,6 +184,12 @@ The engine and the safety nets every later component inherits.
 
 **Done when** the core tests, XSS corpus and benchmarks pass in all three engines, the core is under 6 KB gzipped, and a counter works in a Go template, a Blade view and a WordPress page.
 
+**Done so far:**
+- **Tokens v1:** `tokens/tokens.css` has colour, type, space, radius, elevation, motion and density, with dark mode, four accents (spruce, indigo, amber, rose) and compact density. The values are hex and `rgb()` for now: the OKLCH and `light-dark()` rewrite and `kit check-contrast` are still to do. Contrast is checked with axe instead, which caught and fixed two misses (`--kit-warn`, and amber in light mode).
+- **Go CLI:** the site half exists (see phase 4). It bundles and minifies with esbuild, gives files content-hashed names, and prints each bundle's gzipped size. `kit check` (size budgets, unsafe-sink lint) isn't built.
+
+**Not started:** the core runtime and the test harness.
+
 ### Phase 2: design system and static components (M)
 
 The look, before the behaviour.
@@ -180,6 +202,19 @@ The look, before the behaviour.
 - **A visual-regression baseline** for every theme.
 
 **Done when** a static page built only from tier 1 CSS looks finished in all six theme/scheme combinations, and contrast passes everywhere.
+
+**Done so far:**
+- **The neutral kit theme,** light and dark, with four accents and two densities.
+- **Tier 1 CSS:**
+  - `button`: four variants, three sizes, icon-only, a loading spinner via `aria-busy`, and disabled;
+  - `button-group`, with toggle buttons;
+  - `segmented-control`: the styling only; its keyboard behaviour waits for the core;
+  - `sidebar`: icons, counts and badges, section labels and nested pages. The site's own navigation uses it.
+
+  All CSS is 2.4 KB gzipped, fonts' `@font-face` rules and tokens included.
+- **Placeholder data:** the "Lumen" world in `site/data/lumen.yaml`, read by every demo.
+
+**Not started:** the `kritano` and `chrisgarlick` themes, the rest of tier 1 (type and layout primitives, cards, badge, alert, avatar, kbd, skeleton, empty state, tables, form fields, print), the icon sprite and the visual-regression baseline.
 
 ### Phase 3: interactive components (L)
 
@@ -205,6 +240,25 @@ APG patterns, form-associated where they hold values.
 - **CI:** builds the site, runs Lighthouse CI and axe on every page, and audits it with Kritano.
 
 **Done when** ui.chrisgarlick.com is live, every page scores LCP ≤ 2.5 s, CLS ≤ 0.1 and INP ≤ 200 ms (lab, throttled), and `kit add button` installs a verified copy into a fresh project.
+
+**Done so far:**
+- **`kit site build`:**
+  - the home page, Foundations (every token shown live), a page per group and a page per component;
+  - each component page has the demo, its markup and the README;
+  - all assembled from the component folders and checked as they're read (known group, required fields, valid tier and status, demo templates that run);
+  - empty groups list what's planned, and shipped components drop off that list by themselves;
+  - a sitemap, a 404 page and `.gz` copies for `gzip_static`;
+  - the theme controls (scheme, density, accent), saved in the browser and applied before first paint;
+  - no inline scripts or styles anywhere, so a strict CSP holds. A test enforces it.
+- **`kit site serve`:** rebuilds in about 30 ms on any change and reloads the browser. It sends the same CSP as the live site will.
+- **Tests:** `internal/site` builds a fixture site and the real repo, and checks that broken component folders are all reported.
+- **Checked by hand in a browser:** axe (WCAG 2.2 AA) is clean on every page in light and dark, at 1280 and 390 px, and with every accent. There are no script errors and no sideways scrolling. The check is a Playwright script, not yet in the repo or CI.
+
+**Not started:**
+- props controls, code tabs per backend, and sizes and test status on pages;
+- the registry commands;
+- hosting (DNS, the nginx block, `kit site deploy`);
+- CI.
 
 ### Phase 5: data analysis (XL)
 
@@ -256,12 +310,14 @@ The part that makes the kit different.
 
 0 → 1 → 2 → 3 → 4 (site goes live with the core components) → 5 (data) → 6 (adoption). Phases 2 and 3 can overlap once the core is stable; the site can go live as early as phase 2 if you want something to show.
 
+**What actually happened:** you chose the design system and the site first, so parts of phases 2 and 4 were built before phase 1. That keeps the look settled while the core is written. The core is next.
+
 ---
 
-## 5. Decisions needed from you
+## 5. Decisions
 
-1. Name, tag prefix and licence.
-2. Own repo at `~/dev/kit` (recommended)?
-3. Typefaces: a distinctive UI sans plus a mono. Self-hosted, licensed for the web.
-4. Go for tooling, plain JS in the browser, Rust only if benchmarks demand it (recommended)?
-5. Which comes first after the core: the design system and site (phases 2–4), or data components (phase 5) because Kritano needs them?
+1. **Name, tag prefix and licence:** `kit` and MIT. The `kit-` tag prefix is assumed but not yet confirmed.
+2. **Repo:** its own, public, at [Chrisgarlick/kit](https://github.com/Chrisgarlick/kit).
+3. **Typefaces:** Bricolage Grotesque, Instrument Sans and Geist Mono, self-hosted.
+4. **Languages:** Go for tooling and plain JavaScript in the browser; Rust only if benchmarks demand it.
+5. **Order:** the design system and the site first, then the core, then the data components.
