@@ -18,12 +18,19 @@ async function sitePages(request) {
   return paths.concat(['/no-such-page']);
 }
 
+// WebKit logs this for every <select> on a page whose CSP has no
+// 'unsafe-inline' styles: it's WebKit's own built-in stylesheet for the
+// control being refused, and a bare <select> with no kit CSS does it too.
+// The control still renders and works.
+const webkitSelectNoise = (page, text) =>
+  page.context().browser().browserType().name() === 'webkit' && text.startsWith('Refused to apply a stylesheet because its hash, its nonce');
+
 async function check(page, path) {
   const problems = [];
   page.removeAllListeners('console');
   page.removeAllListeners('pageerror');
   page.on('pageerror', (e) => problems.push(`script error: ${e.message}`));
-  page.on('console', (m) => { if (m.type() === 'error' && !/status of 404/.test(m.text())) problems.push(`console: ${m.text()}`); });
+  page.on('console', (m) => { if (m.type() === 'error' && !/status of 404/.test(m.text()) && !webkitSelectNoise(page, m.text())) problems.push(`console: ${m.text()}`); });
   const res = await page.goto(base + path);
   if (res.status() !== (path === '/no-such-page' ? 404 : 200)) problems.push(`answered ${res.status()}`);
   await page.waitForFunction(() => !document.querySelector(':not(:defined)'));
