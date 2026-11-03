@@ -4,6 +4,7 @@
  * destructive item, and a trailing <kbd> or .kit-menu-hint is pushed to the end.
  */
 kit-menu { display: inline-block; }
+kit-menu[context] { display: block; }
 .kit-menu-list:not([data-open]) { display: none; }
 .kit-menu-list {
   z-index: 1000; display: flex; flex-direction: column; gap: 1px;

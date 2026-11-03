@@ -31,10 +31,18 @@ export class KitMenu extends KitElement {
   };
 
   #close = null;
+  #opener = null; // context menus: what had focus before opening
+  #ghost = null; // context menus: a point to open beside
   #typed = '';
   #typedAt = 0;
 
-  get trigger() { return this.querySelector(':scope > button'); }
+  /** True for a context menu: opened by right-click, Shift+F10 or the Menu key on its region. */
+  get isContext() { return this.hasAttribute('context'); }
+
+  /** The button that opens it; for a context menu, the region it belongs to. */
+  get trigger() {
+    return this.isContext ? this.querySelector(':scope > :not(.kit-menu-list)') : this.querySelector(':scope > button');
+  }
   get list() { return this.querySelector(':scope > .kit-menu-list'); }
 
   /** The items that can be chosen now. */
@@ -48,17 +56,21 @@ export class KitMenu extends KitElement {
   connected() {
     const { trigger, list } = this;
     if (!trigger || !list) {
-      console.error('[kit] <kit-menu> needs a <button> and a .kit-menu-list as children');
+      console.error('[kit] <kit-menu> needs a <button> (or, with context, a region) and a .kit-menu-list as children');
       return;
     }
-    trigger.type = 'button';
-    trigger.id ||= uid('kit-menubutton');
     list.id ||= uid('kit-menu');
-    trigger.setAttribute('aria-haspopup', 'menu');
-    trigger.setAttribute('aria-controls', list.id);
-    trigger.setAttribute('aria-expanded', 'false');
     list.setAttribute('role', 'menu');
-    list.setAttribute('aria-labelledby', trigger.id);
+    if (this.isContext) {
+      if (!list.hasAttribute('aria-label')) list.setAttribute('aria-label', this.getAttribute('label') || 'Actions');
+    } else {
+      trigger.type = 'button';
+      trigger.id ||= uid('kit-menubutton');
+      trigger.setAttribute('aria-haspopup', 'menu');
+      trigger.setAttribute('aria-controls', list.id);
+      trigger.setAttribute('aria-expanded', 'false');
+      list.setAttribute('aria-labelledby', trigger.id);
+    }
     for (const i of list.querySelectorAll(':scope > :is(button, a)')) {
       i.setAttribute('role', 'menuitem');
       i.tabIndex = -1;
@@ -67,8 +79,23 @@ export class KitMenu extends KitElement {
     for (const hr of list.querySelectorAll(':scope > hr')) hr.setAttribute('role', 'separator');
 
     const on = { signal: this.signal };
-    trigger.addEventListener('click', () => (this.open ? this.hide() : this.show()), on);
-    trigger.addEventListener('keydown', (e) => {
+    if (this.isContext) {
+      trigger.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        this.hide(false);
+        this.#opener = document.activeElement;
+        this.show('first', { x: e.clientX, y: e.clientY });
+      }, on);
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key !== 'ContextMenu' && !(e.shiftKey && e.key === 'F10')) return;
+        e.preventDefault();
+        this.#opener = document.activeElement;
+        const r = (trigger.contains(document.activeElement) ? document.activeElement : trigger).getBoundingClientRect();
+        this.show('first', { x: r.left + 8, y: r.top + Math.min(r.height, 32) });
+      }, on);
+    }
+    if (!this.isContext) trigger.addEventListener('click', () => (this.open ? this.hide() : this.show()), on);
+    if (!this.isContext) trigger.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         this.show(e.key === 'ArrowUp' ? 'last' : 'first');
@@ -90,16 +117,27 @@ export class KitMenu extends KitElement {
     this.hide(false);
   }
 
-  /** Opens the menu and focuses its first item, or 'last'. */
-  show(focus = 'first') {
+  /** Opens the menu and focuses its first item, or 'last'; `at` ({ x, y }) opens it beside a point. */
+  show(focus = 'first', at = null) {
     if (this.open || !this.list) return;
     const { list, trigger } = this;
     showLayer(list);
-    trigger.setAttribute('aria-expanded', 'true');
+    if (!this.isContext) trigger.setAttribute('aria-expanded', 'true');
+    let anchor = trigger;
+    if (at) {
+      // A one-pixel element at the point, for the positioning helper to follow.
+      const g = document.createElement('span');
+      g.setAttribute('aria-hidden', 'true');
+      for (const [k, v] of [['position', 'fixed'], ['left', `${at.x}px`], ['top', `${at.y}px`], ['width', '1px'], ['height', '1px'], ['pointer-events', 'none']]) g.style.setProperty(k, v);
+      this.append(g);
+      this.#ghost = g;
+      anchor = g;
+    }
     const ctl = new AbortController();
-    const stop = follow(list, trigger, { placement: this.placement || 'bottom-start' });
-    onOutside([list, trigger], () => this.hide(false), ctl.signal);
-    this.#close = () => { ctl.abort(); stop(); };
+    const stop = follow(list, anchor, { placement: at ? 'bottom-start' : this.placement || 'bottom-start', offset: at ? 2 : 6 });
+    onOutside(this.isContext ? [list] : [list, trigger], () => this.hide(false), ctl.signal);
+    if (this.isContext) addEventListener('scroll', () => this.hide(false), { capture: true, passive: true, once: true, signal: ctl.signal });
+    this.#close = () => { ctl.abort(); stop(); this.#ghost?.remove(); this.#ghost = null; };
     const items = this.items;
     (focus === 'last' ? items.at(-1) : items[0])?.focus({ preventScroll: true });
   }
@@ -110,8 +148,8 @@ export class KitMenu extends KitElement {
     this.#close();
     this.#close = null;
     hideLayer(this.list);
-    this.trigger.setAttribute('aria-expanded', 'false');
-    if (returnFocus) this.trigger.focus();
+    if (!this.isContext) this.trigger.setAttribute('aria-expanded', 'false');
+    if (returnFocus) (this.isContext && this.#opener?.isConnected ? this.#opener : this.trigger).focus();
   }
 
   #pick(item) {

@@ -1,0 +1,16 @@
+/* SPDX-License-Identifier: MIT
+ * Tag input: the chips and entry box <kit-tags> (tag-input.js) builds.
+ */
+kit-tags { display: block; min-inline-size: 0; }
+.kit-tags-box { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-block-size: var(--kit-control); padding: 4px 6px; border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-1); cursor: text; }
+.kit-tags-box:focus-within { border-color: var(--kit-accent); box-shadow: 0 0 0 3px var(--kit-accent-soft); }
+.kit-tags-list { display: contents; list-style: none; margin: 0; padding: 0; }
+.kit-tag { display: inline-flex; align-items: center; gap: 2px; max-inline-size: 100%; padding: 3px 4px 3px 10px; border-radius: var(--kit-radius-pill); background: var(--kit-accent-soft); color: var(--kit-fg); font: 500 var(--kit-text-sm)/1.2 var(--kit-font-ui); }
+.kit-tag > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kit-tag > button { display: grid; place-items: center; inline-size: 20px; block-size: 20px; flex: none; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--kit-fg-2); cursor: pointer; }
+.kit-tag > button svg { inline-size: 12px; block-size: 12px; }
+.kit-tag > button:hover { background: color-mix(in srgb, var(--kit-fg) 12%, transparent); color: var(--kit-fg); }
+.kit-tag > button:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
+.kit-tags-entry { flex: 1; min-inline-size: 8rem; block-size: 28px; padding: 0 6px; border: 0; background: none; color: var(--kit-fg); font: 400 var(--kit-text-md)/1 var(--kit-font-ui); }
+.kit-tags-entry:focus { outline: none; }
+.kit-tags-entry:disabled { cursor: not-allowed; }

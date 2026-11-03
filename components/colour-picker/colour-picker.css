@@ -1,0 +1,15 @@
+/* SPDX-License-Identifier: MIT
+ * Colour picker: .kit-colour > input[type=color] + input.kit-input + .kit-colour-swatches > button[data-colour]
+ */
+.kit-colour { display: flex; flex-wrap: wrap; align-items: center; gap: var(--kit-space-3); }
+.kit-colour > input[type="color"] { inline-size: var(--kit-control); block-size: var(--kit-control); flex: none; padding: 3px; border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-2); background: var(--kit-surface); cursor: pointer; }
+.kit-colour > input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+.kit-colour > input[type="color"]::-webkit-color-swatch { border: 0; border-radius: calc(var(--kit-radius-2) - 3px); }
+.kit-colour > input[type="color"]::-moz-color-swatch { border: 0; border-radius: calc(var(--kit-radius-2) - 3px); }
+.kit-colour > input[type="color"]:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-colour > .kit-input { inline-size: 7.5rem; font-family: var(--kit-font-mono); text-transform: uppercase; }
+.kit-colour-swatches { display: flex; flex-wrap: wrap; gap: 6px; }
+.kit-colour-swatches > button { inline-size: 26px; block-size: 26px; padding: 0; border: 2px solid var(--kit-surface); border-radius: 50%; background: var(--kit-swatch, var(--kit-surface-3)); box-shadow: 0 0 0 1px var(--kit-line-strong); cursor: pointer; }
+.kit-colour-swatches > button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--kit-fg); }
+.kit-colour-swatches > button:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 3px; }
+@media (forced-colors: active) { .kit-colour-swatches > button { forced-color-adjust: none; border-color: Canvas; box-shadow: 0 0 0 1px CanvasText; } }

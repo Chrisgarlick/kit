@@ -1,0 +1,12 @@
+/* SPDX-License-Identifier: MIT
+ * Date picker (tier 1): native date and time inputs with class kit-input,
+ * styled; .kit-date-range lays two side by side.
+ */
+.kit-input:is([type="date"], [type="time"], [type="datetime-local"], [type="month"], [type="week"]) { font-variant-numeric: tabular-nums; min-inline-size: 10rem; }
+.kit-input::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.7; border-radius: 4px; padding: 2px; }
+.kit-input::-webkit-calendar-picker-indicator:hover { opacity: 1; background-color: var(--kit-surface-2); }
+.kit-input::-webkit-datetime-edit-fields-wrapper { padding: 0; }
+.kit-input::-webkit-datetime-edit-text { color: var(--kit-fg-3); }
+.kit-date-range { display: flex; flex-wrap: wrap; align-items: end; gap: var(--kit-space-3); }
+.kit-date-range > span { padding-block-end: 10px; color: var(--kit-fg-3); }
+.kit-date-range > .kit-field { flex: 1; min-inline-size: 10rem; }

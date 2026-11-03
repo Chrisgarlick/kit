@@ -84,7 +84,7 @@ for (const d of document.querySelectorAll('dialog[data-demo-note]')) {
   d.addEventListener('close', () => { note.textContent = `Closed with: ${d.returnValue || 'Escape or the backdrop'}`; d.returnValue = ''; });
 }
 // A menu's select event, shown in the note under the demo.
-for (const m of document.querySelectorAll('kit-menu[data-demo-note]')) {
+for (const m of document.querySelectorAll('kit-menu[data-demo-note]')) { // menus and context menus
   const note = document.getElementById(m.dataset.demoNote);
   m.addEventListener('select', (e) => { note.textContent = `Selected: ${e.detail.value}`; });
 }

@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: MIT
+ * Number stepper: .kit-stepper > button[data-step="down"] + input.kit-input[type=number] + button[data-step="up"]
+ */
+.kit-stepper { display: flex; inline-size: fit-content; max-inline-size: 100%; border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-1); }
+.kit-stepper:focus-within { border-color: var(--kit-accent); box-shadow: 0 0 0 3px var(--kit-accent-soft); }
+.kit-stepper > .kit-input { inline-size: 5.5rem; border: 0; border-radius: 0; box-shadow: none; background: none; text-align: center; font-family: var(--kit-font-mono); font-variant-numeric: tabular-nums; -moz-appearance: textfield; appearance: textfield; }
+.kit-stepper > .kit-input:focus-visible { box-shadow: none; }
+.kit-stepper > .kit-input::-webkit-inner-spin-button, .kit-stepper > .kit-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.kit-stepper > button { inline-size: var(--kit-control); flex: none; border: 0; background: none; color: var(--kit-fg-2); font: 500 18px/1 var(--kit-font-ui); cursor: pointer; }
+.kit-stepper > button:first-child { border-inline-end: 1px solid var(--kit-line); border-start-start-radius: inherit; border-end-start-radius: inherit; }
+.kit-stepper > button:last-child { border-inline-start: 1px solid var(--kit-line); border-start-end-radius: inherit; border-end-end-radius: inherit; }
+.kit-stepper > button:hover:not(:disabled) { background: var(--kit-surface-2); color: var(--kit-fg); }
+.kit-stepper > button:disabled { color: var(--kit-fg-3); opacity: 0.5; cursor: not-allowed; }

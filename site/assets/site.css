@@ -174,3 +174,5 @@ main { padding-block: var(--kit-space-6) 80px; min-inline-size: 0; outline: none
 .demo-ratio { display: grid; place-items: center; border: 1px dashed var(--kit-line-strong); background: var(--kit-accent-soft); color: var(--kit-fg-2); font: 500 var(--kit-text-sm)/1 var(--kit-font-mono); }
 .demo-ratio > span { position: absolute; inset: 0; display: grid; place-items: center; }
 .demo-fab { position: relative; min-block-size: 9rem; padding: var(--kit-space-4); }
+.demo-context { min-block-size: 7rem; cursor: context-menu; text-align: center; }
+.demo-context:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
