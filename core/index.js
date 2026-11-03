@@ -7,3 +7,4 @@ export { define } from './define.js';
 export { uid, announce, roving } from './a11y.js';
 export { computePosition, place, follow } from './position.js';
 export { showLayer, hideLayer, onOutside, nativePopover } from './layer.js';
+export { niceTicks, linear, formatter } from './scale.js';

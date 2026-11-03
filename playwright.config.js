@@ -7,7 +7,8 @@ export default defineConfig({
   testDir: 'tests',
   fullyParallel: true,
   reporter: [['list']],
-  use: { trace: 'retain-on-failure' },
+  // Traces only in CI: locally the disk is tight, and the error output is enough.
+  use: { trace: process.env.CI ? 'retain-on-failure' : 'off' },
   webServer: [
     { command: 'python3 -m http.server 8151 --bind 127.0.0.1', url: 'http://127.0.0.1:8151/tests/harness.html', reuseExistingServer: true },
     { command: 'go build -o bin/kit ./cmd/kit && ./bin/kit site serve -addr 127.0.0.1:8152', url: 'http://127.0.0.1:8152/', reuseExistingServer: true, timeout: 120_000 },

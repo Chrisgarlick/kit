@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: MIT
+ * Sparkline: the tiny chart <kit-sparkline> (sparkline.js) draws.
+ * Size it with inline-size and block-size (default 6rem by 1.75rem).
+ */
+kit-sparkline { --_c: var(--kit-accent); display: inline-block; inline-size: 6rem; block-size: 1.75rem; vertical-align: middle; color: var(--_c); }
+kit-sparkline[data-tone="good"] { --_c: var(--kit-good); }
+kit-sparkline[data-tone="bad"] { --_c: var(--kit-bad); }
+kit-sparkline[data-tone="warn"] { --_c: var(--kit-warn); }
+kit-sparkline[data-tone="info"] { --_c: var(--kit-info); }
+kit-sparkline svg { display: block; overflow: visible; }
+kit-sparkline .kit-spark-line { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linejoin: round; stroke-linecap: round; }
+kit-sparkline .kit-spark-area { fill: currentColor; opacity: 0.15; }
+kit-sparkline circle, kit-sparkline rect { fill: currentColor; }
+@media (forced-colors: active) { kit-sparkline { color: CanvasText; } }
