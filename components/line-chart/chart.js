@@ -276,7 +276,9 @@ export class KitChart extends KitElement {
       }
       a0 = a1;
     });
-    out.push(`<text class="kit-chart-total" x="${cx}" y="${cy - 4}" text-anchor="middle">${esc(fmt(vals.reduce((a, b) => a + b, 0)))}</text>`,
+    // center="first" shows the first part instead of the total, for a donut used as a gauge.
+    const middle = this.getAttribute('center') === 'first' ? vals[0] ?? 0 : vals.reduce((a, b) => a + b, 0);
+    out.push(`<text class="kit-chart-total" x="${cx}" y="${cy - 4}" text-anchor="middle">${esc(fmt(middle))}</text>`,
       `<text class="kit-chart-tick" x="${cx}" y="${cy + 16}" text-anchor="middle">${esc(m.series[0]?.name || 'Total')}</text>`, '</svg>');
     this.#geom = { kind: 'donut', n: vals.length, cx, cy, r, ri, arcs, total };
     return out.join('');

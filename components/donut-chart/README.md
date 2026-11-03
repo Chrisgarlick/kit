@@ -20,7 +20,7 @@ summary: Parts of a whole from a two-column table, with the total in the middle,
 </kit-chart>
 ```
 
-The first column names the parts and the second holds their values; the middle shows the total, labelled with the value column's heading. Parts are drawn in table order, clockwise from the top.
+The first column names the parts and the second holds their values; the middle shows the total, labelled with the value column's heading. Parts are drawn in table order, clockwise from the top. `center="first"` shows the first part's value in the middle instead of the total, for a donut used as a score gauge (a score, then what's left to 100).
 
 Donuts are for a handful of parts of one whole, up to about six. To compare sizes closely, or across groups, a bar chart is easier to read.
 

@@ -1,0 +1,215 @@
+{{define "bodyclass"}}kr-body{{end}}
+{{define "page"}}{{$s := "https://kritano.com"}}{{$app := "https://app.kritano.com"}}
+<div class="kr-page">
+<a class="kr-skip" href="#kr-main">Skip to content</a>
+<p class="kr-demo-bar"><span class="kit-container kit-cluster" data-justify="between"><span>The kritano.com homepage, rebuilt from <a href="/">kit</a> components in the <a href="{{.Theme.URL}}">Kritano theme</a>.</span><a href="{{$s}}/">The real site →</a></span></p>
+
+<header class="kr-masthead">
+  <div class="kit-container kit-cluster kr-masthead-inner" data-justify="between" data-nowrap>
+    <a class="kr-logo" href="{{$s}}/" aria-label="Kritano, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#4f46e5"/><rect x="3" y="3" width="26" height="26" rx="5" fill="#312e81"/><path d="M10 7 L10 25 L13.5 25 L13.5 17.5 L19.5 25 L24 25 L17 16 L23.5 7 L19.5 7 L13.5 14.5 L13.5 7 Z" fill="white"/><circle cx="24" cy="6.5" r="2.5" fill="#fbbf24"/></svg>
+      <span>Kritano</span>
+    </a>
+    <nav class="kr-nav" aria-label="Main navigation">
+      <ul class="kit-cluster" data-gap="5">
+        <li>
+          <kit-menu>
+            <button class="kr-navlink">Services <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5l3 3 3-3"/></svg></button>
+            <div class="kit-menu-list kr-services-menu">
+              <a href="{{$s}}/services/seo"><span><b>SEO Auditing</b><small>Search engine optimisation analysis</small></span></a>
+              <a href="{{$s}}/services/accessibility"><span><b>Accessibility</b><small>WCAG 2.2 compliance testing</small></span></a>
+              <a href="{{$s}}/services/security"><span><b>Security Scanning</b><small>Vulnerability &amp; threat detection</small></span></a>
+              <a href="{{$s}}/services/performance"><span><b>Performance</b><small>Speed &amp; Core Web Vitals</small></span></a>
+              <a href="{{$s}}/services/content-quality"><span><b>Content Quality</b><small>Readability, structure &amp; E-E-A-T</small></span></a>
+              <hr>
+              <a href="{{$s}}/services">All services</a>
+            </div>
+          </kit-menu>
+        </li>
+        <li><a class="kr-navlink" href="{{$s}}/pricing">Pricing</a></li>
+        <li><a class="kr-navlink" href="{{$s}}/compare">Compare</a></li>
+        <li><a class="kr-navlink" href="{{$s}}/about">About</a></li>
+        <li><a class="kr-navlink" href="{{$s}}/blog">Blog</a></li>
+        <li><a class="kr-navlink" href="https://docs.kritano.com">API Docs</a></li>
+      </ul>
+    </nav>
+    <div class="kit-cluster kr-actions" data-gap="2" data-nowrap>
+      <a class="kit-button kr-signin" data-variant="ghost" data-size="sm" href="{{$app}}/login">Sign in</a>
+      <a class="kit-button" data-variant="primary" data-size="sm" href="{{$app}}/register">Start free</a>
+      <button class="kit-button kr-menu-button" data-variant="ghost" data-icon data-size="sm" type="button" commandfor="kr-drawer" command="show-modal" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<dialog class="kit-dialog kit-drawer" id="kr-drawer" aria-label="Navigation menu" closedby="any">
+  <header class="kit-dialog-header"><p class="kr-logo"><span>Kritano</span></p><button class="kit-button" data-variant="ghost" data-icon type="button" commandfor="kr-drawer" command="close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+  <nav class="kit-dialog-body" aria-label="Mobile navigation">
+    <ul class="kr-drawer-nav">
+      <li><a href="{{$s}}/services">Services</a></li><li><a href="{{$s}}/pricing">Pricing</a></li><li><a href="{{$s}}/compare">Compare</a></li><li><a href="{{$s}}/about">About</a></li><li><a href="{{$s}}/blog">Blog</a></li><li><a href="{{$s}}/resources">Resources</a></li><li><a href="{{$s}}/contact">Contact</a></li><li><a href="https://docs.kritano.com">API Docs</a></li>
+    </ul>
+  </nav>
+  <footer class="kit-dialog-footer"><a class="kit-button" href="{{$app}}/login">Sign in</a><a class="kit-button" data-variant="primary" href="{{$app}}/register">Start free</a></footer>
+</dialog>
+
+<main id="kr-main" tabindex="-1">
+<section class="kr-hero" aria-labelledby="kr-h1">
+  <div class="kit-container kr-hero-grid">
+    <div class="kit-stack" data-gap="5">
+      <p><span class="kit-badge" data-tone="accent"><span class="kit-dot"></span>Website Auditing Platform</span></p>
+      <h1 id="kr-h1">The <em>clarity</em> your website deserves.</h1>
+      <p class="kr-lede">Kritano is a website auditing platform that checks your site for SEO, accessibility, security, and performance issues. It runs over 500 rules in a single scan and shows you exactly what to fix.</p>
+      <p class="kr-note">According to <a href="https://webaim.org/projects/million/">WebAIM</a>, 95.9% of websites have detectable accessibility failures. In our testing, most sites also have security header gaps and SEO issues they do not know about.</p>
+      <div class="kit-cluster" data-gap="3"><a class="kit-button" data-variant="primary" data-size="lg" href="{{$app}}/register">Start free</a><a class="kit-button" data-size="lg" href="{{$s}}/services">Learn more</a></div>
+      <ul class="kit-cluster kr-trust" data-gap="4"><li class="kit-status" data-tone="good">No credit card required</li><li class="kit-status" data-tone="good">Free forever plan</li><li class="kit-status" data-tone="good">Audits in under 2 minutes</li></ul>
+    </div>
+
+    <article class="kit-card kr-demo" data-raised aria-label="A sample audit">
+      <header class="kit-card-header"><h2 class="kr-card-title">New audit</h2><span class="kit-badge" data-tone="good"><span class="kit-dot"></span>Audit complete</span></header>
+      <div class="kit-card-body kit-stack" data-gap="4">
+        <div class="kit-field"><label for="kr-url">Enter your URL</label><div class="kit-input-group"><span class="kit-input-affix" aria-hidden="true">https://</span><input class="kit-input" id="kr-url" value="example.com" readonly><button class="kit-button" data-variant="primary" type="button" data-toast="This is a sample" data-toast-description="Start free at app.kritano.com to audit your own site.">Audit</button></div></div>
+        <div class="kit-progress-field"><label for="kr-pages">38 of 47 pages audited</label><span>81%</span><progress class="kit-progress" id="kr-pages" max="47" value="38">38 of 47</progress></div>
+        <div class="kr-overall">
+          <kit-chart type="donut" class="kr-donut" center="first"><table><caption>Overall health, sample audit</caption><thead><tr><th scope="col">Part</th><th scope="col">Overall</th></tr></thead><tbody><tr><th scope="row">Score</th><td>87</td></tr><tr><th scope="row">To improve</th><td>13</td></tr></tbody></table></kit-chart>
+          <div class="kit-stack" data-gap="2">
+            <p class="kr-overall-label">Overall health</p>
+            <p class="kr-overall-note">Good - 1 area to improve</p>
+            <div class="kr-bars">
+              <div class="kit-progress-field"><label for="kr-b1">SEO</label><span>92</span><progress class="kit-progress" id="kr-b1" max="100" value="92">92</progress></div>
+              <div class="kit-progress-field"><label for="kr-b2">A11Y</label><span>78</span><progress class="kit-progress" id="kr-b2" data-tone="warn" max="100" value="78">78</progress></div>
+              <div class="kit-progress-field"><label for="kr-b3">Sec</label><span>95</span><progress class="kit-progress" id="kr-b3" max="100" value="95">95</progress></div>
+              <div class="kit-progress-field"><label for="kr-b4">Perf</label><span>83</span><progress class="kit-progress" id="kr-b4" max="100" value="83">83</progress></div>
+              <div class="kit-progress-field"><label for="kr-b5">Cont</label><span>88</span><progress class="kit-progress" id="kr-b5" max="100" value="88">88</progress></div>
+            </div>
+          </div>
+        </div>
+        <ul class="kr-issues">
+          <li><span class="kit-status" data-tone="bad">Images missing alt text</span><span class="kit-badge" data-numeric>12 pages</span></li>
+          <li><span class="kit-status" data-tone="warn">Missing meta descriptions</span><span class="kit-badge" data-numeric>5 pages</span></li>
+          <li><span class="kit-status" data-tone="warn">Heading hierarchy skip</span><span class="kit-badge" data-numeric>8 pages</span></li>
+        </ul>
+      </div>
+      <footer class="kit-card-footer"><span class="kr-sample">Sample audit of example.com</span><button class="kit-button" data-variant="ghost" data-size="sm" type="button" data-toast="PDF export" data-toast-description="Reports export as branded PDFs and CSVs in the app.">Export PDF</button></footer>
+    </article>
+  </div>
+</section>
+
+<section class="kit-container kr-section" aria-labelledby="kr-content">
+  <div class="kr-split">
+    <div class="kit-stack" data-gap="4">
+      <p><span class="kit-badge" data-tone="accent">Only on Kritano</span></p>
+      <h2 id="kr-content">Content intelligence that goes beyond <em>keywords</em>.</h2>
+      <p class="kr-lede">Kritano is the only audit tool that scores your content the way search engines evaluate it. E-E-A-T analysis, Answer Engine Optimisation, readability scoring, and engagement markers - unified into a single Content Quality Score.</p>
+      <ul class="kr-checks">
+        <li><b>E-E-A-T scoring:</b> Experience, Expertise, Authority, Trust</li>
+        <li><b>AEO analysis:</b> How likely AI models are to cite your pages</li>
+        <li><b>Readability &amp; engagement:</b> Reading level, structure, CTAs</li>
+        <li><b>400+ content checks</b> across 7 sub-modules</li>
+      </ul>
+      <p><a class="kit-button" data-variant="primary" href="{{$app}}/register">Start free</a></p>
+    </div>
+    <article class="kit-card" data-raised aria-label="A sample Content Quality Score">
+      <header class="kit-card-header"><div><p class="kr-overall-label">Content Quality Score</p><p class="kr-overall-note">Good - E-E-A-T and engagement need work</p></div><p class="kr-big">78</p></header>
+      <div class="kit-card-body">
+        <kit-chart type="bar" class="kr-cqs"><table><caption>Content Quality Score by sub-module, sample</caption><thead><tr><th scope="col">Sub-module</th><th scope="col">Score</th></tr></thead><tbody><tr><th scope="row">Quality</th><td>82</td></tr><tr><th scope="row">E-E-A-T</th><td>71</td></tr><tr><th scope="row">Readability</th><td>76</td></tr><tr><th scope="row">Engagement</th><td>65</td></tr><tr><th scope="row">Structure</th><td>84</td></tr></tbody></table></kit-chart>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="kit-container kr-section" aria-labelledby="kr-six">
+  <div class="kr-head kit-stack" data-gap="3">
+    <p class="kr-eyebrow">Core Capabilities</p>
+    <h2 id="kr-six">Six dimensions. One clear <em>verdict</em>.</h2>
+    <p class="kr-lede">Every audit covers SEO, accessibility, security, performance, content quality, and structured data. Findings are prioritised by real impact, not vanity metrics.</p>
+  </div>
+  <ul class="kit-grid kr-features" data-min="sm" data-cols="4" data-gap="4">
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg></span><h3><a class="kit-card-link" href="{{$s}}/services/seo">SEO</a></h3><p>Metadata, broken links, structured data, and Core Web Vitals.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M5 9l7 1.5L19 9M12 10.5V15m0 0-3 6m3-6 3 6"/></svg></span><h3><a class="kit-card-link" href="{{$s}}/services/accessibility">Accessibility</a></h3><p>WCAG 2.2 compliance, screen readers, keyboard navigation.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.2 7.5 9.5 4.3-1.3 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3><a class="kit-card-link" href="{{$s}}/services/security">Security</a></h3><p>HTTPS, headers, exposed files, cookie security.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8Z"/></svg></span><h3><a class="kit-card-link" href="{{$s}}/services/performance">Performance</a></h3><p>Page speed, resource optimisation, caching, LCP/INP/CLS.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h10l4 4v12H5V4Z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg></span><h3><a class="kit-card-link" href="{{$s}}/services/content-quality">Content Quality</a></h3><p>Readability, structure, E-E-A-T signals and AI search citation.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7V3Z"/><path d="M12 11v6m-3-3 3 3 3-3"/></svg></span><h3>PDF &amp; CSV Reports</h3><p>Export branded reports for clients and stakeholders.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 15l4-4 3 3 5-6"/></svg></span><h3>Scheduled Audits &amp; Trend Analytics</h3><p>Automated monitoring with score history over time.</p></div></li>
+    <li class="kit-card kr-feature-cta"><div class="kit-card-body kit-stack" data-gap="3"><p>Having audited thousands of websites, we noticed that most tools only cover one or two categories. Kritano checks all six in a single scan so nothing slips through.</p><a class="kr-more" href="{{$s}}/compare">See how we compare →</a></div></li>
+  </ul>
+</section>
+
+<section class="kit-container kr-section" aria-labelledby="kr-steps">
+  <div class="kr-head kit-stack" data-gap="3"><p class="kr-eyebrow">How It Works</p><h2 id="kr-steps">Three steps to a <em>healthier</em> website</h2></div>
+  <ol class="kit-grid kr-steps" data-min="sm" data-cols="3" data-gap="4">
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-step">01</span><h3>Enter your URL</h3><p>Add your website and verify domain ownership. Our scanner is ready in seconds.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-step">02</span><h3>Run your audit</h3><p>Kritano crawls your pages, checking 500+ SEO, accessibility, security, and performance rules.</p></div></li>
+    <li class="kit-card"><div class="kit-card-body"><span class="kr-step">03</span><h3>Act on insights</h3><p>Review prioritised findings with fix guidance. Export reports. Track improvements over time.</p></div></li>
+  </ol>
+</section>
+
+<section class="kit-container kr-section" aria-label="Kritano in numbers">
+  <div class="kr-band kit-grid" data-min="xs" data-cols="4" data-gap="4">
+    <div class="kit-stat" data-flush><p class="kit-stat-value">6</p><p class="kit-stat-label">Audit Categories</p></div>
+    <div class="kit-stat" data-flush><p class="kit-stat-value">500+</p><p class="kit-stat-label">Rules Checked</p></div>
+    <div class="kit-stat" data-flush><p class="kit-stat-value">PDF</p><p class="kit-stat-label">Export Reports</p></div>
+    <div class="kit-stat" data-flush><p class="kit-stat-value">&lt; 2min</p><p class="kit-stat-label">Avg. Audit Time</p></div>
+  </div>
+</section>
+
+<section class="kit-container kr-section" aria-labelledby="kr-own">
+  <div class="kr-split">
+    <div class="kit-stack" data-gap="4">
+      <p class="kr-eyebrow">Audited by Kritano</p>
+      <h2 id="kr-own">We run our <em>own</em> sites through it.</h2>
+      <p class="kr-lede">Real scores from scheduled audits in November 2026: Kritano's site, its docs, and its founder's site. Content quality is the category everyone still has work to do on.</p>
+      <dl class="kit-dl" data-layout="columns">
+        <div><dt>Sites</dt><dd>3</dd></div><div><dt>Pages audited</dt><dd data-numeric>139</dd></div><div><dt>Categories</dt><dd>6</dd></div>
+      </dl>
+    </div>
+    <article class="kit-card" data-raised><div class="kit-card-body">
+      <kit-chart type="heatmap" class="kr-heat">
+        <table><caption>Audit scores by site and category, November 2026</caption>
+          <thead><tr><th scope="col">Site</th><th scope="col">SEO</th><th scope="col">A11y</th><th scope="col">Security</th><th scope="col">Perf</th><th scope="col">Data</th><th scope="col">Content</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">kritano.com</th><td>95</td><td>98</td><td>95</td><td>97</td><td>91</td><td>64</td></tr>
+            <tr><th scope="row">docs.kritano.com</th><td>93</td><td>98</td><td>96</td><td>97</td><td>86</td><td>44</td></tr>
+            <tr><th scope="row">chrisgarlick.com</th><td>100</td><td>100</td><td>100</td><td>94</td><td>92</td><td>63</td></tr>
+          </tbody>
+        </table>
+      </kit-chart>
+    </div></article>
+  </div>
+</section>
+
+<section class="kit-container kr-section" aria-labelledby="kr-join">
+  <div class="brand-hero kr-join">
+    <h2 id="kr-join">Join as a <em>founding member</em>.</h2>
+    <p>Get a 30-day Agency trial and 50% off for life as a founding member. No credit card required.</p>
+    <div class="kit-cluster" data-gap="3"><a class="kit-button brand-on-dark" data-size="lg" href="{{$app}}/register">Start free</a><a class="kit-button brand-ghost" data-size="lg" href="{{$s}}/pricing">View Pricing</a></div>
+  </div>
+</section>
+
+<section class="kit-container kr-section kr-author" aria-label="About this page">
+  <div class="kit-alert" data-tone="info"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v4.5M10 6.5h.01"/></svg><div><p class="kit-alert-title">In summary</p><p>Kritano scans your website across SEO, accessibility, security, performance, content quality, and structured data. It finds issues that other tools miss, explains them in plain English, and shows you how to fix them. Start with a free audit to see your site's health score.</p></div></div>
+  <article class="kit-card"><div class="kit-card-body kit-cluster" data-gap="4" data-align="start" data-nowrap>
+    <span class="kit-avatar" data-size="lg" data-tone="2" aria-hidden="true">CG</span>
+    <div class="kit-stack" data-gap="2"><p><a class="kr-author-name" href="{{$s}}/author/chris-garlick">Chris Garlick</a> <span class="kit-badge" data-variant="outline">Founder of Kritano</span></p>
+      <p>5 years in web development. I specialise in web auditing, WCAG 2.2 compliance, and search engine optimisation.</p>
+      <p>I built Kritano after years of running audits with fragmented tools. I write about SEO, accessibility, security, and performance based on real auditing data from thousands of scans.</p>
+      <p class="kr-sample">Last updated: <time datetime="2026-04-16">16 April 2026</time></p></div>
+  </div></article>
+</section>
+</main>
+
+<footer class="kr-footer">
+  <div class="kit-container">
+    <div class="kit-split" data-width="md">
+      <div class="kit-stack" data-gap="2"><p class="kr-logo"><span>Kritano</span></p><p>See what others miss.</p></div>
+      <div class="kit-grid" data-min="xs" data-cols="3" data-gap="5">
+        <nav aria-labelledby="kr-f1"><h2 id="kr-f1">Product</h2><ul><li><a href="{{$s}}/pricing">Pricing</a></li><li><a href="{{$s}}/compare">Compare</a></li><li><a href="https://docs.kritano.com">API Docs</a></li></ul></nav>
+        <nav aria-labelledby="kr-f2"><h2 id="kr-f2">Company</h2><ul><li><a href="{{$s}}/about">About</a></li><li><a href="{{$s}}/blog">Blog</a></li><li><a href="{{$s}}/contact">Contact</a></li></ul></nav>
+        <nav aria-labelledby="kr-f3"><h2 id="kr-f3">Resources</h2><ul><li><a href="{{$s}}/resources">Free library</a></li><li><a href="{{$s}}/faq">FAQ</a></li><li><a href="{{$s}}/author/chris-garlick">Author</a></li><li><a href="{{$s}}/privacy">Privacy</a></li><li><a href="{{$s}}/terms">Terms</a></li></ul></nav>
+      </div>
+    </div>
+    <hr class="kit-divider">
+    <p class="kr-sample">© {{year}} Kritano. All rights reserved. This page: rebuilt from kit.</p>
+  </div>
+</footer>
+</div>
+{{end}}

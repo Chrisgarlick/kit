@@ -26,7 +26,7 @@ summary: One headline number with its label and how it changed, coloured by whet
 | `data-good` | `down` when falling is good (costs, errors, load time) | `up` |
 | `data-flush` | present for no border or padding, inside a card | a bordered tile |
 
-A `<small>` inside the value holds its unit (`ms`, `GB`). Lay tiles out with the grid. Figures use tabular numbers, so tiles line up when they change.
+A `<p class="kit-stat-note">` in place of the delta gives a quiet line of context instead ("Served from disk by nginx"). A `<small>` inside the value holds its unit (`ms`, `GB`). Lay tiles out with the grid. Figures use tabular numbers, so tiles line up when they change.
 
 ## Accessibility
 

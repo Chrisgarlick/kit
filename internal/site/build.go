@@ -414,7 +414,10 @@ func (s *Site) templates() (map[string]*template.Template, error) {
 func (s *Site) themePage(t *Theme, pg *ThemePage) (*template.Template, error) {
 	dir := filepath.Join(s.Root, "site", "templates")
 	files := []string{filepath.Join(dir, "_bare.gohtml"), filepath.Join(s.Root, "site", "themes", t.ID, "pages", pg.Slug+".gohtml")}
-	return template.New(pg.Slug).Funcs(template.FuncMap{"year": func() int { return time.Now().Year() }}).ParseFiles(files...)
+	return template.New(pg.Slug).Funcs(template.FuncMap{
+		"year": func() int { return time.Now().Year() },
+		"list": func(v ...any) []any { return v },
+	}).ParseFiles(files...)
 }
 
 func writeSitemap(out, baseURL string, pages []string) error {
