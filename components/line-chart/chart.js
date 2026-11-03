@@ -84,9 +84,15 @@ export class KitChart extends KitElement {
 
   connected() {
     if (!this.#plot) this.#build();
+    // Redraw on the next frame, never inside the observer callback, so a
+    // redraw that changes the box can't loop.
+    let frame = 0;
     const ro = new ResizeObserver(() => {
-      const w = Math.round(this.#plot.clientWidth);
-      if (w && w !== this.#width) { this.#width = w; this.requestUpdate(); }
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const w = Math.round(this.#plot.clientWidth);
+        if (w && w !== this.#width) { this.#width = w; this.requestUpdate(); }
+      });
     });
     ro.observe(this.#plot);
     this.signal.addEventListener('abort', () => ro.disconnect(), { once: true });
@@ -159,6 +165,7 @@ export class KitChart extends KitElement {
     const W = this.#width;
     // Funnels and bullets are as tall as their rows; other charts fill their box.
     const H = type === 'funnel' || type === 'bullet' ? Math.max(120, m.labels.length * (type === 'bullet' ? 46 : 52)) : Math.max(120, Math.round(this.#plot.clientHeight) || 240);
+    if (type === 'funnel' || type === 'bullet') this.#plot.style.setProperty('block-size', `${H}px`);
     const label = m.title || this.getAttribute('aria-label') || `${type[0].toUpperCase() + type.slice(1)} chart`;
     this.#plot.setAttribute('aria-label', label);
     this.#legend.innerHTML = type === 'scatter' ? scatterLegend(m) : m.series.length > 1 || type === 'donut'

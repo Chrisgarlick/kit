@@ -13,6 +13,8 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
 > Every planned component is built (3 November): about 75 across eight groups, 16 KB of CSS and 30 KB of JS gzipped. Next: the VoiceOver pass, then adoption (a full rebrand of chrisgarlick.com and kritano.com onto kit).
+>
+> Planned next for Typeset (PDF) and Motion (SVG): [plans/typeset-and-motion.md](plans/typeset-and-motion.md), shared brand tokens and one chart renderer for the web, PDFs and animation.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
