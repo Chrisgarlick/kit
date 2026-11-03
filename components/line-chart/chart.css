@@ -61,3 +61,12 @@ kit-chart { position: relative; }
 .kit-chart-scale i { inline-size: 7rem; block-size: 8px; border-radius: 4px; background: linear-gradient(to right, color-mix(in srgb, var(--kit-accent) 10%, var(--kit-surface)), var(--kit-accent)); }
 kit-chart[type="heatmap"] .kit-chart-plot { block-size: var(--kit-chart-height, 260px); }
 @media (forced-colors: active) { .kit-chart-point, .kit-chart-heat { fill: CanvasText; } }
+/* Funnel and bullet */
+.kit-chart-plot .kit-chart-funnel-label { fill: var(--kit-fg-2); font-size: 12px; }
+.kit-chart-plot .kit-chart-bar-value { fill: var(--kit-accent-fg); font: 600 12px/1 var(--kit-font-ui); pointer-events: none; }
+.kit-chart-plot .kit-chart-funnel-step, .kit-chart-plot .kit-chart-bullet-pct { fill: var(--kit-fg-2); font-weight: 600; }
+.kit-chart-bullet-track { fill: var(--kit-surface-3); }
+.kit-chart-bullet-band { fill: color-mix(in srgb, var(--kit-fg) 8%, var(--kit-surface-3)); }
+.kit-chart-target { stroke: var(--kit-fg); stroke-width: 2.5; stroke-linecap: round; }
+.kit-chart-legend-target span { inline-size: 3px !important; block-size: 12px !important; border-radius: 2px; background: var(--kit-fg) !important; }
+kit-chart:is([type="funnel"], [type="bullet"]) .kit-chart-plot { block-size: auto; }

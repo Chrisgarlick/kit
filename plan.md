@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: the screen-reader pass (VoiceOver) across the interactive components, then adoption in an app. Progress is noted under each phase below.
+> Every planned component is built (3 November): about 75 across eight groups, 16 KB of CSS and 30 KB of JS gzipped. Next: the VoiceOver pass, then adoption (a full rebrand of chrisgarlick.com and kritano.com onto kit).
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -243,6 +243,8 @@ The look, before the behaviour.
 - **Placeholder content:** literal placeholder text in every demo (no invented company or records). Demos can still read `site/data/*.yaml` as `.Data`, for charts later.
 
 **Theming recipe** (3 November): `site/themes/<id>/` (theme.yaml and theme.css) builds a showcase page per theme; the Kritano theme, from its clients.kritano.com brand file, is the worked example (1.5 KB gzipped, light and dark, AA-checked). New tokens `--kit-display-weight` and `--kit-display-tracking` let single-weight display faces work. README has the recipe. A second theme, **Chris Garlick** (from a new `brand.yaml` in the Clients format, written from the portfolio's CSS), adds `--kit-button-radius(-sm)` for pill buttons and per-element service accents (`data-cg`), and themes can ship full pages with no kit chrome (`theme.yaml` `pages:`, the bare layout): the chrisgarlick.com homepage rebuilt from kit at /themes/chrisgarlick/home/ (with real figures: its cached response time, its Kritano audit scores), and the kritano.com homepage at /themes/kritano/home/ (sample audit as on the live site, plus a heatmap of real audit scores). Small additions on the way: `.kit-stat-note` and `center="first"` for gauge donuts.
+
+**The rest of the planned list** (3 November): scroll area, aspect ratio; split, toggle and copy buttons, floating action; number stepper, tag input (`<kit-tags>`), file drop, date picker (native, styled), colour picker; progress ring, spinner, banner; context menu (`<kit-menu context>`); breadcrumbs, pagination, steps, top bar, link (and `.kit-vh`); timeline, code block; small multiples (`<kit-multiples>`, shared scale), funnel and bullet charts.
 
 **Not started:** the rest of tier 1 (type primitives, scroll area, code block, print), the icon sprite and the visual-regression baseline.
 

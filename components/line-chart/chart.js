@@ -59,6 +59,8 @@ export class KitChart extends KitElement {
     stacked: { type: Boolean },
     format: { type: String },
     zero: { type: Boolean },
+    min: { type: Number }, // fix the value axis, for charts that must compare (small multiples)
+    max: { type: Number },
   };
   static state = { data: null, active: -1 };
 
@@ -71,6 +73,7 @@ export class KitChart extends KitElement {
   #geom = null; // what the pointer and keys need from the last draw
   #width = 0;
   #histo = null; // the last histogram's bins, for the summary
+  #bulletRows = null;
 
   get table() { return this.querySelector(':scope > table, :scope > .kit-chart-table > table'); }
 
@@ -154,13 +157,15 @@ export class KitChart extends KitElement {
     const type = this.type || 'line';
     const fmt = formatter(this.format || 'number');
     const W = this.#width;
-    const H = Math.max(120, Math.round(this.#plot.clientHeight) || 240);
+    // Funnels and bullets are as tall as their rows; other charts fill their box.
+    const H = type === 'funnel' || type === 'bullet' ? Math.max(120, m.labels.length * (type === 'bullet' ? 46 : 52)) : Math.max(120, Math.round(this.#plot.clientHeight) || 240);
     const label = m.title || this.getAttribute('aria-label') || `${type[0].toUpperCase() + type.slice(1)} chart`;
     this.#plot.setAttribute('aria-label', label);
     this.#legend.innerHTML = type === 'scatter' ? scatterLegend(m) : m.series.length > 1 || type === 'donut'
       ? (type === 'donut' ? m.labels : m.series.map((s) => s.name)).map((n, i) => `<li class="kit-s${(i % 6) + 1}"><span></span>${esc(n)}</li>`).join('')
       : '';
-    const draw = { donut: () => this.#donut(m, W, H, fmt), scatter: () => this.#scatter(m, W, H), histogram: () => this.#histogram(m, W, H), heatmap: () => this.#heatmap(m, W, H, fmt) }[type];
+    const draw = { donut: () => this.#donut(m, W, H, fmt), scatter: () => this.#scatter(m, W, H), histogram: () => this.#histogram(m, W, H), heatmap: () => this.#heatmap(m, W, H, fmt), funnel: () => this.#funnel(m, W, H, fmt), bullet: () => this.#bullet(m, W, H, fmt) }[type];
+    if (type === 'funnel' || type === 'bullet') this.#legend.innerHTML = type === 'bullet' ? '<li class="kit-s1"><span></span>Value</li><li class="kit-chart-legend-target"><span></span>Target</li>' : '';
     if (type === 'heatmap') this.#legend.innerHTML = '';
     if (type === 'histogram') this.#legend.innerHTML = '';
     const svg = draw ? draw() : this.#cartesian(m, type, W, H);
@@ -182,6 +187,8 @@ export class KitChart extends KitElement {
       lo = Math.min(0, ...m.labels.map((_, i) => m.series.reduce((a, s) => a + Math.min(0, s.values[i] ?? 0), 0)));
     }
     if (bar || this.zero || type === 'area') { lo = Math.min(0, lo); hi = Math.max(0, hi); }
+    if (this.min != null) lo = this.min;
+    if (this.max != null) hi = this.max;
     const axis = formatter(this.format === 'percent' ? 'percent' : (Math.abs(hi) >= 10000 || this.format === 'compact') ? 'compact' : this.format || 'number');
     const y = niceTicks(lo, hi, Math.max(2, Math.round(H / 56)));
     const left = 10 + Math.max(...y.ticks.map((t) => axis(t).length)) * 7;
@@ -494,6 +501,86 @@ export class KitChart extends KitElement {
     return out.join('');
   }
 
+  #funnel(m, W, H, fmt) {
+    const vals = (m.series[0]?.values ?? []).map((v) => Math.max(0, v ?? 0));
+    const n = vals.length;
+    const first = vals[0] || 1;
+    const top = Math.max(...vals) || 1;
+    const left = Math.min(W * 0.32, 14 + Math.max(...m.labels.map((l) => l.length)) * 6.5);
+    const right = W - 54;
+    const rowH = (H - 4) / n;
+    const bh = Math.min(40, rowH * 0.72);
+    const out = [`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false"><g class="kit-chart-hover"></g>`];
+    const pct = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : 0);
+    vals.forEach((v, i) => {
+      const cy = 2 + rowH * (i + 0.5);
+      const w = Math.max(2, ((right - left) * v) / top);
+      const x = left + (right - left - w) / 2;
+      out.push(`<text class="kit-chart-tick kit-chart-funnel-label" x="0" y="${cy.toFixed(1)}" dominant-baseline="middle">${esc(m.labels[i])}</text>`,
+        `<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${x.toFixed(1)}" y="${(cy - bh / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${bh.toFixed(1)}" rx="4"/>`);
+      const label = esc(formatter('compact')(v));
+      if (w > 48) out.push(`<text class="kit-chart-bar-value" x="${(x + w / 2).toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${label}</text>`);
+      else out.push(`<text class="kit-chart-tick" x="${(x + w + 6).toFixed(1)}" y="${cy.toFixed(1)}" dominant-baseline="middle">${label}</text>`);
+      if (i) out.push(`<text class="kit-chart-tick kit-chart-funnel-step" x="${W}" y="${cy.toFixed(1)}" text-anchor="end" dominant-baseline="middle">${pct(v, vals[i - 1])}%</text>`);
+    });
+    out.push('</svg>');
+    const say = (i) => `${m.labels[i]}: ${fmt(vals[i])}${i ? `, ${pct(vals[i], vals[i - 1])}% of ${m.labels[i - 1]}, ${pct(vals[i], first)}% of ${m.labels[0]}` : ''}`;
+    this.#geom = {
+      kind: 'funnel', n,
+      hit: (px, py) => { const i = Math.floor((py - 2) / rowH); return i >= 0 && i < n ? i : -1; },
+      mark: (i) => ({
+        svg: `<rect class="kit-chart-band" x="0" y="${(2 + rowH * i).toFixed(1)}" width="${W}" height="${rowH.toFixed(1)}" rx="4"/>`,
+        tip: `<p class="kit-chart-tip-label">${esc(m.labels[i])}</p><p class="kit-s1"><span></span>${esc(m.series[0].name)}<b>${esc(fmt(vals[i]))}</b></p>${i ? `<p>Of previous<b>${pct(vals[i], vals[i - 1])}%</b></p><p>Of first<b>${pct(vals[i], first)}%</b></p>` : ''}`,
+        x: (left + right) / 2, y: 2 + rowH * i,
+      }),
+      say,
+    };
+    return out.join('');
+  }
+
+  #bullet(m, W, H, fmt) {
+    const [value, target, max] = m.series;
+    const n = m.labels.length;
+    const left = Math.min(W * 0.3, 14 + Math.max(...m.labels.map((l) => l.length)) * 6.5);
+    const right = W - 52;
+    const rowH = (H - 4) / n;
+    const th = Math.min(26, rowH * 0.6);
+    const out = [`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false"><g class="kit-chart-hover"></g>`];
+    const rows = m.labels.map((label, i) => {
+      const v = value?.values[i] ?? 0;
+      const t = target?.values[i];
+      const top = max?.values[i] ?? niceTicks(0, Math.max(v, t ?? 0) * 1.1, 4).max;
+      return { label, v, t, top };
+    });
+    rows.forEach((r, i) => {
+      const cy = 2 + rowH * (i + 0.5);
+      const sx = linear(0, r.top || 1, left, right);
+      out.push(`<text class="kit-chart-tick kit-chart-funnel-label" x="0" y="${cy.toFixed(1)}" dominant-baseline="middle">${esc(r.label)}</text>`,
+        `<rect class="kit-chart-bullet-track" x="${left}" y="${(cy - th / 2).toFixed(1)}" width="${(right - left).toFixed(1)}" height="${th.toFixed(1)}" rx="3"/>`,
+        `<rect class="kit-chart-bullet-band" x="${left}" y="${(cy - th / 2).toFixed(1)}" width="${(sx(r.top * 0.8) - left).toFixed(1)}" height="${th.toFixed(1)}" rx="3"/>`,
+        `<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${left}" y="${(cy - th / 6).toFixed(1)}" width="${Math.max(1, Math.min(right, sx(r.v)) - left).toFixed(1)}" height="${(th / 3).toFixed(1)}" rx="2"/>`);
+      if (r.t != null) out.push(`<line class="kit-chart-target" x1="${sx(r.t).toFixed(1)}" x2="${sx(r.t).toFixed(1)}" y1="${(cy - th / 2 - 3).toFixed(1)}" y2="${(cy + th / 2 + 3).toFixed(1)}"/>`);
+      out.push(`<text class="kit-chart-tick kit-chart-bullet-pct" x="${W}" y="${cy.toFixed(1)}" text-anchor="end" dominant-baseline="middle">${r.t ? `${Math.round((r.v / r.t) * 100)}%` : esc(formatter('compact')(r.v))}</text>`);
+    });
+    out.push('</svg>');
+    const say = (i) => { const r = rows[i]; return `${r.label}: ${fmt(r.v)}${r.t != null ? ` against a target of ${fmt(r.t)} (${Math.round((r.v / r.t) * 100)}%)` : ''}`; };
+    this.#geom = {
+      kind: 'bullet', n,
+      hit: (px, py) => { const i = Math.floor((py - 2) / rowH); return i >= 0 && i < n ? i : -1; },
+      mark: (i) => {
+        const r = rows[i];
+        return {
+          svg: `<rect class="kit-chart-band" x="0" y="${(2 + rowH * i).toFixed(1)}" width="${W}" height="${rowH.toFixed(1)}" rx="4"/>`,
+          tip: `<p class="kit-chart-tip-label">${esc(r.label)}</p><p class="kit-s1"><span></span>${esc(value?.name ?? 'Value')}<b>${esc(fmt(r.v))}</b></p>${r.t != null ? `<p>${esc(target.name)}<b>${esc(fmt(r.t))}</b></p><p>Of target<b>${Math.round((r.v / r.t) * 100)}%</b></p>` : ''}`,
+          x: linear(0, r.top || 1, left, right)(r.v), y: 2 + rowH * i,
+        };
+      },
+      say,
+    };
+    this.#bulletRows = rows;
+    return out.join('');
+  }
+
   #heatmap(m, W, H, fmt) {
     const rows = m.labels;
     const cols = m.series.map((s) => s.name);
@@ -568,6 +655,21 @@ export function summarise(m, type, fmt) {
     const hi = cells.reduce((a, b) => (b[0] > a[0] ? b : a));
     const lo = cells.reduce((a, b) => (b[0] < a[0] ? b : a));
     return `Heatmap of ${m.labels.length} rows by ${m.series.length} columns, values from ${fmt(lo[0])} to ${fmt(hi[0])}. Highest: ${m.labels[hi[1]]}, ${m.series[hi[2]].name} (${fmt(hi[0])}). Lowest: ${m.labels[lo[1]]}, ${m.series[lo[2]].name} (${fmt(lo[0])}).`;
+  }
+  if (type === 'funnel') {
+    const vals = (m.series[0]?.values ?? []).map((v) => v ?? 0);
+    if (!vals.length) return 'Funnel with no stages.';
+    let worst = null;
+    for (let i = 1; i < vals.length; i++) {
+      const lost = vals[i - 1] ? 1 - vals[i] / vals[i - 1] : 0;
+      if (!worst || lost > worst.lost) worst = { i, lost };
+    }
+    const overall = vals[0] ? Math.round((vals.at(-1) / vals[0]) * 1000) / 10 : 0;
+    return `Funnel of ${vals.length} stages, from ${m.labels[0]} (${fmt(vals[0])}) to ${m.labels.at(-1)} (${fmt(vals.at(-1))}): ${overall}% make it through.${worst ? ` The biggest drop is from ${m.labels[worst.i - 1]} to ${m.labels[worst.i]}, losing ${Math.round(worst.lost * 100)}%.` : ''}`;
+  }
+  if (type === 'bullet') {
+    const [v, t] = m.series;
+    return `Bullet chart of ${m.labels.length} measures. ${m.labels.map((l, i) => `${l} ${fmt(v?.values[i] ?? 0)}${t?.values[i] != null ? ` against ${fmt(t.values[i])} (${Math.round(((v?.values[i] ?? 0) / t.values[i]) * 100)}%)` : ''}`).join('; ')}.`;
   }
   if (type === 'histogram') return `Histogram of ${(m.series[0]?.values ?? []).filter((v) => v != null).length} values.`;
   const what = { line: 'Line chart', area: 'Area chart', bar: 'Bar chart' }[type] ?? 'Chart';

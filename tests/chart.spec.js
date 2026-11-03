@@ -101,3 +101,22 @@ test('scatter, histogram and heatmap: drawn, summarised, and explorable by keybo
   await page.keyboard.press('ArrowRight');
   await expect.poll(() => page.evaluate(() => document.querySelector('[data-kit-live="polite"]')?.textContent)).toBe('Two, B: no value');
 });
+
+test('funnel, bullet and small multiples: drawn, summarised, and shared scales', async ({ page }) => {
+  await mount(page, `
+    <kit-chart type="funnel" id="fu"><table><thead><tr><th>Stage</th><th>People</th></tr></thead><tbody><tr><th>Visited</th><td>1000</td></tr><tr><th>Signed up</th><td>200</td></tr><tr><th>Paid</th><td>50</td></tr></tbody></table></kit-chart>
+    <kit-chart type="bullet" id="bu"><table><thead><tr><th>Measure</th><th>Value</th><th>Target</th></tr></thead><tbody><tr><th>Revenue</th><td>270</td><td>250</td></tr></tbody></table></kit-chart>
+    <kit-multiples id="mu"><table><caption>Many</caption><thead><tr><th>M</th><th>A</th><th>B</th></tr></thead><tbody><tr><th>1</th><td>10</td><td>100</td></tr><tr><th>2</th><td>20</td><td>90</td></tr></tbody></table></kit-multiples>`);
+  await page.evaluate(() => import('/components/small-multiples/small-multiples.js'));
+  await expect(page.locator('#fu .kit-chart-plot')).toHaveAccessibleDescription('Funnel of 3 stages, from Visited (1,000) to Paid (50): 5% make it through. The biggest drop is from Visited to Signed up, losing 80%.');
+  await page.locator('#fu .kit-chart-plot').focus();
+  await page.keyboard.press('End');
+  await expect.poll(() => page.evaluate(() => document.querySelector('[data-kit-live="polite"]')?.textContent)).toBe('Paid: 50, 25% of Signed up, 5% of Visited');
+  await expect(page.locator('#bu .kit-chart-plot')).toHaveAccessibleDescription('Bullet chart of 1 measures. Revenue 270 against 250 (108%).');
+  await expect(page.locator('#bu .kit-chart-target')).toHaveCount(1);
+  await expect(page.locator('#mu kit-chart')).toHaveCount(2);
+  const ticks = await page.locator('#mu kit-chart').evaluateAll((cs) => cs.map((c) => [...c.querySelectorAll('.kit-chart-tick')].map((t) => t.textContent).filter((t) => /^\d+$/.test(t)).join(',')));
+  expect(ticks[0]).toBe(ticks[1]); // one shared value axis
+  await expect(page.getByRole('group', { name: 'A', exact: true })).toBeVisible();
+  await expect(page.locator('#mu').getByRole('button', { name: 'Show table' })).toHaveCount(1);
+});
