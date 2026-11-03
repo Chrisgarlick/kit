@@ -1,0 +1,21 @@
+/* SPDX-License-Identifier: MIT
+ * Drawer: a dialog that slides in from the side, for filters, details and
+ * settings. Add kit-drawer to a kit-dialog:
+ *   <dialog class="kit-dialog kit-drawer" [data-side="start"] …>
+ * It sits at the end edge (right in left-to-right pages) unless data-side="start".
+ */
+.kit-dialog.kit-drawer {
+  --_w: 26rem; --_from: 100%;
+  margin: 0 0 0 auto; inline-size: min(100% - 48px, var(--_w)); block-size: 100%; max-block-size: none;
+  border-radius: 0; border-block: 0; border-inline-end: 0; border-start-start-radius: var(--kit-radius-3); border-end-start-radius: var(--kit-radius-3);
+}
+.kit-dialog.kit-drawer:dir(rtl) { margin: 0 auto 0 0; --_from: -100%; }
+.kit-dialog.kit-drawer[data-side="start"] { margin: 0 auto 0 0; --_from: -100%; border-inline-end: 1px solid var(--kit-line); border-inline-start: 0; border-radius: 0; border-start-end-radius: var(--kit-radius-3); border-end-end-radius: var(--kit-radius-3); }
+.kit-dialog.kit-drawer[data-side="start"]:dir(rtl) { margin: 0 0 0 auto; --_from: 100%; }
+.kit-dialog.kit-drawer[data-size="lg"] { --_w: 40rem; }
+.kit-drawer .kit-dialog-footer { border-radius: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .kit-dialog.kit-drawer { opacity: 1; scale: 1; translate: var(--_from) 0; transition: translate 0.24s var(--kit-ease), overlay 0.24s allow-discrete, display 0.24s allow-discrete; }
+  .kit-dialog.kit-drawer[open] { translate: 0 0; }
+  @starting-style { .kit-dialog.kit-drawer[open] { translate: var(--_from) 0; } }
+}

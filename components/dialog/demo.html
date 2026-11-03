@@ -1,0 +1,28 @@
+<div class="kit-cluster">
+  <button class="kit-button" commandfor="demo-dialog" command="show-modal">Open dialog</button>
+  <button class="kit-button" data-variant="danger" commandfor="demo-confirm" command="show-modal">Delete item</button>
+  <button class="kit-button" commandfor="demo-form-dialog" command="show-modal">Dialog with a form</button>
+</div>
+<p class="demo-note" id="dialog-out">Closed with: nothing yet</p>
+
+<dialog class="kit-dialog" id="demo-dialog" aria-labelledby="demo-dialog-title" closedby="any" data-demo-note="dialog-out">
+  <header class="kit-dialog-header"><h2 id="demo-dialog-title">Dialog title</h2><button class="kit-button" data-variant="ghost" data-icon type="button" commandfor="demo-dialog" command="close" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg></button></header>
+  <div class="kit-dialog-body"><p>Supporting text for the dialog. Press Escape, click the backdrop or use a button to close it.</p></div>
+  <footer class="kit-dialog-footer"><button class="kit-button" type="button" commandfor="demo-dialog" command="close" value="cancel">Cancel</button><button class="kit-button" data-variant="primary" type="button" commandfor="demo-dialog" command="close" value="confirm">Confirm</button></footer>
+</dialog>
+
+<dialog class="kit-dialog" id="demo-confirm" data-size="sm" aria-labelledby="demo-confirm-title" aria-describedby="demo-confirm-text" data-demo-note="dialog-out">
+  <header class="kit-dialog-header"><h2 id="demo-confirm-title">Delete this item?</h2></header>
+  <div class="kit-dialog-body"><p id="demo-confirm-text">This can't be undone.</p></div>
+  <footer class="kit-dialog-footer"><button class="kit-button" type="button" commandfor="demo-confirm" command="close" value="cancel" autofocus>Cancel</button><button class="kit-button" data-variant="danger" type="button" commandfor="demo-confirm" command="close" value="delete">Delete</button></footer>
+</dialog>
+
+<dialog class="kit-dialog" id="demo-form-dialog" aria-labelledby="demo-form-title" data-demo-note="dialog-out">
+  <form method="dialog" class="kit-stack" data-gap="0">
+    <header class="kit-dialog-header"><h2 id="demo-form-title">Rename item</h2></header>
+    <div class="kit-dialog-body">
+      <div class="kit-field"><label for="demo-form-name">Name</label><input class="kit-input" id="demo-form-name" name="name" value="Item one" required></div>
+    </div>
+    <footer class="kit-dialog-footer"><button class="kit-button" type="button" commandfor="demo-form-dialog" command="close" value="cancel">Cancel</button><button class="kit-button" data-variant="primary" value="save">Save</button></footer>
+  </form>
+</dialog>

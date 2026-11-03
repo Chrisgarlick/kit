@@ -78,3 +78,8 @@ for (const set of document.querySelectorAll('[data-demo-selectall]')) {
   for (const x of ones) x.addEventListener('change', sync);
   sync();
 }
+// A dialog's returnValue, shown in the note under the demo.
+for (const d of document.querySelectorAll('dialog[data-demo-note]')) {
+  const note = document.getElementById(d.dataset.demoNote);
+  d.addEventListener('close', () => { note.textContent = `Closed with: ${d.returnValue || 'Escape or the backdrop'}`; d.returnValue = ''; });
+}

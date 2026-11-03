@@ -1,0 +1,16 @@
+<div class="kit-cluster">
+  <button class="kit-button" commandfor="demo-drawer" command="show-modal">Open drawer</button>
+  <button class="kit-button" commandfor="demo-drawer-start" command="show-modal">From the start</button>
+</div>
+<dialog class="kit-dialog kit-drawer" id="demo-drawer" aria-labelledby="demo-drawer-title" closedby="any">
+  <header class="kit-dialog-header"><h2 id="demo-drawer-title">Drawer title</h2><button class="kit-button" data-variant="ghost" data-icon type="button" commandfor="demo-drawer" command="close" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg></button></header>
+  <div class="kit-dialog-body kit-stack">
+    <div class="kit-field"><label for="demo-drawer-a">Label</label><select class="kit-select" id="demo-drawer-a"><option>Option one</option><option>Option two</option></select></div>
+    <fieldset class="kit-fieldset"><legend>Group label</legend><label class="kit-choice"><input type="checkbox" class="kit-checkbox" checked> Option one</label><label class="kit-choice"><input type="checkbox" class="kit-checkbox"> Option two</label></fieldset>
+  </div>
+  <footer class="kit-dialog-footer"><button class="kit-button" type="button" commandfor="demo-drawer" command="close">Cancel</button><button class="kit-button" data-variant="primary" type="button" commandfor="demo-drawer" command="close" value="apply">Apply</button></footer>
+</dialog>
+<dialog class="kit-dialog kit-drawer" id="demo-drawer-start" data-side="start" aria-labelledby="demo-drawer-start-title" closedby="any">
+  <header class="kit-dialog-header"><h2 id="demo-drawer-start-title">Drawer title</h2><button class="kit-button" data-variant="ghost" data-icon type="button" commandfor="demo-drawer-start" command="close" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg></button></header>
+  <div class="kit-dialog-body"><p>Supporting text. This drawer opens from the start edge.</p></div>
+</dialog>
