@@ -11,6 +11,7 @@ test.beforeEach(async ({ page }) => {
       <div style="padding:80px">
         <button id="icon" aria-label="Copy" data-tooltip="Copy">C</button>
         <button id="hint" data-tooltip="Sends to everyone">Share</button>
+        <button id="plain">Plain</button>
         <dialog id="d"><button id="in" data-tooltip="Inside">In</button></dialog>
       </div>`;
     await import('/components/tooltip/tooltip.js');
@@ -36,6 +37,7 @@ test('it repeats the name, so it is not a description; extra text is', async ({ 
   await expect(tip(page)).toHaveText('Sends to everyone');
   await expect(page.locator('#hint')).toHaveAccessibleDescription('Sends to everyone');
   await page.keyboard.press('Tab');
+  await expect(page.locator('#plain')).toBeFocused();
   await expect(tip(page)).toBeHidden();
   await expect(page.locator('#hint')).not.toHaveAttribute('aria-describedby', /./);
 });
