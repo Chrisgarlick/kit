@@ -86,10 +86,13 @@ echo "$cur -> $prev"`, *dir))
 	if o, err := remote("mkdir -p " + release); err != nil {
 		return fmt.Errorf("%s: %w", o, err)
 	}
-	// Readable by the web server whatever the local umask was.
-	rs := exec.CommandContext(ctx, "rsync", "-a", "--delete", "--chmod=D755,F644", out+"/", *host+":"+release+"/") //nolint:gosec // checked above
+	// Readable by the web server whatever the local umask was (symbolic, so
+	// the old rsync macOS ships understands it too).
+	rs := exec.CommandContext(ctx, "rsync", "-a", "--delete", "--chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r", out+"/", *host+":"+release+"/") //nolint:gosec // checked above
 	rs.Stdout, rs.Stderr = os.Stdout, os.Stderr
 	if err := rs.Run(); err != nil {
+		// Don't leave a half-copied release behind to be rolled back to.
+		_, _ = remote("rm -rf " + release)
 		return fmt.Errorf("rsync: %w", err)
 	}
 	o, err := remote(fmt.Sprintf(`ln -sfn releases/%[2]s %[1]s/current.next && mv -T %[1]s/current.next %[1]s/current

@@ -9,7 +9,10 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 >
 > - the core runtime (3 November), with `<kit-segmented>` as its first component, and browser tests for both.
 >
-> The site isn't deployed yet. Next: more tier 2 components on the core. Progress is noted under each phase below.
+> - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
+> - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
+>
+> Next: more components. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -207,7 +210,7 @@ The engine and the safety nets every later component inherits.
   - an XSS corpus of 12 hostile values through every kind of binding;
   - `<kit-segmented>`, and every page of the site (axe in light and dark, at 1280 and 390 px, every accent).
 
-  All 30 pass in Chromium. Firefox and WebKit are wired up (`KIT_ALL_BROWSERS=1`) but not installed locally for lack of disk space.
+  All 30 pass in Chromium, Firefox and WebKit (in CI; locally Chromium only, as the Mac's disk is short of space).
 
 **Not started:** benchmarks and the heap check, `kit check` (size budgets, unsafe-sink lint) and the OKLCH token rewrite. The core always includes the renderer, about 2 KB of its size, even for components that don't render templates; that can be made optional.
 
@@ -283,11 +286,16 @@ The site's own scheme and density controls use it. Its screen-reader pass is sti
 - **Tests:** `internal/site` builds a fixture site and the real repo, and checks that broken component folders are all reported.
 - **Checked by hand in a browser:** axe (WCAG 2.2 AA) is clean on every page in light and dark, at 1280 and 390 px, and with every accent. There are no script errors and no sideways scrolling. The check is a Playwright script, not yet in the repo or CI.
 
+- **Hosting (3 November):** [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live, as static files on the chrisgarlick.com server, with no new process.
+  - nginx (`deploy/ui.chrisgarlick.com.conf`) serves `/var/www/ui/current` with `gzip_static`, a year's cache for hashed assets, `no-cache` pages, the strict CSP, HSTS, and a Let's Encrypt certificate.
+  - `kit site deploy` rsyncs into a new release folder and switches `current` in one rename, keeping five releases; `-rollback` goes back one.
+  - The site tests pass against the live site too (`KIT_SITE_URL=https://ui.chrisgarlick.com npx playwright test tests/site.spec.js`).
+- **CI (3 November):** GitHub Actions on every push. It runs Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit. Actions are pinned to commits. All green on the first run.
+
 **Not started:**
 - props controls, code tabs per backend, and sizes and test status on pages;
 - the registry commands;
-- hosting (DNS, the nginx block, `kit site deploy`);
-- CI.
+- Lighthouse CI and the Kritano audit in CI.
 
 ### Phase 5: data analysis (XL)
 

@@ -5,7 +5,8 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const base = 'http://127.0.0.1:8152';
+// KIT_SITE_URL=https://ui.chrisgarlick.com runs the same checks against the live site.
+const base = process.env.KIT_SITE_URL ?? 'http://127.0.0.1:8152';
 
 async function sitePages(request) {
   const xml = await (await request.get(base + '/sitemap.xml')).text();
