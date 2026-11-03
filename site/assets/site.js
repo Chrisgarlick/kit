@@ -98,3 +98,8 @@ for (const c of document.querySelectorAll('kit-combobox[data-demo-note]')) {
   const note = document.getElementById(c.dataset.demoNote);
   c.addEventListener('change', (e) => { note.textContent = `Chosen: ${e.detail.label || 'nothing'}`; });
 }
+// The palette's select event, shown beside the demo's button.
+for (const c of document.querySelectorAll('kit-command[data-demo-note]')) {
+  const note = document.getElementById(c.dataset.demoNote);
+  c.addEventListener('select', (e) => { note.textContent = `Chosen: ${e.detail.item.label}`; });
+}

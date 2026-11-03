@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: MIT
+ * Command palette: the dialog <kit-command> (command-palette.js) builds.
+ * It uses the dialog's styles (dialog.css) with these on top.
+ */
+kit-command > :is(a, button) { display: none; }
+.kit-dialog.kit-command { --_w: 38rem; margin-block-start: min(12vh, 8rem); max-block-size: min(100% - 16vh, 34rem); }
+.kit-command-bar { display: flex; align-items: center; gap: 10px; padding: 4px 14px; border-block-end: 1px solid var(--kit-line); }
+.kit-command-bar > svg { inline-size: 18px; block-size: 18px; flex: none; color: var(--kit-fg-3); }
+.kit-command-input { flex: 1; min-inline-size: 0; block-size: 48px; border: 0; background: none; color: var(--kit-fg); font: 400 var(--kit-text-md)/1 var(--kit-font-ui); }
+.kit-command-input:focus { outline: none; }
+.kit-command-input::placeholder { color: var(--kit-fg-3); }
+.kit-command-list { flex: 1; min-block-size: 0; overflow: auto; padding: 6px; }
+.kit-command-list ul { list-style: none; margin: 0; padding: 0; }
+.kit-command-list ul + ul { margin-block-start: 6px; }
+.kit-command-heading { padding: 8px 10px 4px; color: var(--kit-fg-3); font: 600 var(--kit-text-xs)/1 var(--kit-font-ui); text-transform: uppercase; letter-spacing: 0.06em; }
+.kit-command-list [role="option"] { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 10px; border-radius: var(--kit-radius-1); color: var(--kit-fg); cursor: pointer; font: 500 var(--kit-text-sm)/1.3 var(--kit-font-ui); }
+.kit-command-list [role="option"][aria-selected="true"] { background: var(--kit-accent-soft); color: var(--kit-fg); box-shadow: inset 2px 0 0 var(--kit-accent); }
+.kit-command-empty { margin: 0; padding: 28px 16px; text-align: center; color: var(--kit-fg-3); }
+.kit-command-foot { display: flex; gap: 16px; padding: 8px 14px; border-block-start: 1px solid var(--kit-line); background: var(--kit-surface-2); color: var(--kit-fg-3); font: 400 var(--kit-text-xs)/1 var(--kit-font-ui); border-end-start-radius: inherit; border-end-end-radius: inherit; }
+.kit-command-foot .kit-kbd { margin-inline-end: 3px; }
+@media (max-width: 30rem) { .kit-command-foot { display: none; } .kit-dialog.kit-command { margin-block-start: 8px; } }
+@media (forced-colors: active) { .kit-command-list [role="option"][aria-selected="true"] { outline: 2px solid Highlight; } }
