@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: the combobox, then the command palette, then data display (stat tile, data table) and charts. Progress is noted under each phase below.
+> Next: the command palette, then data display (stat tile, description list, data table) and charts. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -272,6 +272,7 @@ Also done (3 November):
 - **The positioning helper** (`core/position.js`): place and follow, flipping and sliding to stay on screen; one JS path in every browser, since CSS anchor positioning isn't in Firefox or Safari 16.4. `core/layer.js` puts overlays in the top layer where popovers exist and falls back to fixed positioning.
 - **Popover** (native `popover`, filled in for older browsers), **`<kit-menu>`** (APG menu button with typeahead) and **tooltip** (one `data-tooltip` attribute; hoverable, Escape, describedby only when it adds to the name).
 - **Toast**: `toast()`, `kit.toast()`, server flash messages from markup and `data-toast` buttons; announced through the live regions, paused on hover and focus, kept inside open modals. **Switch** (native checkbox, `role="switch"`) and **slider** (native range with a filled track and `<output>` readout).
+- **`<kit-combobox>`** (beta): enhances a `<select>` into an APG combobox with list autocomplete (accent- and case-insensitive, starts-with first, highlighted matches, match count announced). The hidden select keeps the value, so submit, `required` and reset are native.
 
 ### Phase 4: ui.chrisgarlick.com v1 and the registry (M)
 

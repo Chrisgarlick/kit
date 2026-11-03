@@ -93,3 +93,8 @@ for (const b of document.querySelectorAll('[data-toast][data-demo-note]')) {
   const note = document.getElementById(b.dataset.demoNote);
   b.addEventListener('toastaction', () => { note.textContent = 'Undo pressed: yes'; });
 }
+// A combobox's change event, shown in the note under the demo.
+for (const c of document.querySelectorAll('kit-combobox[data-demo-note]')) {
+  const note = document.getElementById(c.dataset.demoNote);
+  c.addEventListener('change', (e) => { note.textContent = `Chosen: ${e.detail.label || 'nothing'}`; });
+}

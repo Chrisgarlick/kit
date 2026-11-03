@@ -1,0 +1,33 @@
+/* SPDX-License-Identifier: MIT
+ * Combobox: the input and list for <kit-combobox> (combobox.js). Before the
+ * script runs, the select inside is styled as a .kit-select.
+ */
+kit-combobox { display: block; position: relative; min-inline-size: 0; }
+.kit-combobox-input { padding-inline-end: 34px; background-repeat: no-repeat; background-size: 16px; background-position: right 10px center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27%23767676%27 stroke-width=%271.75%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m4 6 4 4 4-4%27/%3E%3C/svg%3E"); }
+.kit-combobox-input:dir(rtl) { background-position: left 10px center; padding-inline: 34px 12px; }
+.kit-combobox-popup:not([data-open]) { display: none; }
+.kit-combobox-popup {
+  z-index: 1000; min-inline-size: var(--kit-anchor-width, 12rem); max-inline-size: min(28rem, 100vw - 16px);
+  max-block-size: min(18rem, var(--kit-available-height, 18rem)); overflow: auto; padding: 4px; margin: 0;
+  border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface); color: var(--kit-fg);
+  box-shadow: var(--kit-shadow-3); font: 400 var(--kit-text-sm)/1.3 var(--kit-font-ui);
+}
+.kit-combobox-popup > ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.kit-combobox-popup [role="option"] { position: relative; padding: 7px 10px 7px 30px; border-radius: var(--kit-radius-1); cursor: pointer; }
+.kit-combobox-popup [role="option"][data-active] { background: var(--kit-surface-2); box-shadow: inset 0 0 0 1px var(--kit-line-strong); }
+.kit-combobox-popup [role="option"][aria-selected="true"] { font-weight: 600; }
+.kit-combobox-popup [role="option"][aria-selected="true"]::before {
+  content: ""; position: absolute; inset-inline-start: 9px; inset-block-start: 50%; inline-size: 12px; block-size: 12px; translate: 0 -50%;
+  background: var(--kit-accent);
+  mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272.25%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m3.5 8.5 3 3 6-7%27/%3E%3C/svg%3E") center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272.25%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m3.5 8.5 3 3 6-7%27/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.kit-combobox-popup [role="option"][aria-disabled="true"] { color: var(--kit-fg-3); cursor: not-allowed; }
+.kit-combobox-popup mark { background: none; color: var(--kit-accent); font-weight: 700; }
+.kit-combobox-empty { margin: 0; padding: 8px 10px; color: var(--kit-fg-3); }
+@media (forced-colors: active) {
+  .kit-combobox-popup { border: 1px solid CanvasText; }
+  .kit-combobox-popup [role="option"][data-active] { outline: 2px solid Highlight; }
+  .kit-combobox-popup [role="option"][aria-selected="true"]::before { background: CanvasText; }
+}

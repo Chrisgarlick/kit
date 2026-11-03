@@ -1,0 +1,24 @@
+<div class="demo-form">
+  <div class="kit-field">
+    <label for="cb-a">Label</label>
+    <kit-combobox data-demo-note="cb-out">
+      <select class="kit-select" id="cb-a" name="cb-a" aria-describedby="cb-a-hint">
+        <option value="">Type to filter</option>
+        <option>Option one</option><option>Option two</option><option>Option three</option><option>Option four</option><option>Option five</option>
+        <option>Option six</option><option>Option seven</option><option>Option eight</option><option>Option nine</option><option>Option ten</option>
+        <option>Another option</option><option disabled>Disabled option</option><option>Café option</option><option>Last option</option>
+      </select>
+    </kit-combobox>
+    <p class="kit-field-hint" id="cb-a-hint">Try typing "two" or "cafe".</p>
+  </div>
+  <div class="kit-field">
+    <label for="cb-b">With a value</label>
+    <kit-combobox>
+      <select class="kit-select" id="cb-b" name="cb-b">
+        <option value="">Type to filter</option>
+        <option value="a">Option one</option><option value="b" selected>Option two</option><option value="c">Option three</option>
+      </select>
+    </kit-combobox>
+  </div>
+  <p class="demo-note demo-span" id="cb-out">Chosen: nothing yet</p>
+</div>
