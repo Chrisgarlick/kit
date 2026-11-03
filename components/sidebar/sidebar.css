@@ -1,0 +1,32 @@
+/* SPDX-License-Identifier: MIT
+ * Sidebar (tier 1): a vertical list of links for moving around an app or site.
+ *   <nav class="kit-sidebar" aria-label="…">
+ *     <ul> <li><a href="…" aria-current="page">[svg] Text <span class="kit-sidebar-meta">4</span></a>
+ *              [<ul> nested links </ul>] </li> </ul>
+ *     <p class="kit-sidebar-label">Section</p> <ul> … </ul>
+ *   </nav>
+ * Where it sits (sticky, a drawer on phones) is the page layout's job.
+ */
+.kit-sidebar { font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.kit-sidebar a {
+  display: flex; align-items: center; gap: var(--kit-space-2);
+  min-block-size: calc(var(--kit-control) - 6px); padding: 4px 10px;
+  border-radius: var(--kit-radius-1); color: var(--kit-fg-2); text-decoration: none;
+  transition: background var(--kit-duration) var(--kit-ease), color var(--kit-duration) var(--kit-ease);
+}
+.kit-sidebar a:hover { background: var(--kit-surface-2); color: var(--kit-fg); }
+.kit-sidebar a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: -2px; }
+.kit-sidebar a[aria-current="page"] { background: var(--kit-accent-soft); color: var(--kit-accent); font-weight: 600; }
+.kit-sidebar a > svg { inline-size: 16px; block-size: 16px; flex: none; color: var(--kit-fg-3); }
+.kit-sidebar a:hover > svg, .kit-sidebar a[aria-current="page"] > svg { color: currentColor; }
+.kit-sidebar-meta { margin-inline-start: auto; font: 500 var(--kit-text-xs)/1 var(--kit-font-mono); color: var(--kit-fg-3); }
+.kit-sidebar a[aria-current="page"] .kit-sidebar-meta { color: inherit; }
+.kit-sidebar-meta[data-tone="new"] { padding: 3px 6px; border-radius: var(--kit-radius-pill); background: var(--kit-info-soft); color: var(--kit-info); font-family: var(--kit-font-ui); font-weight: 600; }
+.kit-sidebar ul ul { margin: 2px 0 6px 18px; padding-inline-start: 8px; border-inline-start: 1px solid var(--kit-line); }
+.kit-sidebar ul ul a { min-block-size: calc(var(--kit-control) - 10px); }
+.kit-sidebar-label {
+  margin: var(--kit-space-4) 10px var(--kit-space-1);
+  font: 500 var(--kit-text-xs)/1 var(--kit-font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--kit-fg-3);
+}
+@media (forced-colors: active) { .kit-sidebar a[aria-current="page"] { outline: 2px solid Highlight; } }

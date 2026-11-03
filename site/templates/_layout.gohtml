@@ -39,18 +39,18 @@
   </div>
 </header>
 <div class="shell">
-  <nav class="side" aria-label="Site">
+  <nav class="side kit-sidebar" aria-label="Site">
     <ul>
       <li><a href="/"{{if eq .Path "/"}} aria-current="page"{{end}}>Overview</a></li>
       <li><a href="/foundations/"{{if eq .Path "/foundations/"}} aria-current="page"{{end}}>Foundations</a></li>
     </ul>
-    <p class="side-label">Components</p>
+    <p class="kit-sidebar-label">Components</p>
     <ul>
       {{range .Site.Groups}}{{$g := .}}
       <li>
-        <a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}<span class="count">{{if .Components}}{{len .Components}}{{else}}soon{{end}}</span></a>
+        <a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}<span class="kit-sidebar-meta">{{if .Components}}{{len .Components}}{{else}}soon{{end}}</span></a>
         {{if and .Components $.Group}}{{if eq $.Group.ID .ID}}
-        <ul class="sub">{{range .Components}}<li><a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}</a></li>{{end}}</ul>
+        <ul>{{range .Components}}<li><a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}</a></li>{{end}}</ul>
         {{end}}{{end}}
       </li>
       {{end}}
