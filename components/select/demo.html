@@ -1,20 +1,19 @@
-{{$d := .Data}}
 <div class="demo-form">
   <div class="kit-field">
-    <label for="sel-region">Data region</label>
-    <select class="kit-select" id="sel-region">{{range $d.regions}}<option>{{.}}</option>{{end}}</select>
+    <label for="sel-a">Label</label>
+    <select class="kit-select" id="sel-a"><option>Option one</option><option>Option two</option><option>Option three</option></select>
   </div>
   <div class="kit-field">
-    <label for="sel-plan">Plan</label>
-    <select class="kit-select" id="sel-plan" required aria-describedby="sel-plan-hint"><option value="" disabled selected>Choose a plan</option>{{range $d.plans}}<option>{{.}}</option>{{end}}</select>
-    <p class="kit-field-hint" id="sel-plan-hint">You can change plans at any time.</p>
+    <label for="sel-b">With a placeholder</label>
+    <select class="kit-select" id="sel-b" required aria-describedby="sel-b-hint"><option value="" disabled selected>Choose an option</option><option>Option one</option><option>Option two</option></select>
+    <p class="kit-field-hint" id="sel-b-hint">Hint text below the control.</p>
   </div>
   <div class="kit-field">
-    <label for="sel-owner">Project owner</label>
-    <select class="kit-select" id="sel-owner"><optgroup label="Engineering"><option>{{(index $d.people 1).name}}</option></optgroup><optgroup label="Everyone else">{{range $i, $p := $d.people}}{{if ne $i 1}}<option>{{$p.name}}</option>{{end}}{{end}}</optgroup></select>
+    <label for="sel-c">Grouped</label>
+    <select class="kit-select" id="sel-c"><optgroup label="Group one"><option>Option one</option><option>Option two</option></optgroup><optgroup label="Group two"><option>Option three</option></optgroup></select>
   </div>
   <div class="kit-field">
-    <label for="sel-off">Currency</label>
-    <select class="kit-select" id="sel-off" disabled><option>GBP (£)</option></select>
+    <label for="sel-d">Disabled</label>
+    <select class="kit-select" id="sel-d" disabled><option>Option one</option></select>
   </div>
 </div>

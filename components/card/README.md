@@ -12,8 +12,8 @@ summary: A surface that groups one thing's content, with an optional header and 
 
 ```html
 <article class="kit-card">
-  <header class="kit-card-header"><h3><a class="kit-card-link" href="/invoices/1042">INV-1042</a></h3><span class="kit-badge" data-tone="good">Paid</span></header>
-  <div class="kit-card-body"><p>Northwind Studio · £4,200</p></div>
+  <header class="kit-card-header"><h3><a class="kit-card-link" href="/items/1">Card title</a></h3><span class="kit-badge" data-tone="good">Success</span></header>
+  <div class="kit-card-body"><p>Supporting text for the card.</p></div>
   <footer class="kit-card-footer">…</footer>
 </article>
 ```

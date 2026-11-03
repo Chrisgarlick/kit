@@ -1,10 +1,17 @@
-{{$d := .Data}}
 <div class="demo-cards">
-  {{range $d.invoices}}
   <article class="kit-card">
-    <header class="kit-card-header"><h3><a class="kit-card-link" href="#card">{{.number}}</a></h3><span class="kit-badge" data-tone="{{if eq .status "Paid"}}good{{else if eq .status "Due"}}warn{{else}}bad{{end}}">{{.status}}</span></header>
-    <div class="kit-card-body"><p>{{.customer}}</p></div>
-    <footer class="kit-card-footer"><span class="demo-figure">{{.amount}}</span><button class="kit-button" data-size="sm" data-variant="ghost" type="button" aria-label="Download {{.number}}">Download</button></footer>
+    <header class="kit-card-header"><h3><a class="kit-card-link" href="#card">Card title 1</a></h3><span class="kit-badge" data-tone="good">Success</span></header>
+    <div class="kit-card-body"><p>Supporting text for the card.</p></div>
+    <footer class="kit-card-footer"><span class="demo-figure">0.00</span><button class="kit-button" data-size="sm" data-variant="ghost" type="button" aria-label="Action for card 1">Action</button></footer>
   </article>
-  {{end}}
+  <article class="kit-card">
+    <header class="kit-card-header"><h3><a class="kit-card-link" href="#card">Card title 2</a></h3><span class="kit-badge" data-tone="warn">Warning</span></header>
+    <div class="kit-card-body"><p>Supporting text for the card.</p></div>
+    <footer class="kit-card-footer"><span class="demo-figure">0.00</span><button class="kit-button" data-size="sm" data-variant="ghost" type="button" aria-label="Action for card 2">Action</button></footer>
+  </article>
+  <article class="kit-card">
+    <header class="kit-card-header"><h3><a class="kit-card-link" href="#card">Card title 3</a></h3><span class="kit-badge" data-tone="bad">Error</span></header>
+    <div class="kit-card-body"><p>Supporting text for the card.</p></div>
+    <footer class="kit-card-footer"><span class="demo-figure">0.00</span><button class="kit-button" data-size="sm" data-variant="ghost" type="button" aria-label="Action for card 3">Action</button></footer>
+  </article>
 </div>

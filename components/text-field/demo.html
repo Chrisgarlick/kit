@@ -1,34 +1,40 @@
-{{$d := .Data}}
 <form class="demo-form" action="#" novalidate>
   <div class="kit-field">
-    <label for="tf-company">Company name</label>
-    <input class="kit-input" id="tf-company" value="{{$d.company.name}}" autocomplete="organization">
+    <label for="tf-a">Label</label>
+    <input class="kit-input" id="tf-a" value="Text value">
   </div>
   <div class="kit-field">
-    <label for="tf-email">Billing email</label>
-    <input class="kit-input" id="tf-email" type="email" value="accounts@lumen" aria-invalid="true" aria-describedby="tf-email-error">
-    <p class="kit-field-error" id="tf-email-error">Enter a full email address, like accounts@lumen.example.</p>
+    <label for="tf-b">Placeholder</label>
+    <input class="kit-input" id="tf-b" placeholder="Placeholder text">
   </div>
   <div class="kit-field">
-    <label for="tf-amount">Amount</label>
-    <div class="kit-input-group"><span class="kit-input-affix" aria-hidden="true">£</span><input class="kit-input" id="tf-amount" inputmode="decimal" data-numeric value="4,200.00" aria-describedby="tf-amount-hint"></div>
-    <p class="kit-field-hint" id="tf-amount-hint">In pounds, before VAT.</p>
+    <label for="tf-c">With an error</label>
+    <input class="kit-input" id="tf-c" type="email" value="name@" aria-invalid="true" aria-describedby="tf-c-error">
+    <p class="kit-field-error" id="tf-c-error">Error message saying how to fix it.</p>
   </div>
   <div class="kit-field">
-    <label for="tf-domain">Workspace address</label>
-    <div class="kit-input-group"><input class="kit-input" id="tf-domain" value="lumen" autocomplete="off" aria-describedby="tf-domain-hint"><span class="kit-input-affix">.example.app</span></div>
-    <p class="kit-field-hint" id="tf-domain-hint">Letters, numbers and dashes.</p>
+    <label for="tf-d">With a hint</label>
+    <input class="kit-input" id="tf-d" value="Text value" aria-describedby="tf-d-hint">
+    <p class="kit-field-hint" id="tf-d-hint">Hint text below the control.</p>
+  </div>
+  <div class="kit-field">
+    <label for="tf-e">Prefix</label>
+    <div class="kit-input-group"><span class="kit-input-affix" aria-hidden="true">£</span><input class="kit-input" id="tf-e" inputmode="decimal" data-numeric value="0.00"></div>
+  </div>
+  <div class="kit-field">
+    <label for="tf-f">Suffix</label>
+    <div class="kit-input-group"><input class="kit-input" id="tf-f" value="name" autocomplete="off"><span class="kit-input-affix">.example.com</span></div>
   </div>
   <div class="kit-field demo-span">
-    <label for="tf-notes">Notes <span class="kit-field-optional">(optional)</span></label>
-    <textarea class="kit-input" id="tf-notes" rows="3">Net 30. Quote PO-2291 on the remittance.</textarea>
+    <label for="tf-g">Textarea <span class="kit-field-optional">(optional)</span></label>
+    <textarea class="kit-input" id="tf-g" rows="3">Longer text value.</textarea>
   </div>
   <div class="kit-field">
-    <label for="tf-id">Account ID</label>
-    <input class="kit-input" id="tf-id" value="acct_9f31c2" readonly data-numeric>
+    <label for="tf-h">Read-only</label>
+    <input class="kit-input" id="tf-h" value="abc_123" readonly data-numeric>
   </div>
   <div class="kit-field">
-    <label for="tf-off">Region</label>
-    <input class="kit-input" id="tf-off" value="{{index $d.regions 0}}" disabled>
+    <label for="tf-i">Disabled</label>
+    <input class="kit-input" id="tf-i" value="Text value" disabled>
   </div>
 </form>

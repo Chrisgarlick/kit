@@ -24,7 +24,7 @@ func fixture(t *testing.T, components map[string]map[string]string) string {
 		}
 	}
 	write("site/groups.yaml", "- id: actions\n  title: Actions\n  summary: Things to press.\n  planned: [Button, Split button]\n- id: inputs\n  title: Inputs\n  summary: Things to fill in.\n")
-	write("site/data/demo.yaml", "company: { name: Lumen }\n")
+	write("site/data/demo.yaml", "company: { name: Example }\n")
 	write("tokens/tokens.css", ":root {\n  --kit-accent: #0f766e;\n  --kit-radius-1: 6px;\n  --kit-text-sm: 0.8rem;\n}\n")
 	write("tokens/fonts.css", "/* none */\n")
 	real := filepath.Join("..", "..")
@@ -84,7 +84,7 @@ func TestBuildAssemblesGroupPagesFromFolders(t *testing.T) {
 	group := read("actions/index.html")
 	for _, s := range []string{
 		`<a href="/actions/button/">Button</a>`, // the card links to the component page
-		"Save Lumen",                            // the demo ran against the placeholder data
+		"Save Example",                          // the demo ran against the data in site/data
 		"Split button",                          // still planned
 	} {
 		if !strings.Contains(group, s) {

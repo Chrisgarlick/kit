@@ -80,7 +80,7 @@ test('the scheme control is a kit-segmented, and the choice survives a reload', 
 test('the segmented control demo reports its change event', async ({ page }) => {
   await page.goto(base + '/actions/segmented-control/');
   const demo = page.locator('.demo-large');
-  await demo.getByRole('radio', { name: '7 days' }).focus();
+  await demo.getByRole('radio', { name: 'Two' }).focus();
   await page.keyboard.press('ArrowRight');
-  await expect(demo.locator('#seg-out')).toHaveText("Showing Lumen's numbers for the last 30 days.");
+  await expect(demo.locator('#seg-out')).toHaveText('Selected: Three');
 });

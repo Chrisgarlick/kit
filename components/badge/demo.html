@@ -1,5 +1,4 @@
-{{$d := .Data}}
 <div class="demo-stack">
-  <div class="demo-row">{{range $d.invoices}}<span class="kit-badge" data-tone="{{if eq .status "Paid"}}good{{else if eq .status "Due"}}warn{{else}}bad{{end}}"><span class="kit-dot"></span>{{.status}}</span>{{end}}<span class="kit-badge" data-tone="info"><span class="kit-dot"></span>Sent</span></div>
-  <div class="demo-row"><span class="kit-badge">Draft</span><span class="kit-badge" data-tone="accent">New</span><span class="kit-badge" data-variant="outline">v2.4.1</span><span class="kit-badge" data-numeric>{{len $d.invoices}} invoices</span>{{range $d.plans}}<span class="kit-badge" data-variant="outline">{{.}}</span>{{end}}</div>
+  <div class="demo-row"><span class="kit-badge" data-tone="good"><span class="kit-dot"></span>Success</span><span class="kit-badge" data-tone="warn"><span class="kit-dot"></span>Warning</span><span class="kit-badge" data-tone="bad"><span class="kit-dot"></span>Error</span><span class="kit-badge" data-tone="info"><span class="kit-dot"></span>Info</span></div>
+  <div class="demo-row"><span class="kit-badge">Neutral</span><span class="kit-badge" data-tone="accent">Accent</span><span class="kit-badge" data-variant="outline">Outline</span><span class="kit-badge" data-numeric>128</span></div>
 </div>

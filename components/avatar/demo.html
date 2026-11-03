@@ -1,9 +1,8 @@
-{{$d := .Data}}
 <div class="demo-stack">
-  <div class="demo-row">{{range $i, $p := $d.people}}<span class="kit-avatar" data-tone="{{inc $i}}" role="img" aria-label="{{$p.name}}">{{$p.initials}}</span>{{end}}</div>
-  <div class="demo-row"><span class="kit-avatar" data-size="sm" data-tone="2" role="img" aria-label="Sam Okafor">SO</span><span class="kit-avatar" data-tone="2" role="img" aria-label="Sam Okafor">SO</span><span class="kit-avatar" data-size="lg" data-tone="2" role="img" aria-label="Sam Okafor">SO</span></div>
+  <div class="demo-row"><span class="kit-avatar" data-tone="1" role="img" aria-label="Person A">AB</span><span class="kit-avatar" data-tone="2" role="img" aria-label="Person B">CD</span><span class="kit-avatar" data-tone="3" role="img" aria-label="Person C">EF</span><span class="kit-avatar" data-tone="4" role="img" aria-label="Person D">GH</span><span class="kit-avatar" data-tone="5" role="img" aria-label="Person E">IJ</span></div>
+  <div class="demo-row"><span class="kit-avatar" data-size="sm" data-tone="2" role="img" aria-label="Small">SM</span><span class="kit-avatar" data-tone="2" role="img" aria-label="Medium">MD</span><span class="kit-avatar" data-size="lg" data-tone="2" role="img" aria-label="Large">LG</span></div>
   <div class="demo-row">
-    <span class="kit-avatar-group" role="img" aria-label="{{(index $d.people 0).name}}, {{(index $d.people 1).name}}, {{(index $d.people 2).name}} and 2 others">{{range $i, $p := $d.people}}{{if lt $i 3}}<span class="kit-avatar" data-tone="{{inc $i}}" aria-hidden="true">{{$p.initials}}</span>{{end}}{{end}}<span class="kit-avatar" data-more aria-hidden="true">+2</span></span>
-    <span class="demo-note">{{len $d.people}} people in {{$d.company.name}}</span>
+    <span class="kit-avatar-group" role="img" aria-label="Person A, Person B, Person C and 2 others"><span class="kit-avatar" data-tone="1" aria-hidden="true">AB</span><span class="kit-avatar" data-tone="2" aria-hidden="true">CD</span><span class="kit-avatar" data-tone="3" aria-hidden="true">EF</span><span class="kit-avatar" data-more aria-hidden="true">+2</span></span>
+    <span class="demo-note">A group of five</span>
   </div>
 </div>

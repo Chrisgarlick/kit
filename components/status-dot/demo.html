@@ -1,6 +1,7 @@
-{{$d := .Data}}
 <div class="demo-stack">
-  {{range $d.projects}}<span class="kit-status" data-tone="{{if eq .status "Active"}}good{{else if eq .status "Paused"}}warn{{else}}neutral{{end}}">{{.name}}: {{.status}}</span>{{end}}
-  <span class="kit-status" data-tone="info" data-live>Syncing with {{(index $d.invoices 1).customer}}</span>
-  <span class="kit-status" data-tone="bad">Payments: outage</span>
+  <span class="kit-status" data-tone="good">Online</span>
+  <span class="kit-status" data-tone="warn">Away</span>
+  <span class="kit-status" data-tone="bad">Offline</span>
+  <span class="kit-status">Inactive</span>
+  <span class="kit-status" data-tone="info" data-live>In progress</span>
 </div>

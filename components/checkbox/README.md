@@ -14,7 +14,7 @@ summary: A native checkbox, restyled, with its label, an optional hint and a mix
 <label class="kit-choice">
   <input type="checkbox" class="kit-checkbox" name="receipts" checked>
   Email me receipts
-  <span class="kit-choice-hint">Sent to accounts@lumen.example</span>
+  <span class="kit-choice-hint">Optional hint text</span>
 </label>
 ```
 

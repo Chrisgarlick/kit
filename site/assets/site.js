@@ -46,7 +46,7 @@ for (const b of accents) {
 for (const control of document.querySelectorAll('kit-segmented[data-demo-note]')) {
   const note = document.getElementById(control.dataset.demoNote);
   control.addEventListener('change', (e) => {
-    note.textContent = note.textContent.replace(/last .*\.$/, `last ${e.detail.value.toLowerCase()}.`);
+    note.textContent = `Selected: ${e.detail.value}`;
   });
 }
 // Toggle buttons in a button group (tier 1 has no behaviour of its own).

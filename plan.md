@@ -143,7 +143,7 @@ One page per component group, so each page keeps growing as components are added
 
 **How pages grow.** Each component is a folder (`components/<name>/`) holding its code, a `README.md` and a `demo.html`, and its `README` front matter names its group (`group: actions`). `kit site build` assembles every group page from those folders: adding a component means adding a folder, and it appears on its group page, in the sidebar and in search, with no page to edit. Each component also gets its own deep page (`/actions/button`): the live demo, props controls, code tabs per backend, the accessibility contract, the keyboard table and the extension points.
 
-**Placeholder data, not Kritano's.** Demos use one neutral, invented world, so the library reads as general-purpose: a fictional company ("Lumen"), generic people, projects, orders, revenue and sessions, and plain example domains (`example.com`). It lives in one shared `site/data/` file, so every demo tells the same consistent story and real products never appear. Kritano, chrisgarlick.com and other apps show their own data when they adopt kit.
+**Placeholder data, not Kritano's.** Demos use one neutral, invented world, so the library reads as general-purpose: literal placeholder text ("Title", "Option one", "Supporting text"), with no invented company, people or records, and only `example.com` domains, so real products never appear and nothing reads as a real customer. Kritano, chrisgarlick.com and other apps show their own data when they adopt kit.
 
 ---
 
@@ -239,7 +239,7 @@ The look, before the behaviour.
   - **Inputs** (3 November): `text-field` (hint, error, prefix and suffix groups, textarea, read-only), `select` (native), `checkbox` (with the mixed state), `radio-group` (list, row and tiles).
 
   All CSS is 5.6 KB gzipped, fonts' `@font-face` rules and tokens included.
-- **Placeholder data:** the "Lumen" world in `site/data/lumen.yaml`, read by every demo.
+- **Placeholder content:** literal placeholder text in every demo (no invented company or records). Demos can still read `site/data/*.yaml` as `.Data`, for charts later.
 
 **Not started:** the theming recipe and its example, the rest of tier 1 (type and layout primitives, tables, description list, code block, print), the icon sprite and the visual-regression baseline.
 

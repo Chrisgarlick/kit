@@ -48,7 +48,7 @@ summary: One line that says what it's for.
 ---
 ```
 
-Add its CSS and a `demo.html` (a Go template; the placeholder data is `.Data`, from `site/data/`). It appears on its group page, in the navigation and in the sitemap on the next build. `make serve` rebuilds as you edit.
+Add its CSS and a `demo.html` (a Go template, with literal placeholder text; `.Data` holds anything in `site/data/*.yaml`). It appears on its group page, in the navigation and in the sitemap on the next build. `make serve` rebuilds as you edit.
 
 ## Developing
 

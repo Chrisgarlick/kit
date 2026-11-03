@@ -1,7 +1,6 @@
-{{$d := .Data}}
 <div class="demo-stack">
-  <kit-segmented aria-label="Date range" name="range" value="{{index $d.ranges 1}}" data-demo-note="seg-out">
-    {{$current := index $d.ranges 1}}{{range $d.ranges}}<button value="{{.}}" aria-checked="{{if eq . $current}}true{{else}}false{{end}}">{{.}}</button>{{end}}
+  <kit-segmented aria-label="Example" name="example" value="Two" data-demo-note="seg-out">
+    <button value="One" aria-checked="false">One</button><button value="Two" aria-checked="true">Two</button><button value="Three" aria-checked="false">Three</button><button value="Four" aria-checked="false">Four</button>
   </kit-segmented>
-  <p class="demo-note" id="seg-out">Showing {{$d.company.name}}'s numbers for the last {{index $d.ranges 1}}.</p>
+  <p class="demo-note" id="seg-out">Selected: Two</p>
 </div>

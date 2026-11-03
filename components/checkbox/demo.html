@@ -1,10 +1,9 @@
-{{$d := .Data}}
 <div class="demo-stack">
-  <label class="kit-choice"><input type="checkbox" class="kit-checkbox" checked> Email me receipts<span class="kit-choice-hint">Sent to accounts@lumen.example</span></label>
-  <label class="kit-choice"><input type="checkbox" class="kit-checkbox"> Weekly summary</label>
-  <label class="kit-choice"><input type="checkbox" class="kit-checkbox" checked disabled> Security alerts<span class="kit-choice-hint">Always on for owners</span></label>
+  <label class="kit-choice"><input type="checkbox" class="kit-checkbox" checked> Checked<span class="kit-choice-hint">Optional hint text</span></label>
+  <label class="kit-choice"><input type="checkbox" class="kit-checkbox"> Unchecked</label>
+  <label class="kit-choice"><input type="checkbox" class="kit-checkbox" checked disabled> Disabled<span class="kit-choice-hint">Optional hint text</span></label>
   <fieldset class="kit-fieldset" data-demo-selectall>
-    <legend><label class="kit-choice"><input type="checkbox" class="kit-checkbox" data-all> Export all invoices</label></legend>
-    <div class="demo-stack demo-indent">{{range $i, $v := $d.invoices}}<label class="kit-choice"><input type="checkbox" class="kit-checkbox" data-one {{if lt $i 2}}checked{{end}}> {{$v.number}} · {{$v.customer}}</label>{{end}}</div>
+    <legend><label class="kit-choice"><input type="checkbox" class="kit-checkbox" data-all> Select all</label></legend>
+    <div class="demo-stack demo-indent"><label class="kit-choice"><input type="checkbox" class="kit-checkbox" data-one checked> Option one</label><label class="kit-choice"><input type="checkbox" class="kit-checkbox" data-one checked> Option two</label><label class="kit-choice"><input type="checkbox" class="kit-checkbox" data-one> Option three</label></div>
   </fieldset>
 </div>
