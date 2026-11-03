@@ -141,8 +141,12 @@ func Load(root string) (*Site, error) {
 		if err != nil {
 			return nil, err
 		}
-		if err := yaml.Unmarshal(b, t); err != nil || t.Title == "" || !slugRe.MatchString(t.ID) {
-			errs = append(errs, fmt.Errorf("%s: needs a title, in a lower-case folder (%v)", rel(root, f), err))
+		if err := yaml.Unmarshal(b, t); err != nil {
+			errs = append(errs, fmt.Errorf("%s: %w", rel(root, f), err))
+			continue
+		}
+		if t.Title == "" || !slugRe.MatchString(t.ID) {
+			errs = append(errs, fmt.Errorf("%s: needs a title, in a lower-case folder", rel(root, f)))
 			continue
 		}
 		if _, err := os.Stat(filepath.Join(dir, "theme.css")); err != nil {
