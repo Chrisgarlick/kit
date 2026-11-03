@@ -1,0 +1,74 @@
+{{define "layout"}}<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{if eq .Path "/"}}kit · components for any backend{{else}}{{.Title}} · kit{{end}}</title>
+<meta name="description" content="{{.Description}}">
+<link rel="canonical" href="{{.BaseURL}}{{.Path}}">
+<script src="{{.Asset "prefs.js"}}"></script>
+<link rel="stylesheet" href="{{.Asset "kit.css"}}">
+<link rel="stylesheet" href="{{.Asset "site.css"}}">
+{{if eq .Path "/foundations/"}}<link rel="stylesheet" href="{{.Asset "foundations.css"}}">{{end}}
+<script type="module" src="{{.Asset "site.js"}}"></script>
+{{if .Dev}}<script type="module" src="{{.Asset "reload.js"}}"></script>{{end}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="/" aria-label="kit home">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="12" height="5" rx="1.2"/></svg></span>
+    <span class="wordmark">kit</span>
+  </a>
+  <div class="prefs">
+    <div class="kit-segmented" role="radiogroup" aria-label="Colour scheme" data-pref="theme">
+      <button type="button" role="radio" aria-checked="true" data-value="system">System</button>
+      <button type="button" role="radio" aria-checked="false" data-value="light">Light</button>
+      <button type="button" role="radio" aria-checked="false" data-value="dark">Dark</button>
+    </div>
+    <div class="kit-segmented" role="radiogroup" aria-label="Density" data-pref="density">
+      <button type="button" role="radio" aria-checked="true" data-value="comfortable">Comfortable</button>
+      <button type="button" role="radio" aria-checked="false" data-value="compact">Compact</button>
+    </div>
+    <div class="accents" role="group" aria-label="Accent colour">
+      <button type="button" class="acc acc-spruce" data-accent="spruce" aria-pressed="true" aria-label="Spruce"></button>
+      <button type="button" class="acc acc-indigo" data-accent="indigo" aria-pressed="false" aria-label="Indigo"></button>
+      <button type="button" class="acc acc-amber" data-accent="amber" aria-pressed="false" aria-label="Amber"></button>
+      <button type="button" class="acc acc-rose" data-accent="rose" aria-pressed="false" aria-label="Rose"></button>
+    </div>
+  </div>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Site">
+    <ul>
+      <li><a href="/"{{if eq .Path "/"}} aria-current="page"{{end}}>Overview</a></li>
+      <li><a href="/foundations/"{{if eq .Path "/foundations/"}} aria-current="page"{{end}}>Foundations</a></li>
+    </ul>
+    <p class="side-label">Components</p>
+    <ul>
+      {{range .Site.Groups}}{{$g := .}}
+      <li>
+        <a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}<span class="count">{{if .Components}}{{len .Components}}{{else}}soon{{end}}</span></a>
+        {{if and .Components $.Group}}{{if eq $.Group.ID .ID}}
+        <ul class="sub">{{range .Components}}<li><a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}</a></li>{{end}}</ul>
+        {{end}}{{end}}
+      </li>
+      {{end}}
+    </ul>
+  </nav>
+  <main id="main" tabindex="-1">
+    {{template "content" .}}
+  </main>
+</div>
+<footer class="foot">
+  <p>kit is open source under the MIT licence. Example data belongs to Lumen, a company that doesn't exist.</p>
+  <p><a href="https://github.com/Chrisgarlick/kit">GitHub</a></p>
+</footer>
+</body>
+</html>{{end}}
+
+{{define "tags"}}
+<span class="tag{{if eq .Tier 2}} tag-accent{{end}}">{{if eq .Tier 1}}Tier 1 · CSS only{{else}}Tier 2 · behaviour{{end}}</span>
+{{with .Pattern}}<span class="tag">{{.}}</span>{{end}}
+<span class="tag tag-{{.Status}}">{{.Status}}</span>
+{{end}}

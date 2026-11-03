@@ -1,0 +1,11 @@
+/* SPDX-License-Identifier: MIT
+ * Button group (tier 1): related buttons joined into one control.
+ * <div class="kit-button-group" role="group" aria-label="…"> with kit-buttons inside.
+ */
+.kit-button-group { display: inline-flex; isolation: isolate; }
+.kit-button-group > .kit-button { border-radius: 0; box-shadow: none; }
+.kit-button-group > .kit-button + .kit-button { margin-inline-start: -1px; }
+.kit-button-group > .kit-button:first-child { border-start-start-radius: var(--kit-radius-2); border-end-start-radius: var(--kit-radius-2); }
+.kit-button-group > .kit-button:last-child { border-start-end-radius: var(--kit-radius-2); border-end-end-radius: var(--kit-radius-2); }
+.kit-button-group > .kit-button:hover, .kit-button-group > .kit-button:focus-visible { z-index: 1; }
+.kit-button-group > .kit-button[aria-pressed="true"] { background: var(--kit-surface-3); }

@@ -1,0 +1,50 @@
+/* SPDX-License-Identifier: MIT
+ * Button (tier 1). A native <button> or <a> with class="kit-button":
+ *   data-variant  primary | secondary (default) | ghost | danger
+ *   data-size     sm | md (default) | lg
+ *   data-icon     square, icon-only (give it an aria-label)
+ *   aria-busy="true" shows a spinner and keeps the button focusable
+ */
+.kit-button {
+  --_h: var(--kit-control);
+  --_bg: var(--kit-surface);
+  --_fg: var(--kit-fg);
+  --_border: var(--kit-line-strong);
+  --_hover: var(--kit-surface-2);
+  --_shadow: var(--kit-shadow-1);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--kit-space-2);
+  min-block-size: var(--_h); padding-inline: calc(var(--_h) * 0.4);
+  border: 1px solid var(--_border); border-radius: var(--kit-radius-2);
+  background: var(--_bg); color: var(--_fg); box-shadow: var(--_shadow);
+  font: 600 var(--kit-text-md)/1.2 var(--kit-font-ui); text-decoration: none; white-space: nowrap;
+  cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+  transition: background var(--kit-duration) var(--kit-ease), border-color var(--kit-duration) var(--kit-ease), transform 80ms;
+}
+.kit-button:hover { background: var(--_hover); }
+.kit-button:active { transform: translateY(1px); }
+.kit-button:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-button svg { inline-size: 1em; block-size: 1em; flex: none; }
+
+.kit-button[data-variant="primary"] {
+  --_bg: var(--kit-accent); --_fg: var(--kit-accent-fg); --_border: transparent; --_hover: var(--kit-accent-hover);
+  --_shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 1px 2px rgb(0 0 0 / 0.18);
+}
+.kit-button[data-variant="ghost"] { --_bg: transparent; --_fg: var(--kit-fg-2); --_border: transparent; --_shadow: none; }
+.kit-button[data-variant="ghost"]:hover { color: var(--kit-fg); }
+.kit-button[data-variant="danger"] { --_bg: var(--kit-bad); --_fg: var(--kit-bad-fg); --_border: transparent; --_hover: var(--kit-bad); --_shadow: none; }
+.kit-button[data-variant="danger"]:hover { filter: brightness(1.07); }
+
+.kit-button[data-size="sm"] { --_h: var(--kit-control-sm); font-size: var(--kit-text-sm); border-radius: var(--kit-radius-1); }
+.kit-button[data-size="lg"] { --_h: var(--kit-control-lg); font-size: var(--kit-text-lg); }
+.kit-button[data-icon] { inline-size: var(--_h); padding-inline: 0; }
+
+.kit-button:disabled, .kit-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; transform: none; }
+.kit-button[aria-busy="true"] { cursor: progress; }
+.kit-button[aria-busy="true"]::before {
+  content: ""; inline-size: 1em; block-size: 1em; border-radius: 50%; flex: none;
+  border: 2px solid currentColor; border-inline-end-color: transparent;
+  animation: kit-spin 700ms linear infinite;
+}
+@keyframes kit-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .kit-button[aria-busy="true"]::before { animation-duration: 2s; } }
+@media (forced-colors: active) { .kit-button { border-color: ButtonText; } }

@@ -1,0 +1,14 @@
+{{$d := .Data}}
+<div class="demo-row">
+  <button class="kit-button" data-variant="primary" type="button" data-demo-busy>{{$d.actions.primary}}</button>
+  <button class="kit-button" type="button">{{$d.actions.secondary}}</button>
+  <button class="kit-button" data-variant="ghost" type="button">{{$d.actions.cancel}}</button>
+  <button class="kit-button" data-variant="danger" type="button">{{$d.actions.destructive}}</button>
+</div>
+<div class="demo-row">
+  <button class="kit-button" data-variant="primary" data-size="sm" type="button">Small</button>
+  <button class="kit-button" data-variant="primary" type="button">Medium</button>
+  <button class="kit-button" data-variant="primary" data-size="lg" type="button">Large</button>
+  <button class="kit-button" data-icon type="button" aria-label="Copy link"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M3 11V4a1 1 0 0 1 1-1h7"/></svg></button>
+  <button class="kit-button" type="button" disabled>Disabled</button>
+</div>

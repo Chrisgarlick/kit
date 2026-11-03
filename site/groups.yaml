@@ -1,0 +1,31 @@
+# The component groups, in nav order. Each becomes a page (/<id>) built from
+# every components/*/README.md whose front matter says `group: <id>`.
+# `planned` lists what's coming, shown on the page until it ships.
+- id: actions
+  title: Actions
+  summary: What people press. One primary action per view; everything else steps down.
+  planned: [Split button, Toggle button, Copy button, Floating action]
+- id: inputs
+  title: Inputs
+  summary: Form controls with visible labels, hints and errors wired up for screen readers. All of them submit with a normal form.
+  planned: [Text field, Textarea, Select, Combobox, Checkbox, Radio group, Switch, Slider, Number stepper, Tag input, File drop, Date picker, Colour picker]
+- id: feedback
+  title: Feedback
+  summary: Telling people what happened without stealing their focus. Colour always comes with an icon or words.
+  planned: [Alert, Toast, Progress bar, Progress ring, Skeleton, Spinner, Empty state, Banner]
+- id: overlays
+  title: Overlays
+  summary: Layers above the page, on the native dialog and popover, so Escape, focus return and an inert background come for free.
+  planned: [Dialog, Drawer, Menu, Popover, Tooltip, Command palette, Context menu]
+- id: navigation
+  title: Navigation
+  summary: Where am I, and how do I get to the next thing.
+  planned: [Tabs, Breadcrumbs, Pagination, Steps, Accordion, Sidebar, Top bar, Link]
+- id: data-display
+  title: Data display
+  summary: Dense information that stays calm, with tabular figures, quiet borders and state shown in shape as well as colour.
+  planned: [Stat tile, Data table, Data grid, Badge, Status dot, Avatar, Timeline, Description list, Code block, Kbd, Card]
+- id: charts
+  title: Charts
+  summary: Small, fast SVG charts on one shared scale system. Every chart has a text summary and can show its data as a table.
+  planned: [Line, Area, Bar, Stacked bar, Donut, Heatmap, Scatter, Histogram, Sparkline]

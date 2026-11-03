@@ -1,0 +1,18 @@
+{{define "content"}}
+{{$c := .Component}}
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{{.Group.URL}}">{{.Group.Title}}</a></li><li><span aria-current="page">{{$c.Title}}</span></li></ol></nav>
+<header class="page-head">
+  <h1>{{$c.Title}}</h1>
+  <p class="lede">{{$c.Summary}}</p>
+  <div class="tags">{{template "tags" $c}}</div>
+</header>
+<section class="demo-panel" aria-labelledby="demo-h">
+  <h2 id="demo-h" class="vh">Example</h2>
+  <div class="demo demo-large">{{$c.Demo}}</div>
+  <details class="code-panel">
+    <summary>Show the markup</summary>
+    <pre><code>{{printf "%s" $c.Demo}}</code></pre>
+  </details>
+</section>
+<article class="prose">{{$c.Body}}</article>
+{{end}}

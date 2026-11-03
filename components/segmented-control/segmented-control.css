@@ -1,0 +1,24 @@
+/* SPDX-License-Identifier: MIT
+ * Segmented control: one choice from a small set.
+ * <div class="kit-segmented" role="radiogroup" aria-label="…"> with
+ * <button role="radio" aria-checked="true|false"> options.
+ * Tier 1 is the styling; the arrow-key behaviour arrives with <kit-segmented>
+ * (the site wires it up in the meantime).
+ */
+.kit-segmented {
+  display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--kit-radius-2);
+  background: var(--kit-surface-2); border: 1px solid var(--kit-line);
+}
+.kit-segmented > [role="radio"] {
+  min-block-size: calc(var(--kit-control) - 8px); padding-inline: var(--kit-space-3);
+  border: 0; border-radius: 7px; background: transparent; color: var(--kit-fg-2);
+  font: 500 var(--kit-text-sm)/1 var(--kit-font-ui); cursor: pointer; white-space: nowrap;
+  transition: background var(--kit-duration) var(--kit-ease), color var(--kit-duration) var(--kit-ease);
+}
+.kit-segmented > [role="radio"]:hover { color: var(--kit-fg); }
+.kit-segmented > [role="radio"][aria-checked="true"] {
+  background: var(--kit-surface); color: var(--kit-fg); font-weight: 600;
+  box-shadow: var(--kit-shadow-1), 0 0 0 1px var(--kit-line);
+}
+.kit-segmented > [role="radio"]:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
+@media (forced-colors: active) { .kit-segmented > [role="radio"][aria-checked="true"] { outline: 2px solid Highlight; } }

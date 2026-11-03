@@ -1,0 +1,7 @@
+{{$d := .Data}}
+<div class="demo-stack">
+  <div class="kit-segmented" role="radiogroup" aria-label="Date range" data-demo-radiogroup data-demo-output="seg-out">
+    {{range $i, $r := $d.ranges}}<button type="button" role="radio" aria-checked="{{if eq $i 1}}true{{else}}false{{end}}">{{$r}}</button>{{end}}
+  </div>
+  <p class="demo-note" id="seg-out">Showing {{$d.company.name}}'s numbers for the last 7 days.</p>
+</div>

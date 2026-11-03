@@ -1,0 +1,30 @@
+{{define "content"}}
+<header class="page-head">
+  <p class="eyebrow">Components</p>
+  <h1>{{.Group.Title}}</h1>
+  <p class="lede">{{.Group.Summary}}</p>
+</header>
+{{if .Group.Components}}
+<div class="cards">
+  {{range .Group.Components}}
+  <article class="card" aria-labelledby="c-{{.Slug}}">
+    <div class="card-head">
+      <h2 id="c-{{.Slug}}"><a href="{{.URL}}">{{.Title}}</a></h2>
+      <a class="card-more" href="{{.URL}}" aria-label="{{.Title}}: details and code">Details</a>
+    </div>
+    <p class="card-summary">{{.Summary}}</p>
+    <div class="demo">{{.Demo}}</div>
+    <div class="card-foot">{{template "tags" .}}</div>
+  </article>
+  {{end}}
+</div>
+{{else}}
+<p class="empty-note">Nothing here yet.</p>
+{{end}}
+{{with .Group.Upcoming}}
+<section class="planned" aria-labelledby="planned-h">
+  <h2 id="planned-h" class="section-title">Planned for this page</h2>
+  <ul>{{range .}}<li>{{.}}</li>{{end}}</ul>
+</section>
+{{end}}
+{{end}}

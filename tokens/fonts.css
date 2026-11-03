@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: MIT
+ * kit's typefaces, self-hosted (Latin; the files are SIL OFL 1.1, see
+ * fonts/LICENSE). Each is one variable file covering every weight, and
+ * font-display: swap shows the fallback stack until it arrives.
+ */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 200 800; font-display: swap; src: url("./fonts/bricolage-grotesque-latin.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("./fonts/instrument-sans-latin.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("./fonts/geist-mono-latin.woff2") format("woff2"); }

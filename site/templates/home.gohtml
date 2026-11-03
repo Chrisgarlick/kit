@@ -1,0 +1,36 @@
+{{define "content"}}
+<section class="hero">
+  <p class="eyebrow">Web components for any backend</p>
+  <h1>Small, fast, accessible components that drop into Go, Laravel, WordPress or plain HTML.</h1>
+  <p class="lede">Copy a component into your project and it's yours. No framework, no build step to use it, WCAG 2.2 AA as the floor, and one set of design tokens that re-themes everything.</p>
+  <div class="hero-actions">
+    <a class="kit-button" data-variant="primary" data-size="lg" href="{{(index .Site.Groups 0).URL}}">Browse components</a>
+    <a class="kit-button" data-size="lg" href="/foundations/">See the foundations</a>
+  </div>
+</section>
+
+<section class="groups" aria-labelledby="groups-h">
+  <h2 id="groups-h" class="section-title">Components</h2>
+  <ul class="group-grid">
+    {{range .Site.Groups}}
+    <li>
+      <a class="group-card" href="{{.URL}}">
+        <span class="group-card-title">{{.Title}}</span>
+        <span class="group-card-summary">{{.Summary}}</span>
+        <span class="group-card-count">{{if .Components}}{{len .Components}} ready{{else}}Coming soon{{end}}{{with .Upcoming}} · {{len .}} planned{{end}}</span>
+      </a>
+    </li>
+    {{end}}
+  </ul>
+</section>
+
+<section class="principles" aria-labelledby="principles-h">
+  <h2 id="principles-h" class="section-title">Principles</h2>
+  <dl>
+    <div><dt>Light</dt><dd>A tiny core, and each page loads only the components it uses.</dd></div>
+    <div><dt>Accessible</dt><dd>Native elements first, the WAI-ARIA patterns where there are none, and every component tested with screen readers.</dd></div>
+    <div><dt>Safe</dt><dd>Values are text, never HTML, and everything runs under a strict content security policy.</dd></div>
+    <div><dt>Yours</dt><dd>Components are copied into your project, so you can read and change every line.</dd></div>
+  </dl>
+</section>
+{{end}}

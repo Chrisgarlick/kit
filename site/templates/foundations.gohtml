@@ -1,0 +1,45 @@
+{{define "content"}}
+<header class="page-head">
+  <p class="eyebrow">Foundations</p>
+  <h1>Foundations</h1>
+  <p class="lede">The tokens every component is made from. Change the scheme, density or accent at the top and everything below follows.</p>
+</header>
+
+<section class="found" aria-labelledby="f-colour">
+  <h2 id="f-colour" class="section-title">Colour</h2>
+  <h3>Surfaces and text</h3>
+  <ul class="swatches">{{range .Site.TokensWith "kit-bg" "kit-surface" "kit-line" "kit-fg"}}{{template "swatch" .}}{{end}}</ul>
+  <h3>Accent</h3>
+  <ul class="swatches">{{range .Site.TokensWith "kit-accent"}}{{template "swatch" .}}{{end}}</ul>
+  <h3>Meaning</h3>
+  <ul class="swatches">{{range .Site.TokensWith "kit-good" "kit-warn" "kit-bad" "kit-info"}}{{template "swatch" .}}{{end}}</ul>
+  <h3>Data series</h3>
+  <ul class="swatches">{{range .Site.TokensWith "kit-series"}}{{template "swatch" .}}{{end}}</ul>
+</section>
+
+<section class="found" aria-labelledby="f-type">
+  <h2 id="f-type" class="section-title">Type</h2>
+  <ul class="families">
+    <li class="tk-kit-font-display"><span class="fam-name">Bricolage Grotesque</span><span class="fam-use">Display: headings, used with restraint</span><span class="fam-sample">Analytics for small teams</span></li>
+    <li class="tk-kit-font-ui"><span class="fam-name">Instrument Sans</span><span class="fam-use">Interface: everything people read and press</span><span class="fam-sample">Save changes, invite Sam, export the report</span></li>
+    <li class="tk-kit-font-mono"><span class="fam-name">Geist Mono</span><span class="fam-use">Figures, code and labels</span><span class="fam-sample">£128,400 · 48,210 · 3.4%</span></li>
+  </ul>
+  <ul class="scale">{{range .Site.TokensWith "kit-text"}}<li><code>--{{.Name}}</code><span class="tk-{{.Name}}">The quick brown fox</span><span class="faint">{{.Value}}</span></li>{{end}}</ul>
+</section>
+
+<section class="found" aria-labelledby="f-space">
+  <h2 id="f-space" class="section-title">Space and size</h2>
+  <ul class="bars">{{range .Site.TokensWith "kit-space" "kit-control"}}<li><code>--{{.Name}}</code><span class="bar tk-{{.Name}}"></span><span class="faint">{{.Value}}</span></li>{{end}}</ul>
+  <p class="note">Compact density shrinks controls and spacing; try it at the top of the page.</p>
+</section>
+
+<section class="found" aria-labelledby="f-shape">
+  <h2 id="f-shape" class="section-title">Shape and depth</h2>
+  <ul class="tiles">
+    {{range .Site.TokensWith "kit-radius"}}<li><span class="tile tk-{{.Name}}"></span><code>--{{.Name}}</code><span class="faint">{{.Value}}</span></li>{{end}}
+    {{range .Site.TokensWith "kit-shadow"}}<li><span class="tile tile-raised tk-{{.Name}}"></span><code>--{{.Name}}</code></li>{{end}}
+  </ul>
+</section>
+{{end}}
+
+{{define "swatch"}}<li><span class="chip tk-{{.Name}}"></span><code>--{{.Name}}</code><span class="faint">{{.Value}}</span></li>{{end}}
