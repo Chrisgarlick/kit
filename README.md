@@ -1,5 +1,7 @@
 # kit
 
+[![CI](https://github.com/Chrisgarlick/kit/actions/workflows/ci.yml/badge.svg)](https://github.com/Chrisgarlick/kit/actions/workflows/ci.yml)
+
 A small, fast, accessible component library that drops into any backend: Go, Laravel, WordPress or plain HTML. Components are copied into your project (the shadcn model), so you own every line.
 
 - **Light:** a tiny core, and pages load only the components they use.
