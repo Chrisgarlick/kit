@@ -1,0 +1,90 @@
+{{define "content"}}
+<div class="theme-page brand-glow">
+<header class="brand-hero">
+  <p class="eyebrow">Theme · {{.Theme.Source}}</p>
+  <h1>{{.Theme.Title}}, built from <em>kit</em></h1>
+  <p>{{.Theme.Summary}} Every component below is kit's, unchanged: one stylesheet of tokens sets the colours, type, corners and depth, in light and dark.</p>
+  <div class="kit-cluster" data-gap="3">
+    <button class="kit-button brand-on-dark" type="button" data-toast="Audit started" data-toast-tone="good" data-toast-description="Results usually take about a minute.">Start an audit</button>
+    <button class="kit-button brand-ghost" type="button" commandfor="theme-palette" command="--open">Search <kbd class="kit-kbd">⌘K</kbd></button>
+  </div>
+</header>
+
+<section class="theme-section" aria-labelledby="t-overview">
+  <h2 id="t-overview" class="section-title">Overview</h2>
+  <div class="kit-grid" data-min="sm" data-cols="4" data-gap="3">
+    <div class="kit-stat"><p class="kit-stat-label">Label</p><div class="kit-cluster" data-justify="between" data-align="end"><p class="kit-stat-value">12,480</p><kit-sparkline values="8 9 9 11 10 12 13 12 14" label="Label trend" area data-tone="good"></kit-sparkline></div><p class="kit-stat-delta" data-trend="up">+8.2% <span>vs last period</span></p></div>
+    <div class="kit-stat"><p class="kit-stat-label">Score</p><p class="kit-stat-value">92<small>/100</small></p><p class="kit-stat-delta" data-trend="up">+4 <span>vs last period</span></p></div>
+    <div class="kit-stat"><p class="kit-stat-label">Response time</p><p class="kit-stat-value">182<small>ms</small></p><p class="kit-stat-delta" data-trend="down" data-good="down">−12% <span>lower is better</span></p></div>
+    <div class="kit-stat"><p class="kit-stat-label">Issues</p><p class="kit-stat-value">37</p><p class="kit-stat-delta" data-trend="up" data-good="down">+5 <span>vs last period</span></p></div>
+  </div>
+</section>
+
+<section class="theme-section" aria-labelledby="t-data">
+  <h2 id="t-data" class="section-title">Data</h2>
+  <div class="kit-split" data-side="end" data-width="lg">
+    <article class="kit-card"><div class="kit-card-body">
+      <kit-chart type="area" format="compact">
+        <table><caption>Example series by month</caption>
+          <thead><tr><th scope="col">Month</th><th scope="col">Series A</th><th scope="col">Series B</th></tr></thead>
+          <tbody><tr><th scope="row">Jan</th><td>1200</td><td>800</td></tr><tr><th scope="row">Feb</th><td>1350</td><td>940</td></tr><tr><th scope="row">Mar</th><td>1280</td><td>1010</td></tr><tr><th scope="row">Apr</th><td>1620</td><td>1100</td></tr><tr><th scope="row">May</th><td>1900</td><td>1060</td></tr><tr><th scope="row">Jun</th><td>1750</td><td>1240</td></tr><tr><th scope="row">Jul</th><td>2100</td><td>1380</td></tr><tr><th scope="row">Aug</th><td>2340</td><td>1310</td></tr><tr><th scope="row">Sep</th><td>2210</td><td>1490</td></tr></tbody>
+        </table>
+      </kit-chart>
+    </div></article>
+    <article class="kit-card"><div class="kit-card-body">
+      <kit-chart type="donut">
+        <table><caption>Example parts</caption>
+          <thead><tr><th scope="col">Part</th><th scope="col">Count</th></tr></thead>
+          <tbody><tr><th scope="row">Part one</th><td>420</td></tr><tr><th scope="row">Part two</th><td>260</td></tr><tr><th scope="row">Part three</th><td>180</td></tr><tr><th scope="row">Part four</th><td>90</td></tr></tbody>
+        </table>
+      </kit-chart>
+    </div></article>
+  </div>
+  <div class="kit-table-wrap" role="region" aria-label="Example table" tabindex="0">
+    <table class="kit-table" data-sortable>
+      <thead><tr><th scope="col">Name</th><th scope="col">Status</th><th scope="col" data-numeric data-sort="number">Count</th><th scope="col" data-numeric data-sort="number">Score</th><th scope="col" data-sort="none">Actions</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Item 1</th><td><span class="kit-badge" data-tone="good"><span class="kit-dot"></span>Passing</span></td><td data-numeric>1,024</td><td data-numeric>96</td><td><kit-menu placement="bottom-end"><button class="kit-button" data-variant="ghost" data-size="sm" data-icon aria-label="Actions for Item 1"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg></button><div class="kit-menu-list"><button>Open</button><button>Run again</button><hr><button data-tone="bad">Delete</button></div></kit-menu></td></tr>
+        <tr><th scope="row">Item 2</th><td><span class="kit-badge" data-tone="warn"><span class="kit-dot"></span>Needs work</span></td><td data-numeric>86</td><td data-numeric>71</td><td></td></tr>
+        <tr><th scope="row">Item 3</th><td><span class="kit-badge" data-tone="bad"><span class="kit-dot"></span>Failing</span></td><td data-numeric>12,400</td><td data-numeric>38</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="theme-section" aria-labelledby="t-controls">
+  <h2 id="t-controls" class="section-title">Controls</h2>
+  <div class="kit-grid" data-min="md" data-cols="2">
+    <article class="kit-card"><div class="kit-card-body kit-stack">
+      <kit-tabs>
+        <div class="kit-tablist" aria-label="Example tabs"><button>General</button><button>Schedule</button><button>Alerts</button></div>
+        <div class="kit-stack" data-gap="3">
+          <div class="kit-field"><label for="th-name">Label</label><input class="kit-input" id="th-name" value="Text value"></div>
+          <div class="kit-field"><label for="th-sel">With a placeholder</label><select class="kit-select" id="th-sel"><option>Option one</option><option>Option two</option></select></div>
+          <label class="kit-choice" data-end><input type="checkbox" role="switch" class="kit-switch" checked> Setting at the end of the row<span class="kit-choice-hint">Optional hint text</span></label>
+        </div>
+        <div><p>Panel two.</p></div>
+        <div><p>Panel three.</p></div>
+      </kit-tabs>
+    </div></article>
+    <div class="kit-stack" data-gap="3">
+      <div class="kit-alert" data-tone="warn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 3.5 2.8 16h14.4L10 3.5Z"/><path d="M10 8.5v3.5M10 14h.01"/></svg><div><p class="kit-alert-title">Warning</p><p>Something needs attention soon. Alerts can carry an action.</p></div></div>
+      <div class="kit-cluster"><button class="kit-button" data-variant="primary" type="button">Primary</button><button class="kit-button" type="button">Secondary</button><button class="kit-button" data-variant="ghost" type="button">Ghost</button><button class="kit-button" data-variant="danger" type="button" commandfor="theme-dialog" command="show-modal">Danger</button></div>
+      <kit-segmented aria-label="Example range" value="Week"><button value="Day">Day</button><button value="Week">Week</button><button value="Month">Month</button></kit-segmented>
+      <div class="kit-cluster"><span class="kit-badge" data-tone="accent">Accent</span><span class="kit-badge" data-tone="good">Success</span><span class="kit-badge" data-tone="warn">Warning</span><span class="kit-badge" data-tone="bad">Error</span><span class="kit-badge" data-variant="outline">Outline</span></div>
+      <div class="kit-progress-field"><label for="th-pb">Label</label><span>72%</span><progress class="kit-progress" id="th-pb" max="100" value="72">72%</progress></div>
+    </div>
+  </div>
+</section>
+
+<dialog class="kit-dialog" id="theme-dialog" data-size="sm" aria-labelledby="theme-dialog-title" closedby="any">
+  <header class="kit-dialog-header"><h2 id="theme-dialog-title">Delete this item?</h2></header>
+  <div class="kit-dialog-body"><p>This can't be undone.</p></div>
+  <footer class="kit-dialog-footer"><button class="kit-button" type="button" commandfor="theme-dialog" command="close" autofocus>Cancel</button><button class="kit-button" data-variant="danger" type="button" commandfor="theme-dialog" command="close">Delete</button></footer>
+</dialog>
+<kit-command id="theme-palette" shortcut="" label="Search the theme page">
+  <a href="#t-overview" data-group="Sections">Overview</a><a href="#t-data" data-group="Sections">Data</a><a href="#t-controls" data-group="Sections">Controls</a>
+  <button type="button" data-group="Actions" data-toast="Audit started" data-toast-tone="good">Start an audit</button>
+</kit-command>
+</div>
+{{end}}

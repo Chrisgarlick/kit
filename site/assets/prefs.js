@@ -9,5 +9,6 @@
   if (theme === 'light' || theme === 'dark') root.dataset.theme = theme;
   if (get('density') === 'compact') root.dataset.density = 'compact';
   const accent = get('accent');
-  if (accent === 'indigo' || accent === 'amber' || accent === 'rose') root.dataset.accent = accent;
+  // A brand theme page brings its own accent.
+  if (!root.hasAttribute('data-brand') && (accent === 'indigo' || accent === 'amber' || accent === 'rose')) root.dataset.accent = accent;
 })();

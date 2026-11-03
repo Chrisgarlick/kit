@@ -86,7 +86,21 @@ type Site struct {
 	Components []*Component
 	Data       map[string]any
 	Tokens     []Token
+	Themes     []*Theme
 }
+
+// Theme is an example brand theme: site/themes/<id>/theme.yaml and
+// theme.css (which maps the brand onto kit's tokens), shown on its own page.
+// Themes are the site's, not kit's: they show how an app re-skins kit.
+type Theme struct {
+	ID      string `yaml:"-"`
+	Title   string `yaml:"title"`
+	Summary string `yaml:"summary"`
+	Source  string `yaml:"source"`
+}
+
+// URL is the theme's page.
+func (t *Theme) URL() string { return "/themes/" + t.ID + "/" }
 
 var (
 	statuses = []string{"preview", "beta", "stable"}
@@ -117,6 +131,25 @@ func Load(root string) (*Site, error) {
 			errs = append(errs, fmt.Errorf("site/groups.yaml: group %q needs a lower-case id and a title", g.ID))
 		}
 		byID[g.ID] = g
+	}
+
+	themeFiles, _ := filepath.Glob(filepath.Join(root, "site", "themes", "*", "theme.yaml"))
+	for _, f := range themeFiles {
+		dir := filepath.Dir(f)
+		t := &Theme{ID: filepath.Base(dir)}
+		b, err := os.ReadFile(f)
+		if err != nil {
+			return nil, err
+		}
+		if err := yaml.Unmarshal(b, t); err != nil || t.Title == "" || !slugRe.MatchString(t.ID) {
+			errs = append(errs, fmt.Errorf("%s: needs a title, in a lower-case folder (%v)", rel(root, f), err))
+			continue
+		}
+		if _, err := os.Stat(filepath.Join(dir, "theme.css")); err != nil {
+			errs = append(errs, fmt.Errorf("%s: missing theme.css", rel(root, dir)))
+			continue
+		}
+		s.Themes = append(s.Themes, t)
 	}
 
 	dataFiles, _ := filepath.Glob(filepath.Join(root, "site", "data", "*.yaml"))

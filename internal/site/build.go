@@ -41,6 +41,7 @@ type page struct {
 	Site        *Site
 	Group       *Group
 	Component   *Component
+	Theme       *Theme
 	Dev         bool
 	BaseURL     string
 	assets      map[string]string
@@ -120,6 +121,13 @@ func (s *Site) Build(out string, opt Options) (*Result, error) {
 			}
 		}
 	}
+	for _, t := range s.Themes {
+		p := base
+		p.Theme, p.Title, p.Description = t, t.Title+" theme", t.Summary
+		if err := render("theme", t.URL(), p); err != nil {
+			return nil, err
+		}
+	}
 	nf := base
 	nf.Title, nf.Description = "Not found", "This page doesn't exist."
 	if err := render("notfound", "/404.html", nf); err != nil {
@@ -196,6 +204,15 @@ func (s *Site) bundle(out string, opt Options, res *Result) error {
 	}
 	if hasCore {
 		entries = append(entries, api.EntryPoint{InputPath: filepath.Join(gen, "core.js"), OutputPath: "core"})
+	}
+	// Each theme as its own stylesheet, named theme-<id>.css.
+	for _, t := range s.Themes {
+		name := "theme-" + t.ID
+		src := fmt.Sprintf("@import %q;\n", filepath.ToSlash(filepath.Join(s.Root, "site", "themes", t.ID, "theme.css")))
+		if err := os.WriteFile(filepath.Join(gen, name+".css"), []byte(src), 0o600); err != nil {
+			return err
+		}
+		entries = append(entries, api.EntryPoint{InputPath: filepath.Join(gen, name+".css"), OutputPath: name})
 	}
 	if opt.Dev {
 		entries = append(entries, api.EntryPoint{InputPath: filepath.Join(s.Root, "site", "assets", "reload.js"), OutputPath: "reload"})
@@ -361,7 +378,7 @@ func (s *Site) templates() (map[string]*template.Template, error) {
 		return nil, err
 	}
 	out := map[string]*template.Template{}
-	for _, name := range []string{"home", "foundations", "group", "component", "notfound"} {
+	for _, name := range []string{"home", "foundations", "group", "component", "theme", "notfound"} {
 		files := append(slices.Clone(shared), filepath.Join(dir, name+".gohtml"))
 		t, err := template.New(name).Funcs(funcs).ParseFiles(files...)
 		if err != nil {

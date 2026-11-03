@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: the theming recipe (an example brand theme), the screen-reader pass, then more charts (heatmap, scatter, histogram). Progress is noted under each phase below.
+> Next: more charts (heatmap, scatter, histogram), then the screen-reader pass. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -242,7 +242,9 @@ The look, before the behaviour.
   All CSS is 5.6 KB gzipped, fonts' `@font-face` rules and tokens included.
 - **Placeholder content:** literal placeholder text in every demo (no invented company or records). Demos can still read `site/data/*.yaml` as `.Data`, for charts later.
 
-**Not started:** the theming recipe and its example, the rest of tier 1 (type primitives, scroll area, code block, print), the icon sprite and the visual-regression baseline.
+**Theming recipe** (3 November): `site/themes/<id>/` (theme.yaml and theme.css) builds a showcase page per theme; the Kritano theme, from its clients.kritano.com brand file, is the worked example (1.5 KB gzipped, light and dark, AA-checked). New tokens `--kit-display-weight` and `--kit-display-tracking` let single-weight display faces work. README has the recipe.
+
+**Not started:** the rest of tier 1 (type primitives, scroll area, code block, print), the icon sprite and the visual-regression baseline.
 
 ### Phase 3: interactive components (L)
 

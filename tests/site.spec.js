@@ -84,3 +84,16 @@ test('the segmented control demo reports its change event', async ({ page }) => 
   await page.keyboard.press('ArrowRight');
   await expect(demo.locator('#seg-out')).toHaveText('Selected: Three');
 });
+
+test('a theme page re-skins kit from its own stylesheet, and ignores a saved accent', async ({ browser }) => {
+  const ctx = await browser.newContext();
+  await ctx.addInitScript(() => localStorage.setItem('kit-accent', 'rose'));
+  const page = await ctx.newPage();
+  await page.goto(base + '/themes/kritano/');
+  await expect(page.locator('html')).toHaveAttribute('data-brand', 'kritano');
+  await expect(page.locator('html')).not.toHaveAttribute('data-accent', /./);
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--kit-accent').trim().toLowerCase())).toBe('#4f46e5');
+  expect(await page.evaluate(() => getComputedStyle(document.body).fontFamily)).toMatch(/Outfit/);
+  await expect(page.getByRole('group', { name: 'Accent colour' })).toHaveCount(0);
+  await ctx.close();
+});

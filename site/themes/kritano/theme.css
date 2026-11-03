@@ -1,0 +1,110 @@
+/* Kritano theme for kit: the recipe for re-skinning kit from an app's own
+ * repository. Load it after kit.css. It only sets kit's tokens (and, at the
+ * end, a few touches for this showcase page), so every component follows.
+ *
+ * Values come from Kritano's client brand file (clients.kritano.com,
+ * brand 1). Where a brand colour missed WCAG AA as text on one of kit's
+ * surfaces, it's nudged and noted.
+ */
+
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/outfit-latin.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/instrument-serif-regular.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/instrument-serif-italic.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/jetbrains-mono-latin.woff2") format("woff2"); }
+
+:root {
+  /* type: display Instrument Serif 400, heading and body Outfit, mono JetBrains Mono */
+  --kit-font-display: "Instrument Serif", Georgia, serif;
+  --kit-font-ui: "Outfit", system-ui, sans-serif;
+  --kit-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --kit-display-weight: 400;
+  --kit-display-tracking: -0.012em;
+
+  /* palette */
+  --kit-bg: #F7F7FD;              /* paper */
+  --kit-surface: #FFFFFF;         /* surface */
+  --kit-surface-2: #F1F1FA;
+  --kit-surface-3: #E6E6F2;
+  --kit-line: #1E1B4B17;          /* rule */
+  --kit-line-strong: #1E1B4B33;
+  --kit-fg: #1B1A33;              /* ink */
+  --kit-fg-2: #4C4B68;            /* ink-muted */
+  --kit-fg-3: #5F5D7E;
+  --kit-accent: #4F46E5;          /* accent */
+  --kit-accent-hover: #4338CA;
+  --kit-accent-soft: #EEF2FF;     /* accent-soft */
+  --kit-accent-fg: #FFFFFF;       /* on-accent */
+  --kit-focus-ring: #4F46E5;
+  --kit-good: #14773A;            /* good #15803D, a shade darker for AA on surface-2 */
+  --kit-good-soft: #DCFCE7;
+  --kit-warn: #92400E;            /* fair */
+  --kit-warn-soft: #FEF3C7;
+  --kit-bad: #B91C1C;             /* poor */
+  --kit-bad-soft: #FEE2E2;
+  --kit-bad-fg: #FFFFFF;
+  --kit-info: #4338CA;
+  --kit-info-soft: #E0E7FF;
+  --kit-scrim: rgb(16 15 36 / 0.55);
+  --kit-series-1: #4F46E5; --kit-series-2: #F59E0B; --kit-series-3: #0D9488;
+  --kit-series-4: #DB2777; --kit-series-5: #0284C7; --kit-series-6: #65A30D;
+
+  /* shape: radius sm 10, md 18, lg 28; shadow #1E1B4B at 32%, 40px blur, 18px down */
+  --kit-radius-1: 8px;
+  --kit-radius-2: 10px;
+  --kit-radius-3: 18px;
+  --kit-shadow-1: 0 1px 2px rgb(30 27 75 / 0.08);
+  --kit-shadow-2: 0 8px 20px -6px rgb(30 27 75 / 0.18);
+  --kit-shadow-3: 0 18px 40px -12px rgb(30 27 75 / 0.32);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kit-bg: #100F24; --kit-surface: #1B1938; --kit-surface-2: #242246; --kit-surface-3: #2E2B55;
+    --kit-line: #FFFFFF14; --kit-line-strong: #FFFFFF2E;
+    --kit-fg: #E9E8F5; --kit-fg-2: #B6B5CF; --kit-fg-3: #9A99BB;
+    --kit-accent: #818CF8; --kit-accent-hover: #A5B4FC; --kit-accent-soft: #25244F; --kit-accent-fg: #0E0D24; --kit-focus-ring: #A5B4FC;
+    --kit-good: #4ADE80; --kit-good-soft: #12301F; --kit-warn: #FBBF24; --kit-warn-soft: #33280C;
+    --kit-bad: #F87171; --kit-bad-soft: #3A1A22; --kit-bad-fg: #0E0D24; --kit-info: #A5B4FC; --kit-info-soft: #25244F;
+    --kit-scrim: rgb(5 5 15 / 0.7);
+    --kit-series-1: #818CF8; --kit-series-2: #FBBF24; --kit-series-3: #2DD4BF; --kit-series-4: #F472B6; --kit-series-5: #38BDF8; --kit-series-6: #A3E635;
+    --kit-shadow-3: 0 18px 40px -12px rgb(0 0 0 / 0.6);
+  }
+}
+:root[data-theme="dark"] {
+  --kit-bg: #100F24; --kit-surface: #1B1938; --kit-surface-2: #242246; --kit-surface-3: #2E2B55;
+  --kit-line: #FFFFFF14; --kit-line-strong: #FFFFFF2E;
+  --kit-fg: #E9E8F5; --kit-fg-2: #B6B5CF; --kit-fg-3: #9A99BB;
+  --kit-accent: #818CF8; --kit-accent-hover: #A5B4FC; --kit-accent-soft: #25244F; --kit-accent-fg: #0E0D24; --kit-focus-ring: #A5B4FC;
+  --kit-good: #4ADE80; --kit-good-soft: #12301F; --kit-warn: #FBBF24; --kit-warn-soft: #33280C;
+  --kit-bad: #F87171; --kit-bad-soft: #3A1A22; --kit-bad-fg: #0E0D24; --kit-info: #A5B4FC; --kit-info-soft: #25244F;
+  --kit-scrim: rgb(5 5 15 / 0.7);
+  --kit-series-1: #818CF8; --kit-series-2: #FBBF24; --kit-series-3: #2DD4BF; --kit-series-4: #F472B6; --kit-series-5: #38BDF8; --kit-series-6: #A3E635;
+  --kit-shadow-3: 0 18px 40px -12px rgb(0 0 0 / 0.6);
+}
+
+/* ---- This showcase page only: the brand's hero gradient, glow and grid.
+   An app would put these on its own layout, not in its kit theme. ---- */
+.brand-hero {
+  position: relative; overflow: hidden; padding: clamp(28px, 5vw, 56px); border-radius: 28px; color: #FFFFFF;
+  background: linear-gradient(135deg, #312E81, #4F46E5);
+  box-shadow: var(--kit-shadow-3);
+}
+.brand-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at 70% 0%, #000, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 70% 0%, #000, transparent 75%);
+}
+.brand-hero::after {
+  content: ""; position: absolute; inset-inline-start: -10%; inset-block-end: -40%; inline-size: 60%; aspect-ratio: 1; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(253 230 138 / 0.45), transparent);
+}
+.brand-hero > * { position: relative; }
+.brand-hero h1 { margin: 0; font: 400 clamp(2.4rem, 6vw, 4rem)/1.04 var(--kit-font-display); letter-spacing: -0.012em; }
+.brand-hero h1 em { font-style: italic; color: #FDE68A; }
+.brand-hero p { max-inline-size: 52ch; margin: 14px 0 0; color: rgb(255 255 255 / 0.86); font-size: var(--kit-text-lg); }
+.brand-hero .kit-cluster { margin-block-start: 24px; }
+.brand-hero .brand-on-dark { --_bg: #FFFFFF; --_fg: #1E1B4B; --_border: transparent; --_hover: #EEF2FF; }
+.brand-hero .brand-ghost { --_bg: rgb(255 255 255 / 0.1); --_fg: #FFFFFF; --_border: rgb(255 255 255 / 0.3); --_hover: rgb(255 255 255 / 0.18); }
+.brand-glow { background: radial-gradient(circle at 92% -12%, color-mix(in srgb, var(--kit-accent) 12%, transparent), transparent 55%); }

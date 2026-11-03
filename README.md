@@ -50,6 +50,12 @@ summary: One line that says what it's for.
 
 Add its CSS and a `demo.html` (a Go template, with literal placeholder text; `.Data` holds anything in `site/data/*.yaml`). It appears on its group page, in the navigation and in the sitemap on the next build. `make serve` rebuilds as you edit.
 
+## Theming
+
+kit ships one neutral theme. An app re-skins it from its own repository with a stylesheet, loaded after `kit.css`, that only sets kit's `--kit-*` tokens: colours, type (including `--kit-display-weight` and `--kit-display-tracking` for display faces with one weight), radii, shadows and the six chart series. Set the light values on `:root` and the dark ones under both `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }` and `:root[data-theme="dark"]`, as `tokens/tokens.css` does, and check text colours against WCAG AA on every surface.
+
+[`site/themes/kritano/theme.css`](site/themes/kritano/theme.css) is a worked example, built from Kritano's client brand file and shown at [ui.chrisgarlick.com/themes/kritano/](https://ui.chrisgarlick.com/themes/kritano/). Any `site/themes/<id>/` with a `theme.yaml` and `theme.css` gets a page like it.
+
 ## Developing
 
 Requires Go 1.26, and Node for the browser tests (`npm install` once).

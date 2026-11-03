@@ -1,5 +1,5 @@
 {{define "layout"}}<!doctype html>
-<html lang="en-GB">
+<html lang="en-GB"{{with .Theme}} data-brand="{{.ID}}"{{end}}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{.Asset "kit.css"}}">
 <link rel="stylesheet" href="{{.Asset "site.css"}}">
 {{if eq .Path "/foundations/"}}<link rel="stylesheet" href="{{.Asset "foundations.css"}}">{{end}}
+{{with .Theme}}<link rel="stylesheet" href="{{$.Asset (printf "theme-%s.css" .ID)}}">{{end}}
 <script type="module" src="{{.Asset "kit.js"}}"></script>
 <script type="module" src="{{.Asset "site.js"}}"></script>
 {{if .Dev}}<script type="module" src="{{.Asset "reload.js"}}"></script>{{end}}
@@ -31,12 +32,14 @@
       <button value="comfortable" aria-checked="true">Comfortable</button>
       <button value="compact" aria-checked="false">Compact</button>
     </kit-segmented>
+    {{if not .Theme}}
     <div class="accents" role="group" aria-label="Accent colour">
       <button type="button" class="acc acc-spruce" data-accent="spruce" aria-pressed="true" aria-label="Spruce"></button>
       <button type="button" class="acc acc-indigo" data-accent="indigo" aria-pressed="false" aria-label="Indigo"></button>
       <button type="button" class="acc acc-amber" data-accent="amber" aria-pressed="false" aria-label="Amber"></button>
       <button type="button" class="acc acc-rose" data-accent="rose" aria-pressed="false" aria-label="Rose"></button>
     </div>
+    {{end}}
   </div>
 </header>
 <div class="shell">
@@ -45,7 +48,9 @@
       <li><a href="/"{{if eq .Path "/"}} aria-current="page"{{end}}>Overview</a></li>
       <li><a href="/foundations/"{{if eq .Path "/foundations/"}} aria-current="page"{{end}}>Foundations</a></li>
     </ul>
-    <p class="kit-sidebar-label">Components</p>
+    {{if .Site.Themes}}<p class="kit-sidebar-label">Themes</p>
+    <ul>{{range .Site.Themes}}<li><a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}</a></li>{{end}}</ul>
+    {{end}}<p class="kit-sidebar-label">Components</p>
     <ul>
       {{range .Site.Groups}}{{$g := .}}
       <li>

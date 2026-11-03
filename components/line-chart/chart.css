@@ -11,7 +11,7 @@ kit-chart[type="donut"] .kit-chart-plot { block-size: var(--kit-chart-height, 22
 .kit-chart-plot:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 4px; }
 .kit-chart-plot > svg { display: block; overflow: visible; }
 .kit-chart-plot text { fill: var(--kit-fg-3); font: 400 11px/1 var(--kit-font-ui); font-variant-numeric: tabular-nums; }
-.kit-chart-plot .kit-chart-total { fill: var(--kit-fg); font: 600 var(--kit-text-xl)/1 var(--kit-font-display); }
+.kit-chart-plot .kit-chart-total { fill: var(--kit-fg); font: var(--kit-display-weight) var(--kit-text-xl)/1 var(--kit-font-display); }
 .kit-chart-grid { stroke: var(--kit-line); stroke-width: 1; }
 .kit-chart-zero { stroke: var(--kit-line-strong); }
 .kit-chart-line { fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
