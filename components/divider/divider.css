@@ -1,0 +1,12 @@
+/* SPDX-License-Identifier: MIT
+ * Divider (tier 1): a quiet rule between sections, optionally with a word.
+ *   <hr class="kit-divider">
+ *   <div class="kit-divider" role="separator" aria-label="or">or</div>   (labelled)
+ *   <hr class="kit-divider" aria-orientation="vertical">   (inside a row)
+ */
+.kit-divider { border: 0; margin: 0; block-size: 1px; background: var(--kit-line); inline-size: 100%; flex: none; }
+.kit-divider[data-strong] { background: var(--kit-line-strong); }
+.kit-divider[aria-orientation="vertical"] { inline-size: 1px; block-size: auto; align-self: stretch; min-block-size: 1.25em; }
+div.kit-divider:not(:empty) { display: flex; align-items: center; gap: var(--kit-space-3); block-size: auto; background: none; color: var(--kit-fg-3); font: 500 var(--kit-text-xs)/1 var(--kit-font-ui); text-transform: uppercase; letter-spacing: 0.06em; }
+div.kit-divider:not(:empty)::before, div.kit-divider:not(:empty)::after { content: ""; flex: 1; block-size: 1px; background: var(--kit-line); }
+@media (forced-colors: active) { .kit-divider { background: CanvasText; } }

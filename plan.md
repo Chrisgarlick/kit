@@ -4,7 +4,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 
 > **Status (3 November 2026):** the repo is public at [Chrisgarlick/kit](https://github.com/Chrisgarlick/kit) under MIT. Built so far, ahead of the core runtime, because you chose the design system and site first:
 > - the design tokens (light, dark, four accents, compact density) and the three typefaces, self-hosted;
-> - seventeen tier 1 components across actions, inputs, feedback, navigation and data display;
+> - twenty-three tier 1 components across layout, actions, inputs, feedback, navigation and data display;
 > - `kit site build` and `kit site serve` (Go), which assemble the site from the component folders.
 >
 > - the core runtime (3 November), with `<kit-segmented>` as its first component, and browser tests for both.
@@ -236,12 +236,13 @@ The look, before the behaviour.
   - `sidebar`: icons, counts and badges, section labels and nested pages. The site's own navigation uses it.
   - **Feedback** (3 November): `alert` (four tones, title, actions), `progress-bar` (native `<progress>`, tones, indeterminate), `skeleton`, `empty-state`.
   - **Data display** (3 November): `badge`, `status-dot` (with a live pulse), `avatar` (initials, photos, groups), `card` (with an accessible whole-card link), `kbd`.
+  - **Layout** (3 November): `stack`, `cluster`, `grid` (auto-filling columns, for groups of cards), `split` (side and main, stacking without breakpoints), `container`, `divider`.
   - **Inputs** (3 November): `text-field` (hint, error, prefix and suffix groups, textarea, read-only), `select` (native), `checkbox` (with the mixed state), `radio-group` (list, row and tiles).
 
   All CSS is 5.6 KB gzipped, fonts' `@font-face` rules and tokens included.
 - **Placeholder content:** literal placeholder text in every demo (no invented company or records). Demos can still read `site/data/*.yaml` as `.Data`, for charts later.
 
-**Not started:** the theming recipe and its example, the rest of tier 1 (type and layout primitives, tables, description list, code block, print), the icon sprite and the visual-regression baseline.
+**Not started:** the theming recipe and its example, the rest of tier 1 (type primitives, scroll area, tables, description list, code block, print), the icon sprite and the visual-regression baseline.
 
 ### Phase 3: interactive components (L)
 

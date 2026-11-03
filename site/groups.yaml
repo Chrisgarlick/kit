@@ -1,6 +1,10 @@
 # The component groups, in nav order. Each becomes a page (/<id>) built from
 # every components/*/README.md whose front matter says `group: <id>`.
 # `planned` lists what's coming, shown on the page until it ships.
+- id: layout
+  title: Layout
+  summary: The space between things. A few primitives that arrange any content, wrap on small screens without breakpoints, and take their gaps from the spacing scale.
+  planned: [Stack, Cluster, Grid, Split, Container, Divider, Scroll area, Aspect ratio]
 - id: actions
   title: Actions
   summary: What people press. One primary action per view; everything else steps down.

@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: MIT
+ * Stack (tier 1): children in a column with even space between them.
+ *   <div class="kit-stack" [data-gap="0…6"] [data-align="start|center|end"]> … </div>
+ * data-gap picks a step of the spacing scale (default 4, 16px). A child
+ * with data-push pushes everything after it to the far end, for a footer.
+ */
+.kit-stack { --_gap: var(--kit-space-4); display: flex; flex-direction: column; gap: var(--_gap); min-inline-size: 0; }
+.kit-stack > * { margin-block: 0; }
+.kit-stack[data-align="start"] { align-items: flex-start; }
+.kit-stack[data-align="center"] { align-items: center; }
+.kit-stack[data-align="end"] { align-items: flex-end; }
+.kit-stack > [data-push] { margin-block-end: auto; }
+.kit-stack[data-gap="0"] { --_gap: 0; }
+.kit-stack[data-gap="1"] { --_gap: var(--kit-space-1); }
+.kit-stack[data-gap="2"] { --_gap: var(--kit-space-2); }
+.kit-stack[data-gap="3"] { --_gap: var(--kit-space-3); }
+.kit-stack[data-gap="4"] { --_gap: var(--kit-space-4); }
+.kit-stack[data-gap="5"] { --_gap: var(--kit-space-5); }
+.kit-stack[data-gap="6"] { --_gap: var(--kit-space-6); }

@@ -1,0 +1,23 @@
+/* SPDX-License-Identifier: MIT
+ * Split (tier 1): a narrow side next to a wide main area, which stacks
+ * when there isn't room for both: filters beside results, a summary beside
+ * a form, a sidebar beside content.
+ *   <div class="kit-split" [data-side="start|end"] [data-width="sm|md|lg"] [data-gap="0…6"]>
+ *     <aside>…</aside> <div>…</div>
+ *   </div>
+ * The side is the first child, or the last with data-side="end". It is
+ * data-width wide (default md, 16rem); the main area stacks below it once it
+ * would be narrower than half the row.
+ */
+.kit-split { --_gap: var(--kit-space-5); --_side: 16rem; display: flex; flex-wrap: wrap; gap: var(--_gap); min-inline-size: 0; }
+.kit-split > * { flex-grow: 999; flex-basis: 0; min-inline-size: 50%; }
+.kit-split:not([data-side="end"]) > :first-child, .kit-split[data-side="end"] > :last-child { flex-grow: 1; flex-basis: var(--_side); min-inline-size: 0; }
+.kit-split[data-width="sm"] { --_side: 12rem; }
+.kit-split[data-width="lg"] { --_side: 22rem; }
+.kit-split[data-gap="0"] { --_gap: 0; }
+.kit-split[data-gap="1"] { --_gap: var(--kit-space-1); }
+.kit-split[data-gap="2"] { --_gap: var(--kit-space-2); }
+.kit-split[data-gap="3"] { --_gap: var(--kit-space-3); }
+.kit-split[data-gap="4"] { --_gap: var(--kit-space-4); }
+.kit-split[data-gap="5"] { --_gap: var(--kit-space-5); }
+.kit-split[data-gap="6"] { --_gap: var(--kit-space-6); }

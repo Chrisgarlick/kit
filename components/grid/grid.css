@@ -1,0 +1,30 @@
+/* SPDX-License-Identifier: MIT
+ * Grid (tier 1): equal columns that fill the row and wrap by themselves,
+ * with no breakpoints: a group of cards, tiles or form fields.
+ *   <div class="kit-grid" [data-min="xs|sm|md|lg|xl"] [data-cols="2|3|4|6"] [data-gap="0…6"]> … </div>
+ * data-min is the narrowest a column may get (default md, 16rem); data-cols
+ * is the most columns a row may have. Columns never get wider than the
+ * container on a phone.
+ */
+.kit-grid {
+  --_gap: var(--kit-space-4); --_min: 16rem; --_cols: 12;
+  display: grid; gap: var(--_gap); min-inline-size: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(var(--_min), (100% - (var(--_cols) - 1) * var(--_gap)) / var(--_cols))), 1fr));
+}
+.kit-grid[data-fit] { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(var(--_min), (100% - (var(--_cols) - 1) * var(--_gap)) / var(--_cols))), 1fr)); }
+.kit-grid[data-min="xs"] { --_min: 8rem; }
+.kit-grid[data-min="sm"] { --_min: 12rem; }
+.kit-grid[data-min="lg"] { --_min: 20rem; }
+.kit-grid[data-min="xl"] { --_min: 26rem; }
+.kit-grid[data-cols="2"] { --_cols: 2; }
+.kit-grid[data-cols="3"] { --_cols: 3; }
+.kit-grid[data-cols="4"] { --_cols: 4; }
+.kit-grid[data-cols="6"] { --_cols: 6; }
+.kit-grid > [data-span="full"] { grid-column: 1 / -1; }
+.kit-grid[data-gap="0"] { --_gap: 0; }
+.kit-grid[data-gap="1"] { --_gap: var(--kit-space-1); }
+.kit-grid[data-gap="2"] { --_gap: var(--kit-space-2); }
+.kit-grid[data-gap="3"] { --_gap: var(--kit-space-3); }
+.kit-grid[data-gap="4"] { --_gap: var(--kit-space-4); }
+.kit-grid[data-gap="5"] { --_gap: var(--kit-space-5); }
+.kit-grid[data-gap="6"] { --_gap: var(--kit-space-6); }

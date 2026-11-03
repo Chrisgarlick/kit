@@ -1,0 +1,24 @@
+/* SPDX-License-Identifier: MIT
+ * Cluster (tier 1): children in a row that wraps, such as tags, buttons or a toolbar.
+ *   <div class="kit-cluster" [data-gap="0…6"] [data-justify="start|center|end|between"] [data-align="start|center|end|baseline|stretch"]> … </div>
+ * Default gap 2 (8px), centred vertically. A child with data-push sends
+ * itself and everything after it to the far end.
+ */
+.kit-cluster { --_gap: var(--kit-space-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--_gap); min-inline-size: 0; }
+.kit-cluster > * { margin: 0; }
+.kit-cluster[data-justify="center"] { justify-content: center; }
+.kit-cluster[data-justify="end"] { justify-content: flex-end; }
+.kit-cluster[data-justify="between"] { justify-content: space-between; }
+.kit-cluster[data-align="start"] { align-items: flex-start; }
+.kit-cluster[data-align="end"] { align-items: flex-end; }
+.kit-cluster[data-align="baseline"] { align-items: baseline; }
+.kit-cluster[data-align="stretch"] { align-items: stretch; }
+.kit-cluster[data-nowrap] { flex-wrap: nowrap; }
+.kit-cluster > [data-push] { margin-inline-start: auto; }
+.kit-cluster[data-gap="0"] { --_gap: 0; }
+.kit-cluster[data-gap="1"] { --_gap: var(--kit-space-1); }
+.kit-cluster[data-gap="2"] { --_gap: var(--kit-space-2); }
+.kit-cluster[data-gap="3"] { --_gap: var(--kit-space-3); }
+.kit-cluster[data-gap="4"] { --_gap: var(--kit-space-4); }
+.kit-cluster[data-gap="5"] { --_gap: var(--kit-space-5); }
+.kit-cluster[data-gap="6"] { --_gap: var(--kit-space-6); }

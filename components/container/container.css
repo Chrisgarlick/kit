@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: MIT
+ * Container (tier 1): a centred column with a maximum width and side
+ * gutters that never drop below 16px.
+ *   <div class="kit-container" [data-size="prose|sm|md|lg|xl|full"]> … </div>
+ * prose is about 70 characters, for reading; the default, lg, suits app pages.
+ */
+.kit-container { --_max: 72rem; inline-size: 100%; max-inline-size: calc(var(--_max) + 2 * var(--_gutter)); margin-inline: auto; --_gutter: clamp(16px, 4vw, 32px); padding-inline: var(--_gutter); box-sizing: border-box; }
+.kit-container[data-size="prose"] { --_max: 70ch; }
+.kit-container[data-size="sm"] { --_max: 40rem; }
+.kit-container[data-size="md"] { --_max: 56rem; }
+.kit-container[data-size="xl"] { --_max: 90rem; }
+.kit-container[data-size="full"] { --_max: 100%; max-inline-size: none; }
+.kit-container[data-flush] { padding-inline: 0; }
