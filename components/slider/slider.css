@@ -1,0 +1,38 @@
+/* SPDX-License-Identifier: MIT
+ * Slider: a native range input, styled, with the track filled up to the
+ * thumb (slider.js keeps --kit-fill current; without it the track is plain).
+ *   <div class="kit-slider-field"><label for="v">Volume</label><output for="v"></output>
+ *     <input type="range" class="kit-slider" id="v" min="0" max="100" value="40"></div>
+ */
+.kit-slider-field { display: grid; grid-template-columns: 1fr auto; gap: 6px var(--kit-space-3); align-items: baseline; min-inline-size: 0; font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-slider-field > label { font-weight: 600; color: var(--kit-fg); }
+.kit-slider-field > output { color: var(--kit-fg-2); font: 500 var(--kit-text-sm)/1 var(--kit-font-mono); font-variant-numeric: tabular-nums; }
+.kit-slider-field > .kit-slider { grid-column: 1 / -1; }
+.kit-slider-field > .kit-field-hint { grid-column: 1 / -1; }
+
+.kit-slider {
+  --_track: 6px; --_thumb: 18px; --_fill: var(--kit-fill, 0%);
+  appearance: none; -webkit-appearance: none; inline-size: 100%; block-size: var(--_thumb); margin: 0; background: none; cursor: pointer;
+}
+.kit-slider::-webkit-slider-runnable-track {
+  block-size: var(--_track); border-radius: 999px;
+  background: linear-gradient(to right, var(--kit-accent) var(--_fill), var(--kit-surface-3) var(--_fill));
+}
+.kit-slider:dir(rtl)::-webkit-slider-runnable-track { background: linear-gradient(to left, var(--kit-accent) var(--_fill), var(--kit-surface-3) var(--_fill)); }
+.kit-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; inline-size: var(--_thumb); block-size: var(--_thumb); margin-block-start: calc((var(--_track) - var(--_thumb)) / 2);
+  border-radius: 50%; border: 2px solid var(--kit-accent); background: var(--kit-surface); box-shadow: var(--kit-shadow-1);
+  transition: scale var(--kit-duration) var(--kit-ease);
+}
+.kit-slider::-moz-range-track { block-size: var(--_track); border-radius: 999px; background: var(--kit-surface-3); }
+.kit-slider::-moz-range-progress { block-size: var(--_track); border-radius: 999px; background: var(--kit-accent); }
+.kit-slider::-moz-range-thumb {
+  inline-size: var(--_thumb); block-size: var(--_thumb); box-sizing: border-box; border-radius: 50%;
+  border: 2px solid var(--kit-accent); background: var(--kit-surface); box-shadow: var(--kit-shadow-1);
+}
+.kit-slider:hover::-webkit-slider-thumb, .kit-slider:active::-webkit-slider-thumb { scale: 1.1; }
+.kit-slider:focus-visible { outline: none; }
+.kit-slider:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-slider:focus-visible::-moz-range-thumb { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-slider:disabled { opacity: 0.5; cursor: not-allowed; }
+@media (forced-colors: active) { .kit-slider { appearance: auto; -webkit-appearance: auto; } }

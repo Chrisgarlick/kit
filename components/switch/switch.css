@@ -1,0 +1,32 @@
+/* SPDX-License-Identifier: MIT
+ * Switch (tier 1): a native checkbox with role="switch", for settings
+ * that take effect at once.
+ *   <label class="kit-choice"><input type="checkbox" role="switch" class="kit-switch"> Notifications</label>
+ * It shares .kit-choice (label and hint layout) with checkbox.css.
+ */
+.kit-switch {
+  appearance: none; -webkit-appearance: none; position: relative; flex: none; margin: 0; cursor: inherit;
+  inline-size: 34px; block-size: 20px; border-radius: 999px; background: var(--kit-line-strong); border: 0;
+  transition: background-color var(--kit-duration) var(--kit-ease);
+}
+.kit-switch::before {
+  content: ""; position: absolute; inset-block-start: 2px; inset-inline-start: 2px; inline-size: 16px; block-size: 16px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  transition: translate var(--kit-duration) var(--kit-ease);
+}
+.kit-switch:checked { background: var(--kit-accent); }
+.kit-switch:checked::before { translate: 14px 0; }
+.kit-switch:checked:dir(rtl)::before { translate: -14px 0; }
+.kit-switch:hover:not(:disabled) { filter: brightness(0.96); }
+.kit-switch:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-switch:disabled { opacity: 0.5; }
+.kit-choice:has(.kit-switch) { align-items: center; }
+.kit-choice:has(.kit-switch) .kit-choice-hint { grid-column: 2; }
+.kit-choice[data-end]:has(.kit-switch) { grid-template-columns: 1fr auto; inline-size: 100%; }
+.kit-choice[data-end] > .kit-switch { grid-column: 2; grid-row: 1; }
+.kit-choice[data-end]:has(.kit-switch) .kit-choice-hint { grid-column: 1; }
+@media (forced-colors: active) {
+  .kit-switch { border: 1px solid CanvasText; background: Canvas; }
+  .kit-switch::before { background: CanvasText; }
+  .kit-switch:checked { background: Highlight; }
+}

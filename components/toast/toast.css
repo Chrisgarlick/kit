@@ -1,0 +1,39 @@
+/* SPDX-License-Identifier: MIT
+ * Toast: the stack and messages toast.js shows, bottom-end of the screen
+ * (top-centre on phones).
+ */
+.kit-toasts {
+  position: fixed; inset: auto var(--kit-space-4) var(--kit-space-4) auto; z-index: 1100; margin: 0; padding: 0; border: 0;
+  inline-size: min(24rem, 100vw - 32px); max-block-size: calc(100vh - 32px); overflow: visible; background: none;
+  display: flex; flex-direction: column; gap: var(--kit-space-2); list-style: none;
+}
+.kit-toasts:not([data-open]) { display: none; }
+.kit-toast {
+  --_tone: var(--kit-fg-2);
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px 10px 12px 14px;
+  border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface); color: var(--kit-fg);
+  box-shadow: var(--kit-shadow-3); font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui);
+}
+.kit-toast[data-tone="good"] { --_tone: var(--kit-good); }
+.kit-toast[data-tone="warn"] { --_tone: var(--kit-warn); }
+.kit-toast[data-tone="bad"] { --_tone: var(--kit-bad); }
+.kit-toast[data-tone="info"] { --_tone: var(--kit-info); }
+.kit-toast > svg { inline-size: 18px; block-size: 18px; flex: none; margin-block-start: 1px; color: var(--_tone); }
+.kit-toast-body { flex: 1; min-inline-size: 0; }
+.kit-toast-body p { margin: 0; color: var(--kit-fg-2); }
+.kit-toast-body .kit-toast-title { color: var(--kit-fg); font-weight: 600; }
+.kit-toast > .kit-button { flex: none; margin-block: -3px; }
+.kit-toast-close {
+  display: grid; place-items: center; flex: none; inline-size: 24px; block-size: 24px; margin: -2px 0 0; padding: 0;
+  border: 0; border-radius: var(--kit-radius-1); background: none; color: var(--kit-fg-3); cursor: pointer;
+}
+.kit-toast-close svg { inline-size: 14px; block-size: 14px; }
+.kit-toast-close:hover { background: var(--kit-surface-2); color: var(--kit-fg); }
+.kit-toast-close:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
+@media (max-width: 30rem) { .kit-toasts { inset: var(--kit-space-3) var(--kit-space-3) auto; inline-size: auto; flex-direction: column-reverse; } }
+@media (prefers-reduced-motion: no-preference) {
+  .kit-toast { transition: opacity 0.18s var(--kit-ease), translate 0.18s var(--kit-ease); }
+  @starting-style { .kit-toast { opacity: 0; translate: 0 8px; } }
+  .kit-toast[data-leaving] { opacity: 0; translate: 16px 0; }
+}
+@media (forced-colors: active) { .kit-toast { border: 1px solid CanvasText; } }

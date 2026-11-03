@@ -88,3 +88,8 @@ for (const m of document.querySelectorAll('kit-menu[data-demo-note]')) {
   const note = document.getElementById(m.dataset.demoNote);
   m.addEventListener('select', (e) => { note.textContent = `Selected: ${e.detail.value}`; });
 }
+// A toast's action, shown in the note under the demo.
+for (const b of document.querySelectorAll('[data-toast][data-demo-note]')) {
+  const note = document.getElementById(b.dataset.demoNote);
+  b.addEventListener('toastaction', () => { note.textContent = 'Undo pressed: yes'; });
+}
