@@ -1,0 +1,18 @@
+/* SPDX-License-Identifier: MIT
+ * Progress ring: a circular progressbar. ring.js keeps --kit-ring (0% to
+ * 100%) in step with aria-valuenow; without a value it spins.
+ */
+.kit-ring { --_s: 64px; --_c: var(--kit-accent); position: relative; display: inline-grid; place-items: center; inline-size: var(--_s); block-size: var(--_s); flex: none; border-radius: 50%;
+  background: conic-gradient(var(--_c) var(--kit-ring, 0%), var(--kit-surface-3) 0);
+  font: 600 calc(var(--_s) * 0.2)/1 var(--kit-font-ui); font-variant-numeric: tabular-nums; color: var(--kit-fg); }
+.kit-ring::before { content: ""; position: absolute; inset: calc(var(--_s) * 0.1); border-radius: 50%; background: var(--kit-surface); }
+.kit-ring > * { position: relative; }
+.kit-ring[data-size="sm"] { --_s: 40px; }
+.kit-ring[data-size="lg"] { --_s: 96px; }
+.kit-ring[data-tone="good"] { --_c: var(--kit-good); }
+.kit-ring[data-tone="warn"] { --_c: var(--kit-warn); }
+.kit-ring[data-tone="bad"] { --_c: var(--kit-bad); }
+.kit-ring:not([aria-valuenow]) { background: conic-gradient(var(--_c) 0 25%, var(--kit-surface-3) 0); animation: kit-spin 1s linear infinite; }
+.kit-ring:not([aria-valuenow])::before { animation: kit-spin 1s linear infinite reverse; }
+@media (prefers-reduced-motion: reduce) { .kit-ring:not([aria-valuenow]), .kit-ring:not([aria-valuenow])::before { animation-duration: 3s; } }
+@media (forced-colors: active) { .kit-ring { background: conic-gradient(Highlight var(--kit-ring, 0%), Canvas 0); border: 1px solid CanvasText; } }

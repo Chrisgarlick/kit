@@ -1,0 +1,12 @@
+/* SPDX-License-Identifier: MIT
+ * Aspect ratio (tier 1): a box that keeps its proportions.
+ *   <div class="kit-ratio" data-ratio="16/9" [data-fit="contain"]><img …></div>
+ */
+.kit-ratio { position: relative; inline-size: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--kit-radius-2); background: var(--kit-surface-2); }
+.kit-ratio[data-ratio="1/1"] { aspect-ratio: 1; }
+.kit-ratio[data-ratio="4/3"] { aspect-ratio: 4 / 3; }
+.kit-ratio[data-ratio="3/2"] { aspect-ratio: 3 / 2; }
+.kit-ratio[data-ratio="21/9"] { aspect-ratio: 21 / 9; }
+.kit-ratio[data-ratio="3/4"] { aspect-ratio: 3 / 4; }
+.kit-ratio > :is(img, video, iframe, picture, svg, canvas) { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; border: 0; }
+.kit-ratio[data-fit="contain"] > :is(img, video) { object-fit: contain; }

@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: MIT
+ * Floating action (tier 1): button.kit-fab [data-extended] [data-position="start"] [data-contained]
+ */
+.kit-fab {
+  position: fixed; inset-inline-end: max(var(--kit-space-5), env(safe-area-inset-right, 0px)); inset-block-end: max(var(--kit-space-5), env(safe-area-inset-bottom, 0px)); z-index: 30;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-inline-size: 56px; block-size: 56px; padding: 0 16px;
+  border: 0; border-radius: 999px; background: var(--kit-accent); color: var(--kit-accent-fg); box-shadow: var(--kit-shadow-3);
+  font: 600 var(--kit-text-md)/1 var(--kit-font-ui); cursor: pointer; transition: transform 0.12s var(--kit-ease), background var(--kit-duration);
+}
+.kit-fab:hover { background: var(--kit-accent-hover); }
+.kit-fab:active { transform: scale(0.96); }
+.kit-fab:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 3px; }
+.kit-fab svg { inline-size: 24px; block-size: 24px; flex: none; }
+.kit-fab-label { display: none; }
+.kit-fab[data-extended] .kit-fab-label { display: inline; }
+@media (min-width: 48rem) { .kit-fab .kit-fab-label { display: inline; } .kit-fab { padding-inline: 20px 24px; } }
+.kit-fab[data-position="start"] { inset-inline: max(var(--kit-space-5), env(safe-area-inset-left, 0px)) auto; }
+.kit-fab[data-contained] { position: absolute; inset-inline-end: var(--kit-space-4); inset-block-end: var(--kit-space-4); }
+@media (forced-colors: active) { .kit-fab { border: 2px solid ButtonText; } }

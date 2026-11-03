@@ -1,0 +1,12 @@
+/* SPDX-License-Identifier: MIT
+ * Breadcrumbs (tier 1): nav[aria-label="Breadcrumb"] > ol.kit-breadcrumbs > li > a
+ */
+.kit-breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin: 0; padding: 0; list-style: none; font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-breadcrumbs li { display: inline-flex; align-items: center; }
+.kit-breadcrumbs li + li::before { content: ""; inline-size: 6px; block-size: 6px; margin-inline: 10px; border-block-start: 1.5px solid var(--kit-fg-3); border-inline-end: 1.5px solid var(--kit-fg-3); rotate: 45deg; }
+.kit-breadcrumbs li + li:dir(rtl)::before { rotate: -135deg; }
+.kit-breadcrumbs a { color: var(--kit-fg-2); text-decoration: none; border-radius: 3px; }
+.kit-breadcrumbs a:hover { color: var(--kit-accent); text-decoration: underline; text-underline-offset: 3px; }
+.kit-breadcrumbs a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-breadcrumbs [aria-current="page"] { color: var(--kit-fg); font-weight: 600; }
+@media (forced-colors: active) { .kit-breadcrumbs li + li::before { border-color: CanvasText; } }

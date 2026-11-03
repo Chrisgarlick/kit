@@ -1,0 +1,18 @@
+/* SPDX-License-Identifier: MIT
+ * Pagination (tier 1): nav[aria-label="Pagination"] > ul.kit-pagination > li > a
+ * aria-current="page" marks the current page; <span aria-disabled="true">
+ * for a previous or next that isn't there.
+ */
+.kit-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; padding: 0; list-style: none; font: 500 var(--kit-text-sm)/1 var(--kit-font-ui); }
+.kit-pagination :is(a, span[aria-disabled]) { display: inline-grid; place-items: center; min-inline-size: 36px; block-size: 36px; padding-inline: 10px; border: 1px solid transparent; border-radius: var(--kit-radius-2); color: var(--kit-fg-2); text-decoration: none; font-variant-numeric: tabular-nums; }
+.kit-pagination a:hover { background: var(--kit-surface-2); color: var(--kit-fg); }
+.kit-pagination a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
+.kit-pagination a[aria-current="page"] { border-color: var(--kit-line-strong); background: var(--kit-surface); color: var(--kit-fg); font-weight: 600; box-shadow: var(--kit-shadow-1); }
+.kit-pagination :is(a[rel="prev"], a[rel="next"], span[aria-disabled]) { gap: 6px; }
+.kit-pagination a[rel="prev"]::before, .kit-pagination span[aria-disabled]:first-child::before { content: "←"; }
+.kit-pagination a[rel="next"]::after { content: "→"; }
+.kit-pagination :is(a[rel], span[aria-disabled]) { grid-auto-flow: column; }
+.kit-pagination span[aria-disabled] { color: var(--kit-fg-3); cursor: not-allowed; }
+.kit-pagination-gap { padding-inline: 6px; color: var(--kit-fg-3); }
+.kit-pagination-status { padding-inline: 10px; color: var(--kit-fg-2); }
+.kit-pagination[data-compact] { gap: 8px; }

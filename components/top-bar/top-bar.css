@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: MIT
+ * Top bar (tier 1): header.kit-topbar with .kit-topbar-brand,
+ * nav.kit-topbar-nav and .kit-topbar-actions. data-sticky pins it.
+ */
+.kit-topbar { display: flex; flex-wrap: nowrap; align-items: center; gap: 0 var(--kit-space-5); min-block-size: 56px; padding-inline: var(--kit-space-4); border-block-end: 1px solid var(--kit-line); background: var(--kit-surface); font: 500 var(--kit-text-sm)/1 var(--kit-font-ui); }
+.kit-topbar[data-sticky] { position: sticky; inset-block-start: 0; z-index: 40; background: color-mix(in srgb, var(--kit-surface) 85%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.kit-topbar-brand { flex: none; display: inline-flex; align-items: center; gap: 10px; color: var(--kit-fg); font: 600 var(--kit-text-md)/1 var(--kit-font-ui); text-decoration: none; }
+.kit-topbar-nav { display: flex; flex: 1 1 auto; gap: 4px; align-self: stretch; min-inline-size: 0; overflow-x: auto; scrollbar-width: none; }
+.kit-topbar-nav a { display: inline-flex; align-items: center; padding-inline: 10px; border-block: 2px solid transparent; color: var(--kit-fg-2); text-decoration: none; white-space: nowrap; }
+.kit-topbar-nav a:hover { color: var(--kit-fg); }
+.kit-topbar-nav a[aria-current="page"] { color: var(--kit-fg); border-block-end-color: var(--kit-accent); font-weight: 600; }
+.kit-topbar-nav a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: -4px; border-radius: 6px; }
+.kit-topbar-actions { flex: none; display: flex; align-items: center; gap: 6px; margin-inline-start: auto; }
+@media (max-width: 40rem) { .kit-topbar { flex-wrap: wrap; } .kit-topbar-nav { order: 3; flex-basis: 100%; block-size: 44px; margin-inline: calc(-1 * var(--kit-space-4)); padding-inline: var(--kit-space-3); border-block-start: 1px solid var(--kit-line); } .kit-topbar { padding-block-start: 8px; } }

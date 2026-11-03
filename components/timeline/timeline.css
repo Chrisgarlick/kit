@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: MIT
+ * Timeline (tier 1): ol.kit-timeline > li[data-tone] with
+ * .kit-timeline-title, .kit-timeline-time and text; a .kit-avatar first
+ * child replaces the dot.
+ */
+.kit-timeline { margin: 0; padding: 0; list-style: none; font: 400 var(--kit-text-sm)/1.5 var(--kit-font-ui); }
+.kit-timeline > li { --_tone: var(--kit-fg-3); position: relative; display: grid; grid-template-columns: auto 1fr; column-gap: 8px; padding-inline-start: 32px; padding-block-end: var(--kit-space-5); }
+.kit-timeline > li:last-child { padding-block-end: 0; }
+.kit-timeline > li::before { content: ""; position: absolute; inset-inline-start: 7px; inset-block-start: 5px; inline-size: 10px; block-size: 10px; border-radius: 50%; background: var(--_tone); box-shadow: 0 0 0 3px var(--kit-surface), 0 0 0 4px color-mix(in srgb, var(--_tone) 30%, transparent); }
+.kit-timeline > li::after { content: ""; position: absolute; inset-inline-start: 11.5px; inset-block: 20px 0; inline-size: 1px; background: var(--kit-line); }
+.kit-timeline > li:last-child::after { display: none; }
+.kit-timeline > li:has(> .kit-avatar)::before { display: none; }
+.kit-timeline > li > .kit-avatar { position: absolute; inset-inline-start: -2px; inset-block-start: -2px; }
+.kit-timeline > li[data-tone="good"] { --_tone: var(--kit-good); }
+.kit-timeline > li[data-tone="warn"] { --_tone: var(--kit-warn); }
+.kit-timeline > li[data-tone="bad"] { --_tone: var(--kit-bad); }
+.kit-timeline > li[data-tone="info"] { --_tone: var(--kit-info); }
+.kit-timeline > li[data-tone="accent"] { --_tone: var(--kit-accent); }
+.kit-timeline p { grid-column: 1 / -1; margin: 0; color: var(--kit-fg-2); }
+.kit-timeline .kit-timeline-title { grid-column: 1; color: var(--kit-fg); font-weight: 600; }
+.kit-timeline-time { grid-column: 2; grid-row: 1; justify-self: end; color: var(--kit-fg-3); font-size: var(--kit-text-xs); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (forced-colors: active) { .kit-timeline > li::before { background: CanvasText; } }

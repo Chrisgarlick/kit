@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: MIT
+ * Split button: a main kit-button joined to a <kit-menu> button.
+ */
+.kit-split-button { display: inline-flex; isolation: isolate; }
+.kit-split-button > .kit-button { border-start-end-radius: 0; border-end-end-radius: 0; }
+.kit-split-button > kit-menu > .kit-button { border-start-start-radius: 0; border-end-start-radius: 0; margin-inline-start: -1px; }
+.kit-split-button > kit-menu > .kit-button[data-variant="primary"] { margin-inline-start: 1px; }
+.kit-split-button .kit-button:is(:hover, :focus-visible) { z-index: 1; }

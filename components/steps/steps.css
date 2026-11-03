@@ -1,0 +1,26 @@
+/* SPDX-License-Identifier: MIT
+ * Steps (tier 1): ol.kit-steps > li[data-state="done|current"], with
+ * aria-current="step" on the current one. data-orientation="vertical".
+ */
+.kit-steps { --_dot: 28px; display: flex; margin: 0; padding: 0; list-style: none; counter-reset: kit-step; font: 400 var(--kit-text-sm)/1.35 var(--kit-font-ui); }
+.kit-steps > li { position: relative; flex: 1; display: grid; justify-items: center; gap: 2px; padding-block-start: calc(var(--_dot) + 10px); text-align: center; counter-increment: kit-step; min-inline-size: 0; }
+.kit-steps > li::before { content: counter(kit-step); position: absolute; inset-block-start: 0; inset-inline-start: calc(50% - var(--_dot) / 2); z-index: 1; display: grid; place-items: center; inline-size: var(--_dot); block-size: var(--_dot); border: 2px solid var(--kit-line-strong); border-radius: 50%; background: var(--kit-surface); color: var(--kit-fg-3); font-weight: 600; font-size: var(--kit-text-xs); }
+.kit-steps > li + li::after { content: ""; position: absolute; inset-block-start: calc(var(--_dot) / 2 - 1px); inset-inline: calc(-50% + var(--_dot) / 2 + 4px) calc(50% + var(--_dot) / 2 + 4px); block-size: 2px; border-radius: 2px; background: var(--kit-line-strong); }
+.kit-steps > li[data-state="done"]::before { content: ""; border-color: var(--kit-accent); background: var(--kit-accent) center / 14px no-repeat; background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272.25%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m3.5 8.5 3 3 6-7%27/%3E%3C/svg%3E"); }
+.kit-steps > li[data-state="current"]::before { border-color: var(--kit-accent); color: var(--kit-accent); box-shadow: 0 0 0 4px var(--kit-accent-soft); }
+.kit-steps > li:is([data-state="done"], [data-state="current"]) + li::after, .kit-steps > li[data-state="done"] + li[data-state]::after { background: var(--kit-accent); }
+.kit-steps > li:not([data-state="done"]) + li:not([data-state])::after { background: var(--kit-line-strong); }
+.kit-steps-title { color: var(--kit-fg); font-weight: 600; }
+.kit-steps > li:not([data-state]) .kit-steps-title { color: var(--kit-fg-2); font-weight: 500; }
+.kit-steps-hint { color: var(--kit-fg-3); font-size: var(--kit-text-xs); }
+.kit-steps a { color: inherit; text-decoration: none; }
+.kit-steps a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; border-radius: 3px; }
+.kit-steps[data-orientation="vertical"] { flex-direction: column; }
+.kit-steps[data-orientation="vertical"] > li { justify-items: start; padding-block: 3px var(--kit-space-5); padding-inline-start: calc(var(--_dot) + 14px); text-align: start; }
+.kit-steps[data-orientation="vertical"] > li:last-child { padding-block-end: 0; }
+.kit-steps[data-orientation="vertical"] > li::before { inset-inline-start: 0; }
+.kit-steps[data-orientation="vertical"] > li + li::after { display: none; }
+.kit-steps[data-orientation="vertical"] > li:not(:last-child)::after { content: ""; position: absolute; display: block; inset-inline-start: calc(var(--_dot) / 2 - 1px); inset-block: calc(var(--_dot) + 4px) 4px; inline-size: 2px; border-radius: 2px; background: var(--kit-line-strong); }
+.kit-steps[data-orientation="vertical"] > li[data-state="done"]:not(:last-child)::after { background: var(--kit-accent); }
+@media (max-width: 30rem) { .kit-steps:not([data-orientation]) .kit-steps-hint { display: none; } }
+@media (forced-colors: active) { .kit-steps > li::before { border-color: CanvasText; } .kit-steps > li[data-state="done"]::before { background-color: Highlight; } }

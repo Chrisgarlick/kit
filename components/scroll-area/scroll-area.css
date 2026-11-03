@@ -1,0 +1,32 @@
+/* SPDX-License-Identifier: MIT
+ * Scroll area (tier 1): a box that scrolls on its own, with slim scrollbars
+ * and shadows at the edges that still have content past them.
+ *   <div class="kit-scroll" data-height="sm|md|lg" [data-axis="x|y|both"] role="region" aria-label="…" tabindex="0">
+ */
+.kit-scroll {
+  --_bg: var(--kit-surface);
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; min-inline-size: 0;
+  padding: var(--kit-space-3) var(--kit-space-4); border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2);
+  scrollbar-width: thin; scrollbar-color: var(--kit-line-strong) transparent;
+  /* Covers that scroll with the content hide the shadows at the ends. */
+  background:
+    linear-gradient(var(--_bg) 30%, transparent) top / 100% 24px no-repeat local,
+    linear-gradient(transparent, var(--_bg) 70%) bottom / 100% 24px no-repeat local,
+    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / 0.12), transparent) top / 100% 10px no-repeat scroll,
+    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / 0.12), transparent) bottom / 100% 10px no-repeat scroll,
+    var(--_bg);
+}
+.kit-scroll:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-scroll[data-height="sm"] { max-block-size: 10rem; }
+.kit-scroll[data-height="md"] { max-block-size: 16rem; }
+.kit-scroll[data-height="lg"] { max-block-size: 24rem; }
+.kit-scroll[data-axis="x"] { overflow-x: auto; overflow-y: hidden; }
+.kit-scroll[data-axis="both"] { overflow: auto; }
+.kit-scroll[data-axis="x"] { background:
+    linear-gradient(to right, var(--_bg) 30%, transparent) left / 24px 100% no-repeat local,
+    linear-gradient(to left, var(--_bg) 30%, transparent) right / 24px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgb(0 0 0 / 0.12), transparent) left / 10px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgb(0 0 0 / 0.12), transparent) right / 10px 100% no-repeat scroll,
+    var(--_bg); }
+.kit-scroll > :first-child { margin-block-start: 0; }
+.kit-scroll > :last-child { margin-block-end: 0; }

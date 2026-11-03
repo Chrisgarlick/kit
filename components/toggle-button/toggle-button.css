@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: MIT
+ * Toggle button: a kit-button with aria-pressed; toggle.js flips it.
+ */
+.kit-button[aria-pressed="true"] { --_bg: var(--kit-surface-3); --_hover: var(--kit-surface-3); --_border: var(--kit-line-strong); box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.12); color: var(--kit-fg); }
+.kit-button[aria-pressed="true"][data-variant="ghost"] { --_bg: var(--kit-accent-soft); --_fg: var(--kit-accent); }
+@media (forced-colors: active) { .kit-button[aria-pressed="true"] { background: Highlight; color: HighlightText; } }

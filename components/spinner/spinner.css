@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: MIT
+ * Spinner (tier 1): a small loading indicator.
+ *   <span class="kit-spinner" role="status" [data-size="sm|lg"]><span class="kit-vh">Loading</span></span>
+ */
+.kit-spinner { --_s: 20px; display: inline-block; inline-size: var(--_s); block-size: var(--_s); flex: none; border-radius: 50%; color: var(--kit-accent);
+  border: calc(var(--_s) / 8) solid color-mix(in srgb, currentColor 22%, transparent); border-block-start-color: currentColor;
+  animation: kit-spin 0.7s linear infinite; vertical-align: middle; }
+.kit-spinner[data-size="sm"] { --_s: 14px; }
+.kit-spinner[data-size="lg"] { --_s: 32px; }
+@keyframes kit-spin { to { transform: rotate(360deg); } }
+@keyframes kit-pulse-soft { 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .kit-spinner { animation: kit-pulse-soft 1.6s ease-in-out infinite; } }
+@media (forced-colors: active) { .kit-spinner { border-color: CanvasText; border-block-start-color: Highlight; } }
