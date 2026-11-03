@@ -8,9 +8,14 @@ import AxeBuilder from '@axe-core/playwright';
 // KIT_SITE_URL=https://ui.chrisgarlick.com runs the same checks against the live site.
 const base = process.env.KIT_SITE_URL ?? 'http://127.0.0.1:8152';
 
+// Each test walks every page with axe, which takes a while in Firefox and WebKit.
+test.describe.configure({ timeout: 180_000 });
+
 async function sitePages(request) {
   const xml = await (await request.get(base + '/sitemap.xml')).text();
-  return [...xml.matchAll(/<loc>[^<]*?(\/[^<]*)<\/loc>/g)].map((m) => m[1]).concat(['/no-such-page']);
+  const paths = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
+  expect(paths.length).toBeGreaterThan(5);
+  return paths.concat(['/no-such-page']);
 }
 
 async function check(page, path) {
@@ -19,7 +24,8 @@ async function check(page, path) {
   page.removeAllListeners('pageerror');
   page.on('pageerror', (e) => problems.push(`script error: ${e.message}`));
   page.on('console', (m) => { if (m.type() === 'error' && !/status of 404/.test(m.text())) problems.push(`console: ${m.text()}`); });
-  await page.goto(base + path);
+  const res = await page.goto(base + path);
+  if (res.status() !== (path === '/no-such-page' ? 404 : 200)) problems.push(`answered ${res.status()}`);
   await page.waitForFunction(() => !document.querySelector(':not(:defined)'));
   const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag22aa']).analyze();
   for (const v of axe.violations.filter((v) => ['serious', 'critical'].includes(v.impact))) problems.push(`${v.id}: ${v.nodes.map((n) => n.target.join(' ')).slice(0, 3).join(', ')}`);

@@ -222,7 +222,10 @@ func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any)
 	if err := md.Convert(body, &html); err != nil {
 		return nil, fmt.Errorf("%s/README.md: %w", where, err)
 	}
-	c.Body = template.HTML(html.String()) //nolint:gosec // Markdown rendered by goldmark, which escapes raw HTML
+	// Code blocks and tables scroll sideways when they're wide, so they have
+	// to be reachable by keyboard (WCAG 2.1.1).
+	body2 := strings.NewReplacer("<pre>", `<pre tabindex="0">`, "<table>", `<table tabindex="0">`).Replace(html.String())
+	c.Body = template.HTML(body2) //nolint:gosec // Markdown rendered by goldmark, which escapes raw HTML
 
 	if b, err := os.ReadFile(filepath.Join(dir, "demo.html")); err == nil {
 		t, err := template.New(slug).Option("missingkey=error").Funcs(demoFuncs).Parse(string(b))

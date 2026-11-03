@@ -127,7 +127,9 @@ main { padding-block: var(--kit-space-6) 80px; min-inline-size: 0; outline: none
 .code-panel { border-block-start: 1px solid var(--kit-line); }
 .code-panel summary { cursor: pointer; padding: var(--kit-space-3) var(--kit-space-4); font-weight: 600; font-size: var(--kit-text-sm); }
 .code-panel pre { margin: 0; padding: var(--kit-space-4); overflow-x: auto; background: var(--kit-surface-2); font-size: var(--kit-text-sm); line-height: 1.6; }
-.prose { max-inline-size: 72ch; display: grid; gap: var(--kit-space-3); }
+.prose { max-inline-size: 72ch; display: grid; gap: var(--kit-space-3); grid-template-columns: minmax(0, 1fr); }
+.prose pre { margin: 0; padding: var(--kit-space-3) var(--kit-space-4); overflow-x: auto; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface-2); font-size: var(--kit-text-sm); line-height: 1.6; }
+.prose pre code { padding: 0; background: none; font-size: inherit; }
 .prose h2 { font: 600 var(--kit-text-xl)/1.25 var(--kit-font-display); letter-spacing: -0.02em; margin-block-start: var(--kit-space-4); }
 .prose p, .prose li { color: var(--kit-fg-2); }
 .prose ul { margin: 0; padding-inline-start: 1.2em; display: grid; gap: 6px; }
@@ -158,3 +160,4 @@ main { padding-block: var(--kit-space-6) 80px; min-inline-size: 0; outline: none
 .tile-raised { background: var(--kit-surface); border-radius: var(--kit-radius-3); border-color: transparent; }
 .note { color: var(--kit-fg-3); font-size: var(--kit-text-sm); }
 @media (max-width: 30rem) { .scale li, .bars li { grid-template-columns: 1fr auto; } .scale code, .bars code { grid-column: 1 / -1; } }
+.prose :is(pre, table):focus-visible, .code-panel pre:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
