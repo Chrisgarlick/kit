@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: data display (stat tile, description list, data table, then the data grid) and charts. Progress is noted under each phase below.
+> Next: charts (sparkline, line, bar, donut on one scale system), then the virtualised data grid. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -235,14 +235,14 @@ The look, before the behaviour.
   - `segmented-control`: the styling, now also for `<kit-segmented>` (see phase 3);
   - `sidebar`: icons, counts and badges, section labels and nested pages. The site's own navigation uses it.
   - **Feedback** (3 November): `alert` (four tones, title, actions), `progress-bar` (native `<progress>`, tones, indeterminate), `skeleton`, `empty-state`.
-  - **Data display** (3 November): `badge`, `status-dot` (with a live pulse), `avatar` (initials, photos, groups), `card` (with an accessible whole-card link), `kbd`.
+  - **Data display** (3 November): `badge`, `status-dot` (with a live pulse), `avatar` (initials, photos, groups), `card` (with an accessible whole-card link), `kbd`; then `stat-tile` (trend shown by shape, `data-good="down"` for costs), `description-list` (container-query stacking, columns) and `data-table` (tabular figures, sticky header, scroll region, sortable columns via `table-sort.js` with natural, number and date order).
   - **Layout** (3 November): `stack`, `cluster`, `grid` (auto-filling columns, for groups of cards), `split` (side and main, stacking without breakpoints), `container`, `divider`.
   - **Inputs** (3 November): `text-field` (hint, error, prefix and suffix groups, textarea, read-only), `select` (native), `checkbox` (with the mixed state), `radio-group` (list, row and tiles).
 
   All CSS is 5.6 KB gzipped, fonts' `@font-face` rules and tokens included.
 - **Placeholder content:** literal placeholder text in every demo (no invented company or records). Demos can still read `site/data/*.yaml` as `.Data`, for charts later.
 
-**Not started:** the theming recipe and its example, the rest of tier 1 (type primitives, scroll area, tables, description list, code block, print), the icon sprite and the visual-regression baseline.
+**Not started:** the theming recipe and its example, the rest of tier 1 (type primitives, scroll area, code block, print), the icon sprite and the visual-regression baseline.
 
 ### Phase 3: interactive components (L)
 

@@ -1,0 +1,37 @@
+/* SPDX-License-Identifier: MIT
+ * Data table (tier 1 styles; table-sort.js adds sorting): a native table
+ * for rows of records, inside a scroll area.
+ *   <div class="kit-table-wrap" role="region" aria-label="…" tabindex="0">
+ *     <table class="kit-table" [data-striped] [data-sticky] [data-sortable]>…</table>
+ *   </div>
+ * data-numeric on a th or td right-aligns it in tabular figures.
+ */
+.kit-table-wrap { max-inline-size: 100%; overflow: auto; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-3); background: var(--kit-surface); }
+.kit-table-wrap:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-table-wrap[data-max-height] { max-block-size: 24rem; }
+.kit-table { inline-size: 100%; border-collapse: separate; border-spacing: 0; color: var(--kit-fg); font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-table caption { padding: var(--kit-space-3) var(--kit-space-4); text-align: start; color: var(--kit-fg-2); font-weight: 600; caption-side: top; }
+.kit-table :is(th, td) { padding: 10px var(--kit-space-4); text-align: start; vertical-align: middle; border-block-end: 1px solid var(--kit-line); white-space: nowrap; }
+.kit-table thead th { position: relative; background: var(--kit-surface-2); color: var(--kit-fg-2); font: 600 var(--kit-text-xs)/1.3 var(--kit-font-ui); text-transform: uppercase; letter-spacing: 0.05em; }
+.kit-table tbody tr:last-child > * { border-block-end: 0; }
+.kit-table tbody tr:hover { background: color-mix(in srgb, var(--kit-surface-2) 60%, transparent); }
+.kit-table tbody tr[aria-selected="true"] { background: var(--kit-accent-soft); }
+.kit-table tbody th { font-weight: 600; }
+.kit-table :is(th, td)[data-numeric] { text-align: end; font-variant-numeric: tabular-nums; }
+.kit-table td[data-wrap], .kit-table th[data-wrap] { white-space: normal; min-inline-size: 12rem; }
+.kit-table[data-striped] tbody tr:nth-child(even) { background: color-mix(in srgb, var(--kit-surface-2) 45%, transparent); }
+.kit-table[data-sticky] thead th { position: sticky; inset-block-start: 0; z-index: 1; }
+.kit-table tfoot :is(th, td) { border-block: 1px solid var(--kit-line-strong) 0; font-weight: 600; background: var(--kit-surface-2); }
+:root[data-density="compact"] .kit-table :is(th, td), .kit-table[data-density="compact"] :is(th, td) { padding-block: 6px; }
+
+/* Sortable headers (table-sort.js wraps each one's text in a button). */
+.kit-table th > .kit-sort { all: unset; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; border-radius: 3px; }
+.kit-table th[data-numeric] > .kit-sort { flex-direction: row-reverse; }
+.kit-table th > .kit-sort:hover { color: var(--kit-fg); }
+.kit-table th > .kit-sort:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 3px; }
+.kit-table th > .kit-sort::after { content: ""; inline-size: 8px; block-size: 10px; opacity: 0.35; background: currentColor;
+  clip-path: polygon(50% 0, 100% 38%, 0 38%, 0 62%, 100% 62%, 50% 100%); }
+.kit-table th[aria-sort="ascending"] > .kit-sort, .kit-table th[aria-sort="descending"] > .kit-sort { color: var(--kit-fg); }
+.kit-table th[aria-sort="ascending"] > .kit-sort::after { opacity: 1; clip-path: polygon(50% 0, 100% 45%, 0 45%); }
+.kit-table th[aria-sort="descending"] > .kit-sort::after { opacity: 1; clip-path: polygon(0 55%, 100% 55%, 50% 100%); }
+@media (forced-colors: active) { .kit-table th > .kit-sort::after { background: CanvasText; } }
