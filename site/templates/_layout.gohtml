@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{.Asset "kit.css"}}">
 <link rel="stylesheet" href="{{.Asset "site.css"}}">
 {{if eq .Path "/foundations/"}}<link rel="stylesheet" href="{{.Asset "foundations.css"}}">{{end}}
+<script type="module" src="{{.Asset "kit.js"}}"></script>
 <script type="module" src="{{.Asset "site.js"}}"></script>
 {{if .Dev}}<script type="module" src="{{.Asset "reload.js"}}"></script>{{end}}
 </head>
@@ -21,15 +22,15 @@
     <span class="wordmark">kit</span>
   </a>
   <div class="prefs">
-    <div class="kit-segmented" role="radiogroup" aria-label="Colour scheme" data-pref="theme">
-      <button type="button" role="radio" aria-checked="true" data-value="system">System</button>
-      <button type="button" role="radio" aria-checked="false" data-value="light">Light</button>
-      <button type="button" role="radio" aria-checked="false" data-value="dark">Dark</button>
-    </div>
-    <div class="kit-segmented" role="radiogroup" aria-label="Density" data-pref="density">
-      <button type="button" role="radio" aria-checked="true" data-value="comfortable">Comfortable</button>
-      <button type="button" role="radio" aria-checked="false" data-value="compact">Compact</button>
-    </div>
+    <kit-segmented aria-label="Colour scheme" data-pref="theme" value="system">
+      <button value="system" aria-checked="true">System</button>
+      <button value="light" aria-checked="false">Light</button>
+      <button value="dark" aria-checked="false">Dark</button>
+    </kit-segmented>
+    <kit-segmented aria-label="Density" data-pref="density" value="comfortable">
+      <button value="comfortable" aria-checked="true">Comfortable</button>
+      <button value="compact" aria-checked="false">Compact</button>
+    </kit-segmented>
     <div class="accents" role="group" aria-label="Accent colour">
       <button type="button" class="acc acc-spruce" data-accent="spruce" aria-pressed="true" aria-label="Spruce"></button>
       <button type="button" class="acc acc-indigo" data-accent="indigo" aria-pressed="false" aria-label="Indigo"></button>

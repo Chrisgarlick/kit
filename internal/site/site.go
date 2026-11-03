@@ -62,6 +62,7 @@ type Component struct {
 	Body template.HTML `yaml:"-"` // the README below its front matter
 	Demo template.HTML `yaml:"-"` // demo.html, run against the placeholder data
 	CSS  []string      `yaml:"-"` // stylesheets, relative to the root
+	JS   []string      `yaml:"-"` // tier 2 modules, relative to the root
 
 	group *Group
 }
@@ -240,6 +241,15 @@ func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any)
 	css, _ := filepath.Glob(filepath.Join(dir, "*.css"))
 	for _, f := range css {
 		c.CSS = append(c.CSS, rel(root, f))
+	}
+	js, _ := filepath.Glob(filepath.Join(dir, "*.js"))
+	for _, f := range js {
+		if !strings.HasSuffix(f, ".test.js") {
+			c.JS = append(c.JS, rel(root, f))
+		}
+	}
+	if c.Tier == 2 && len(c.JS) == 0 && c.Status != "preview" {
+		return nil, fmt.Errorf("%s: a tier 2 component past preview needs its .js", where)
 	}
 	return c, nil
 }

@@ -165,12 +165,37 @@ func (s *Site) bundle(out string, opt Options, res *Result) error {
 	if err := os.WriteFile(filepath.Join(gen, "foundations.css"), []byte(s.foundationsCSS()), 0o600); err != nil {
 		return err
 	}
+	// kit.js: every tier 2 component (each imports the core pieces it uses).
+	var kitJS strings.Builder
+	kitJS.WriteString("// kit: every tier 2 component\n")
+	for _, c := range s.Components {
+		for _, f := range c.JS {
+			fmt.Fprintf(&kitJS, "import %q;\n", filepath.ToSlash(filepath.Join(s.Root, f)))
+		}
+	}
+	if err := os.WriteFile(filepath.Join(gen, "kit.js"), []byte(kitJS.String()), 0o600); err != nil {
+		return err
+	}
+	// core.js: the whole core on its own, built only to measure it.
+	coreIndex := filepath.Join(s.Root, "core", "index.js")
+	_, err = os.Stat(coreIndex)
+	hasCore := err == nil
+	if hasCore {
+		core := fmt.Sprintf("export * from %q;\n", filepath.ToSlash(coreIndex))
+		if err := os.WriteFile(filepath.Join(gen, "core.js"), []byte(core), 0o600); err != nil {
+			return err
+		}
+	}
 
 	entries := []api.EntryPoint{
 		{InputPath: filepath.Join(gen, "kit.css"), OutputPath: "kit"},
 		{InputPath: filepath.Join(gen, "foundations.css"), OutputPath: "foundations"},
+		{InputPath: filepath.Join(gen, "kit.js"), OutputPath: "kit"},
 		{InputPath: filepath.Join(s.Root, "site", "assets", "site.css"), OutputPath: "site"},
 		{InputPath: filepath.Join(s.Root, "site", "assets", "site.js"), OutputPath: "site"},
+	}
+	if hasCore {
+		entries = append(entries, api.EntryPoint{InputPath: filepath.Join(gen, "core.js"), OutputPath: "core"})
 	}
 	if opt.Dev {
 		entries = append(entries, api.EntryPoint{InputPath: filepath.Join(s.Root, "site", "assets", "reload.js"), OutputPath: "reload"})
@@ -257,7 +282,7 @@ func (s *Site) bundle(out string, opt Options, res *Result) error {
 		}
 		res.Assets[name] = "/" + filepath.ToSlash(u)
 	}
-	for _, want := range []string{"kit.css", "foundations.css", "site.css", "site.js", "prefs.js"} {
+	for _, want := range []string{"kit.css", "kit.js", "foundations.css", "site.css", "site.js", "prefs.js"} {
 		if res.Assets[want] == "" {
 			return fmt.Errorf("bundle: no output for %s", want)
 		}

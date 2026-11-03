@@ -11,16 +11,23 @@ The documentation and live demos are at [ui.chrisgarlick.com](https://ui.chrisga
 
 ## Status
 
-Early. The design tokens and the first components (button, button group, segmented control) are in; the reactive core for tier 2 components is next. See [plan.md](plan.md) and [spec.md](spec.md).
+Early. In so far:
+- the design tokens;
+- the core runtime (`core/`, 5.6 KB gzipped);
+- the first components: button, button group, sidebar, and `<kit-segmented>`, the first tier 2 component.
+
+See [plan.md](plan.md) and [spec.md](spec.md).
 
 ## Layout
 
 | Path | What |
 |---|---|
+| `core/` | The runtime for tier 2 components: `KitElement`, the `html`/`svg` renderer, `css`, `define`, and the accessibility helpers |
 | `tokens/` | Design tokens and the self-hosted fonts |
 | `components/<name>/` | One folder per component: its CSS (and later JS), `README.md` and `demo.html` |
 | `site/` | The documentation site: groups, placeholder data, templates and the site's own assets |
 | `cmd/kit`, `internal/` | The `kit` tool (Go) |
+| `tests/` | Browser tests (Playwright): the core, each component, and every page of the site |
 | `design/` | Design explorations |
 
 ## Adding a component
@@ -43,11 +50,13 @@ Add its CSS and a `demo.html` (a Go template; the placeholder data is `.Data`, f
 
 ## Developing
 
-Requires Go 1.26.
+Requires Go 1.26, and Node for the browser tests (`npm install` once).
 
 ```sh
-make serve   # http://localhost:8150, rebuilding on every change
-make check   # lint, tests and a full site build
+make serve          # http://localhost:8150, rebuilding on every change
+make test           # Go tests
+make browser-test   # the core, components and site in Chromium (KIT_ALL_BROWSERS=1 adds Firefox and WebKit)
+make check          # all of it, plus lint and a full site build
 ```
 
 ## Licence

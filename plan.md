@@ -7,7 +7,9 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - four tier 1 components: button, button group, segmented control and sidebar;
 > - `kit site build` and `kit site serve` (Go), which assemble the site from the component folders.
 >
-> The site isn't deployed yet. Next: the core runtime (phase 1), starting with `<kit-segmented>`. Progress is noted under each phase below.
+> - the core runtime (3 November), with `<kit-segmented>` as its first component, and browser tests for both.
+>
+> The site isn't deployed yet. Next: more tier 2 components on the core. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -195,7 +197,19 @@ The engine and the safety nets every later component inherits.
 - **Tokens v1:** `tokens/tokens.css` has colour, type, space, radius, elevation, motion and density, with dark mode, four accents (spruce, indigo, amber, rose) and compact density. The values are hex and `rgb()` for now: the OKLCH rewrite and `kit check-contrast` are still to do. Contrast is checked with axe instead, which caught and fixed two misses (`--kit-warn`, and amber in light mode).
 - **Go CLI:** the site half exists (see phase 4). It bundles and minifies with esbuild, gives files content-hashed names, and prints each bundle's gzipped size. `kit check` (size budgets, unsafe-sink lint) isn't built.
 
-**Not started:** the core runtime and the test harness.
+- **The core runtime** (`core/`, 3 November): **5.6 KB gzipped** in all, under the 6 KB budget.
+  - `KitElement`, with the fixes from 1.2: reflected defaults, a 50-cycle loop guard, optional `render()` for components that enhance server markup, `ElementInternals` for form controls, and a fallback for `AbortSignal.any`, which is newer than the browser floor;
+  - `html`/`svg`, with a real scanner instead of the `>` heuristic, case-kept attribute names, keyed `repeat()`, CSP-safe `styleMap()` (custom properties only), and event options (`@scroll.passive`);
+  - blocked bindings: `on*`, `.innerHTML`, `.outerHTML`, `srcdoc` and plain `style`. `safeUrl` allows same-origin `blob:`;
+  - `css`, `define` (a second copy of a tag warns and keeps the first), and `a11y` (`uid`, `announce` with two regions and one inside an open modal, `roving`).
+- **Browser tests** (`tests/`, Playwright, `make browser-test`):
+  - the core: batching, reflection, early properties, disconnect and reconnect, latest-wins `run()`, the loop guard, the renderer and refused bindings;
+  - an XSS corpus of 12 hostile values through every kind of binding;
+  - `<kit-segmented>`, and every page of the site (axe in light and dark, at 1280 and 390 px, every accent).
+
+  All 30 pass in Chromium. Firefox and WebKit are wired up (`KIT_ALL_BROWSERS=1`) but not installed locally for lack of disk space.
+
+**Not started:** benchmarks and the heap check, `kit check` (size budgets, unsafe-sink lint) and the OKLCH token rewrite. The core always includes the renderer, about 2 KB of its size, even for components that don't render templates; that can be made optional.
 
 ### Phase 2: design system and static components (M)
 
@@ -215,7 +229,7 @@ The look, before the behaviour.
 - **Tier 1 CSS:**
   - `button`: four variants, three sizes, icon-only, a loading spinner via `aria-busy`, and disabled;
   - `button-group`, with toggle buttons;
-  - `segmented-control`: the styling only; its keyboard behaviour waits for the core;
+  - `segmented-control`: the styling, now also for `<kit-segmented>` (see phase 3);
   - `sidebar`: icons, counts and badges, section labels and nested pages. The site's own navigation uses it.
 
   All CSS is 2.4 KB gzipped, fonts' `@font-face` rules and tokens included.
@@ -235,6 +249,14 @@ APG patterns, form-associated where they hold values.
 - **The positioning helper** (anchor positioning plus fallback).
 
 **Done when** every component meets the definition of done, including the manual screen-reader pass, and a sample form submits natively with validation messages.
+
+**Done so far:** `<kit-segmented>` (3 November, beta).
+- It enhances server-rendered buttons: roles, a roving tabindex, arrows (swapped on right-to-left pages), Home and End.
+- It has a `change` event and a `choose()` method.
+- It submits with its form, resets with it, and follows a disabled `<fieldset>`.
+- It warns in the console when it has no accessible name.
+
+The site's own scheme and density controls use it. Its screen-reader pass is still to do.
 
 ### Phase 4: ui.chrisgarlick.com v1 and the registry (M)
 

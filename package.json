@@ -1,0 +1,14 @@
+{
+  "name": "kit",
+  "private": true,
+  "description": "Browser tests for kit's core, components and site. The library itself has no dependencies.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1"
+  }
+}

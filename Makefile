@@ -2,7 +2,7 @@
 GO   ?= go
 LINT ?= golangci-lint
 
-.PHONY: kit site serve test lint check clean
+.PHONY: kit site serve test browser-test lint check clean
 
 kit: ## Build the kit tool
 	$(GO) build -o bin/kit ./cmd/kit
@@ -16,11 +16,14 @@ serve: kit ## Serve the site at http://localhost:8150, rebuilding on every chang
 test:
 	$(GO) test ./...
 
+browser-test: ## Core, component and site tests in a real browser (npm install first)
+	npx playwright test
+
 lint:
 	$(LINT) run ./...
 	GOOS=linux $(LINT) run ./...
 
-check: lint test site ## Everything CI runs
+check: lint test site browser-test ## Everything CI runs
 
 clean:
 	rm -rf bin dist
