@@ -70,6 +70,8 @@
   --kit-radius-1: 6px;
   --kit-radius-2: 10px;
   --kit-radius-3: 14px;
+  --kit-button-radius: var(--kit-radius-2); /* 999px for pill buttons */
+  --kit-button-radius-sm: var(--kit-radius-1);
   --kit-radius-pill: 999px;
 
   /* Space and size (density changes these) */

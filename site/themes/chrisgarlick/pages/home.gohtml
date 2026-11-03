@@ -1,0 +1,162 @@
+{{define "bodyclass"}}cg-body{{end}}
+{{define "page"}}{{$s := "https://chrisgarlick.com"}}
+<div class="cg-page">
+<a class="cg-skip" href="#cg-main">Skip to content</a>
+<p class="cg-demo-bar"><span class="kit-container kit-cluster" data-justify="between"><span>The chrisgarlick.com homepage, rebuilt from <a href="/">kit</a> components in the <a href="{{.Theme.URL}}">Chris Garlick theme</a>.</span><a href="{{$s}}/">The real site →</a></span></p>
+
+<header class="cg-masthead">
+  <div class="kit-container kit-cluster cg-masthead-inner" data-justify="between" data-nowrap>
+    <a class="cg-wordmark" href="{{$s}}/" aria-label="Chris Garlick, home">Chris Garlick</a>
+    <nav class="cg-nav" aria-label="Main navigation">
+      <ul class="kit-cluster" data-gap="5">
+        <li>
+          <kit-menu class="cg-nav-menu">
+            <button class="cg-navlink">Services <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5l3 3 3-3"/></svg></button>
+            <div class="kit-menu-list">
+              <a href="{{$s}}/services/laravel" data-cg="red"><span class="kit-dot"></span>Laravel development</a>
+              <a href="{{$s}}/services/wordpress" data-cg="blue"><span class="kit-dot"></span>WordPress development</a>
+              <a href="{{$s}}/services/ai" data-cg="violet"><span class="kit-dot"></span>AI implementation</a>
+              <hr>
+              <a href="{{$s}}/services">All services</a>
+            </div>
+          </kit-menu>
+        </li>
+        <li><a class="cg-navlink" href="{{$s}}/work">Work</a></li>
+        <li><a class="cg-navlink" href="{{$s}}/work/kritano-website-audits">Kritano</a></li>
+        <li><a class="cg-navlink" href="{{$s}}/article">Articles</a></li>
+        <li><a class="cg-navlink" href="{{$s}}/tools/site-audit">Site audit</a></li>
+        <li><a class="cg-navlink" href="{{$s}}/about">About</a></li>
+        <li data-cg="ink"><a class="kit-button" data-variant="primary" data-size="sm" href="{{$s}}/contact">Start a project</a></li>
+      </ul>
+    </nav>
+    <button class="kit-button cg-menu-button" data-variant="ghost" data-icon type="button" commandfor="cg-drawer" command="show-modal" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<dialog class="kit-dialog kit-drawer" id="cg-drawer" aria-label="Navigation menu" closedby="any">
+  <header class="kit-dialog-header"><p class="cg-wordmark">Chris Garlick</p><button class="kit-button" data-variant="ghost" data-icon type="button" commandfor="cg-drawer" command="close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+  <nav class="kit-dialog-body" aria-label="Mobile navigation">
+    <ul class="cg-drawer-nav">
+      <li><a href="{{$s}}/services">Services</a></li>
+      <li><a class="cg-sub" href="{{$s}}/services/laravel">Laravel development</a></li>
+      <li><a class="cg-sub" href="{{$s}}/services/wordpress">WordPress development</a></li>
+      <li><a class="cg-sub" href="{{$s}}/services/ai">AI implementation</a></li>
+      <li><a href="{{$s}}/work">Work</a></li>
+      <li><a href="{{$s}}/work/kritano-website-audits">Kritano</a></li>
+      <li><a href="{{$s}}/article">Articles</a></li>
+      <li><a href="{{$s}}/tools/site-audit">Site audit</a></li>
+      <li><a href="{{$s}}/about">About</a></li>
+    </ul>
+  </nav>
+  <footer class="kit-dialog-footer" data-cg="ink"><a class="kit-button" data-variant="primary" href="{{$s}}/contact">Start a project</a></footer>
+</dialog>
+
+<main id="cg-main" tabindex="-1">
+<section class="kit-container cg-hero" aria-labelledby="cg-h1">
+  <div class="cg-hero-grid">
+    <div>
+      <p class="cg-label">Web developer, UK</p>
+      <h1 id="cg-h1">Websites and web apps that stay fast.</h1>
+      <p class="cg-lede">I build in Laravel and WordPress, and add AI where it actually earns its place. One developer from the first call to handover. No account managers, no junior hand-offs, and nothing locked to me when it is done.</p>
+      <div class="kit-cluster" data-gap="3">
+        <span data-cg="ink"><a class="kit-button cg-cta-lg" data-variant="primary" href="{{$s}}/contact">Start a project</a></span>
+        <a class="kit-button cg-cta-lg" href="{{$s}}/work">See the work</a>
+      </div>
+    </div>
+    <section class="cg-issue" aria-label="In this issue">
+      <p>In this issue</p>
+      <ol>
+        <li><a href="{{$s}}/services"><span class="cg-num">01</span><span><span class="cg-issue-title">Services</span><span class="cg-issue-sub">What I build, and how</span></span><span class="cg-arrow" aria-hidden="true">→</span></a></li>
+        <li><a href="{{$s}}/work"><span class="cg-num">02</span><span><span class="cg-issue-title">The work</span><span class="cg-issue-sub">Products and sites I have built</span></span><span class="cg-arrow" aria-hidden="true">→</span></a></li>
+        <li><a href="{{$s}}/work/kritano-website-audits"><span class="cg-num">03</span><span><span class="cg-issue-title">Kritano</span><span class="cg-issue-sub">My website auditing platform</span></span><span class="cg-arrow" aria-hidden="true">→</span></a></li>
+        <li><a href="{{$s}}/tools/site-audit"><span class="cg-num">04</span><span><span class="cg-issue-title">Free site audit</span><span class="cg-issue-sub">How does your site score?</span></span><span class="cg-arrow" aria-hidden="true">→</span></a></li>
+      </ol>
+    </section>
+  </div>
+</section>
+
+<section class="kit-container cg-section" aria-labelledby="cg-services">
+  <div class="kit-cluster cg-section-head" data-justify="between" data-align="baseline" data-double>
+    <h2 id="cg-services">What I build</h2>
+    <a class="cg-more" href="{{$s}}/services">All services →</a>
+  </div>
+  <div class="cg-services">
+    <a class="cg-service cg-service-lead" href="{{$s}}/services/laravel" data-cg="red">
+      <span class="cg-bar" aria-hidden="true"></span>
+      <span class="cg-label">Where most work starts</span>
+      <h3>Laravel development</h3>
+      <p>Web applications, admin panels and APIs built in Laravel, with tests from day one, so the tenth change is as easy as the first.</p>
+      <ul class="cg-includes">
+        <li>A written scope, so we both know what done looks like</li>
+        <li>Automated tests, because you will want to change it</li>
+        <li>Fast by design: caching, queues and sensible database work</li>
+      </ul>
+      <span class="cg-find">Find out more →</span>
+    </a>
+    <a class="cg-service" href="{{$s}}/services/wordpress" data-cg="blue"><span class="cg-bar" aria-hidden="true"></span><h3>WordPress development</h3><p>Custom WordPress themes and plugins, speed and security work, and rescues for sites that have become slow or fragile.</p><span class="cg-find">Find out more →</span></a>
+    <a class="cg-service" href="{{$s}}/services/ai" data-cg="violet"><span class="cg-bar" aria-hidden="true"></span><h3>AI implementation</h3><p>One manual process, turned into an AI-assisted one. Built into your systems, tested on your real data, and handed over with the documentation.</p><span class="cg-find">Find out more →</span></a>
+    <a class="cg-service" href="{{$s}}/services/software-development" data-cg="red"><span class="cg-bar" aria-hidden="true"></span><h3>Software development</h3><p>Internal tools, integrations and the unglamorous systems a business actually runs on, built in Laravel, PHP and TypeScript.</p><span class="cg-find">Find out more →</span></a>
+    <a class="cg-service" href="{{$s}}/services/website-building" data-cg="blue"><span class="cg-bar" aria-hidden="true"></span><h3>Website building</h3><p>Fast, accessible websites you can edit yourself. No page-builder bloat, and no monthly platform fee to keep it online.</p><span class="cg-find">Find out more →</span></a>
+  </div>
+</section>
+
+<section class="cg-feature" data-cg="green" aria-labelledby="cg-feature">
+  <div class="kit-container cg-feature-grid">
+    <div>
+      <p class="cg-label">Featured work</p>
+      <h2 id="cg-feature">Kritano, a website auditing platform</h2>
+      <p>A SaaS I founded, built and run. It audits a website across SEO, accessibility, security, performance, content quality and structured data in under two minutes.</p>
+      <a class="kit-button cg-cta-lg" href="{{$s}}/work/kritano-website-audits">Read the story</a>
+    </div>
+    <blockquote>More than 500 checks in under two minutes, across SEO, accessibility, security and performance.</blockquote>
+  </div>
+</section>
+
+<section class="kit-container cg-section cg-work" aria-labelledby="cg-work">
+  <div class="kit-cluster cg-section-head" data-justify="between" data-align="baseline"><h2 id="cg-work">More of my work</h2></div>
+  <div class="kit-grid" data-min="md" data-cols="2" data-gap="6">
+    <article class="kit-card" data-cg="red"><div class="kit-card-body"><p class="cg-stack">Laravel, Postgres, Inertia, React, TypeScript, Tailwind, nginx</p><h3><a class="kit-card-link" href="{{$s}}/work/cg-cms">cg-cms, a lightweight CMS for Laravel</a></h3><p>A Laravel CMS I designed and built to run this site. Content in Postgres, HTML rendered on save and served from disk by nginx, with an admin built in Inertia and React.</p></div></article>
+    <article class="kit-card" data-cg="red"><div class="kit-card-body"><p class="cg-stack">Laravel, Postgres, cg-cms, Tailwind, nginx</p><h3><a class="kit-card-link" href="{{$s}}/work/chrisgarlick-com">chrisgarlick.com, rebuilt on Laravel</a></h3><p>This site, moved from Astro and a Bun CMS to Laravel and cg-cms, with every URL kept, faster pages and lead capture built in.</p></div></article>
+  </div>
+</section>
+
+<section class="kit-container cg-section cg-articles" aria-labelledby="cg-articles">
+  <div class="kit-cluster cg-section-head" data-justify="between" data-align="baseline">
+    <h2 id="cg-articles">From the articles</h2>
+    <a class="cg-more" href="{{$s}}/article">All articles →</a>
+  </div>
+  <div class="kit-grid" data-min="sm" data-cols="3" data-gap="5">
+    <article class="kit-card" data-cg="violet"><header class="kit-card-header"><span class="kit-badge" data-tone="accent">AI implementation</span></header><div class="kit-card-body kit-stack" data-gap="3"><h3><a class="kit-card-link" href="{{$s}}/article/ai-client-intake-law-firms">AI client intake for law firms: from enquiry to matter open</a></h3><p>How law firms automate client intake with AI, from the first enquiry to an open matter, with a fee-earner approving every step that matters.</p></div><footer class="kit-card-footer"><time datetime="2026-10-09">9 October 2026</time></footer></article>
+    <article class="kit-card" data-cg="violet"><header class="kit-card-header"><span class="kit-badge" data-tone="accent">AI implementation</span></header><div class="kit-card-body kit-stack" data-gap="3"><h3><a class="kit-card-link" href="{{$s}}/article/ai-vs-hiring-accountancy">AI vs Hiring: The Real Cost for UK Accountancy Firms</a></h3><p>AI vs hiring for UK accountancy firms: a real cost comparison. What a new hire actually costs, what automation costs, and which one to pick.</p></div><footer class="kit-card-footer"><time datetime="2026-06-25">25 June 2026</time></footer></article>
+    <article class="kit-card" data-cg="violet"><header class="kit-card-header"><span class="kit-badge" data-tone="accent">AI implementation</span></header><div class="kit-card-body kit-stack" data-gap="3"><h3><a class="kit-card-link" href="{{$s}}/article/ai-client-onboarding-accountancy-uk">AI Client Onboarding Automation for UK Accountancy Firms</a></h3><p>Manual client onboarding eats 110 minutes per client. How UK accountancy firms automate it with AI, and what still needs a human.</p></div><footer class="kit-card-footer"><time datetime="2026-06-19">19 June 2026</time></footer></article>
+  </div>
+</section>
+
+<section class="cg-cta" aria-labelledby="cg-cta">
+  <div class="kit-container" data-size="md">
+    <h2 id="cg-cta">Got something to build, or fix?</h2>
+    <p>Tell me where it is now and where you want it to be. I will tell you honestly whether I am the right person for it.</p>
+    <span data-cg="ink"><a class="kit-button cg-cta-lg" data-variant="primary" href="{{$s}}/contact">Get in touch</a></span>
+  </div>
+</section>
+</main>
+
+<footer class="cg-footer">
+  <div class="kit-container">
+    <div class="kit-split" data-width="lg">
+      <div><p class="cg-footer-name">Chris Garlick</p><p>Web developer, UK</p></div>
+      <nav aria-label="Footer">
+        <ul class="kit-cluster" data-gap="5">
+          <li><a href="{{$s}}/services/laravel">Laravel</a></li><li><a href="{{$s}}/services/wordpress">WordPress</a></li><li><a href="{{$s}}/services/ai">AI</a></li><li><a href="{{$s}}/work">Work</a></li><li><a href="{{$s}}/work/kritano-website-audits">Kritano</a></li><li><a href="{{$s}}/article">Articles</a></li><li><a href="{{$s}}/tools/site-audit">Site audit</a></li><li><a href="{{$s}}/about">About</a></li><li><a href="{{$s}}/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <hr class="kit-divider">
+    <div class="kit-cluster cg-footer-small" data-justify="between">
+      <span>© {{year}} Chris Garlick</span>
+      <ul class="kit-cluster" data-gap="4"><li><a href="{{$s}}/privacy">Privacy</a></li><li><a href="{{$s}}/terms">Terms</a></li><li><a href="{{$s}}/sitemap.xml">Sitemap</a></li><li>Rebuilt here from kit</li></ul>
+    </div>
+  </div>
+</footer>
+</div>
+{{end}}

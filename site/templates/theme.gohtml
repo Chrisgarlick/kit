@@ -5,8 +5,9 @@
   <h1>{{.Theme.Title}}, built from <em>kit</em></h1>
   <p>{{.Theme.Summary}} Every component below is kit's, unchanged: one stylesheet of tokens sets the colours, type, corners and depth, in light and dark.</p>
   <div class="kit-cluster" data-gap="3">
-    <button class="kit-button brand-on-dark" type="button" data-toast="Audit started" data-toast-tone="good" data-toast-description="Results usually take about a minute.">Start an audit</button>
+    <button class="kit-button brand-on-dark" type="button" data-toast="Done" data-toast-tone="good" data-toast-description="This is a demo; nothing was sent.">{{or .Theme.CTA "Primary action"}}</button>
     <button class="kit-button brand-ghost" type="button" commandfor="theme-palette" command="--open">Search <kbd class="kit-kbd">⌘K</kbd></button>
+    {{range .Theme.Pages}}<a class="kit-button brand-ghost" href="{{.URL}}">{{.Title}}</a>{{end}}
   </div>
 </header>
 
@@ -84,7 +85,7 @@
 </dialog>
 <kit-command id="theme-palette" shortcut="" label="Search the theme page">
   <a href="#t-overview" data-group="Sections">Overview</a><a href="#t-data" data-group="Sections">Data</a><a href="#t-controls" data-group="Sections">Controls</a>
-  <button type="button" data-group="Actions" data-toast="Audit started" data-toast-tone="good">Start an audit</button>
+  <button type="button" data-group="Actions" data-toast="Done" data-toast-tone="good">{{or .Theme.CTA "Primary action"}}</button>
 </kit-command>
 </div>
 {{end}}

@@ -1,0 +1,71 @@
+# Kritano's brand, taken from ~/dev/kritano/app/web/static/app.css (2026-11-03).
+# The first client in Clients. Every contrast rule in specs/brand.md passes in both modes.
+# Kept here as the source of theme.css; Clients holds the canonical copy.
+brand: 1
+name: Kritano
+
+palette:
+  paper: "#F7F7FD"            # --bg
+  surface: "#FFFFFF"          # --panel-solid
+  ink: "#1B1A33"              # --text
+  ink-muted: "#4C4B68"        # --text-2
+  heading: "#1E1B4B"          # --i950 (brand ink)
+  rule: "#1E1B4B17"           # --line (indigo 950 at 9%)
+  accent: "#4F46E5"           # --i600
+  accent-soft: "#EEF2FF"      # --i50
+  accent-2: "#FBBF24"         # --amber, the spark
+  on-accent: "#FFFFFF"
+  inverse: "#1E1B4B"          # the floating top bar
+  on-inverse: "#FFFFFF"
+  good: "#15803D"
+  fair: "#92400E"
+  poor: "#B91C1C"
+
+modes:
+  dark:
+    paper: "#100F24"
+    surface: "#1B1938"
+    ink: "#E9E8F5"
+    ink-muted: "#B6B5CF"
+    heading: "#FFFFFF"
+    rule: "#FFFFFF14"
+    accent: "#818CF8"
+    accent-soft: "#202142"    # #818CF8 at 14% over paper, flattened
+    on-accent: "#0E0D24"
+    good: "#4ADE80"
+    fair: "#FBBF24"
+    poor: "#F87171"
+
+gradients:
+  hero: { type: linear, angle: 135deg, stops: ["#312E81", "#4F46E5"] }
+  glow: { type: radial, at: [92%, -12%], stops: ["#C7D2FE", paper] }      # the app's background glow
+  spark: { type: radial, at: [-10%, 108%], stops: ["#FDE68A", paper] }
+
+patterns:
+  grid: { type: grid, size: 80px, color: ink/5, fade: radial }   # the faint grid on Kritano's headers
+
+type:
+  display: { font: "lib:instrument-serif", italic-font: "lib:instrument-serif-italic", weight: 400, tracking: -0.012em, leading: 1.04 }
+  heading: { font: "lib:outfit", weight: 600, leading: 1.2 }
+  body:    { font: "lib:outfit", weight: 400, leading: 1.55 }
+  mono:    { font: "JetBrains Mono", weight: 400 }
+
+shape:
+  radius: { sm: 10px, md: 18px, lg: 28px }
+  shadow: { color: "#1E1B4B", opacity: 0.32, blur: 40px, y: 18px }
+  stroke: 1px
+
+logos:                        # from ~/Herd/pagepulser/client/public/brand/
+  primary: "lib:logo-lockup-light"
+  on-dark: "lib:logo-lockup-dark"
+  mark: "lib:logo-mark-light"
+wordmark: Kritano
+
+print:
+  page: A4
+  cover: editorial
+
+motion:
+  personality: confident
+  speed: 1.0
+  stagger: 60ms

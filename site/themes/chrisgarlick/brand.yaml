@@ -1,0 +1,63 @@
+# Chris Garlick's brand, taken from ~/dev/portfolio/theme/assets/app.css (2026-11-03),
+# in the Clients brand format (specs/brand.md, v1). Every contrast rule passes in both modes.
+# The site gives each service its own accent (house green, plus red for Laravel, blue for
+# WordPress, violet for AI, amber spare); the format has one accent and accent-2, so the
+# green is the accent and the others are listed under "Service accents" in the kit theme.
+brand: 1
+name: Chris Garlick
+
+palette:
+  paper: "#FAF8F3"            # --color-bg-primary, warm paper
+  surface: "#FFFFFF"          # --color-bg-surface
+  ink: "#151513"              # --color-text-primary
+  ink-muted: "#5B5852"        # --color-text-secondary
+  heading: "#151513"
+  rule: "#DAD5CA"             # --color-border
+  accent: "#1F5C45"           # --color-green, the house colour
+  accent-soft: "#DDE7DF"      # --color-green-soft
+  accent-2: "#B12F1C"         # --color-red, Laravel
+  on-accent: "#FFFFFF"
+  inverse: "#151513"          # the solid ink buttons and dark panels
+  on-inverse: "#FAF8F3"
+  good: "#1F5C45"
+  fair: "#925600"             # --color-amber
+  poor: "#B12F1C"
+
+modes:
+  dark:
+    paper: "#151513"          # --color-bg-dark
+    surface: "#1F1F1C"        # --color-bg-dark-surface
+    ink: "#E4E0D8"            # --color-text-dark
+    ink-muted: "#A39B91"      # the site's #888078 is 4.25:1 on surface; this passes (6.0:1)
+    heading: "#E4E0D8"
+    rule: "#2C2D27"
+    accent: "#E4E0D8"         # the site goes monochrome in dark: accent is the ink
+    accent-soft: "#262622"
+    on-accent: "#151513"
+    inverse: "#E4E0D8"
+    on-inverse: "#151513"
+    good: "#7CCFA4"
+    fair: "#E8B45A"
+    poor: "#F08A78"
+
+type:
+  display: { font: "Inter Tight", weight: 500, tracking: -0.035em, leading: 0.95 }
+  heading: { font: "Inter Tight", weight: 500, tracking: -0.02em, leading: 1.05 }
+  body:    { font: "Inter", weight: 400, leading: 1.6 }
+  mono:    { font: "JetBrains Mono", weight: 400 }
+
+shape:
+  radius: { sm: 6px, md: 12px, lg: 16px }
+  shadow: { color: "#1A1715", opacity: 0.08, blur: 30px, y: 8px }
+  stroke: 1px
+
+wordmark: Chris Garlick
+
+print:
+  page: A4
+  cover: editorial
+
+motion:
+  personality: calm
+  speed: 1.0
+  stagger: 60ms

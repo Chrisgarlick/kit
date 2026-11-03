@@ -93,11 +93,25 @@ type Site struct {
 // theme.css (which maps the brand onto kit's tokens), shown on its own page.
 // Themes are the site's, not kit's: they show how an app re-skins kit.
 type Theme struct {
-	ID      string `yaml:"-"`
+	ID      string       `yaml:"-"`
+	Title   string       `yaml:"title"`
+	Summary string       `yaml:"summary"`
+	Source  string       `yaml:"source"`
+	CTA     string       `yaml:"cta"`
+	Pages   []*ThemePage `yaml:"pages"`
+}
+
+// ThemePage is a full page in a theme's own style, with no kit site chrome:
+// site/themes/<id>/pages/<slug>.gohtml, shown at /themes/<id>/<slug>/.
+type ThemePage struct {
+	Slug    string `yaml:"slug"`
 	Title   string `yaml:"title"`
 	Summary string `yaml:"summary"`
-	Source  string `yaml:"source"`
+	theme   *Theme
 }
+
+// URL is the page's address.
+func (p *ThemePage) URL() string { return p.theme.URL() + p.Slug + "/" }
 
 // URL is the theme's page.
 func (t *Theme) URL() string { return "/themes/" + t.ID + "/" }
@@ -152,6 +166,14 @@ func Load(root string) (*Site, error) {
 		if _, err := os.Stat(filepath.Join(dir, "theme.css")); err != nil {
 			errs = append(errs, fmt.Errorf("%s: missing theme.css", rel(root, dir)))
 			continue
+		}
+		for _, pg := range t.Pages {
+			pg.theme = t
+			if !slugRe.MatchString(pg.Slug) || pg.Title == "" {
+				errs = append(errs, fmt.Errorf("%s: each page needs a lower-case slug and a title", rel(root, f)))
+			} else if _, err := os.Stat(filepath.Join(dir, "pages", pg.Slug+".gohtml")); err != nil {
+				errs = append(errs, fmt.Errorf("%s: page %q has no pages/%s.gohtml", rel(root, f), pg.Slug, pg.Slug))
+			}
 		}
 		s.Themes = append(s.Themes, t)
 	}

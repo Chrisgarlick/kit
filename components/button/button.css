@@ -14,7 +14,7 @@
   --_shadow: var(--kit-shadow-1);
   display: inline-flex; align-items: center; justify-content: center; gap: var(--kit-space-2);
   min-block-size: var(--_h); padding-inline: calc(var(--_h) * 0.4);
-  border: 1px solid var(--_border); border-radius: var(--kit-radius-2);
+  border: 1px solid var(--_border); border-radius: var(--kit-button-radius, var(--kit-radius-2));
   background: var(--_bg); color: var(--_fg); box-shadow: var(--_shadow);
   font: 600 var(--kit-text-md)/1.2 var(--kit-font-ui); text-decoration: none; white-space: nowrap;
   cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
@@ -34,7 +34,7 @@
 .kit-button[data-variant="danger"] { --_bg: var(--kit-bad); --_fg: var(--kit-bad-fg); --_border: transparent; --_hover: var(--kit-bad); --_shadow: none; }
 .kit-button[data-variant="danger"]:hover { filter: brightness(1.07); }
 
-.kit-button[data-size="sm"] { --_h: var(--kit-control-sm); font-size: var(--kit-text-sm); border-radius: var(--kit-radius-1); }
+.kit-button[data-size="sm"] { --_h: var(--kit-control-sm); font-size: var(--kit-text-sm); border-radius: var(--kit-button-radius-sm, var(--kit-radius-1)); }
 .kit-button[data-size="lg"] { --_h: var(--kit-control-lg); font-size: var(--kit-text-lg); }
 .kit-button[data-icon] { inline-size: var(--_h); padding-inline: 0; }
 

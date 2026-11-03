@@ -49,7 +49,7 @@
       <li><a href="/foundations/"{{if eq .Path "/foundations/"}} aria-current="page"{{end}}>Foundations</a></li>
     </ul>
     {{if .Site.Themes}}<p class="kit-sidebar-label">Themes</p>
-    <ul>{{range .Site.Themes}}<li><a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}</a></li>{{end}}</ul>
+    <ul>{{range .Site.Themes}}<li><a href="{{.URL}}"{{if eq $.Path .URL}} aria-current="page"{{end}}>{{.Title}}</a>{{if .Pages}}<ul>{{range .Pages}}<li><a href="{{.URL}}">{{.Title}}</a></li>{{end}}</ul>{{end}}</li>{{end}}</ul>
     {{end}}<p class="kit-sidebar-label">Components</p>
     <ul>
       {{range .Site.Groups}}{{$g := .}}

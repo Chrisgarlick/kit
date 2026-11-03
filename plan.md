@@ -242,7 +242,7 @@ The look, before the behaviour.
   All CSS is 5.6 KB gzipped, fonts' `@font-face` rules and tokens included.
 - **Placeholder content:** literal placeholder text in every demo (no invented company or records). Demos can still read `site/data/*.yaml` as `.Data`, for charts later.
 
-**Theming recipe** (3 November): `site/themes/<id>/` (theme.yaml and theme.css) builds a showcase page per theme; the Kritano theme, from its clients.kritano.com brand file, is the worked example (1.5 KB gzipped, light and dark, AA-checked). New tokens `--kit-display-weight` and `--kit-display-tracking` let single-weight display faces work. README has the recipe.
+**Theming recipe** (3 November): `site/themes/<id>/` (theme.yaml and theme.css) builds a showcase page per theme; the Kritano theme, from its clients.kritano.com brand file, is the worked example (1.5 KB gzipped, light and dark, AA-checked). New tokens `--kit-display-weight` and `--kit-display-tracking` let single-weight display faces work. README has the recipe. A second theme, **Chris Garlick** (from a new `brand.yaml` in the Clients format, written from the portfolio's CSS), adds `--kit-button-radius(-sm)` for pill buttons and per-element service accents (`data-cg`), and themes can ship full pages with no kit chrome (`theme.yaml` `pages:`, the bare layout): the chrisgarlick.com homepage rebuilt from kit at /themes/chrisgarlick/home/.
 
 **Not started:** the rest of tier 1 (type primitives, scroll area, code block, print), the icon sprite and the visual-regression baseline.
 

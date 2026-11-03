@@ -1,0 +1,18 @@
+{{define "bare"}}<!doctype html>
+<html lang="en-GB"{{with .Theme}} data-brand="{{.ID}}"{{end}}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{.Title}} · kit</title>
+<meta name="description" content="{{.Description}}">
+<link rel="canonical" href="{{.BaseURL}}{{.Path}}">
+<script src="{{.Asset "prefs.js"}}"></script>
+<link rel="stylesheet" href="{{.Asset "kit.css"}}">
+{{with .Theme}}<link rel="stylesheet" href="{{$.Asset (printf "theme-%s.css" .ID)}}">{{end}}
+<script type="module" src="{{.Asset "kit.js"}}"></script>
+{{if .Dev}}<script type="module" src="{{.Asset "reload.js"}}"></script>{{end}}
+</head>
+<body class="{{block "bodyclass" .}}{{end}}">
+{{template "page" .}}
+</body>
+</html>{{end}}

@@ -42,6 +42,7 @@ type page struct {
 	Group       *Group
 	Component   *Component
 	Theme       *Theme
+	ThemePage   *ThemePage
 	Dev         bool
 	BaseURL     string
 	assets      map[string]string
@@ -126,6 +127,26 @@ func (s *Site) Build(out string, opt Options) (*Result, error) {
 		p.Theme, p.Title, p.Description = t, t.Title+" theme", t.Summary
 		if err := render("theme", t.URL(), p); err != nil {
 			return nil, err
+		}
+		for _, pg := range t.Pages {
+			pt, err := s.themePage(t, pg)
+			if err != nil {
+				return nil, err
+			}
+			q := base
+			q.Theme, q.ThemePage, q.Title, q.Description, q.Path = t, pg, pg.Title, pg.Summary, pg.URL()
+			var buf bytes.Buffer
+			if err := pt.ExecuteTemplate(&buf, "bare", q); err != nil {
+				return nil, fmt.Errorf("%s: %w", pg.URL(), err)
+			}
+			file := filepath.Join(out, filepath.FromSlash(strings.TrimPrefix(pg.URL(), "/")), "index.html")
+			if err := os.MkdirAll(filepath.Dir(file), 0o755); err != nil {
+				return nil, err
+			}
+			if err := os.WriteFile(file, buf.Bytes(), 0o644); err != nil {
+				return nil, err
+			}
+			res.Pages = append(res.Pages, pg.URL())
 		}
 	}
 	nf := base
@@ -387,6 +408,13 @@ func (s *Site) templates() (map[string]*template.Template, error) {
 		out[name] = t
 	}
 	return out, nil
+}
+
+// themePage parses a theme's full page with the bare layout.
+func (s *Site) themePage(t *Theme, pg *ThemePage) (*template.Template, error) {
+	dir := filepath.Join(s.Root, "site", "templates")
+	files := []string{filepath.Join(dir, "_bare.gohtml"), filepath.Join(s.Root, "site", "themes", t.ID, "pages", pg.Slug+".gohtml")}
+	return template.New(pg.Slug).Funcs(template.FuncMap{"year": func() int { return time.Now().Year() }}).ParseFiles(files...)
 }
 
 func writeSitemap(out, baseURL string, pages []string) error {
