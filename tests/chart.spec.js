@@ -81,3 +81,23 @@ test('nice ticks land on round numbers that cover the data', async ({ page }) =>
   });
   expect(r).toEqual([[0, 20, 40, 60, 80, 100], [1000, 1500, 2000, 2500, 3000], [-4, -2, 0, 2, 4, 6, 8], [0, 1, 2, 3, 4, 5]]);
 });
+
+test('scatter, histogram and heatmap: drawn, summarised, and explorable by keyboard', async ({ page }) => {
+  await mount(page, `
+    <kit-chart type="scatter" id="sc"><table><thead><tr><th>Item</th><th>X</th><th>Y</th><th>Group</th></tr></thead><tbody>
+      <tr><th>a</th><td>1</td><td>2</td><td>One</td></tr><tr><th>b</th><td>2</td><td>4.1</td><td>Two</td></tr><tr><th>c</th><td>3</td><td>5.9</td><td>One</td></tr><tr><th>d</th><td>4</td><td>8.2</td><td>Two</td></tr></tbody></table></kit-chart>
+    <kit-chart type="histogram" id="hi"><table><thead><tr><th>#</th><th>Value</th></tr></thead><tbody>${[12, 14, 15, 18, 22, 23, 24, 26, 31, 47].map((v, i) => `<tr><th>${i}</th><td>${v}</td></tr>`).join('')}</tbody></table></kit-chart>
+    <kit-chart type="heatmap" id="hm"><table><thead><tr><th>Row</th><th>A</th><th>B</th></tr></thead><tbody><tr><th>One</th><td>1</td><td>9</td></tr><tr><th>Two</th><td>5</td><td></td></tr></tbody></table></kit-chart>`);
+  await expect(page.locator('#sc .kit-chart-point')).toHaveCount(4);
+  await expect(page.locator('#sc .kit-chart-legend li')).toHaveText(['One', 'Two']);
+  await expect(page.locator('#sc .kit-chart-plot')).toHaveAccessibleDescription(/4 points\. X from 1 to 4, Y from 2 to 8\.2, showing a strong positive relationship \(r = 1\.00\)/);
+  await expect(page.locator('#hi .kit-chart-plot')).toHaveAccessibleDescription(/^Histogram of 10 values of Value, in \d+ bins/);
+  await expect(page.locator('#hm .kit-chart-heat')).toHaveCount(4);
+  await expect(page.locator('#hm .kit-chart-plot')).toHaveAccessibleDescription('Heatmap of 2 rows by 2 columns, values from 1 to 9. Highest: One, B (9). Lowest: One, A (1).');
+  await page.locator('#hm .kit-chart-plot').focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowDown'); // down a row: from One, A to Two, A
+  await expect.poll(() => page.evaluate(() => document.querySelector('[data-kit-live="polite"]')?.textContent)).toBe('Two, A: 5');
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(() => page.evaluate(() => document.querySelector('[data-kit-live="polite"]')?.textContent)).toBe('Two, B: no value');
+});

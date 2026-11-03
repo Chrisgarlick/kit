@@ -32,4 +32,4 @@
 - id: charts
   title: Charts
   summary: Small, fast SVG charts on one shared scale system. Every chart has a text summary and can show its data as a table.
-  planned: [Heatmap, Scatter, Histogram, Small multiples]
+  planned: [Small multiples, Funnel, Bullet]

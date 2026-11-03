@@ -47,3 +47,17 @@ kit-chart { position: relative; }
 @media (forced-colors: active) {
   .kit-chart-line { stroke: CanvasText; } .kit-chart-bar, .kit-chart-slice, .kit-chart-area { fill: CanvasText; }
 }
+/* Scatter, histogram, heatmap */
+.kit-chart-point { fill: currentColor; fill-opacity: 0.8; stroke: var(--kit-surface); stroke-width: 1; transition: opacity var(--kit-duration) var(--kit-ease); }
+.kit-chart-axis-title { fill: var(--kit-fg-2); font-weight: 600; }
+.kit-chart-heat { fill: var(--kit-accent); }
+.kit-chart-heat.kit-chart-empty { fill: var(--kit-surface-2); }
+.kit-chart-heat-value { fill: var(--kit-fg); font: 500 10px/1 var(--kit-font-ui); pointer-events: none; }
+.kit-chart-plot .kit-chart-heat-value { fill: var(--kit-fg); }
+.kit-chart-plot .kit-chart-heat-value.kit-chart-heat-on { fill: var(--kit-accent-fg); }
+.kit-chart-heat-ring { fill: none; stroke: var(--kit-fg); stroke-width: 2; }
+.kit-chart-scale { gap: 8px; }
+.kit-chart-scale small { font-size: inherit; font-variant-numeric: tabular-nums; }
+.kit-chart-scale i { inline-size: 7rem; block-size: 8px; border-radius: 4px; background: linear-gradient(to right, color-mix(in srgb, var(--kit-accent) 10%, var(--kit-surface)), var(--kit-accent)); }
+kit-chart[type="heatmap"] .kit-chart-plot { block-size: var(--kit-chart-height, 260px); }
+@media (forced-colors: active) { .kit-chart-point, .kit-chart-heat { fill: CanvasText; } }

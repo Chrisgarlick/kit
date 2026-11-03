@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: more charts (heatmap, scatter, histogram), then the screen-reader pass. Progress is noted under each phase below.
+> Next: the screen-reader pass (VoiceOver) across the interactive components, then adoption in an app. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -276,7 +276,7 @@ Also done (3 November):
 - **Toast**: `toast()`, `kit.toast()`, server flash messages from markup and `data-toast` buttons; announced through the live regions, paused on hover and focus, kept inside open modals. **Switch** (native checkbox, `role="switch"`) and **slider** (native range with a filled track and `<output>` readout).
 - **`<kit-combobox>`** (beta): enhances a `<select>` into an APG combobox with list autocomplete (accent- and case-insensitive, starts-with first, highlighted matches, match count announced). The hidden select keeps the value, so submit, `required` and reset are native.
 - **`<kit-command>`** (beta): the command palette. Items from markup links and buttons (choosing one follows or clicks it), ⌘K/Ctrl+K, multi-word ranked filtering over labels, keywords and groups, and an async `source` for server results with latest-wins.
-- **Charts** (beta): `<kit-chart>` draws line, area, bar (grouped or stacked) and donut charts from a plain `<table>` (the no-script fallback and the screen-reader view, revealed by "Show table"), with `core/scale.js` (nice ticks, linear scales, formatters), a generated text summary, hover and arrow-key values that are announced, and redraws on resize or table edits. `<kit-sparkline>` for trends beside a number.
+- **Charts** (beta): `<kit-chart>` draws line, area, bar (grouped or stacked) and donut charts from a plain `<table>` (the no-script fallback and the screen-reader view, revealed by "Show table"), with `core/scale.js` (nice ticks, linear scales, formatters), a generated text summary, hover and arrow-key values that are announced, and redraws on resize or table edits. `<kit-sparkline>` for trends beside a number. Then scatter (groups, nearest-point hover, correlation in the summary), histogram (round bins, Sturges by default) and heatmap (accent shading with printed values, 2-D keyboard movement).
 - **`<kit-data-grid>`** (beta): APG data grid with virtual rows (a recycled pool, fixed row height), so 50,000 rows render a few dozen elements; aria-rowcount/colcount and per-row indices for the whole set, focus on the grid with the current cell as `aria-activedescendant`, arrows, Home/End, Ctrl+Home/End and Page Up/Down, header sorting, a multi-word `query`, per-column formats and safe `cell()` renderers.
 
 ### Phase 4: ui.chrisgarlick.com v1 and the registry (M)
