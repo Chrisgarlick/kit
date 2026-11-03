@@ -1,4 +1,4 @@
-// Command kit is kit's tooling: today, building and serving the
+// Command kit is kit's tooling: today, building, serving and deploying the
 // documentation site (ui.chrisgarlick.com). The registry commands (init, add,
 // verify, diff) come later.
 package main
@@ -27,6 +27,7 @@ const usage = `kit: a small, fast, accessible component library
 Usage:
   kit site build [-root .] [-out dist] [-base https://ui.chrisgarlick.com]
   kit site serve [-root .] [-addr localhost:8150]
+  kit site deploy [-host chrisgarlick-server] [-dir /var/www/ui] [-keep 5] [-rollback]
 `
 
 func main() {
@@ -40,6 +41,8 @@ func main() {
 		err = build(os.Args[3:])
 	case "serve":
 		err = serve(os.Args[3:])
+	case "deploy":
+		err = deploy(os.Args[3:])
 	default:
 		fmt.Fprint(os.Stderr, usage)
 		os.Exit(2)

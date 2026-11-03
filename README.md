@@ -61,6 +61,10 @@ make browser-test   # the core, components and site in Chromium (KIT_ALL_BROWSER
 make check          # all of it, plus lint and a full site build
 ```
 
+## Deploying ui.chrisgarlick.com
+
+The site is static files. `./bin/kit site deploy` builds it and rsyncs it into a new release folder on the server, then switches the `current` symlink nginx serves (`deploy/ui.chrisgarlick.com.conf`) in one step, keeping the last five releases. `./bin/kit site deploy -rollback` points it back at the previous one.
+
 ## Licence
 
 MIT. The fonts in `tokens/fonts/` are under the SIL Open Font License; see `tokens/fonts/LICENSE`.
