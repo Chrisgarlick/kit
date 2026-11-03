@@ -56,9 +56,9 @@ The spec is written for app chrome (buttons, dialogs, tabs). Data analysis needs
 
 ### 1.3 Things the spec doesn't decide
 
-- **Browser support.** State it: the last two versions of Chrome, Edge, Firefox and Safari (desktop and iOS), tested in Playwright's Chromium, Firefox and WebKit. That makes the newer APIs below usable, each with a fallback where noted.
-- **Theming per app.** One kit, several brands: a neutral default plus a `kritano` theme (indigo, amber, Outfit and Instrument Serif) and a `chrisgarlick` theme. Light and dark for each, chosen by `prefers-color-scheme` or an explicit `data-theme`, exactly as Kritano's app now does it.
-- **Colour.** Define the palette in OKLCH and use `light-dark()` so each token is declared once for both schemes. The Go CLI converts to sRGB to check contrast.
+- **Browser support.** Decided 3 November: as wide as possible. The floor is Safari and iOS 16.4, Chrome and Edge 111, and Firefox 115 ESR, tested in Playwright's Chromium, Firefox and WebKit. Newer APIs get fallbacks (see phase 0).
+- **Theming per app.** One kit, several brands. Kit ships the mechanism and a neutral default, and each app brings its own theme: a file in the app's repo that overrides the `--kit-*` tokens, in light and dark (decided 3 November).
+- **Colour.** Define the palette in OKLCH; the Go CLI converts to sRGB to check contrast. (`light-dark()` was proposed here but is newer than the browser floor, so dark values stay declared separately.)
 - **Positioning** (menus, popovers, tooltips, date pickers). CSS anchor positioning where supported; a ~1.5 KB fallback for the rest. Popover API for the top layer.
 - **Icons.** One SVG sprite of the icons the kit and your apps use (a subset of an ISC/MIT set such as Lucide), with `aria-hidden` by default.
 - **Versioning.** Semver for the kit; parts, custom properties and events are public API (the spec already says so); a deprecation note lasts one minor version.
@@ -165,9 +165,16 @@ Make the calls the spec leaves open, so nothing is rebuilt later:
 - Go for tooling, plain JavaScript in the browser, Rust only if phase 5's benchmarks demand it;
 - typefaces: Bricolage Grotesque (display), Instrument Sans (interface) and Geist Mono (figures, code and labels), self-hosted under the SIL OFL;
 - the look: graphite neutrals with a spruce-teal accent, from the component catalogue (`design/components.html`);
-- order: the design system and the site first, then the core, then the data components.
+- order: the design system and the site first, then the core, then the data components;
+- tag prefix `kit-` (3 November);
+- browser support as wide as possible (3 November). The floor is **Safari and iOS 16.4, Chrome and Edge 111, and Firefox 115 ESR**, and later: the first versions with everything web components need (custom elements, shadow DOM, constructable stylesheets, form-associated elements). Two rules apply on top:
+  - below the floor, pages still work: tier 1 is plain HTML and CSS, and tier 2 components start from usable native markup;
+  - anything newer than the floor (popover, anchor positioning) gets a fallback.
 
-**Still open:** the tag prefix (`kit-` assumed so far), the browser support matrix, the shadow DOM default, loading defaults per backend, and the `kritano` and `chrisgarlick` brand themes. The review in part 1 hasn't been folded into the spec as v0.2 yet.
+  `light-dark()` is dropped for this reason: separate dark values already work on the floor;
+- brand themes live in the apps (3 November). Kit ships the token mechanism and one neutral default theme. Each app overrides the `--kit-*` tokens it wants (accent, fonts, radius) in a theme file in its own repo, loaded after kit's CSS.
+
+**Still open:** the shadow DOM default and the loading default per backend; these settle while the core is built. The review in part 1 hasn't been folded into the spec as v0.2 yet.
 
 ### Phase 1: core and harnesses (L)
 
@@ -180,12 +187,12 @@ The engine and the safety nets every later component inherits.
   - dev checks that are stripped from production.
 - **Go CLI skeleton:** `kit build` (esbuild minify, per-file gzip and Brotli sizes, hashed filenames, manifest), `kit check` (size budgets, unsafe-sink lint).
 - **Test harness:** Playwright component tests in three engines, the XSS corpus runner, race tests with a controllable fake `fetch`, render benchmarks at 4x CPU throttle, and a 10,000-cycle mount/unmount heap check.
-- **Tokens v1:** colour (OKLCH, `light-dark()`), type, space, radius, elevation, motion, density; `kit check-contrast` in Go.
+- **Tokens v1:** colour (OKLCH), type, space, radius, elevation, motion, density; `kit check-contrast` in Go.
 
 **Done when** the core tests, XSS corpus and benchmarks pass in all three engines, the core is under 6 KB gzipped, and a counter works in a Go template, a Blade view and a WordPress page.
 
 **Done so far:**
-- **Tokens v1:** `tokens/tokens.css` has colour, type, space, radius, elevation, motion and density, with dark mode, four accents (spruce, indigo, amber, rose) and compact density. The values are hex and `rgb()` for now: the OKLCH and `light-dark()` rewrite and `kit check-contrast` are still to do. Contrast is checked with axe instead, which caught and fixed two misses (`--kit-warn`, and amber in light mode).
+- **Tokens v1:** `tokens/tokens.css` has colour, type, space, radius, elevation, motion and density, with dark mode, four accents (spruce, indigo, amber, rose) and compact density. The values are hex and `rgb()` for now: the OKLCH rewrite and `kit check-contrast` are still to do. Contrast is checked with axe instead, which caught and fixed two misses (`--kit-warn`, and amber in light mode).
 - **Go CLI:** the site half exists (see phase 4). It bundles and minifies with esbuild, gives files content-hashed names, and prints each bundle's gzipped size. `kit check` (size budgets, unsafe-sink lint) isn't built.
 
 **Not started:** the core runtime and the test harness.
@@ -194,14 +201,14 @@ The engine and the safety nets every later component inherits.
 
 The look, before the behaviour.
 
-- **Final tokens and themes:** neutral, `kritano` and `chrisgarlick`, each light and dark.
+- **Final tokens and the default theme,** light and dark, plus a documented recipe for an app's own theme (Foundations → Theming on the site).
 - **Tier 1 CSS:**
   - type, layout primitives (stack, cluster, grid, sidebar), surfaces and cards, badge, alert, avatar, kbd, skeleton, empty state;
   - table styles (tier 1, for server-rendered tables), form field styles, print styles.
 - **The icon sprite.**
 - **A visual-regression baseline** for every theme.
 
-**Done when** a static page built only from tier 1 CSS looks finished in all six theme/scheme combinations, and contrast passes everywhere.
+**Done when** a static page built only from tier 1 CSS looks finished in light and dark with every accent, an example app theme re-skins it without touching kit's files, and contrast passes everywhere.
 
 **Done so far:**
 - **The neutral kit theme,** light and dark, with four accents and two densities.
@@ -214,7 +221,7 @@ The look, before the behaviour.
   All CSS is 2.4 KB gzipped, fonts' `@font-face` rules and tokens included.
 - **Placeholder data:** the "Lumen" world in `site/data/lumen.yaml`, read by every demo.
 
-**Not started:** the `kritano` and `chrisgarlick` themes, the rest of tier 1 (type and layout primitives, cards, badge, alert, avatar, kbd, skeleton, empty state, tables, form fields, print), the icon sprite and the visual-regression baseline.
+**Not started:** the theming recipe and its example, the rest of tier 1 (type and layout primitives, cards, badge, alert, avatar, kbd, skeleton, empty state, tables, form fields, print), the icon sprite and the visual-regression baseline.
 
 ### Phase 3: interactive components (L)
 
@@ -293,6 +300,7 @@ The part that makes the kit different.
 
 ### Phase 6: adoption, then the advanced parts (L, ongoing)
 
+- **Each app adds its theme file** (accent, fonts, radius in light and dark) in its own repo: Kritano's indigo, amber and Outfit; chrisgarlick.com's own palette.
 - **Kritano's app first:**
   - replace its hand-built pieces: score chart and sparklines, ⌘K palette, tables, menus, dialogs and tabs;
   - then the Kritano and docs sites through cms themes;
@@ -316,8 +324,10 @@ The part that makes the kit different.
 
 ## 5. Decisions
 
-1. **Name, tag prefix and licence:** `kit` and MIT. The `kit-` tag prefix is assumed but not yet confirmed.
+1. **Name, tag prefix and licence:** `kit`, `kit-` and MIT.
 2. **Repo:** its own, public, at [Chrisgarlick/kit](https://github.com/Chrisgarlick/kit).
 3. **Typefaces:** Bricolage Grotesque, Instrument Sans and Geist Mono, self-hosted.
 4. **Languages:** Go for tooling and plain JavaScript in the browser; Rust only if benchmarks demand it.
 5. **Order:** the design system and the site first, then the core, then the data components.
+6. **Browsers:** as wide as possible. The floor is Safari and iOS 16.4, Chrome and Edge 111, and Firefox 115 ESR; below it pages still work, and above it newer features get fallbacks.
+7. **Brand themes:** each app's own, in its own repo, overriding kit's tokens.
