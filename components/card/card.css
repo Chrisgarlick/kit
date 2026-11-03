@@ -1,0 +1,21 @@
+/* SPDX-License-Identifier: MIT
+ * Card (tier 1): a surface that groups one thing's content.
+ *   <article class="kit-card"> <header class="kit-card-header">…</header>
+ *     <div class="kit-card-body">…</div> <footer class="kit-card-footer">…</footer> </article>
+ * A card that opens one thing: put class="kit-card-link" on the main link
+ * and the whole card becomes the link's click target.
+ */
+.kit-card { position: relative; display: flex; flex-direction: column; min-inline-size: 0; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-3); background: var(--kit-surface); color: var(--kit-fg); font: 400 var(--kit-text-sm)/1.5 var(--kit-font-ui); }
+.kit-card[data-raised] { border-color: transparent; box-shadow: var(--kit-shadow-2); }
+.kit-card-header { display: flex; justify-content: space-between; align-items: baseline; gap: var(--kit-space-3); padding: var(--kit-space-4) var(--kit-space-4) 0; }
+.kit-card-header :is(h2, h3, h4, p) { margin: 0; font: 600 var(--kit-text-md)/1.3 var(--kit-font-ui); }
+.kit-card-body { padding: var(--kit-space-3) var(--kit-space-4) var(--kit-space-4); color: var(--kit-fg-2); flex: 1; }
+.kit-card-body > :first-child { margin-block-start: 0; }
+.kit-card-body > :last-child { margin-block-end: 0; }
+.kit-card-footer { display: flex; flex-wrap: wrap; gap: var(--kit-space-2); align-items: center; justify-content: space-between; padding: var(--kit-space-3) var(--kit-space-4); border-block-start: 1px solid var(--kit-line); }
+.kit-card-link { color: inherit; text-decoration: none; }
+.kit-card-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.kit-card-link:focus-visible { outline: none; }
+.kit-card:has(.kit-card-link:focus-visible) { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-card:has(.kit-card-link):hover { border-color: var(--kit-line-strong); box-shadow: var(--kit-shadow-2); }
+.kit-card :is(button, a:not(.kit-card-link), input, select) { position: relative; z-index: 1; } /* other controls stay clickable */

@@ -1,0 +1,21 @@
+/* SPDX-License-Identifier: MIT
+ * Alert (tier 1): an inline message.
+ *   <div class="kit-alert" data-tone="info|good|warn|bad"> <svg aria-hidden="true">…</svg>
+ *     <div><p class="kit-alert-title">…</p><p>…</p></div> [<div class="kit-alert-actions">…</div>] </div>
+ */
+.kit-alert {
+  --_tone: var(--kit-info); --_soft: var(--kit-info-soft);
+  display: grid; grid-template-columns: auto 1fr; gap: 2px var(--kit-space-3); align-items: start;
+  padding: var(--kit-space-3) var(--kit-space-4); border-radius: var(--kit-radius-2);
+  background: var(--_soft); border: 1px solid color-mix(in srgb, var(--_tone) 26%, transparent);
+  color: var(--kit-fg); font: 400 var(--kit-text-sm)/1.5 var(--kit-font-ui);
+}
+.kit-alert[data-tone="good"] { --_tone: var(--kit-good); --_soft: var(--kit-good-soft); }
+.kit-alert[data-tone="warn"] { --_tone: var(--kit-warn); --_soft: var(--kit-warn-soft); }
+.kit-alert[data-tone="bad"] { --_tone: var(--kit-bad); --_soft: var(--kit-bad-soft); }
+.kit-alert > svg { inline-size: 18px; block-size: 18px; margin-block-start: 1px; color: var(--_tone); }
+.kit-alert p { margin: 0; }
+.kit-alert p + p { color: var(--kit-fg-2); }
+.kit-alert-title { font-weight: 600; }
+.kit-alert-actions { grid-column: 2; display: flex; flex-wrap: wrap; gap: var(--kit-space-2); margin-block-start: var(--kit-space-2); }
+@media (forced-colors: active) { .kit-alert { border-color: CanvasText; } }

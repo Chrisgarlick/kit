@@ -1,0 +1,20 @@
+{{$d := .Data}}
+<div class="demo-form">
+  <div class="kit-field">
+    <label for="sel-region">Data region</label>
+    <select class="kit-select" id="sel-region">{{range $d.regions}}<option>{{.}}</option>{{end}}</select>
+  </div>
+  <div class="kit-field">
+    <label for="sel-plan">Plan</label>
+    <select class="kit-select" id="sel-plan" required aria-describedby="sel-plan-hint"><option value="" disabled selected>Choose a plan</option>{{range $d.plans}}<option>{{.}}</option>{{end}}</select>
+    <p class="kit-field-hint" id="sel-plan-hint">You can change plans at any time.</p>
+  </div>
+  <div class="kit-field">
+    <label for="sel-owner">Project owner</label>
+    <select class="kit-select" id="sel-owner"><optgroup label="Engineering"><option>{{(index $d.people 1).name}}</option></optgroup><optgroup label="Everyone else">{{range $i, $p := $d.people}}{{if ne $i 1}}<option>{{$p.name}}</option>{{end}}{{end}}</optgroup></select>
+  </div>
+  <div class="kit-field">
+    <label for="sel-off">Currency</label>
+    <select class="kit-select" id="sel-off" disabled><option>GBP (£)</option></select>
+  </div>
+</div>

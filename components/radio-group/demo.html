@@ -1,0 +1,18 @@
+{{$d := .Data}}
+<div class="demo-stack">
+  <fieldset class="kit-fieldset">
+    <legend>Billing period</legend>
+    <label class="kit-choice"><input type="radio" class="kit-radio" name="rg-period" checked> Monthly</label>
+    <label class="kit-choice"><input type="radio" class="kit-radio" name="rg-period"> Yearly<span class="kit-choice-hint">Two months free</span></label>
+  </fieldset>
+  <fieldset class="kit-fieldset" data-layout="row">
+    <legend>Invoice format</legend>
+    <label class="kit-choice"><input type="radio" class="kit-radio" name="rg-format" checked> PDF</label>
+    <label class="kit-choice"><input type="radio" class="kit-radio" name="rg-format"> CSV</label>
+    <label class="kit-choice"><input type="radio" class="kit-radio" name="rg-format" disabled> XLSX</label>
+  </fieldset>
+  <fieldset class="kit-fieldset demo-fill" data-variant="cards">
+    <legend>Plan</legend>
+    {{range $i, $p := $d.plans}}<label class="kit-choice"><input type="radio" class="kit-radio" name="rg-plan" {{if eq $i 1}}checked{{end}}> {{$p}}<span class="kit-choice-hint">{{if eq $i 0}}Up to 3 people{{else if eq $i 1}}Up to 25 people{{else}}Unlimited, with SSO{{end}}</span></label>{{end}}
+  </fieldset>
+</div>

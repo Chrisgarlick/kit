@@ -8,7 +8,7 @@
 - id: inputs
   title: Inputs
   summary: Form controls with visible labels, hints and errors wired up for screen readers. All of them submit with a normal form.
-  planned: [Text field, Textarea, Select, Combobox, Checkbox, Radio group, Switch, Slider, Number stepper, Tag input, File drop, Date picker, Colour picker]
+  planned: [Text field, Select, Combobox, Checkbox, Radio group, Switch, Slider, Number stepper, Tag input, File drop, Date picker, Colour picker]
 - id: feedback
   title: Feedback
   summary: Telling people what happened without stealing their focus. Colour always comes with an icon or words.

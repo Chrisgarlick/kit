@@ -225,7 +225,7 @@ func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any)
 	c.Body = template.HTML(html.String()) //nolint:gosec // Markdown rendered by goldmark, which escapes raw HTML
 
 	if b, err := os.ReadFile(filepath.Join(dir, "demo.html")); err == nil {
-		t, err := template.New(slug).Option("missingkey=error").Parse(string(b))
+		t, err := template.New(slug).Option("missingkey=error").Funcs(demoFuncs).Parse(string(b))
 		if err != nil {
 			return nil, fmt.Errorf("%s/demo.html: %w", where, err)
 		}
@@ -312,3 +312,6 @@ func rel(root, p string) string {
 	}
 	return filepath.ToSlash(r)
 }
+
+// demoFuncs are the helpers a demo.html can call.
+var demoFuncs = template.FuncMap{"inc": func(i int) int { return i + 1 }}

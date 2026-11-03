@@ -45,7 +45,7 @@ for (const accent of ['indigo', 'amber', 'rose']) {
       const ctx = await browser.newContext({ colorScheme: scheme });
       await ctx.addInitScript((a) => localStorage.setItem('kit-accent', a), accent);
       const page = await ctx.newPage();
-      for (const path of ['/', '/actions/', '/actions/segmented-control/', '/navigation/sidebar/', '/foundations/']) problems.push(...(await check(page, path)));
+      for (const path of ['/', '/actions/', '/actions/segmented-control/', '/inputs/', '/feedback/', '/data-display/', '/navigation/sidebar/', '/foundations/']) problems.push(...(await check(page, path)));
       await ctx.close();
     }
     expect(problems).toEqual([]);

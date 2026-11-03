@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: MIT
+ * Badge (tier 1): a short label for state, a category or a count.
+ *   <span class="kit-badge" data-tone="neutral|accent|good|warn|bad|info" [data-variant="outline"]>[<span class="kit-dot"></span>]Paid</span>
+ */
+.kit-badge {
+  --_tone: var(--kit-fg-2); --_soft: var(--kit-surface-2);
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: var(--kit-radius-pill);
+  background: var(--_soft); color: var(--_tone); border: 1px solid transparent;
+  font: 600 var(--kit-text-xs)/1.3 var(--kit-font-ui); white-space: nowrap; vertical-align: middle;
+}
+.kit-badge[data-tone="accent"] { --_tone: var(--kit-accent); --_soft: var(--kit-accent-soft); }
+.kit-badge[data-tone="good"] { --_tone: var(--kit-good); --_soft: var(--kit-good-soft); }
+.kit-badge[data-tone="warn"] { --_tone: var(--kit-warn); --_soft: var(--kit-warn-soft); }
+.kit-badge[data-tone="bad"] { --_tone: var(--kit-bad); --_soft: var(--kit-bad-soft); }
+.kit-badge[data-tone="info"] { --_tone: var(--kit-info); --_soft: var(--kit-info-soft); }
+.kit-badge[data-variant="outline"] { background: transparent; border-color: var(--kit-line-strong); color: var(--kit-fg-2); }
+.kit-badge .kit-dot, .kit-dot { inline-size: 7px; block-size: 7px; border-radius: 50%; background: currentColor; flex: none; }
+.kit-badge[data-numeric] { font-family: var(--kit-font-mono); font-variant-numeric: tabular-nums; }
+@media (forced-colors: active) { .kit-badge { border-color: CanvasText; } }

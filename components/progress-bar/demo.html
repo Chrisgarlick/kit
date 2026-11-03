@@ -1,0 +1,6 @@
+{{$d := .Data}}
+<div class="demo-stack demo-fill">
+  <div class="kit-progress-field"><label for="pb-export">Exporting {{$d.company.name}}'s sessions</label><span>72%</span><progress class="kit-progress" id="pb-export" max="100" value="72">72%</progress></div>
+  <div class="kit-progress-field"><label for="pb-storage">Storage</label><span>{{$d.storage.used}} / {{$d.storage.total}} {{$d.storage.unit}}</span><progress class="kit-progress" id="pb-storage" data-tone="warn" max="{{$d.storage.total}}" value="{{$d.storage.used}}">{{$d.storage.used}}%</progress></div>
+  <div class="kit-progress-field"><label for="pb-wait">Waiting for the worker</label><span>queued</span><progress class="kit-progress" id="pb-wait"></progress></div>
+</div>

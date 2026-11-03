@@ -4,7 +4,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 
 > **Status (3 November 2026):** the repo is public at [Chrisgarlick/kit](https://github.com/Chrisgarlick/kit) under MIT. Built so far, ahead of the core runtime, because you chose the design system and site first:
 > - the design tokens (light, dark, four accents, compact density) and the three typefaces, self-hosted;
-> - four tier 1 components: button, button group, segmented control and sidebar;
+> - seventeen tier 1 components across actions, inputs, feedback, navigation and data display;
 > - `kit site build` and `kit site serve` (Go), which assemble the site from the component folders.
 >
 > - the core runtime (3 November), with `<kit-segmented>` as its first component, and browser tests for both.
@@ -12,7 +12,7 @@ Companion to [spec.md](spec.md) (draft v0.1). Written 2 November 2026.
 > - CI on GitHub Actions (3 November): Go lint, tests and a site build, and the browser tests in Chromium, Firefox and WebKit;
 > - [ui.chrisgarlick.com](https://ui.chrisgarlick.com) is live (3 November), deployed with `kit site deploy`.
 >
-> Next: more components. Progress is noted under each phase below.
+> Next: the interactive components (tabs, dialog and drawer, menu, tooltip, toast, accordion), then the richer form controls. Progress is noted under each phase below.
 
 The aim, in your words: one UI library that everything you build uses (Kritano's app and sites, chrisgarlick.com, future apps), shown off on **ui.chrisgarlick.com** as a fully interactive site. Premium, sleek and beautiful; very light and very fast; and good enough for **data analysis** (dense tables, charts, dashboards), not just forms and buttons.
 
@@ -234,11 +234,14 @@ The look, before the behaviour.
   - `button-group`, with toggle buttons;
   - `segmented-control`: the styling, now also for `<kit-segmented>` (see phase 3);
   - `sidebar`: icons, counts and badges, section labels and nested pages. The site's own navigation uses it.
+  - **Feedback** (3 November): `alert` (four tones, title, actions), `progress-bar` (native `<progress>`, tones, indeterminate), `skeleton`, `empty-state`.
+  - **Data display** (3 November): `badge`, `status-dot` (with a live pulse), `avatar` (initials, photos, groups), `card` (with an accessible whole-card link), `kbd`.
+  - **Inputs** (3 November): `text-field` (hint, error, prefix and suffix groups, textarea, read-only), `select` (native), `checkbox` (with the mixed state), `radio-group` (list, row and tiles).
 
-  All CSS is 2.4 KB gzipped, fonts' `@font-face` rules and tokens included.
+  All CSS is 5.6 KB gzipped, fonts' `@font-face` rules and tokens included.
 - **Placeholder data:** the "Lumen" world in `site/data/lumen.yaml`, read by every demo.
 
-**Not started:** the theming recipe and its example, the rest of tier 1 (type and layout primitives, cards, badge, alert, avatar, kbd, skeleton, empty state, tables, form fields, print), the icon sprite and the visual-regression baseline.
+**Not started:** the theming recipe and its example, the rest of tier 1 (type and layout primitives, tables, description list, code block, print), the icon sprite and the visual-regression baseline.
 
 ### Phase 3: interactive components (L)
 

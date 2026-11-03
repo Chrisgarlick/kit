@@ -1,0 +1,44 @@
+/* SPDX-License-Identifier: MIT
+ * Text field (tier 1): a label, a native input or textarea, a hint and an error.
+ *   <div class="kit-field">
+ *     <label for="x">Company name</label>
+ *     <input class="kit-input" id="x" aria-describedby="x-hint">
+ *     <p class="kit-field-hint" id="x-hint">…</p>
+ *     <p class="kit-field-error" id="x-error">…</p>   (with aria-invalid="true" on the input)
+ *   </div>
+ * .kit-input-group wraps an input with a prefix or suffix (£, .com, a button).
+ */
+.kit-field { display: grid; gap: 6px; min-inline-size: 0; font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-field > label, .kit-field-label { font-weight: 600; color: var(--kit-fg); }
+.kit-field-optional { font-weight: 400; color: var(--kit-fg-3); }
+.kit-field-hint { margin: 0; color: var(--kit-fg-3); }
+.kit-field-error { margin: 0; color: var(--kit-bad); font-weight: 500; }
+.kit-field-error::before { content: "! "; font-weight: 700; }
+
+.kit-input, .kit-select {
+  inline-size: 100%; min-block-size: var(--kit-control); padding: 0 12px;
+  border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-2);
+  background: var(--kit-surface); color: var(--kit-fg); box-shadow: var(--kit-shadow-1);
+  font: 400 var(--kit-text-md)/1.4 var(--kit-font-ui);
+  transition: border-color var(--kit-duration) var(--kit-ease), box-shadow var(--kit-duration) var(--kit-ease);
+}
+textarea.kit-input { padding-block: 9px; min-block-size: 6rem; resize: vertical; }
+.kit-input::placeholder { color: var(--kit-fg-3); opacity: 1; }
+.kit-input:hover, .kit-select:hover { border-color: var(--kit-fg-3); }
+.kit-input:focus-visible, .kit-select:focus-visible { outline: none; border-color: var(--kit-accent); box-shadow: 0 0 0 3px var(--kit-accent-soft); }
+.kit-input[aria-invalid="true"], .kit-select[aria-invalid="true"] { border-color: var(--kit-bad); }
+.kit-input[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 3px var(--kit-bad-soft); }
+.kit-input:disabled, .kit-select:disabled { background: var(--kit-surface-2); color: var(--kit-fg-3); box-shadow: none; cursor: not-allowed; }
+.kit-input[readonly] { background: var(--kit-surface-2); box-shadow: none; }
+.kit-input[type="number"], .kit-input[data-numeric] { font-family: var(--kit-font-mono); font-variant-numeric: tabular-nums; }
+
+.kit-input-group { display: flex; align-items: stretch; border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-1); overflow: hidden; }
+.kit-input-group > .kit-input { border: 0; box-shadow: none; border-radius: 0; background: transparent; min-inline-size: 0; }
+.kit-input-group:hover { border-color: var(--kit-fg-3); }
+.kit-input-group:focus-within { border-color: var(--kit-accent); box-shadow: 0 0 0 3px var(--kit-accent-soft); }
+.kit-input-group:has([aria-invalid="true"]) { border-color: var(--kit-bad); }
+.kit-input-affix { display: grid; place-items: center; padding: 0 10px; background: var(--kit-surface-2); color: var(--kit-fg-2); font: 500 var(--kit-text-sm)/1 var(--kit-font-ui); white-space: nowrap; }
+.kit-input-affix:first-child { border-inline-end: 1px solid var(--kit-line); }
+.kit-input-affix:last-child { border-inline-start: 1px solid var(--kit-line); }
+.kit-input-group > .kit-button { border: 0; border-radius: 0; box-shadow: none; border-inline-start: 1px solid var(--kit-line); }
+@media (forced-colors: active) { .kit-input:focus-visible, .kit-input-group:focus-within { outline: 2px solid Highlight; } }

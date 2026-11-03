@@ -1,0 +1,33 @@
+/* SPDX-License-Identifier: MIT
+ * Progress bar (tier 1): a native <progress class="kit-progress">, so the
+ * value is real, announced, and needs no script or inline style. Without a
+ * value it is indeterminate.
+ *   <div class="kit-progress-field"> <label for="p">Uploading</label><span>42%</span>
+ *     <progress class="kit-progress" id="p" max="100" value="42">42%</progress> </div>
+ */
+.kit-progress-field { display: grid; grid-template-columns: 1fr auto; gap: 6px var(--kit-space-3); font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-progress-field > :nth-child(2) { font-family: var(--kit-font-mono); font-variant-numeric: tabular-nums; color: var(--kit-fg-2); }
+.kit-progress-field > .kit-progress { grid-column: 1 / -1; }
+.kit-progress {
+  -webkit-appearance: none; appearance: none; display: block; inline-size: 100%; block-size: 8px;
+  border: 0; border-radius: var(--kit-radius-pill); background: var(--kit-surface-3); color: var(--kit-accent); overflow: hidden;
+}
+.kit-progress::-webkit-progress-bar { background: var(--kit-surface-3); border-radius: var(--kit-radius-pill); }
+.kit-progress::-webkit-progress-value { background: var(--kit-accent); border-radius: var(--kit-radius-pill); transition: inline-size 400ms var(--kit-ease); }
+.kit-progress::-moz-progress-bar { background: var(--kit-accent); border-radius: var(--kit-radius-pill); }
+.kit-progress[data-tone="good"] { color: var(--kit-good); }
+.kit-progress[data-tone="good"]::-webkit-progress-value { background: var(--kit-good); }
+.kit-progress[data-tone="good"]::-moz-progress-bar { background: var(--kit-good); }
+.kit-progress[data-tone="warn"] { color: var(--kit-warn); }
+.kit-progress[data-tone="warn"]::-webkit-progress-value { background: var(--kit-warn); }
+.kit-progress[data-tone="warn"]::-moz-progress-bar { background: var(--kit-warn); }
+.kit-progress[data-tone="bad"] { color: var(--kit-bad); }
+.kit-progress[data-tone="bad"]::-webkit-progress-value { background: var(--kit-bad); }
+.kit-progress[data-tone="bad"]::-moz-progress-bar { background: var(--kit-bad); }
+/* Indeterminate: a moving stripe (Chromium/WebKit draw it via the bar, Firefox via its own). */
+.kit-progress:indeterminate { background: linear-gradient(90deg, var(--kit-surface-3) 0 30%, var(--kit-accent) 30% 55%, var(--kit-surface-3) 55%) 0 0 / 300% 100%; animation: kit-progress-slide 1.4s linear infinite; }
+.kit-progress:indeterminate::-webkit-progress-bar { background: transparent; }
+.kit-progress:indeterminate::-moz-progress-bar { background: transparent; }
+@keyframes kit-progress-slide { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .kit-progress:indeterminate { animation: none; background: var(--kit-accent-soft); } }
+@media (forced-colors: active) { .kit-progress { border: 1px solid CanvasText; } }

@@ -1,0 +1,27 @@
+/* SPDX-License-Identifier: MIT
+ * Avatar (tier 1): a person's photo or initials, and groups of them.
+ *   <span class="kit-avatar" data-tone="1…6" [data-size="sm|lg"]>AP</span>
+ *   <span class="kit-avatar"><img src="…" alt=""></span>
+ *   <span class="kit-avatar-group" role="img" aria-label="5 people"> … <span class="kit-avatar" data-more>+2</span></span>
+ */
+.kit-avatar {
+  --_size: 2.25rem;
+  display: inline-grid; place-items: center; inline-size: var(--_size); block-size: var(--_size); flex: none;
+  border-radius: 50%; overflow: hidden; background: var(--kit-series-1); color: #fff;
+  font: 600 calc(var(--_size) * 0.38)/1 var(--kit-font-ui); letter-spacing: 0.02em; text-transform: uppercase; user-select: none;
+}
+.kit-avatar img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.kit-avatar[data-size="sm"] { --_size: 1.75rem; }
+.kit-avatar[data-size="lg"] { --_size: 3rem; }
+/* Initials stay white on a darkened series colour, in light and dark. */
+.kit-avatar[data-tone="1"] { background: #0f766e; }
+.kit-avatar[data-tone="2"] { background: #4f46e5; }
+.kit-avatar[data-tone="3"] { background: #b45309; }
+.kit-avatar[data-tone="4"] { background: #be185d; }
+.kit-avatar[data-tone="5"] { background: #0369a1; }
+.kit-avatar[data-tone="6"] { background: #4d7c0f; }
+.kit-avatar[data-more] { background: var(--kit-surface-3); color: var(--kit-fg-2); text-transform: none; }
+.kit-avatar-group { display: inline-flex; }
+.kit-avatar-group > .kit-avatar { box-shadow: 0 0 0 2px var(--kit-surface); }
+.kit-avatar-group > .kit-avatar + .kit-avatar { margin-inline-start: -8px; }
+@media (forced-colors: active) { .kit-avatar { border: 1px solid CanvasText; } }

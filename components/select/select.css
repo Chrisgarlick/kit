@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: MIT
+ * Select (tier 1): a native <select> styled to match .kit-input (which
+ * text-field.css shares with it). The browser's own picker opens, so it
+ * works with every keyboard, screen reader and phone.
+ *   <select class="kit-select" id="x">…</select>   inside a .kit-field
+ */
+.kit-select {
+  appearance: none; -webkit-appearance: none; cursor: pointer; padding-inline-end: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27%23767676%27 stroke-width=%271.75%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m4 6 4 4 4-4%27/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 16px; background-position: right 10px center;
+}
+.kit-select:dir(rtl) { background-position: left 10px center; padding-inline: 34px 12px; }
+.kit-select[multiple] { background-image: none; padding: 6px; min-block-size: 7rem; }
+.kit-select option { color: var(--kit-fg); background: var(--kit-surface); }
+@media (forced-colors: active) { .kit-select { appearance: auto; background-image: none; padding-inline-end: 12px; } }

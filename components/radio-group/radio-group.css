@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: MIT
+ * Radio group (tier 1): native radios in a fieldset; one choice from a few.
+ *   <fieldset class="kit-fieldset"><legend>Billing</legend>
+ *     <label class="kit-choice"><input type="radio" class="kit-radio" name="b"> Monthly</label> …
+ *   </fieldset>
+ * .kit-fieldset is shared by checkbox groups too. data-layout="row" lines
+ * the options up; data-variant="cards" puts each in a bordered tile.
+ */
+.kit-fieldset { margin: 0; padding: 0; border: 0; min-inline-size: 0; display: grid; gap: 10px; }
+.kit-fieldset > legend { padding: 0; margin-block-end: 10px; font: 600 var(--kit-text-sm)/1.4 var(--kit-font-ui); color: var(--kit-fg); }
+.kit-fieldset[data-layout="row"] { grid-auto-flow: column; justify-content: start; gap: var(--kit-space-5); }
+.kit-radio { border-radius: 50%; }
+.kit-radio:checked { border: 5px solid var(--kit-accent); background: var(--kit-surface); }
+.kit-fieldset[data-variant="cards"] { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+.kit-fieldset[data-variant="cards"] > .kit-choice { inline-size: auto; padding: 12px 14px; border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-2); background: var(--kit-surface); transition: border-color var(--kit-duration) var(--kit-ease), box-shadow var(--kit-duration) var(--kit-ease); }
+.kit-fieldset[data-variant="cards"] > .kit-choice:has(:checked) { border-color: var(--kit-accent); box-shadow: 0 0 0 1px var(--kit-accent); }
+.kit-fieldset[data-variant="cards"] > .kit-choice:has(:focus-visible) { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-fieldset[data-variant="cards"] .kit-radio:focus-visible { outline: none; }
+@media (max-width: 30rem) { .kit-fieldset[data-layout="row"] { grid-auto-flow: row; } }

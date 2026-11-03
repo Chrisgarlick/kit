@@ -1,0 +1,21 @@
+/* SPDX-License-Identifier: MIT
+ * Skeleton (tier 1): placeholders shaped like the content that's loading, so
+ * nothing shifts when it arrives.
+ *   <div class="kit-skeleton-group" aria-hidden="true">
+ *     <span class="kit-skeleton" data-shape="circle"></span> <span class="kit-skeleton" data-width="60"></span> </div>
+ * data-shape: text (default), circle, block. data-width: 25, 40, 60, 80 or 100 (percent).
+ */
+.kit-skeleton-group { display: grid; gap: var(--kit-space-2); }
+.kit-skeleton {
+  display: block; block-size: 0.75em; inline-size: 100%; border-radius: var(--kit-radius-1);
+  background: linear-gradient(90deg, var(--kit-surface-2) 0%, var(--kit-surface-3) 40%, var(--kit-surface-2) 80%) 0 0 / 300% 100%;
+  animation: kit-shimmer 1.6s linear infinite;
+}
+.kit-skeleton[data-shape="circle"] { inline-size: 2.5rem; block-size: 2.5rem; border-radius: 50%; flex: none; }
+.kit-skeleton[data-shape="block"] { block-size: 6rem; border-radius: var(--kit-radius-2); }
+.kit-skeleton[data-width="25"] { inline-size: 25%; }
+.kit-skeleton[data-width="40"] { inline-size: 40%; }
+.kit-skeleton[data-width="60"] { inline-size: 60%; }
+.kit-skeleton[data-width="80"] { inline-size: 80%; }
+@keyframes kit-shimmer { from { background-position: 100% 0; } to { background-position: -50% 0; } }
+@media (prefers-reduced-motion: reduce) { .kit-skeleton { animation: none; background: var(--kit-surface-3); } }

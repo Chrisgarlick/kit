@@ -1,0 +1,16 @@
+/* SPDX-License-Identifier: MIT
+ * Status dot (tier 1): a coloured dot and the word for the state it shows.
+ *   <span class="kit-status" data-tone="good|warn|bad|info|neutral" [data-live]>Online</span>
+ * data-live adds a slow pulse for something happening now (it stops under
+ * reduced motion).
+ */
+.kit-status { --_tone: var(--kit-fg-3); display: inline-flex; align-items: center; gap: 7px; font: 500 var(--kit-text-sm)/1.3 var(--kit-font-ui); color: var(--kit-fg); white-space: nowrap; }
+.kit-status::before { content: ""; inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--_tone); flex: none; }
+.kit-status[data-tone="good"] { --_tone: var(--kit-good); }
+.kit-status[data-tone="warn"] { --_tone: var(--kit-warn); }
+.kit-status[data-tone="bad"] { --_tone: var(--kit-bad); }
+.kit-status[data-tone="info"] { --_tone: var(--kit-info); }
+.kit-status[data-live]::before { animation: kit-pulse 1.8s ease-out infinite; }
+@keyframes kit-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--_tone) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 6px transparent; } }
+@media (prefers-reduced-motion: reduce) { .kit-status[data-live]::before { animation: none; } }
+@media (forced-colors: active) { .kit-status::before { background: CanvasText; } }

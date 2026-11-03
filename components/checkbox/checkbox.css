@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: MIT
+ * Checkbox (tier 1): a native checkbox, restyled, inside its label.
+ *   <label class="kit-choice"><input type="checkbox" class="kit-checkbox"> Email me receipts
+ *     <span class="kit-choice-hint">…</span></label>
+ * .indeterminate (set from script) shows a dash; radio.css shares .kit-choice.
+ */
+.kit-choice { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: start; inline-size: fit-content; max-inline-size: 100%; color: var(--kit-fg); font: 500 var(--kit-text-sm)/1.25rem var(--kit-font-ui); cursor: pointer; }
+.kit-choice-hint { grid-column: 2; color: var(--kit-fg-3); font-weight: 400; }
+.kit-choice:has(:disabled) { color: var(--kit-fg-3); cursor: not-allowed; }
+.kit-checkbox, .kit-radio {
+  appearance: none; -webkit-appearance: none; margin: 2px 0 0; inline-size: 16px; block-size: 16px; flex: none;
+  display: grid; place-content: center; border: 1.5px solid var(--kit-fg-3); background: var(--kit-surface) center / 14px no-repeat;
+  cursor: inherit; transition: background-color var(--kit-duration) var(--kit-ease), border-color var(--kit-duration) var(--kit-ease);
+}
+.kit-checkbox { border-radius: 4px; }
+.kit-checkbox:checked { background-color: var(--kit-accent); border-color: var(--kit-accent); background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272.25%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m3.5 8.5 3 3 6-7%27/%3E%3C/svg%3E"); }
+.kit-checkbox:indeterminate { background-color: var(--kit-accent); border-color: var(--kit-accent); background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 stroke=%27white%27 stroke-width=%272.25%27 stroke-linecap=%27round%27%3E%3Cpath d=%27M4 8h8%27/%3E%3C/svg%3E"); }
+.kit-checkbox:focus-visible, .kit-radio:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-checkbox:hover:not(:disabled, :checked, :indeterminate), .kit-radio:hover:not(:disabled, :checked) { border-color: var(--kit-fg-2); }
+.kit-checkbox:disabled, .kit-radio:disabled { opacity: 0.55; }
+.kit-checkbox[aria-invalid="true"], .kit-radio[aria-invalid="true"] { border-color: var(--kit-bad); }
+@media (forced-colors: active) { .kit-checkbox, .kit-radio { appearance: auto; } }

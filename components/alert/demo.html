@@ -1,0 +1,20 @@
+{{$d := .Data}}
+<div class="demo-stack demo-fill">
+  <div class="kit-alert">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v4.5M10 6.5h.01"/></svg>
+    <div><p class="kit-alert-title">Report scheduled</p><p>{{$d.company.name}}'s monthly report goes out on the 1st at 09:00.</p></div>
+  </div>
+  <div class="kit-alert" data-tone="good">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="m6.8 10.2 2.2 2.2 4.2-4.6"/></svg>
+    <div><p class="kit-alert-title">Payment received</p><p>{{(index $d.invoices 0).number}} from {{(index $d.invoices 0).customer}} is paid in full.</p></div>
+  </div>
+  <div class="kit-alert" data-tone="warn">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 3.5 2.8 16h14.4L10 3.5Z"/><path d="M10 8.5v3.5M10 14h.01"/></svg>
+    <div><p class="kit-alert-title">Nearly out of storage</p><p>{{$d.storage.used}} of {{$d.storage.total}} {{$d.storage.unit}} used. Old exports are deleted after 30 days.</p></div>
+    <div class="kit-alert-actions"><button class="kit-button" data-size="sm" type="button">Manage storage</button></div>
+  </div>
+  <div class="kit-alert" data-tone="bad">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="m7.5 7.5 5 5m0-5-5 5"/></svg>
+    <div><p class="kit-alert-title">{{(index $d.invoices 2).number}} is overdue</p><p>{{(index $d.invoices 2).customer}} was due to pay {{(index $d.invoices 2).amount}} 14 days ago.</p></div>
+  </div>
+</div>

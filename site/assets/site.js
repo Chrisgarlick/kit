@@ -65,3 +65,16 @@ for (const b of document.querySelectorAll('[data-demo-busy]')) {
     setTimeout(() => { b.removeAttribute('aria-busy'); b.textContent = label; }, 1400);
   });
 }
+// "Select all" above a list of checkboxes: checked, unchecked or mixed.
+for (const set of document.querySelectorAll('[data-demo-selectall]')) {
+  const all = set.querySelector('[data-all]');
+  const ones = [...set.querySelectorAll('[data-one]')];
+  const sync = () => {
+    const n = ones.filter((x) => x.checked).length;
+    all.checked = n === ones.length;
+    all.indeterminate = n > 0 && n < ones.length;
+  };
+  all.addEventListener('change', () => { for (const x of ones) x.checked = all.checked; sync(); });
+  for (const x of ones) x.addEventListener('change', sync);
+  sync();
+}
