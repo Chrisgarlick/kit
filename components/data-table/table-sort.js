@@ -27,22 +27,28 @@ function cellValue(row, index, type) {
   return raw;
 }
 
+// Comparators live out here, closing over nothing: WebKit's JIT has been seen
+// handing a comparator closure the previous call's locals.
+const byText = (a, b) => collator.compare(a[0], b[0]) || a[1] - b[1];
+const byTextDesc = (a, b) => collator.compare(b[0], a[0]) || a[1] - b[1];
+const byNumber = (a, b) => a[0] - b[0] || a[1] - b[1];
+const byNumberDesc = (a, b) => b[0] - a[0] || a[1] - b[1];
+
 export function sortTable(table, index, direction) {
-  const th = table.tHead.rows[0].cells[index];
-  const type = th.dataset.sort || 'text';
-  for (const h of table.tHead.rows[0].cells) h.removeAttribute('aria-sort');
+  const header = table.tHead.rows[0];
+  const th = header.cells[index];
+  const kind = th.getAttribute('data-sort') || 'text';
+  for (const h of header.cells) h.removeAttribute('aria-sort');
   th.setAttribute('aria-sort', direction);
-  const sign = direction === 'ascending' ? 1 : -1;
+  const desc = direction === 'descending';
+  const compare = kind === 'text' ? (desc ? byTextDesc : byText) : (desc ? byNumberDesc : byNumber);
   for (const body of table.tBodies) {
-    const rows = [...body.rows].map((r, i) => ({ r, i, v: cellValue(r, index, type) }));
-    rows.sort((a, b) => {
-      const c = type === 'text' ? collator.compare(a.v, b.v) : a.v - b.v;
-      return c * sign || a.i - b.i; // stable for equal values
-    });
-    body.append(...rows.map((x) => x.r));
+    // [value, original position, row]: equal values keep their order.
+    const rows = Array.from(body.rows, (r, i) => [cellValue(r, index, kind), i, r]);
+    rows.sort(compare);
+    body.append(...rows.map((x) => x[2]));
   }
-  const name = th.textContent.trim();
-  announce(`Sorted by ${name}, ${direction}`);
+  announce(`Sorted by ${th.textContent.trim()}, ${direction}`);
   table.dispatchEvent(new CustomEvent('sort', { bubbles: true, detail: { column: index, direction } }));
 }
 
