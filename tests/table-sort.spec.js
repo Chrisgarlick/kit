@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-const names = (page) => page.locator('tbody tr td:first-child').allTextContents();
+const names = (page) => page.locator('tbody tr td:first-child');
 
 test('headers become sort buttons, except data-sort="none"', async ({ page }) => {
   await expect(page.getByRole('columnheader').getByRole('button')).toHaveCount(3);
@@ -27,18 +27,18 @@ test('headers become sort buttons, except data-sort="none"', async ({ page }) =>
 
 test('text sorts naturally and ignores case; a second press reverses; it is announced', async ({ page }) => {
   await page.getByRole('button', { name: 'Name' }).click();
-  expect(await names(page)).toEqual(['item 1', 'Item 2', 'Item 10']);
+  await expect(names(page)).toHaveText(['item 1', 'Item 2', 'Item 10']);
   await expect(page.getByRole('columnheader', { name: 'Name' })).toHaveAttribute('aria-sort', 'ascending');
   await page.getByRole('button', { name: 'Name' }).click();
-  expect(await names(page)).toEqual(['Item 10', 'Item 2', 'item 1']);
+  await expect(names(page)).toHaveText(['Item 10', 'Item 2', 'item 1']);
   await expect(page.getByRole('columnheader', { name: 'Name' })).toHaveAttribute('aria-sort', 'descending');
   await expect.poll(() => page.evaluate(() => document.querySelector('[data-kit-live="polite"]')?.textContent)).toBe('Sorted by Name, descending');
 });
 
 test('numbers and dates sort by data-value; only one column is sorted at a time', async ({ page }) => {
   await page.getByRole('button', { name: 'Count' }).click();
-  expect(await names(page)).toEqual(['Item 10', 'item 1', 'Item 2']);
+  await expect(names(page)).toHaveText(['Item 10', 'item 1', 'Item 2']);
   await page.getByRole('button', { name: 'When' }).click();
-  expect(await names(page)).toEqual(['Item 2', 'item 1', 'Item 10']);
+  await expect(names(page)).toHaveText(['Item 2', 'item 1', 'Item 10']);
   await expect(page.getByRole('columnheader', { name: 'Count' })).not.toHaveAttribute('aria-sort', /./);
 });
