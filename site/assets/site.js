@@ -103,3 +103,32 @@ for (const c of document.querySelectorAll('kit-command[data-demo-note]')) {
   const note = document.getElementById(c.dataset.demoNote);
   c.addEventListener('select', (e) => { note.textContent = `Chosen: ${e.detail.item.label}`; });
 }
+// The data grid demo: 10,000 placeholder rows, made here so the page stays small.
+for (const grid of document.querySelectorAll('kit-data-grid[data-demo-rows]')) {
+  const n = Number(grid.dataset.demoRows);
+  const statuses = ['Online', 'Away', 'Offline', 'Inactive'];
+  const tones = { Online: 'good', Away: 'warn', Offline: 'bad', Inactive: '' };
+  let seed = 7;
+  const rand = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  const start = Date.UTC(2025, 0, 1);
+  grid.columns = [
+    { key: 'name', label: 'Name', width: 140 },
+    { key: 'status', label: 'Status', width: 130, cell: (v) => { const s = document.createElement('span'); s.className = 'kit-status'; if (tones[v]) s.dataset.tone = tones[v]; s.textContent = v; return s; } },
+    { key: 'count', label: 'Count', format: 'number', align: 'end', sort: 'number' },
+    { key: 'amount', label: 'Amount', format: 'currency:GBP', align: 'end', sort: 'number' },
+    { key: 'updated', label: 'Updated', format: 'date', sort: 'date', width: 140 },
+  ];
+  grid.rows = Array.from({ length: n }, (_, i) => ({
+    name: `Item ${i + 1}`,
+    status: statuses[Math.floor(rand() * 4)],
+    count: Math.floor(rand() * 20000),
+    amount: Math.round(rand() * 500000) / 100,
+    updated: new Date(start + Math.floor(rand() * 600) * 86400000).toISOString().slice(0, 10),
+  }));
+  const out = document.getElementById('dg-out');
+  grid.addEventListener('rowactivate', (e) => { if (out) out.textContent = `Activated: ${e.detail.row.name}`; });
+}
+for (const input of document.querySelectorAll('input[data-demo-grid]')) {
+  const grid = document.getElementById(input.dataset.demoGrid);
+  input.addEventListener('input', () => { grid.query = input.value; });
+}
