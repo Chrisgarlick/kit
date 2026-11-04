@@ -9,11 +9,13 @@ import (
 	"flag"
 	"fmt"
 	"io/fs"
+	"maps"
 	"net/http"
 	"os"
 	"os/signal"
 	"path"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strings"
 	"sync"
@@ -28,16 +30,14 @@ Usage:
   kit site build [-root .] [-out dist] [-base https://ui.chrisgarlick.com]
   kit site serve [-root .] [-addr localhost:8150]
   kit site deploy [-host chrisgarlick-server] [-dir /var/www/ui] [-keep 5] [-rollback]
+  kit dist -out <dir> [-js kit=a,b] [-js charts=c] [-css d,e] [-fonts]   (kit for another app)
   kit brand [-check] <folder with brand.yaml>...
   kit bundle-charts   (the chart renderer for crates/kit-render)
 `
 
 func main() {
-	if len(os.Args) >= 2 && (os.Args[1] == "brand" || os.Args[1] == "bundle-charts") {
-		run := brandCmd
-		if os.Args[1] == "bundle-charts" {
-			run = bundleCharts
-		}
+	if len(os.Args) >= 2 && (os.Args[1] == "brand" || os.Args[1] == "bundle-charts" || os.Args[1] == "dist") {
+		run := map[string]func([]string) error{"brand": brandCmd, "bundle-charts": bundleCharts, "dist": dist}[os.Args[1]]
 		if err := run(os.Args[2:]); err != nil {
 			fmt.Fprintln(os.Stderr, "kit:", err)
 			os.Exit(1)
@@ -64,6 +64,69 @@ func main() {
 		fmt.Fprintln(os.Stderr, "kit:", err)
 		os.Exit(1)
 	}
+}
+
+// dist writes kit.css, kit.js and VERSION for another app to vendor.
+func dist(args []string) error {
+	fl := flag.NewFlagSet("dist", flag.ExitOnError)
+	root := fl.String("root", ".", "the kit repository")
+	out := fl.String("out", "", "where to write kit.css, kit.js and VERSION")
+	var bundles bundleFlag
+	fl.Var(&bundles, "js", "a bundle: name=component,component (repeatable; default kit=every tier 2 component)")
+	cssList := fl.String("css", "", "components whose CSS goes in kit.css besides the bundles', comma-separated (default: all)")
+	fonts := fl.Bool("fonts", false, "include kit's fonts")
+	_ = fl.Parse(args)
+	if *out == "" {
+		return errors.New("dist: -out is required")
+	}
+	s, err := site.Load(*root)
+	if err != nil {
+		return err
+	}
+	res, err := s.Dist(*out, site.DistOptions{Bundles: bundles, CSS: splitList(*cssList), Fonts: *fonts})
+	if err != nil {
+		return err
+	}
+	names := make([]string, 0, len(res.Files))
+	for n := range res.Files {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	for _, n := range names {
+		fmt.Printf("  %-28s %6.1f KB\n", n, float64(res.Files[n])/1024)
+	}
+	fmt.Printf("kit %s\n", res.Version)
+	for _, n := range slices.Sorted(maps.Keys(res.Bundles)) {
+		fmt.Printf("  %s.js: %s\n", n, strings.Join(res.Bundles[n], ", "))
+	}
+	return nil
+}
+
+// bundleFlag collects repeated -js name=a,b flags.
+type bundleFlag map[string][]string
+
+func (b *bundleFlag) String() string { return fmt.Sprint(map[string][]string(*b)) }
+
+func (b *bundleFlag) Set(v string) error {
+	name, list, ok := strings.Cut(v, "=")
+	if !ok || name == "" {
+		return errors.New("want name=component,component")
+	}
+	if *b == nil {
+		*b = map[string][]string{}
+	}
+	(*b)[name] = append((*b)[name], splitList(list)...)
+	return nil
+}
+
+func splitList(s string) []string {
+	var out []string
+	for c := range strings.SplitSeq(s, ",") {
+		if c = strings.TrimSpace(c); c != "" {
+			out = append(out, c)
+		}
+	}
+	return out
 }
 
 func build(args []string) error {

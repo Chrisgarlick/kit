@@ -50,6 +50,23 @@ summary: One line that says what it's for.
 
 Add its CSS and a `demo.html` (a Go template, with literal placeholder text; `.Data` holds anything in `site/data/*.yaml`). It appears on its group page, in the navigation and in the sitemap on the next build. `make serve` rebuilds as you edit.
 
+## Using kit in an app
+
+`kit dist` writes kit for another app to vendor (commit the output, so the app builds without kit):
+
+```sh
+kit dist -out web/static/kit \
+  -js kit=command-palette,menu,tabs,dialog,data-table \
+  -js charts=line-chart,sparkline \
+  -css button,badge,alert,text-field
+```
+
+- `kit.css`: the tokens, plus the CSS of the components named in `-js` and `-css` (every component without `-css`). Add `-fonts` for kit's typefaces; apps with their own set the `--kit-font-*` tokens.
+- One ES module per `-js` bundle (`kit.js`, `charts.js`), sharing one `kit-core-<hash>.js` chunk, so a page loads only the bundles it uses. Without `-js` there is one bundle, `kit`, with every tier 2 component.
+- `VERSION`: the kit commit (`+dirty` for uncommitted changes) and each bundle's components.
+
+Entry names aren't hashed; the app versions its own asset URLs. Theme kit by overriding the `--kit-*` tokens in a stylesheet loaded after `kit.css` (see Theming).
+
 ## Theming
 
 kit ships one neutral theme. An app re-skins it from its own repository with a stylesheet, loaded after `kit.css`, that only sets kit's `--kit-*` tokens: colours, type (including `--kit-display-weight` and `--kit-display-tracking` for display faces with one weight), radii, shadows and the six chart series. Set the light values on `:root` and the dark ones under both `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }` and `:root[data-theme="dark"]`, as `tokens/tokens.css` does, and check text colours against WCAG AA on every surface.
