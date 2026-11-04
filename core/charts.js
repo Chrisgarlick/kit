@@ -11,6 +11,10 @@
 //
 // data is { title, labels, series: [{ name, values, texts }] }, as tableData()
 // reads from a table. The SVG uses kit's classes, which chart.css styles.
+// Every mark carries data-part (bar, line, area, slice, point, cell, or
+// label for a value printed on a mark) and data-i (its index: the category,
+// series, part, point or cell), so other renderers, such as Motion, can
+// animate marks one by one.
 
 import { niceTicks, linear, formatter } from './scale.js';
 
@@ -145,9 +149,9 @@ function cartesian(m, type, W, H, o, res) {
         }
         const yTop = Math.min(y0, y1);
         const h = Math.max(1, Math.abs(y1 - y0));
-        out.push(`<rect class="kit-s${(j % 6) + 1} kit-chart-bar" data-i="${i}" x="${x.toFixed(1)}" y="${yTop.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${Math.min(3, w / 4).toFixed(1)}"/>`);
+        out.push(`<rect class="kit-s${(j % 6) + 1} kit-chart-bar" data-part="bar" data-i="${i}" x="${x.toFixed(1)}" y="${yTop.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${Math.min(3, w / 4).toFixed(1)}"/>`);
         // values: print each bar's value at its end (for print, where there's no hover).
-        if (o.values && !stacked && w >= 18) out.push(`<text class="kit-chart-tick kit-chart-value" x="${(x + w / 2).toFixed(1)}" y="${(v >= 0 ? yTop - 5 : yTop + h + 12).toFixed(1)}" text-anchor="middle">${esc(formatter(o.format === 'percent' ? 'percent' : 'compact')(v))}</text>`);
+        if (o.values && !stacked && w >= 18) out.push(`<text class="kit-chart-tick kit-chart-value" data-part="label" data-i="${i}" x="${(x + w / 2).toFixed(1)}" y="${(v >= 0 ? yTop - 5 : yTop + h + 12).toFixed(1)}" text-anchor="middle">${esc(formatter(o.format === 'percent' ? 'percent' : 'compact')(v))}</text>`);
       });
     });
   } else {
@@ -162,9 +166,9 @@ function cartesian(m, type, W, H, o, res) {
         const d = r.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join('');
         if (type === 'area') {
           const base = sy(Math.max(y.min, 0)).toFixed(1);
-          out.push(`<path class="${cls} kit-chart-area" d="${d}L${r.at(-1)[0].toFixed(1)} ${base}L${r[0][0].toFixed(1)} ${base}Z"/>`);
+          out.push(`<path class="${cls} kit-chart-area" data-part="area" data-i="${j}" d="${d}L${r.at(-1)[0].toFixed(1)} ${base}L${r[0][0].toFixed(1)} ${base}Z"/>`);
         }
-        out.push(`<path class="${cls} kit-chart-line" d="${d}"/>`);
+        out.push(`<path class="${cls} kit-chart-line" data-part="line" data-i="${j}" d="${d}"/>`);
       }
     });
   }
@@ -195,7 +199,7 @@ function donut(m, W, H, fmt, o, res) {
         : `M${p(a0, r)}A${r} ${r} 0 ${big} 1 ${p(a1, r)}L${p(a1, ri)}A${ri} ${ri} 0 ${big} 0 ${p(a0, ri)}Z`;
       // A gauge (center="first") draws what's left as a quiet track, not a second series.
       const cls = o.center === 'first' && i > 0 ? 'kit-chart-track' : `kit-s${(i % 6) + 1}`;
-      out.push(`<path class="${cls} kit-chart-slice" data-i="${i}" d="${d}"/>`);
+      out.push(`<path class="${cls} kit-chart-slice" data-part="slice" data-i="${i}" d="${d}"/>`);
     }
     a0 = a1;
   });
@@ -245,7 +249,7 @@ function scatter(m, W, H, o, res) {
     `<text class="kit-chart-tick kit-chart-axis-title" x="${box.left}" y="10" text-anchor="start">↑ ${esc(ys?.name ?? 'y')}</text>`,
     '<g class="kit-chart-hover"></g>');
   pts.forEach((p, i) => {
-    out.push(`<circle class="kit-s${(p.g % 6) + 1} kit-chart-point" data-i="${i}" cx="${sx(p.x).toFixed(1)}" cy="${sy(p.y).toFixed(1)}" r="4.5"/>`);
+    out.push(`<circle class="kit-s${(p.g % 6) + 1} kit-chart-point" data-part="point" data-i="${i}" cx="${sx(p.x).toFixed(1)}" cy="${sy(p.y).toFixed(1)}" r="4.5"/>`);
   });
   out.push('</svg>');
   const describe = (i) => {
@@ -298,7 +302,7 @@ function histogram(m, W, H, o, res) {
     const x0 = sx(b.lo) + 1;
     const x1 = sx(b.hi) - 1;
     const y1 = sy(b.n);
-    if (b.n) out.push(`<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${x0.toFixed(1)}" y="${y1.toFixed(1)}" width="${Math.max(1, x1 - x0).toFixed(1)}" height="${Math.max(1, box.bottom - y1).toFixed(1)}" rx="2"/>`);
+    if (b.n) out.push(`<rect class="kit-s1 kit-chart-bar" data-part="bar" data-i="${i}" x="${x0.toFixed(1)}" y="${y1.toFixed(1)}" width="${Math.max(1, x1 - x0).toFixed(1)}" height="${Math.max(1, box.bottom - y1).toFixed(1)}" rx="2"/>`);
   });
   out.push('</svg>');
   const range = (b) => `${fmt(b.lo)} to ${fmt(b.hi)}`;
@@ -335,10 +339,10 @@ function funnel(m, W, H, fmt, o, res) {
     const w = Math.max(2, ((right - left) * v) / top);
     const x = left + (right - left - w) / 2;
     out.push(labelText('kit-chart-tick kit-chart-funnel-label', 0, cy.toFixed(1), m.labels[i], Math.max(6, Math.floor((left - 12) / 6.6)), null, true),
-      `<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${x.toFixed(1)}" y="${(cy - bh / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${bh.toFixed(1)}" rx="4"/>`);
+      `<rect class="kit-s1 kit-chart-bar" data-part="bar" data-i="${i}" x="${x.toFixed(1)}" y="${(cy - bh / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${bh.toFixed(1)}" rx="4"/>`);
     const label = esc(formatter('compact')(v));
-    if (w > 48) out.push(`<text class="kit-chart-bar-value" x="${(x + w / 2).toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${label}</text>`);
-    else out.push(`<text class="kit-chart-tick" x="${(x + w + 6).toFixed(1)}" y="${cy.toFixed(1)}" dominant-baseline="middle">${label}</text>`);
+    if (w > 48) out.push(`<text class="kit-chart-bar-value" data-part="label" data-i="${i}" x="${(x + w / 2).toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${label}</text>`);
+    else out.push(`<text class="kit-chart-tick" data-part="label" data-i="${i}" x="${(x + w + 6).toFixed(1)}" y="${cy.toFixed(1)}" dominant-baseline="middle">${label}</text>`);
     if (i) out.push(`<text class="kit-chart-tick kit-chart-funnel-step" x="${W}" y="${cy.toFixed(1)}" text-anchor="end" dominant-baseline="middle">${pct(v, vals[i - 1])}%</text>`);
   });
   out.push('</svg>');
@@ -376,7 +380,7 @@ function bullet(m, W, H, fmt, o, res) {
     out.push(labelText('kit-chart-tick kit-chart-funnel-label', 0, cy.toFixed(1), r.label, Math.max(6, Math.floor((left - 12) / 6.6)), null, true),
       `<rect class="kit-chart-bullet-track" x="${left}" y="${(cy - th / 2).toFixed(1)}" width="${(right - left).toFixed(1)}" height="${th.toFixed(1)}" rx="3"/>`,
       `<rect class="kit-chart-bullet-band" x="${left}" y="${(cy - th / 2).toFixed(1)}" width="${(sx(r.top * 0.8) - left).toFixed(1)}" height="${th.toFixed(1)}" rx="3"/>`,
-      `<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${left}" y="${(cy - th / 6).toFixed(1)}" width="${Math.max(1, Math.min(right, sx(r.v)) - left).toFixed(1)}" height="${(th / 3).toFixed(1)}" rx="2"/>`);
+      `<rect class="kit-s1 kit-chart-bar" data-part="bar" data-i="${i}" x="${left}" y="${(cy - th / 6).toFixed(1)}" width="${Math.max(1, Math.min(right, sx(r.v)) - left).toFixed(1)}" height="${(th / 3).toFixed(1)}" rx="2"/>`);
     if (r.t != null) out.push(`<line class="kit-chart-target" x1="${sx(r.t).toFixed(1)}" x2="${sx(r.t).toFixed(1)}" y1="${(cy - th / 2 - 3).toFixed(1)}" y2="${(cy + th / 2 + 3).toFixed(1)}"/>`);
     out.push(`<text class="kit-chart-tick kit-chart-bullet-pct" x="${W}" y="${cy.toFixed(1)}" text-anchor="end" dominant-baseline="middle">${r.t ? `${Math.round((r.v / r.t) * 100)}%` : esc(formatter('compact')(r.v))}</text>`);
   });
@@ -418,8 +422,8 @@ function heatmap(m, W, H, fmt, o, res) {
     const t = v == null ? 0 : (v - lo) / (hi - lo || 1);
     const x = left + cw * j + 1;
     const yy = top + ch * i + 1;
-    out.push(`<rect class="kit-chart-heat${v == null ? ' kit-chart-empty' : ''}" data-i="${i * cols.length + j}" x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${(cw - 2).toFixed(1)}" height="${(ch - 2).toFixed(1)}" rx="3" fill-opacity="${v == null ? 1 : (0.1 + t * 0.9).toFixed(3)}"/>`);
-    if (showValues && v != null) out.push(`<text class="kit-chart-heat-value${t > 0.55 ? ' kit-chart-heat-on' : ''}" x="${(x + cw / 2 - 1).toFixed(1)}" y="${(yy + ch / 2 - 1).toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${esc(formatter('compact')(v))}</text>`);
+    out.push(`<rect class="kit-chart-heat${v == null ? ' kit-chart-empty' : ''}" data-part="cell" data-i="${i * cols.length + j}" x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${(cw - 2).toFixed(1)}" height="${(ch - 2).toFixed(1)}" rx="3" fill-opacity="${v == null ? 1 : (0.1 + t * 0.9).toFixed(3)}"/>`);
+    if (showValues && v != null) out.push(`<text class="kit-chart-heat-value${t > 0.55 ? ' kit-chart-heat-on' : ''}" data-part="label" data-i="${i * cols.length + j}" x="${(x + cw / 2 - 1).toFixed(1)}" y="${(yy + ch / 2 - 1).toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${esc(formatter('compact')(v))}</text>`);
   }));
   out.push('<g class="kit-chart-hover"></g></svg>');
   res.legend = { scale: [fmt(lo), fmt(hi)] };
