@@ -8,5 +8,6 @@ export { uid, announce, roving } from './a11y.js';
 export { computePosition, place, follow } from './position.js';
 export { showLayer, hideLayer, onOutside, nativePopover } from './layer.js';
 export { niceTicks, linear, formatter } from './scale.js';
+export * as dates from './dates.js';
 export { renderChart, chartHeight, summarise, correlation } from './charts.js';
 export { renderStatic } from './charts-static.js';

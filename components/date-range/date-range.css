@@ -1,0 +1,35 @@
+/* SPDX-License-Identifier: MIT
+ * Date range picker: the button and its popover of presets and a range
+ * calendar, for <kit-date-range> (date-range.js).
+ */
+kit-date-range { display: inline-block; }
+/* Before the script runs, the two date inputs sit side by side. */
+kit-date-range:not(:defined) { display: inline-flex; gap: var(--kit-space-2); align-items: center; }
+.kit-range-trigger { gap: var(--kit-space-2); font-variant-numeric: tabular-nums; }
+.kit-range-trigger svg { color: var(--kit-fg-3); }
+.kit-range-trigger[data-empty] .kit-range-text { color: var(--kit-fg-2); font-weight: 500; }
+.kit-range-pop {
+  z-index: 1000; display: none; gap: var(--kit-space-3); padding: var(--kit-space-3);
+  max-block-size: var(--kit-available-height, 80vh); overflow: auto;
+  border: 1px solid var(--kit-line); border-radius: var(--kit-radius-3); background: var(--kit-surface); color: var(--kit-fg); box-shadow: var(--kit-shadow-3);
+}
+.kit-range-pop[data-open] { display: flex; }
+.kit-range-pop[data-open]:not([data-side]) { visibility: hidden; } /* until placed */
+.kit-range-presets { display: flex; flex-direction: column; gap: 2px; min-inline-size: 9rem; padding-inline-end: var(--kit-space-3); border-inline-end: 1px solid var(--kit-line); }
+.kit-range-presets[hidden] { display: none; }
+.kit-range-presets > button {
+  appearance: none; padding: 8px 10px; border: 0; border-radius: var(--kit-radius-1); background: none; color: var(--kit-fg-2);
+  font: 500 var(--kit-text-sm)/1.2 var(--kit-font-ui); text-align: start; white-space: nowrap; cursor: pointer;
+}
+.kit-range-presets > button:hover { background: var(--kit-surface-2); color: var(--kit-fg); }
+.kit-range-presets > button[aria-pressed="true"] { background: var(--kit-accent-soft); color: var(--kit-fg); font-weight: 600; }
+.kit-range-presets > button:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: -2px; }
+@media (max-width: 34rem) {
+  .kit-range-pop[data-open] { flex-direction: column; }
+  .kit-range-presets { flex-direction: row; flex-wrap: wrap; padding: 0 0 var(--kit-space-3); border: 0; border-block-end: 1px solid var(--kit-line); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .kit-range-pop { transition: opacity 0.14s var(--kit-ease), translate 0.14s var(--kit-ease); }
+  @starting-style { .kit-range-pop[data-open] { opacity: 0; translate: 0 -4px; } }
+}
+@media (forced-colors: active) { .kit-range-pop { border: 1px solid CanvasText; } }

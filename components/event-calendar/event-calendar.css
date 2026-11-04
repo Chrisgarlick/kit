@@ -1,0 +1,104 @@
+/* SPDX-License-Identifier: MIT
+ * Event calendar: a month of dated items for <kit-event-calendar>
+ * (event-calendar.js), in four layouts (data-layout, set from layout):
+ *   auto     the grid; under 40rem of its own width, the compact grid
+ *   agenda   the grid; under 40rem, the agenda (the days with items, in order)
+ *   grid     the grid, always
+ *   compact  small day cells with a dot per tone, always
+ *   item and dot tones: data-tone="accent|good|warn|bad|info|neutral"
+ */
+kit-event-calendar { display: block; container-type: inline-size; color: var(--kit-fg); font: 400 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-evcal-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kit-space-2); margin-block-end: var(--kit-space-3); }
+.kit-evcal-title { margin: 0; font: var(--kit-display-weight) var(--kit-text-xl)/1.2 var(--kit-font-display); letter-spacing: var(--kit-display-tracking); }
+.kit-evcal-nav { display: flex; gap: 2px; }
+.kit-evcal-nav [data-dir="1"] svg { transform: scaleX(-1); }
+:dir(rtl) .kit-evcal-nav svg { transform: scaleX(-1); }
+:dir(rtl) .kit-evcal-nav [data-dir="1"] svg { transform: none; }
+
+/* Tones, for items, dots and the key. */
+kit-event-calendar [data-tone] { --_tone: var(--kit-accent); --_soft: var(--kit-accent-soft); }
+kit-event-calendar [data-tone="good"] { --_tone: var(--kit-good); --_soft: var(--kit-good-soft); }
+kit-event-calendar [data-tone="warn"] { --_tone: var(--kit-warn); --_soft: var(--kit-warn-soft); }
+kit-event-calendar [data-tone="bad"] { --_tone: var(--kit-bad); --_soft: var(--kit-bad-soft); }
+kit-event-calendar [data-tone="info"] { --_tone: var(--kit-info); --_soft: var(--kit-info-soft); }
+kit-event-calendar [data-tone="neutral"] { --_tone: var(--kit-fg-3); --_soft: var(--kit-surface-2); }
+
+/* The grid. */
+.kit-evcal-grid { inline-size: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-3); background: var(--kit-surface); overflow: hidden; }
+.kit-evcal-grid th { padding: 8px 10px; border-block-end: 1px solid var(--kit-line); background: var(--kit-surface-2); color: var(--kit-fg-2); font-size: var(--kit-text-xs); font-weight: 600; text-align: start; text-transform: uppercase; letter-spacing: 0.05em; }
+.kit-evcal-wd-narrow { display: none; }
+.kit-evcal-grid td { block-size: 7rem; padding: 6px; vertical-align: top; border-block-end: 1px solid var(--kit-line); border-inline-end: 1px solid var(--kit-line); }
+.kit-evcal-grid td:last-child { border-inline-end: 0; }
+.kit-evcal-grid tr:last-child td { border-block-end: 0; }
+.kit-evcal-grid td[data-outside] { background: color-mix(in srgb, var(--kit-surface-2) 55%, transparent); }
+.kit-evcal-date { display: inline-flex; align-items: center; justify-content: center; min-inline-size: 26px; block-size: 26px; margin-block-end: 4px; padding-inline: 5px; border-radius: var(--kit-radius-pill); color: var(--kit-fg-2); font-size: var(--kit-text-xs); font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; }
+a.kit-evcal-date:hover { background: var(--kit-surface-2); color: var(--kit-fg); }
+a.kit-evcal-date:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
+.kit-evcal-grid td[data-outside] .kit-evcal-date { color: var(--kit-fg-3); }
+.kit-evcal-grid td[aria-current="date"] .kit-evcal-date { background: var(--kit-accent); color: var(--kit-accent-fg); }
+.kit-evcal-dots { display: none; }
+kit-event-calendar .kit-vh { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.kit-evcal-items { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.kit-evcal-item {
+  --_tone: var(--kit-accent); --_soft: var(--kit-accent-soft);
+  display: block; overflow: hidden; padding: 3px 7px; border-inline-start: 3px solid var(--_tone); border-radius: var(--kit-radius-1);
+  background: var(--_soft); color: var(--kit-fg); font-size: var(--kit-text-xs); line-height: 1.35; text-overflow: ellipsis; white-space: nowrap;
+}
+.kit-evcal-item time { color: var(--kit-fg-2); font-variant-numeric: tabular-nums; font-weight: 600; }
+.kit-evcal-item a { color: inherit; text-decoration: none; }
+.kit-evcal-item a:hover { text-decoration: underline; }
+.kit-evcal-item a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; border-radius: 2px; }
+.kit-evcal-more { appearance: none; margin-block-start: 3px; padding: 2px 4px; border: 0; border-radius: var(--kit-radius-1); background: none; color: var(--kit-fg-2); font: 600 var(--kit-text-xs)/1.3 var(--kit-font-ui); cursor: pointer; }
+.kit-evcal-more:hover { background: var(--kit-surface-2); color: var(--kit-fg); }
+.kit-evcal-more:focus-visible { outline: 2px solid var(--kit-focus-ring); }
+
+/* The compact grid: small days, a dot per tone, the whole day a link.
+   layout="compact" always; layout="auto" under 40rem of its own width. */
+kit-event-calendar[data-layout="compact"] :is(.kit-evcal-items, .kit-evcal-more, .kit-evcal-wd) { display: none; }
+kit-event-calendar[data-layout="compact"] .kit-evcal-wd-narrow { display: inline; }
+kit-event-calendar[data-layout="compact"] .kit-evcal-grid :is(th, td) { padding: 0; text-align: center; }
+kit-event-calendar[data-layout="compact"] .kit-evcal-grid th { padding-block: 6px; }
+kit-event-calendar[data-layout="compact"] .kit-evcal-grid td { block-size: 3.25rem; vertical-align: middle; }
+kit-event-calendar[data-layout="compact"] .kit-evcal-date { display: flex; flex-direction: column; gap: 3px; inline-size: 100%; block-size: 100%; min-block-size: 3.25rem; margin: 0; padding: 4px 0; border-radius: 0; font-size: var(--kit-text-sm); }
+kit-event-calendar[data-layout="compact"] .kit-evcal-dots { display: flex; justify-content: center; gap: 3px; block-size: 6px; }
+kit-event-calendar[data-layout="compact"] .kit-evcal-grid td[aria-current="date"] .kit-evcal-date { background: none; color: var(--kit-fg); }
+kit-event-calendar[data-layout="compact"] .kit-evcal-grid td[aria-current="date"] .kit-evcal-num { display: grid; place-items: center; inline-size: 26px; block-size: 26px; border-radius: 50%; background: var(--kit-accent); color: var(--kit-accent-fg); }
+@container (max-width: 40rem) {
+  kit-event-calendar[data-layout="auto"] :is(.kit-evcal-items, .kit-evcal-more, .kit-evcal-wd) { display: none; }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-wd-narrow { display: inline; }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-grid :is(th, td) { padding: 0; text-align: center; }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-grid th { padding-block: 6px; }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-grid td { block-size: 3.25rem; vertical-align: middle; }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-date { display: flex; flex-direction: column; gap: 3px; inline-size: 100%; block-size: 100%; min-block-size: 3.25rem; margin: 0; padding: 4px 0; border-radius: 0; font-size: var(--kit-text-sm); }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-dots { display: flex; justify-content: center; gap: 3px; block-size: 6px; }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-grid td[aria-current="date"] .kit-evcal-date { background: none; color: var(--kit-fg); }
+  kit-event-calendar[data-layout="auto"] .kit-evcal-grid td[aria-current="date"] .kit-evcal-num { display: grid; place-items: center; inline-size: 26px; block-size: 26px; border-radius: 50%; background: var(--kit-accent); color: var(--kit-accent-fg); }
+}
+.kit-evcal-dots i, .kit-evcal-key i { display: block; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--_tone); }
+
+/* The agenda (layout="agenda", under 40rem). */
+.kit-evcal-agenda { display: none; margin: 0; padding: 0; list-style: none; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-3); background: var(--kit-surface); }
+.kit-evcal-agenda > li { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--kit-space-3); padding: var(--kit-space-3) var(--kit-space-4); }
+.kit-evcal-agenda > li + li { border-block-start: 1px solid var(--kit-line); }
+.kit-evcal-agenda > li[aria-current="date"] .kit-evcal-day { color: var(--kit-accent); }
+.kit-evcal-day { margin: 0; color: var(--kit-fg-2); font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; }
+a.kit-evcal-day:hover { color: var(--kit-fg); text-decoration: underline; }
+.kit-evcal-agenda .kit-evcal-item { white-space: normal; font-size: var(--kit-text-sm); }
+.kit-evcal-none { display: block !important; color: var(--kit-fg-3); }
+@container (max-width: 40rem) {
+  kit-event-calendar[data-layout="agenda"] .kit-evcal-grid { display: none; }
+  kit-event-calendar[data-layout="agenda"] .kit-evcal-agenda { display: block; }
+}
+
+/* The key: a dot and a name for each tone the month uses. */
+.kit-evcal-key { display: flex; flex-wrap: wrap; gap: 6px var(--kit-space-4); margin: var(--kit-space-3) 0 0; padding: 0; list-style: none; color: var(--kit-fg-2); font-size: var(--kit-text-xs); }
+.kit-evcal-key[hidden] { display: none; }
+.kit-evcal-key li { display: inline-flex; align-items: center; gap: 6px; }
+.kit-evcal-key i { inline-size: 8px; block-size: 8px; }
+
+@media (forced-colors: active) {
+  .kit-evcal-item { border-inline-start-color: CanvasText; }
+  .kit-evcal-dots i, .kit-evcal-key i { forced-color-adjust: none; outline: 1px solid CanvasText; }
+  .kit-evcal-grid td[aria-current="date"] :is(.kit-evcal-date, .kit-evcal-num) { outline: 2px solid CanvasText; }
+}
