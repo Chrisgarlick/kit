@@ -1,0 +1,27 @@
+# kit's choices for the Chris Garlick theme, over what kit brand derives from brand.yaml.
+both:
+  font-mono: 'ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace'  # the site's stack; the brand's JetBrains Mono is for Typeset and Motion
+  button-radius: 999px     # the site's pill buttons
+  button-radius-sm: 999px
+light:
+  info: "#1D5E8C"          # the site's blue
+  info-soft: "#DCE8F2"
+  series-1: "#1F5C45"
+  series-2: "#1D5E8C"
+  series-3: "#B12F1C"
+  series-4: "#6B3FB8"
+  series-5: "#925600"
+  series-6: "#5B5852"
+  shadow-1: 0 1px 2px rgb(26 23 21 / 0.05)
+  shadow-2: 0 2px 12px rgb(26 23 21 / 0.06)
+  shadow-3: 0 8px 30px rgb(26 23 21 / 0.08), 0 2px 6px rgb(26 23 21 / 0.04)
+dark:
+  info: "#8AB8DD"
+  info-soft: "#17222B"
+  series-1: "#7CCFA4"
+  series-2: "#8AB8DD"
+  series-3: "#F08A78"
+  series-4: "#B79CF0"
+  series-5: "#E8B45A"
+  series-6: "#A39B91"
+  shadow-3: 0 0 0 1px rgb(228 224 216 / 0.08), 0 12px 40px rgb(0 0 0 / 0.45)

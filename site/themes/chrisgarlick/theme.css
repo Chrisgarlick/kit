@@ -3,74 +3,12 @@
  * Clients format); the rest is this site's showcase and its homepage rebuild.
  */
 
+@import "tokens.css";
+
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2"); }
 @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-tight-latin-wght-normal.woff2") format("woff2"); }
 
-:root {
-  /* type: display and headings Inter Tight 500, tight; body Inter */
-  --kit-font-display: "Inter Tight", "Inter", system-ui, sans-serif;
-  --kit-font-ui: "Inter", system-ui, sans-serif;
-  --kit-display-weight: 500;
-  --kit-display-tracking: -0.035em;
-
-  /* palette */
-  --kit-bg: #FAF8F3;              /* paper */
-  --kit-surface: #FFFFFF;         /* surface */
-  --kit-surface-2: #F2EEE6;       /* --color-bg-muted */
-  --kit-surface-3: #E8E3D8;
-  --kit-line: #DAD5CA;            /* rule */
-  --kit-line-strong: #C4BDB0;     /* --color-border-hover */
-  --kit-fg: #151513;              /* ink */
-  --kit-fg-2: #5B5852;            /* ink-muted */
-  --kit-fg-3: #625F58;            /* --color-text-tertiary */
-  --kit-accent: #1F5C45;          /* accent, the house green */
-  --kit-accent-hover: #174A37;
-  --kit-accent-soft: #DDE7DF;
-  --kit-accent-fg: #FFFFFF;
-  --kit-focus-ring: #1F5C45;
-  --kit-good: #1F5C45; --kit-good-soft: #DDE7DF;
-  --kit-warn: #925600; --kit-warn-soft: #F6E6CC;
-  --kit-bad: #B12F1C; --kit-bad-soft: #F8DED8; --kit-bad-fg: #FFFFFF;
-  --kit-info: #1D5E8C; --kit-info-soft: #DCE8F2;
-  --kit-scrim: rgb(26 23 21 / 0.35);
-  --kit-series-1: #1F5C45; --kit-series-2: #1D5E8C; --kit-series-3: #B12F1C;
-  --kit-series-4: #6B3FB8; --kit-series-5: #925600; --kit-series-6: #5B5852;
-
-  /* shape: soft corners, pill buttons, quiet warm shadows */
-  --kit-radius-1: 4px;
-  --kit-radius-2: 6px;
-  --kit-radius-3: 12px;
-  --kit-button-radius: 999px;
-  --kit-button-radius-sm: 999px;
-  --kit-shadow-1: 0 1px 2px rgb(26 23 21 / 0.05);
-  --kit-shadow-2: 0 2px 12px rgb(26 23 21 / 0.06);
-  --kit-shadow-3: 0 8px 30px rgb(26 23 21 / 0.08), 0 2px 6px rgb(26 23 21 / 0.04);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --kit-bg: #151513; --kit-surface: #1F1F1C; --kit-surface-2: #262622; --kit-surface-3: #2F2F2A;
-    --kit-line: #2C2D27; --kit-line-strong: #3D4036;
-    --kit-fg: #E4E0D8; --kit-fg-2: #A39B91; --kit-fg-3: #A39B91;
-    --kit-accent: #E4E0D8; --kit-accent-hover: #F0EDE8; --kit-accent-soft: #262622; --kit-accent-fg: #151513; --kit-focus-ring: #E4E0D8;
-    --kit-good: #7CCFA4; --kit-good-soft: #18261F; --kit-warn: #E8B45A; --kit-warn-soft: #2B2214;
-    --kit-bad: #F08A78; --kit-bad-soft: #2D1A16; --kit-bad-fg: #151513; --kit-info: #8AB8DD; --kit-info-soft: #17222B;
-    --kit-scrim: rgb(0 0 0 / 0.6);
-    --kit-series-1: #7CCFA4; --kit-series-2: #8AB8DD; --kit-series-3: #F08A78; --kit-series-4: #B79CF0; --kit-series-5: #E8B45A; --kit-series-6: #A39B91;
-    --kit-shadow-3: 0 0 0 1px rgb(228 224 216 / 0.08), 0 12px 40px rgb(0 0 0 / 0.45);
-  }
-}
-:root[data-theme="dark"] {
-  --kit-bg: #151513; --kit-surface: #1F1F1C; --kit-surface-2: #262622; --kit-surface-3: #2F2F2A;
-  --kit-line: #2C2D27; --kit-line-strong: #3D4036;
-  --kit-fg: #E4E0D8; --kit-fg-2: #A39B91; --kit-fg-3: #A39B91;
-  --kit-accent: #E4E0D8; --kit-accent-hover: #F0EDE8; --kit-accent-soft: #262622; --kit-accent-fg: #151513; --kit-focus-ring: #E4E0D8;
-  --kit-good: #7CCFA4; --kit-good-soft: #18261F; --kit-warn: #E8B45A; --kit-warn-soft: #2B2214;
-  --kit-bad: #F08A78; --kit-bad-soft: #2D1A16; --kit-bad-fg: #151513; --kit-info: #8AB8DD; --kit-info-soft: #17222B;
-  --kit-scrim: rgb(0 0 0 / 0.6);
-  --kit-series-1: #7CCFA4; --kit-series-2: #8AB8DD; --kit-series-3: #F08A78; --kit-series-4: #B79CF0; --kit-series-5: #E8B45A; --kit-series-6: #A39B91;
-  --kit-shadow-3: 0 0 0 1px rgb(228 224 216 / 0.08), 0 12px 40px rgb(0 0 0 / 0.45);
-}
+/* The tokens are generated from brand.yaml and kit.yaml by `kit brand` (tokens.css, imported above). */
 
 /* Service accents: each service has its own colour, set on any element with
    data-cg, and every kit component inside picks it up. "ink" is the solid

@@ -54,6 +54,8 @@ Add its CSS and a `demo.html` (a Go template, with literal placeholder text; `.D
 
 kit ships one neutral theme. An app re-skins it from its own repository with a stylesheet, loaded after `kit.css`, that only sets kit's `--kit-*` tokens: colours, type (including `--kit-display-weight` and `--kit-display-tracking` for display faces with one weight), radii, shadows and the six chart series. Set the light values on `:root` and the dark ones under both `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }` and `:root[data-theme="dark"]`, as `tokens/tokens.css` does, and check text colours against WCAG AA on every surface.
 
+You don't have to write the tokens by hand: `./bin/kit brand <folder>` reads a Clients `brand.yaml` (and an optional `kit.yaml` of token overrides beside it) and writes `tokens.css` for kit, `tokens.typ` for Typeset and `tokens.json` for Motion and charts. It derives the roles the brand format doesn't have by fixed rules and refuses to write anything if a text colour fails WCAG AA in either mode; `-check` fails when the files are out of date. Import `tokens.css` from the theme's stylesheet.
+
 [`site/themes/kritano/theme.css`](site/themes/kritano/theme.css) is a worked example, built from Kritano's client brand file and shown at [ui.chrisgarlick.com/themes/kritano/](https://ui.chrisgarlick.com/themes/kritano/). Any `site/themes/<id>/` with a `theme.yaml` and `theme.css` gets a page like it.
 
 ## Developing

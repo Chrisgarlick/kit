@@ -22,6 +22,8 @@ Charts are shared code because they are maths (scales, ticks, layouts, summaries
 
 ## Phase 1: brand → tokens, one generator (small)
 
+**Done 4 November 2026.** `kit brand` in `internal/brand` and `cmd/kit/brand.go`; both site themes now import generated `tokens.css`, with `kit.yaml` holding their few deliberate choices (Kritano's darker green and chart colours, chrisgarlick's blue info, pill buttons, two-layer shadows, the site's mono stack). It caught the same Kritano contrast failure found by hand. A Go test fails if a theme's generated files are stale. Next is phase 2.
+
 A Go command in kit, `kit brand`, reads a Clients `brand.yaml` (modes included) and writes:
 
 - `theme.css`: kit tokens, as `site/themes/*/theme.css` are today by hand (light on `:root`, dark under both the media query and `[data-theme="dark"]`). Fills the roles kit needs that the brand format doesn't have (`fg-3`, `surface-2`/`-3`, six series colours) with the same derivations every time, and checks WCAG AA for every text-on-surface pair in both modes, failing loudly.

@@ -28,9 +28,17 @@ Usage:
   kit site build [-root .] [-out dist] [-base https://ui.chrisgarlick.com]
   kit site serve [-root .] [-addr localhost:8150]
   kit site deploy [-host chrisgarlick-server] [-dir /var/www/ui] [-keep 5] [-rollback]
+  kit brand [-check] <folder with brand.yaml>...
 `
 
 func main() {
+	if len(os.Args) >= 2 && os.Args[1] == "brand" {
+		if err := brandCmd(os.Args[2:]); err != nil {
+			fmt.Fprintln(os.Stderr, "kit:", err)
+			os.Exit(1)
+		}
+		return
+	}
 	if len(os.Args) < 3 || os.Args[1] != "site" {
 		fmt.Fprint(os.Stderr, usage)
 		os.Exit(2)

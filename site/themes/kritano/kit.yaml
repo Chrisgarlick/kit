@@ -1,0 +1,16 @@
+# kit's choices for the Kritano theme, over what kit brand derives from brand.yaml.
+light:
+  good: "#14773A"          # the brand's #15803D is 4.34:1 on surface-2; one shade darker passes
+  good-soft: "#DCFCE7"     # Tailwind-style tints, as Kritano's app uses
+  warn-soft: "#FEF3C7"
+  bad-soft: "#FEE2E2"
+  info-soft: "#E0E7FF"
+  series-2: "#F59E0B"      # amber 500 rather than the spark's 400, for contrast on white
+  series-3: "#0D9488"
+  series-4: "#DB2777"
+  series-5: "#0284C7"
+  series-6: "#65A30D"
+dark:
+  accent-soft: "#25244F"   # the brand's #202142 is too close to the surface to show
+  focus-ring: "#A5B4FC"
+  info-soft: "#25244F"
