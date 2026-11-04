@@ -4,22 +4,25 @@
  * The same look works as tier 1 on a <div class="kit-segmented" role="radiogroup">
  * with role="radio" buttons, for pages that handle the behaviour themselves.
  * Buttons are styled before the element upgrades, so nothing shifts.
+ * As links between views (a server-rendered filter), with no script:
+ *   <nav class="kit-segmented" aria-label="…"><a href="…" aria-current="page">…</a><a href="…">…</a></nav>
  */
 kit-segmented, .kit-segmented {
   display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--kit-radius-2);
   background: var(--kit-surface-2); border: 1px solid var(--kit-line); vertical-align: middle;
 }
-:is(kit-segmented, .kit-segmented) > button {
+:is(kit-segmented, .kit-segmented) > button, .kit-segmented > a {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
   min-block-size: calc(var(--kit-control) - 8px); padding-inline: var(--kit-space-3);
   border: 0; border-radius: 7px; background: transparent; color: var(--kit-fg-2);
   font: 500 var(--kit-text-sm)/1 var(--kit-font-ui); cursor: pointer; white-space: nowrap;
   transition: background var(--kit-duration) var(--kit-ease), color var(--kit-duration) var(--kit-ease);
 }
-:is(kit-segmented, .kit-segmented) > button:hover { color: var(--kit-fg); }
-:is(kit-segmented, .kit-segmented) > button[aria-checked="true"] {
+:is(kit-segmented, .kit-segmented) > button:hover, .kit-segmented > a:hover { color: var(--kit-fg); }
+:is(kit-segmented, .kit-segmented) > button[aria-checked="true"], .kit-segmented > a[aria-current="page"] {
   background: var(--kit-surface); color: var(--kit-fg); font-weight: 600;
   box-shadow: var(--kit-shadow-1), 0 0 0 1px var(--kit-line);
 }
-:is(kit-segmented, .kit-segmented) > button:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
+:is(kit-segmented, .kit-segmented) > button:focus-visible, .kit-segmented > a:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 1px; }
 :is(kit-segmented, .kit-segmented) > button:disabled { opacity: 0.5; cursor: not-allowed; }
 @media (forced-colors: active) { :is(kit-segmented, .kit-segmented) > button[aria-checked="true"] { outline: 2px solid Highlight; } }

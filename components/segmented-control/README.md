@@ -40,6 +40,17 @@ It resets with its form (`form.reset()`) to the value it started with.
 - Each option is `role="radio"` with `aria-checked`. Only the chosen option is in the tab order (roving `tabindex`). Arrow keys move and choose, Home and End jump to the ends, and right-to-left pages swap the arrows.
 - The chosen option is shown by more than colour: it is raised and bolder, and outlined in forced-colours mode.
 
+## As links
+
+For a filter that reloads the page (a server-rendered `?status=`), use the same look on links, with no script. Mark the current one with `aria-current="page"`:
+
+```html
+<nav class="kit-segmented" aria-label="Status">
+  <a href="?status=all" aria-current="page">All</a>
+  <a href="?status=draft">Drafts</a>
+</nav>
+```
+
 ## Extension points
 
 - Class: `KitSegmented`, exported from `segmented-control.js`.
