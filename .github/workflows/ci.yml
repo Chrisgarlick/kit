@@ -1,5 +1,5 @@
-# kit's CI: Go (lint, tests, a full site build) and the browser tests in all
-# three engines. Actions are pinned to commits, not tags.
+# kit's CI: Go (lint, tests, a full site build), the Rust chart renderer
+# (kit-render), and the browser tests in all three engines. Actions are pinned to commits, not tags.
 name: CI
 
 on:
@@ -32,6 +32,17 @@ jobs:
         run: go test ./...
       - name: Build the site
         run: make site
+      - name: The chart bundle for kit-render is current
+        run: ./bin/kit bundle-charts && git diff --exit-code crates/kit-render/js/kit-charts.js
+
+  rust:
+    name: Rust (kit-render)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Tests
+        run: cargo test --release --locked --manifest-path crates/kit-render/Cargo.toml
 
   browser:
     name: Browsers (${{ matrix.browser }})

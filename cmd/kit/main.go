@@ -29,11 +29,16 @@ Usage:
   kit site serve [-root .] [-addr localhost:8150]
   kit site deploy [-host chrisgarlick-server] [-dir /var/www/ui] [-keep 5] [-rollback]
   kit brand [-check] <folder with brand.yaml>...
+  kit bundle-charts   (the chart renderer for crates/kit-render)
 `
 
 func main() {
-	if len(os.Args) >= 2 && os.Args[1] == "brand" {
-		if err := brandCmd(os.Args[2:]); err != nil {
+	if len(os.Args) >= 2 && (os.Args[1] == "brand" || os.Args[1] == "bundle-charts") {
+		run := brandCmd
+		if os.Args[1] == "bundle-charts" {
+			run = bundleCharts
+		}
+		if err := run(os.Args[2:]); err != nil {
 			fmt.Fprintln(os.Stderr, "kit:", err)
 			os.Exit(1)
 		}

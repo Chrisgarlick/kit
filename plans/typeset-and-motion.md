@@ -49,6 +49,8 @@ Done when `<kit-chart>` passes its tests on top of the renderer, and `node tools
 
 ## Phase 3: running the renderer from Rust (medium)
 
+**Done 4 November 2026.** `crates/kit-render`: `Renderer::new()` loads `js/kit-charts.js` (24 KB, from `./bin/kit bundle-charts`) into QuickJS via `rquickjs` 0.14; `render(&spec)` returns `{ svg, summary, width, height }`. A 12-point line chart takes about 0.4 ms in release. QuickJS has no `Intl`, so `core/scale.js` falls back to `plainFormat`, which matches `Intl`'s en-GB output on 150 cases. CI runs the crate's tests and fails if the bundle is stale. The Node sidecar fallback wasn't needed. Next is phase 4 (Typeset).
+
 Typeset and Motion are Rust. Embed the renderer rather than port it, so there is one implementation:
 
 - A small crate, `kit-render` (in the kit repo, `crates/kit-render`), wrapping **QuickJS** through `rquickjs` (about 1 MB, no Node). It bundles `core/charts` (esbuild, at build time) and exposes `render_chart(spec: &ChartSpec, theme: &Theme) -> Result<Rendered>` with the SVG and the summary.
