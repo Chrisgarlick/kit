@@ -90,3 +90,14 @@ test('server results merge in, and only the latest search counts', async ({ page
   await page.getByRole('option', { name: 'Result for re' }).click();
   expect(await page.evaluate(() => window.picks)).toEqual(['re']);
 });
+
+test('server results are kept even when the words are the server’s own, and show a description', async ({ page }) => {
+  await page.evaluate(() => {
+    document.querySelector('kit-command').source = async () => [{ label: 'Appearance', description: 'Settings · theme', group: 'Pages', href: '#appearance' }];
+  });
+  await page.locator('#open').click();
+  await box(page).fill('dark mode');
+  const opt = page.getByRole('option', { name: /Appearance/ });
+  await expect(opt).toBeVisible();
+  await expect(opt).toContainText('Settings · theme');
+});

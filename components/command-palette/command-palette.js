@@ -11,9 +11,10 @@
 // The links and buttons inside are its items (they stay hidden); choosing
 // one follows the link or clicks the button, so its own handlers run, and
 // fires `select` with detail { value, item }. For results from a server,
-// set `source`: async (query, signal) => [{ label, group, href | value, hint, keywords }].
-// Typing filters by every word, in labels, keywords and group names, best
-// matches first.
+// set `source`: async (query, signal) => [{ label, description, group,
+// href | value, hint, keywords }]. Typing filters the markup items by every
+// word, in labels, keywords and group names, best matches first; the
+// source's items are its own matches, so they are ranked but never dropped.
 
 import { KitElement } from '../../core/element.js';
 import { define } from '../../core/define.js';
@@ -26,6 +27,7 @@ const ICON = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-
 /** How well `item` matches the query words; 0 means it doesn't. */
 function score(item, words) {
   if (!words.length) return 1;
+  if (item.matched) return 1 + (norm(item.label).startsWith(words[0]) ? 4 : 0); // the source already matched it
   const label = norm(item.label);
   const hay = `${label} ${norm(item.keywords || '')} ${norm(item.group || '')}`;
   let total = 0;
@@ -162,7 +164,7 @@ export class KitCommand extends KitElement {
       this.#render(items, words); // markup results straight away, server results when they come
       const extra = await this.run('source', (signal) => this.source(q, signal));
       if (extra === undefined) return; // a newer search took over
-      items = items.concat(extra);
+      items = items.concat((extra || []).map((x) => ({ ...x, matched: true })));
     }
     this.#render(items, words);
     clearTimeout(this.#timer);
@@ -207,7 +209,14 @@ export class KitCommand extends KitElement {
         li.dataset.i = String(i);
         li.setAttribute('aria-selected', 'false');
         const text = document.createElement('span');
+        text.className = 'kit-command-text';
         text.textContent = it.label;
+        if (it.description) {
+          const d = document.createElement('span');
+          d.className = 'kit-command-desc';
+          d.textContent = it.description;
+          text.append(d);
+        }
         li.append(text);
         if (it.hint) {
           const k = document.createElement('kbd');

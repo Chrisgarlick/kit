@@ -36,7 +36,7 @@ palette.source = async (q, signal) => {
 };
 ```
 
-Every word typed must appear in an item's label, keywords or group; items whose label starts with the words rank first, and groups are ordered by their best match.
+Every word typed must appear in a markup item's label, keywords or group; items whose label starts with the words rank first, and groups are ordered by their best match. The source's items are taken as its own matches (a server may match on words it doesn't send), so they are ranked but never dropped. An item's `description` shows as a second, quieter line.
 
 ## Accessibility
 
