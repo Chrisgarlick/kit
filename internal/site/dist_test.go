@@ -67,6 +67,13 @@ func TestDist(t *testing.T) {
 	if _, err := s.Dist(t.TempDir(), DistOptions{NoJS: true, Bundles: map[string][]string{"kit": {"tabs"}}}); err == nil {
 		t.Error("-no-js with bundles should be an error")
 	}
+	bare := t.TempDir()
+	if _, err := s.Dist(bare, DistOptions{NoJS: true, NoTokens: true, CSS: []string{"button"}}); err != nil {
+		t.Fatal(err)
+	}
+	if b, _ := os.ReadFile(filepath.Join(bare, "kit.css")); strings.Contains(string(b), "--kit-accent:") || !strings.Contains(string(b), ".kit-button") {
+		t.Error("-no-tokens should leave out the token definitions but keep the components")
+	}
 	fonts := t.TempDir()
 	if _, err := s.Dist(fonts, DistOptions{Bundles: map[string][]string{"kit": {"tabs"}}, Fonts: true}); err != nil {
 		t.Fatal(err)

@@ -27,6 +27,9 @@ type DistOptions struct {
 	// NoJS writes kit.css only, for apps that use kit's CSS without its
 	// components' scripts. Bundles must be empty.
 	NoJS bool
+	// NoTokens leaves out tokens.css, for an app that defines every
+	// --kit-* token the chosen components read (its own theme).
+	NoTokens bool
 	// Fonts adds kit's typefaces (fonts.css and the woff2 files). Apps with
 	// their own fonts leave it off and set the --kit-font-* tokens.
 	Fonts bool
@@ -102,7 +105,9 @@ func (s *Site) Dist(out string, opt DistOptions) (*DistResult, error) {
 	if opt.Fonts {
 		imp(&css, "@import", "tokens/fonts.css")
 	}
-	imp(&css, "@import", "tokens/tokens.css")
+	if !opt.NoTokens {
+		imp(&css, "@import", "tokens/tokens.css")
+	}
 	for _, c := range s.Components {
 		if len(opt.CSS) > 0 && !inCSS[c.Slug] {
 			continue

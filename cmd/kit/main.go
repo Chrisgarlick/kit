@@ -30,7 +30,7 @@ Usage:
   kit site build [-root .] [-out dist] [-base https://ui.chrisgarlick.com]
   kit site serve [-root .] [-addr localhost:8150]
   kit site deploy [-host chrisgarlick-server] [-dir /var/www/ui] [-keep 5] [-rollback]
-  kit dist -out <dir> [-js kit=a,b] [-js charts=c] [-css d,e] [-fonts] [-no-js]   (kit for another app)
+  kit dist -out <dir> [-js kit=a,b] [-js charts=c] [-css d,e] [-fonts] [-no-js] [-no-tokens]   (kit for another app)
   kit brand [-check] <folder with brand.yaml>...
   kit bundle-charts   (the chart renderer for crates/kit-render)
 `
@@ -76,6 +76,7 @@ func dist(args []string) error {
 	cssList := fl.String("css", "", "components whose CSS goes in kit.css besides the bundles', comma-separated (default: all)")
 	fonts := fl.Bool("fonts", false, "include kit's fonts")
 	noJS := fl.Bool("no-js", false, "kit.css only: no bundles")
+	noTokens := fl.Bool("no-tokens", false, "leave out kit's tokens (the app defines every --kit-* token)")
 	_ = fl.Parse(args)
 	if *out == "" {
 		return errors.New("dist: -out is required")
@@ -84,7 +85,7 @@ func dist(args []string) error {
 	if err != nil {
 		return err
 	}
-	res, err := s.Dist(*out, site.DistOptions{Bundles: bundles, CSS: splitList(*cssList), Fonts: *fonts, NoJS: *noJS})
+	res, err := s.Dist(*out, site.DistOptions{Bundles: bundles, CSS: splitList(*cssList), Fonts: *fonts, NoJS: *noJS, NoTokens: *noTokens})
 	if err != nil {
 		return err
 	}
