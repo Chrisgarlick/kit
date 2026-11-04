@@ -1,6 +1,14 @@
 # kit in Typeset and Motion
 
-**Status:** plan, 3 November 2026. To build next. Owner: kit (the shared pieces), with small changes in `~/dev/typeset` and `~/dev/motion`.
+**Status (4 November 2026): built.** Phases 1 to 5 are done. Typeset's `chart` component is merged and live; Motion's `chart` layer is merged into Motion's main (cf5ba6f), not yet pushed or deployed. Owner: kit (the shared pieces), with small changes in `~/dev/typeset` and `~/dev/motion`.
+
+**Still open:**
+- Motion: push and deploy (coordinate with any other session working in Motion), then run the server's tests (they didn't run locally: the disk was full).
+- Motion: scenes can't yet take a chart's data as a template input (a "monthly score sting" fed a table); the data is written into the scene.
+- Motion: donut slices pop in turn rather than sweeping; a sweep would be a chart-only effect.
+- Motion: the under-a-second render target hasn't been measured on the server (kit-render takes about 0.4 ms per chart locally).
+- Typeset: decide whether `examples/charts.json` joins the gallery snapshots; check PDF/UA tagging now that charts carry alt text.
+- Clients: whether publishing a brand should run `kit brand`, so each brand version carries its kit theme.
 
 ## Why
 
@@ -61,7 +69,7 @@ Fallback if QuickJS is a problem on the servers: a tiny Node sidecar on the same
 
 ## Phase 4: Typeset
 
-**Built 4 November 2026, on the `kit-charts` branch in a worktree (`~/dev/typeset-kit`), not merged.** Typeset already had most of `kit.typ` (metrics, scores, gauges, score matrix, bars with targets, callouts, steps, highlights), so this phase became one new component instead: `chart`, in JSON (schema v2) and as a Markdown fence (options on the fence line, data as a table). `src/renderers/chart.rs` maps the profile's colours and fonts to kit tokens, draws through `kit-render` (one QuickJS engine per thread), and embeds the SVG with `image(bytes(...), format: "svg")` and the summary as alt text; a chart that fails becomes a warning callout. `examples/charts.json` shows every type (real Kritano audit data where it exists); an ignored test renders it to PNG. All 80 tests pass. To merge: rebase on main (another session has uncommitted work in `renderers/typst.rs` and `brand/`), build the Docker image once (QuickJS compiles from C; the builder has gcc), and decide whether `charts.json` joins the gallery snapshots. The original plan follows.
+**Built 4 November 2026, merged into Typeset's main (c68a16c) and deployed.** Typeset already had most of `kit.typ` (metrics, scores, gauges, score matrix, bars with targets, callouts, steps, highlights), so this phase became one new component instead: `chart`, in JSON (schema v2) and as a Markdown fence (options on the fence line, data as a table). `src/renderers/chart.rs` maps the profile's colours and fonts to kit tokens, draws through `kit-render` (one QuickJS engine per thread), and embeds the SVG with `image(bytes(...), format: "svg")` and the summary as alt text; a chart that fails becomes a warning callout. `examples/charts.json` shows every type (real Kritano audit data where it exists); an ignored test renders it to PNG. All 80 tests pass. Verified live: `examples/charts.json` renders through the deployed API. The original plan follows.
 
 - `kit.typ`, a Typst library styled from `tokens.typ`: `stat-tile`, `stat-row`, `badge`, `callout` (kit's alert), `timeline`, `steps`, `description-list`, and table styling that matches kit's data table (tabular figures, header band, totals row).
 - Markdown authoring, following the README's rules:
@@ -74,6 +82,9 @@ Fallback if QuickJS is a problem on the servers: a tiny Node sidecar on the same
 Done when a Kritano audit report (scores bar chart, category heatmap, trend line, stat row) renders as a PDF matching app.kritano.com.
 
 ## Phase 5: Motion
+
+**Built 4 November 2026, merged into Motion's main (cf5ba6f), not yet deployed.** A `chart` layer (`type: chart`, a `size`, and `chart: { kind, labels, series, format, stacked, values, center, bins }`) is drawn by `kit-render` (kit rev 880ec49) in `crates/motion-render/src/chart.rs`. The theme comes from the scene's palette for its mode, and the font from the brand's `body` role. kit's `<text>` becomes Motion glyph outlines; elements with a `data-i` are grouped into marks, and everything else is the static base. `in`/`out` always split by mark (`Split::Mark`), so `stagger` spaces the bars, slices, points, cells or lines. `wipe` with `direction: up` grows bars from the baseline, `draw` draws each line of a line chart (and is allowed only there), and `pop` suits slices and points. `motion-core` holds the schema, validation, theme and mark count and stays wasm-safe; only `motion-render` depends on kit-render. Documented in Motion's `tech-spec.md` §5.10 and `specs/authoring.md`; tested with `tests/scenes/charts.yaml`. The original plan follows.
+
 
 - A `chart` layer type: the static SVG from `kit-render`, with enter animations written by Motion's emitter, so they work in animated SVG, PNG frames and later MP4: bars grow from the baseline, lines draw on (stroke-dash), donut slices sweep, heatmap cells fade in staggered (`motion.stagger` from the brand), numbers count up in stat layers.
 - The renderer marks animatable parts (`data-part="bar"`, `data-i`), and Motion targets them; the chart itself stays static and printable.
