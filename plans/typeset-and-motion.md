@@ -61,6 +61,8 @@ Fallback if QuickJS is a problem on the servers: a tiny Node sidecar on the same
 
 ## Phase 4: Typeset
 
+**Built 4 November 2026, on the `kit-charts` branch in a worktree (`~/dev/typeset-kit`), not merged.** Typeset already had most of `kit.typ` (metrics, scores, gauges, score matrix, bars with targets, callouts, steps, highlights), so this phase became one new component instead: `chart`, in JSON (schema v2) and as a Markdown fence (options on the fence line, data as a table). `src/renderers/chart.rs` maps the profile's colours and fonts to kit tokens, draws through `kit-render` (one QuickJS engine per thread), and embeds the SVG with `image(bytes(...), format: "svg")` and the summary as alt text; a chart that fails becomes a warning callout. `examples/charts.json` shows every type (real Kritano audit data where it exists); an ignored test renders it to PNG. All 80 tests pass. To merge: rebase on main (another session has uncommitted work in `renderers/typst.rs` and `brand/`), build the Docker image once (QuickJS compiles from C; the builder has gcc), and decide whether `charts.json` joins the gallery snapshots. The original plan follows.
+
 - `kit.typ`, a Typst library styled from `tokens.typ`: `stat-tile`, `stat-row`, `badge`, `callout` (kit's alert), `timeline`, `steps`, `description-list`, and table styling that matches kit's data table (tabular figures, header band, totals row).
 - Markdown authoring, following the README's rules:
   - ```` ```chart ```` fenced blocks: YAML (type, format, options) plus a Markdown table or inline data; Typeset renders the SVG through `kit-render` and embeds it with `image(..., alt: summary)`, so the PDF carries the same words a screen reader gets on the web.
