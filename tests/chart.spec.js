@@ -120,3 +120,38 @@ test('funnel, bullet and small multiples: drawn, summarised, and shared scales',
   await expect(page.getByRole('group', { name: 'A', exact: true })).toBeVisible();
   await expect(page.locator('#mu').getByRole('button', { name: 'Show table' })).toHaveCount(1);
 });
+
+test('renderStatic: a standalone, valid SVG with theme colours as attributes, a title and the summary', async ({ page }) => {
+  await page.goto(harness);
+  const r = await page.evaluate(async () => {
+    const { renderStatic } = await import('/core/charts-static.js');
+    const { renderChart } = await import('/core/charts.js');
+    const data = { title: 'Scores', labels: ['One', 'Two', 'Three'], series: [{ name: 'A', values: [3, 5, 4] }, { name: 'B', values: [2, 6, 1] }] };
+    const out = {};
+    for (const type of ['line', 'area', 'bar', 'donut', 'scatter', 'histogram', 'heatmap', 'funnel', 'bullet']) {
+      const s = renderStatic(data, { type, width: 480, theme: { accent: '#123456', 'series-1': '#abcdef' } });
+      const doc = new DOMParser().parseFromString(s.svg, 'image/svg+xml');
+      out[type] = {
+        error: doc.querySelector('parsererror')?.textContent ?? null,
+        classes: /class="kit-(s\d|chart)/.test(s.svg),
+        vars: /var\(--|currentColor/.test(s.svg),
+        title: doc.querySelector('title')?.textContent,
+        desc: doc.querySelector('desc')?.textContent === s.summary,
+        xmlns: doc.documentElement.getAttribute('xmlns'),
+        themed: s.svg.includes('#abcdef') || s.svg.includes('#123456'),
+        marks: type === 'bar' ? [s.svg.split('<g class="kit-legend"')[0].match(/<rect[^>]*fill="#abcdef"/g)?.length, renderChart(data, { type, width: 480 }).svg.match(/kit-s1 kit-chart-bar/g)?.length] : null,
+      };
+    }
+    return out;
+  });
+  for (const [type, x] of Object.entries(r)) {
+    expect(x.error, type).toBeNull();
+    expect(x.classes, `${type} still has kit classes`).toBe(false);
+    expect(x.vars, `${type} still depends on CSS`).toBe(false);
+    expect(x.title, type).toBe('Scores');
+    expect(x.desc, type).toBe(true);
+    expect(x.xmlns, type).toBe('http://www.w3.org/2000/svg');
+    expect(x.themed, `${type} uses the theme`).toBe(true);
+  }
+  expect(r.bar.marks[0]).toBe(r.bar.marks[1]); // the same bars as the browser draws
+});

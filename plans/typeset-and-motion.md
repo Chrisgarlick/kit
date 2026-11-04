@@ -36,6 +36,8 @@ Open question: should Clients run this at publish time, so a published brand ver
 
 ## Phase 2: the chart renderer, out of the element (medium)
 
+**Done 4 November 2026.** `core/charts.js` (`renderChart`, DOM-free, every type) draws for `<kit-chart>`, now a 288-line shell for hover, keys and the table. `core/charts-static.js` (`renderStatic`) writes a standalone SVG: theme colours and fonts as attributes, legend drawn in, `<title>` and `<desc>` (the summary), optional `background` and bar `values`; kept out of `kit.js`. `tools/render-chart.mjs` renders from a JSON spec with a `tokens.json` theme. Checked by compiling real Kritano-themed charts into a Typst page (Typst 0.14). Note for phase 4: SVG text uses whatever fonts Typst has, so Typeset must load the brand fonts. Next is phase 3.
+
 Split `components/line-chart/chart.js` into:
 
 - `core/charts/*.js`, pure functions: `renderChart({ type, data, width, height, theme, format, options }) → { svg, summary }`. No DOM, no `document`, no CSS variables in the output: colours, fonts and sizes come from `theme` (from `tokens.json`) and are written as attributes, so the SVG stands alone. Every type: line, area, bar (grouped and stacked), donut, scatter, histogram, heatmap, funnel, bullet, sparkline, small multiples.
