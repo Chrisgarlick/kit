@@ -18,6 +18,7 @@ kit-chart[type="donut"] .kit-chart-plot { block-size: var(--kit-chart-height, 22
 .kit-chart-area { fill: currentColor; opacity: 0.14; stroke: none; }
 .kit-chart-bar, .kit-chart-slice { fill: currentColor; transition: opacity var(--kit-duration) var(--kit-ease); }
 .kit-chart-slice { stroke: var(--kit-surface); stroke-width: 2; }
+.kit-chart-plot .kit-chart-track { fill: var(--kit-surface-3); }
 .kit-chart-dim { opacity: 0.35; }
 .kit-chart-cross { stroke: var(--kit-fg-3); stroke-width: 1; stroke-dasharray: 3 3; }
 .kit-chart-band { fill: var(--kit-surface-2); }

@@ -17,6 +17,29 @@ import { niceTicks, linear, formatter } from './scale.js';
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 const TYPES = ['line', 'area', 'bar', 'donut', 'scatter', 'histogram', 'heatmap', 'funnel', 'bullet'];
 
+// Splits a label into at most two lines of about `max` characters, ending
+// the second with an ellipsis if it still doesn't fit.
+function wrap(text, max) {
+  const s = String(text);
+  if (s.length <= max) return [s];
+  const words = s.split(' ');
+  let first = '';
+  while (words.length && (first ? `${first} ${words[0]}` : words[0]).length <= max) first = first ? `${first} ${words.shift()}` : words.shift();
+  if (!first) first = words.shift();
+  let second = words.join(' ');
+  if (second.length > max) second = `${second.slice(0, Math.max(1, max - 1)).trimEnd()}…`;
+  return second ? [first, second] : [first];
+}
+
+// A <text> of one or two lines, centred on y when `middle`, else hanging from it.
+function labelText(cls, x, y, text, max, anchor, middle) {
+  const lines = wrap(text, max);
+  const attrs = `class="${cls}" x="${x}" y="${y}"${anchor ? ` text-anchor="${anchor}"` : ''}`;
+  if (lines.length === 1) return `<text ${attrs}${middle ? ' dominant-baseline="middle"' : ''}>${esc(lines[0])}</text>`;
+  const start = middle ? '-0.55em' : '0';
+  return `<text ${attrs}${middle ? ' dominant-baseline="middle"' : ''}><tspan x="${x}" dy="${start}">${esc(lines[0])}</tspan><tspan x="${x}" dy="1.15em">${esc(lines[1])}</tspan></text>`;
+}
+
 /** The height a chart wants: funnels and bullets grow with their rows, others take the box. */
 export function chartHeight(type, m, box = 240) {
   if (type === 'funnel') return Math.max(120, m.labels.length * 52);
@@ -51,7 +74,7 @@ export function renderChart(m, options = {}) {
   if (!legend) {
     if (type === 'scatter') legend = scatterGroups(m).map((label, i) => ({ label, series: i }));
     else if (type === 'bullet') legend = [{ label: 'Value', series: 0 }, { label: 'Target', target: true }];
-    else if (type === 'donut') legend = m.labels.map((label, i) => ({ label, series: i }));
+    else if (type === 'donut') legend = o.center === 'first' ? [] : m.labels.map((label, i) => ({ label, series: i }));
     else if (['line', 'area', 'bar'].includes(type) && m.series.length > 1) legend = m.series.map((s, i) => ({ label: s.name, series: i }));
     else legend = [];
   }
@@ -77,8 +100,10 @@ function cartesian(m, type, W, H, o, res) {
   const axis = formatter(o.format === 'percent' ? 'percent' : (Math.abs(hi) >= 10000 || o.format === 'compact') ? 'compact' : o.format || 'number');
   const y = niceTicks(lo, hi, Math.max(2, Math.round(H / 56)));
   const left = 10 + Math.max(...y.ticks.map((t) => axis(t).length)) * 7;
-  const top = 10;
-  const bottom = H - 26;
+  const slot = (W - left - 10) / Math.max(1, n);
+  const twoLines = bar && m.labels.some((l) => String(l).length * 6.2 > slot - 6);
+  const top = o.values ? 22 : 10;
+  const bottom = H - (twoLines ? 38 : 26);
   const right = W - 10;
   const sy = linear(y.min, y.max, bottom, top);
   const band = (right - left) / n;
@@ -95,7 +120,9 @@ function cartesian(m, type, W, H, o, res) {
   m.labels.forEach((l, i) => {
     if (i % every && i !== n - 1) return;
     if (!bar && i === n - 1 && i % every && n - 1 - Math.floor((n - 1) / every) * every < every / 2) return;
-    out.push(`<text class="kit-chart-tick" x="${sx(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(l)}</text>`);
+    out.push(bar
+      ? labelText('kit-chart-tick', sx(i).toFixed(1), bottom + 16, l, Math.max(4, Math.floor((band * every - 6) / 6.2)), 'middle', false)
+      : `<text class="kit-chart-tick" x="${sx(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(l)}</text>`);
   });
   out.push('<g class="kit-chart-hover"></g>');
   if (bar) {
@@ -166,7 +193,9 @@ function donut(m, W, H, fmt, o, res) {
       const d = full
         ? `M${p(-Math.PI / 2, r)}A${r} ${r} 0 1 1 ${p(Math.PI * 1.5 - 0.0001, r)}L${p(Math.PI * 1.5 - 0.0001, ri)}A${ri} ${ri} 0 1 0 ${p(-Math.PI / 2, ri)}Z`
         : `M${p(a0, r)}A${r} ${r} 0 ${big} 1 ${p(a1, r)}L${p(a1, ri)}A${ri} ${ri} 0 ${big} 0 ${p(a0, ri)}Z`;
-      out.push(`<path class="kit-s${(i % 6) + 1} kit-chart-slice" data-i="${i}" d="${d}"/>`);
+      // A gauge (center="first") draws what's left as a quiet track, not a second series.
+      const cls = o.center === 'first' && i > 0 ? 'kit-chart-track' : `kit-s${(i % 6) + 1}`;
+      out.push(`<path class="${cls} kit-chart-slice" data-i="${i}" d="${d}"/>`);
     }
     a0 = a1;
   });
@@ -305,7 +334,7 @@ function funnel(m, W, H, fmt, o, res) {
     const cy = 2 + rowH * (i + 0.5);
     const w = Math.max(2, ((right - left) * v) / top);
     const x = left + (right - left - w) / 2;
-    out.push(`<text class="kit-chart-tick kit-chart-funnel-label" x="0" y="${cy.toFixed(1)}" dominant-baseline="middle">${esc(m.labels[i])}</text>`,
+    out.push(labelText('kit-chart-tick kit-chart-funnel-label', 0, cy.toFixed(1), m.labels[i], Math.max(6, Math.floor((left - 12) / 6.6)), null, true),
       `<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${x.toFixed(1)}" y="${(cy - bh / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${bh.toFixed(1)}" rx="4"/>`);
     const label = esc(formatter('compact')(v));
     if (w > 48) out.push(`<text class="kit-chart-bar-value" x="${(x + w / 2).toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${label}</text>`);
@@ -344,7 +373,7 @@ function bullet(m, W, H, fmt, o, res) {
   rows.forEach((r, i) => {
     const cy = 2 + rowH * (i + 0.5);
     const sx = linear(0, r.top || 1, left, right);
-    out.push(`<text class="kit-chart-tick kit-chart-funnel-label" x="0" y="${cy.toFixed(1)}" dominant-baseline="middle">${esc(r.label)}</text>`,
+    out.push(labelText('kit-chart-tick kit-chart-funnel-label', 0, cy.toFixed(1), r.label, Math.max(6, Math.floor((left - 12) / 6.6)), null, true),
       `<rect class="kit-chart-bullet-track" x="${left}" y="${(cy - th / 2).toFixed(1)}" width="${(right - left).toFixed(1)}" height="${th.toFixed(1)}" rx="3"/>`,
       `<rect class="kit-chart-bullet-band" x="${left}" y="${(cy - th / 2).toFixed(1)}" width="${(sx(r.top * 0.8) - left).toFixed(1)}" height="${th.toFixed(1)}" rx="3"/>`,
       `<rect class="kit-s1 kit-chart-bar" data-i="${i}" x="${left}" y="${(cy - th / 6).toFixed(1)}" width="${Math.max(1, Math.min(right, sx(r.v)) - left).toFixed(1)}" height="${(th / 3).toFixed(1)}" rx="2"/>`);

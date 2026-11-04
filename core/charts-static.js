@@ -29,6 +29,14 @@ const KIT_LIGHT = {
   'series-1': '#0f766e', 'series-2': '#4f46e5', 'series-3': '#d97706', 'series-4': '#db2777', 'series-5': '#0284c7', 'series-6': '#65a30d',
 };
 
+// a moved toward b by amount, both #RRGGBB (what chart.css does with color-mix).
+function mixHex(a, b, amount) {
+  const p = (h) => [1, 3, 5].map((i) => parseInt(String(h).slice(i, i + 2), 16));
+  const [x, y] = [p(a), p(b)];
+  if (x.some(Number.isNaN) || y.some(Number.isNaN)) return a;
+  return `#${x.map((v, i) => Math.round(v + (y[i] - v) * amount).toString(16).padStart(2, '0')).join('')}`;
+}
+
 // The attributes each of kit's chart classes stands for, from a theme.
 function attrsFor(classes, t, colour) {
   const a = {};
@@ -39,10 +47,10 @@ function attrsFor(classes, t, colour) {
   if (has('kit-chart-area')) Object.assign(a, { fill: colour, 'fill-opacity': 0.14 });
   if (has('kit-chart-bar') || has('kit-chart-point')) a.fill = colour;
   if (has('kit-chart-point')) Object.assign(a, { 'fill-opacity': 0.8, stroke: t.surface, 'stroke-width': 1 });
-  if (has('kit-chart-slice')) Object.assign(a, { fill: colour, stroke: t.surface, 'stroke-width': 2 });
+  if (has('kit-chart-slice')) Object.assign(a, { fill: has('kit-chart-track') ? t['surface-3'] : colour, stroke: t.surface, 'stroke-width': 2 });
   if (has('kit-chart-heat')) a.fill = has('kit-chart-empty') ? t['surface-2'] : t.accent;
   if (has('kit-chart-bullet-track')) a.fill = t['surface-3'];
-  if (has('kit-chart-bullet-band')) a.fill = t['line-strong'];
+  if (has('kit-chart-bullet-band')) a.fill = mixHex(t['surface-3'], t.fg, 0.08);
   if (has('kit-chart-target')) Object.assign(a, { stroke: t.fg, 'stroke-width': 2.5, 'stroke-linecap': 'round' });
   if (has('kit-chart-tick')) Object.assign(a, { fill: t['fg-3'], 'font-size': 11 });
   if (has('kit-chart-value')) Object.assign(a, { fill: t['fg-2'], 'font-weight': 600 });
