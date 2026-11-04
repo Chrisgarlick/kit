@@ -62,7 +62,7 @@ kit dist -out web/static/kit \
 ```
 
 - `kit.css`: the tokens, plus the CSS of the components named in `-js` and `-css` (every component without `-css`). Add `-fonts` for kit's typefaces; apps with their own set the `--kit-font-*` tokens.
-- One ES module per `-js` bundle (`kit.js`, `charts.js`), sharing one `kit-core-<hash>.js` chunk, so a page loads only the bundles it uses. Without `-js` there is one bundle, `kit`, with every tier 2 component.
+- One ES module per `-js` bundle (`kit.js`, `charts.js`), sharing one `kit-core-<hash>.js` chunk, so a page loads only the bundles it uses. Without `-js` there is one bundle, `kit`, with every tier 2 component; `-no-js` writes `kit.css` alone, for an app that uses kit's CSS only.
 - `VERSION`: the kit commit (`+dirty` for uncommitted changes) and each bundle's components.
 
 Entry names aren't hashed; the app versions its own asset URLs. Theme kit by overriding the `--kit-*` tokens in a stylesheet loaded after `kit.css` (see Theming).

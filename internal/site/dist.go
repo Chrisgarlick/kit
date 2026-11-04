@@ -24,6 +24,9 @@ type DistOptions struct {
 	// CSS lists the components whose CSS goes into kit.css, besides those in
 	// the bundles. Empty means every component.
 	CSS []string
+	// NoJS writes kit.css only, for apps that use kit's CSS without its
+	// components' scripts. Bundles must be empty.
+	NoJS bool
 	// Fonts adds kit's typefaces (fonts.css and the woff2 files). Apps with
 	// their own fonts leave it off and set the --kit-font-* tokens.
 	Fonts bool
@@ -47,7 +50,10 @@ func (s *Site) Dist(out string, opt DistOptions) (*DistResult, error) {
 		known[c.Slug] = c
 	}
 	bundles := opt.Bundles
-	if len(bundles) == 0 {
+	if opt.NoJS && len(bundles) > 0 {
+		return nil, fmt.Errorf("dist: no JS and bundles together")
+	}
+	if len(bundles) == 0 && !opt.NoJS {
 		var all []string
 		for _, c := range s.Components {
 			if len(c.JS) > 0 {
@@ -129,6 +135,9 @@ func (s *Site) Dist(out string, opt DistOptions) (*DistResult, error) {
 		entries []api.EntryPoint
 		split   bool
 	}{{cssEntry, false}, {jsEntries, true}} {
+		if len(b.entries) == 0 {
+			continue
+		}
 		r := api.Build(api.BuildOptions{
 			EntryPointsAdvanced: b.entries,
 			AbsWorkingDir:       s.Root,

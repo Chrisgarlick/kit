@@ -54,6 +54,19 @@ func TestDist(t *testing.T) {
 			t.Errorf("%+v should be an error", bad)
 		}
 	}
+	css := t.TempDir()
+	if _, err := s.Dist(css, DistOptions{NoJS: true, CSS: []string{"button"}}); err != nil {
+		t.Fatal(err)
+	}
+	if m, _ := filepath.Glob(filepath.Join(css, "*.js")); len(m) > 0 {
+		t.Errorf("-no-js wrote %v", m)
+	}
+	if b, _ := os.ReadFile(filepath.Join(css, "kit.css")); strings.Contains(string(b), "kit-command") {
+		t.Error("-no-js should carry only the named components' CSS")
+	}
+	if _, err := s.Dist(t.TempDir(), DistOptions{NoJS: true, Bundles: map[string][]string{"kit": {"tabs"}}}); err == nil {
+		t.Error("-no-js with bundles should be an error")
+	}
 	fonts := t.TempDir()
 	if _, err := s.Dist(fonts, DistOptions{Bundles: map[string][]string{"kit": {"tabs"}}, Fonts: true}); err != nil {
 		t.Fatal(err)
