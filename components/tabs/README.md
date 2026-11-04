@@ -33,7 +33,14 @@ The nth button shows the nth panel. The first tab is chosen unless `value` names
 |---|---|
 | `change` | `{ value }`, when the person picks another tab |
 
-Use `activation="manual"` when a panel is slow to show, say it loads data, so arrowing past it doesn't load it. Tabs switch views of the same thing; for moving between pages, use links.
+Use `activation="manual"` when a panel is slow to show, say it loads data, so arrowing past it doesn't load it. Tabs switch views of the same thing; for moving between pages, use links. For links between pages that look like tabs (a server-rendered `?tab=`), use the same row with no script: mark the current one with `aria-current="page"`.
+
+```html
+<nav class="kit-tablist" aria-label="Site">
+  <a href="?tab=overview" aria-current="page">Overview</a>
+  <a href="?tab=audits">Audits <span class="kit-badge">2</span></a>
+</nav>
+```
 
 ## Accessibility
 
