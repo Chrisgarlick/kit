@@ -21,6 +21,7 @@
 //   stacked   bars on top of each other instead of side by side
 //   format    number (default), compact, percent, currency:GBP
 //   zero      start the value axis at zero (always on for bars)
+//   points    a dot on each value (lines and areas)
 
 import { KitElement } from '../../core/element.js';
 import { define } from '../../core/define.js';
@@ -60,6 +61,7 @@ export class KitChart extends KitElement {
     stacked: { type: Boolean },
     format: { type: String },
     zero: { type: Boolean },
+    points: { type: Boolean },
     min: { type: Number }, // fix the value axis, for charts that must compare (small multiples)
     max: { type: Number },
   };
@@ -166,7 +168,7 @@ export class KitChart extends KitElement {
     const label = m.title || this.getAttribute('aria-label') || `${type[0].toUpperCase() + type.slice(1)} chart`;
     this.#plot.setAttribute('aria-label', label);
     const out = renderChart(m, {
-      type, width: this.#width, height: H, format: this.format, stacked: this.stacked, zero: this.zero,
+      type, width: this.#width, height: H, format: this.format, stacked: this.stacked, zero: this.zero, points: this.points,
       min: this.min, max: this.max, center: this.getAttribute('center'), bins: this.getAttribute('bins'),
     });
     this.#geom = out.geom;

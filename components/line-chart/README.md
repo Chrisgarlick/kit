@@ -30,6 +30,7 @@ The table is the data: the first column labels the points and every other column
 | `type` | `line`, `area` (also `bar` and `donut`, on their own pages) | `line` |
 | `format` | `number`, `compact`, `percent`, `currency:GBP` | `number` |
 | `zero` | present to start the value axis at zero | fits the data (areas always start at zero) |
+| `points` | present to mark each value with a dot | lines only |
 
 Set the height with `--kit-chart-height` (240px by default); the width follows the container and the chart redraws to fit. To draw from script, set `chart.data = { labels, series: [{ name, values }] }`. Changing the table redraws the chart.
 

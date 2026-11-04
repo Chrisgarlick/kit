@@ -82,6 +82,14 @@ test('nice ticks land on round numbers that cover the data', async ({ page }) =>
   expect(r).toEqual([[0, 20, 40, 60, 80, 100], [1000, 1500, 2000, 2500, 3000], [-4, -2, 0, 2, 4, 6, 8], [0, 1, 2, 3, 4, 5]]);
 });
 
+test('a flat line sits on a small range, and points mark each value', async ({ page }) => {
+  await mount(page, `<kit-chart type="line" points><table><thead><tr><th>Audit</th><th>Score</th></tr></thead><tbody><tr><th>1 Nov</th><td>77</td></tr><tr><th>4 Nov</th><td>77</td></tr></tbody></table></kit-chart>`);
+  await expect(page.locator('kit-chart .kit-chart-mark')).toHaveCount(2);
+  const ticks = await page.locator('kit-chart .kit-chart-plot text').allTextContents();
+  expect(ticks).not.toContain('0');
+  expect(ticks.some((t) => Number(t) > 77) && ticks.some((t) => Number(t) < 77 && Number(t) > 0)).toBe(true);
+});
+
 test('scatter, histogram and heatmap: drawn, summarised, and explorable by keyboard', async ({ page }) => {
   await mount(page, `
     <kit-chart type="scatter" id="sc"><table><thead><tr><th>Item</th><th>X</th><th>Y</th><th>Group</th></tr></thead><tbody>

@@ -53,7 +53,8 @@ export function chartHeight(type, m, box = 240) {
 
 /**
  * Draws a chart. options: type, width, height, format, stacked, zero, min,
- * max, center ('first'), bins, values (print each bar's value).
+ * max, center ('first'), bins, values (print each bar's value), points (a
+ * dot on each value of a line or area).
  * Returns { svg, summary, legend, geom, height }: legend is a list of
  * { label, series } (or { scale: [lo, hi] } for heatmaps); geom is what
  * hover and keyboard exploration need.
@@ -99,6 +100,8 @@ function cartesian(m, type, W, H, o, res) {
     lo = Math.min(0, ...m.labels.map((_, i) => m.series.reduce((a, s) => a + Math.min(0, s.values[i] ?? 0), 0)));
   }
   if (bar || o.zero || type === 'area') { lo = Math.min(0, lo); hi = Math.max(0, hi); }
+  // A flat line sits mid-chart on a small range, not on an axis from zero.
+  else if (lo === hi && lo !== 0) { const pad = Math.max(Math.abs(lo) * 0.1, 1); lo = lo > 0 ? Math.max(0, lo - pad) : lo - pad; hi += pad; }
   if (o.min != null) lo = o.min;
   if (o.max != null) hi = o.max;
   const axis = formatter(o.format === 'percent' ? 'percent' : (Math.abs(hi) >= 10000 || o.format === 'compact') ? 'compact' : o.format || 'number');
@@ -170,6 +173,9 @@ function cartesian(m, type, W, H, o, res) {
         }
         out.push(`<path class="${cls} kit-chart-line" data-part="line" data-i="${j}" d="${d}"/>`);
       }
+      // points: a dot on each value, in the series' group (data-i), so they
+      // animate with their line.
+      if (o.points) for (const p of pts) if (p) out.push(`<circle class="${cls} kit-chart-mark" data-part="point" data-i="${j}" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.5"/>`);
     });
   }
   out.push('</svg>');

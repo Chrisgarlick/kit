@@ -47,6 +47,7 @@ function attrsFor(classes, t, colour) {
   if (has('kit-chart-area')) Object.assign(a, { fill: colour, 'fill-opacity': 0.14 });
   if (has('kit-chart-bar') || has('kit-chart-point')) a.fill = colour;
   if (has('kit-chart-point')) Object.assign(a, { 'fill-opacity': 0.8, stroke: t.surface, 'stroke-width': 1 });
+  if (has('kit-chart-mark')) Object.assign(a, { fill: t.surface, stroke: colour, 'stroke-width': 2 });
   if (has('kit-chart-slice')) Object.assign(a, { fill: has('kit-chart-track') ? t['surface-3'] : colour, stroke: t.surface, 'stroke-width': 2 });
   if (has('kit-chart-heat')) a.fill = has('kit-chart-empty') ? t['surface-2'] : t.accent;
   if (has('kit-chart-bullet-track')) a.fill = t['surface-3'];

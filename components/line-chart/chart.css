@@ -22,6 +22,7 @@ kit-chart[type="donut"] .kit-chart-plot { block-size: var(--kit-chart-height, 22
 .kit-chart-dim { opacity: 0.35; }
 .kit-chart-cross { stroke: var(--kit-fg-3); stroke-width: 1; stroke-dasharray: 3 3; }
 .kit-chart-band { fill: var(--kit-surface-2); }
+.kit-chart-mark { fill: var(--kit-surface); stroke: currentColor; stroke-width: 2; }
 .kit-chart-dot { fill: var(--kit-surface); stroke: currentColor; stroke-width: 2.5; }
 .kit-s1 { --_c: var(--kit-series-1); } .kit-s2 { --_c: var(--kit-series-2); } .kit-s3 { --_c: var(--kit-series-3); }
 .kit-s4 { --_c: var(--kit-series-4); } .kit-s5 { --_c: var(--kit-series-5); } .kit-s6 { --_c: var(--kit-series-6); }
