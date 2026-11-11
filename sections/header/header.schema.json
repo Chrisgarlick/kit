@@ -12,7 +12,7 @@
     "links": { "type": "list", "label": "Links", "max": 7, "item": {
       "label": { "type": "text", "label": "Label", "required": true, "max": 30 },
       "url": { "type": "url", "label": "Address", "required": true },
-      "current": { "type": "boolean", "label": "This page" }
+      "current": { "type": "boolean", "label": "This page", "help": "Marks the link as the page being shown. On WordPress, kit Blocks works this out." }
     }},
     "phone": { "type": "text", "label": "Phone number", "max": 30, "bind": "site.phone" },
     "action_label": { "type": "text", "label": "Button", "max": 30 },

@@ -18,6 +18,9 @@
       @if($content['count'])
       <p class="kit-shop-count">{{ $content['count'] }}</p>
       @endif
+      @if($content['link_label'] && $content['link_url'])
+      <a class="kit-link" data-variant="arrow" href="{{ kit_url($content['link_url']) }}">{{ $content['link_label'] }}</a>
+      @endif
     </div>
     @if(count($content['categories']) || count($content['sort_options']))
     <div class="kit-shop-tools">

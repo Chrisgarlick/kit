@@ -21,6 +21,9 @@ return function ($content = [], $variant = 'default'): void {
       <?php if ($content['count']): ?>
       <p class="kit-shop-count"><?php echo kit_e($content['count']); ?></p>
       <?php endif; ?>
+      <?php if (($content['link_label'] && $content['link_url'])): ?>
+      <a class="kit-link" data-variant="arrow" href="<?php echo kit_e(kit_url($content['link_url'])); ?>"><?php echo kit_e($content['link_label']); ?></a>
+      <?php endif; ?>
     </div>
     <?php if ((count($content['categories']) || count($content['sort_options']))): ?>
     <div class="kit-shop-tools">

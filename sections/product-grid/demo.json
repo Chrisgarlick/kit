@@ -141,5 +141,43 @@
         }
       ]
     }
+  },
+  {
+    "title": "Featured on a home page: no filters, a link to the shop",
+    "content": {
+      "title": "Featured",
+      "heading_level": 2,
+      "link_label": "Shop all",
+      "link_url": "/shop/",
+      "products": [
+        {
+          "name": "Product name",
+          "url": "/product/",
+          "price": "£14.99",
+          "add_url": "/basket/"
+        },
+        {
+          "name": "Product name",
+          "url": "/product/",
+          "price": "£14.99",
+          "was_price": "£19.99",
+          "badge": "sale",
+          "add_url": "/basket/"
+        },
+        {
+          "name": "Another product",
+          "url": "/product/",
+          "price": "£24.00",
+          "badge": "new",
+          "add_url": "/basket/"
+        },
+        {
+          "name": "Product name",
+          "url": "/product/",
+          "price": "£14.99",
+          "badge": "sold-out"
+        }
+      ]
+    }
   }
 ]

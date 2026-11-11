@@ -22,6 +22,7 @@ block it can be filled by hand, for a few featured products that link to another
 |---|---|---|
 | `crumbs` | list | The trail, current page last. |
 | `title`, `heading_level`, `count` | | "Shop all", h1, "24 products". |
+| `link_label`, `link_url` | | A link at the end of the heading row: "Shop all" when it's a few featured products on another page. |
 | `categories` | list | Filter links: `label`, `url`, `current`. |
 | `sort_options`, `sort_url`, `sort_name` | | A GET form: the select's name is `sort_name` (WooCommerce's `orderby`), its options `label` and `value`. Empty, no sort. |
 | `columns` | `2`, `3` or `4` | Two a row on a phone. |

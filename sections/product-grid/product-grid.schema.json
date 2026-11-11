@@ -41,6 +41,16 @@
       "help": "\"24 products\".",
       "max": 30
     },
+    "link_label": {
+      "type": "text",
+      "label": "Link",
+      "help": "A link at the end of the heading row, like \"Shop all\" on a home page.",
+      "max": 40
+    },
+    "link_url": {
+      "type": "url",
+      "label": "Link address"
+    },
     "categories": {
       "type": "list",
       "label": "Categories",
