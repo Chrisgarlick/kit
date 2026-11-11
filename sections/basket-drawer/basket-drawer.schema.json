@@ -1,0 +1,124 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "basket-drawer",
+  "title": "Basket",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "The basket: what's in it, quantities you can change, the subtotal and checkout, with how far to free delivery. A drawer from the side, or a page of its own.",
+  "variants": {
+    "drawer": "A drawer from the side, opened by a button",
+    "page": "A page of its own"
+  },
+  "inserter": false,
+  "fields": {
+    "title": {
+      "type": "text",
+      "label": "Heading",
+      "max": 40,
+      "default": "Your basket"
+    },
+    "items": {
+      "type": "list",
+      "label": "Items",
+      "max": 50,
+      "item": {
+        "name": {
+          "type": "text",
+          "label": "Name",
+          "required": true,
+          "max": 100
+        },
+        "url": {
+          "type": "url",
+          "label": "Product page"
+        },
+        "image": {
+          "type": "image",
+          "label": "Photo",
+          "alt": "optional"
+        },
+        "options": {
+          "type": "text",
+          "label": "Options",
+          "help": "\"Natural · M\".",
+          "max": 80
+        },
+        "price": {
+          "type": "text",
+          "label": "Price",
+          "required": true,
+          "max": 20
+        },
+        "quantity": {
+          "type": "number",
+          "label": "Quantity",
+          "min": 0,
+          "max": 99,
+          "default": 1
+        }
+      }
+    },
+    "delivery_text": {
+      "type": "rich-text",
+      "label": "Free delivery line",
+      "help": "\"You're **£11.01** away from free delivery\".",
+      "max": 100
+    },
+    "delivery_progress": {
+      "type": "number",
+      "label": "Free delivery progress",
+      "help": "0 to 100.",
+      "min": 0,
+      "max": 100
+    },
+    "subtotal": {
+      "type": "text",
+      "label": "Subtotal",
+      "max": 20
+    },
+    "note": {
+      "type": "text",
+      "label": "Note",
+      "max": 120,
+      "default": "Delivery and taxes worked out at checkout."
+    },
+    "checkout_label": {
+      "type": "text",
+      "label": "Checkout button",
+      "max": 30,
+      "default": "Checkout"
+    },
+    "checkout_url": {
+      "type": "url",
+      "label": "Checkout address"
+    },
+    "continue_label": {
+      "type": "text",
+      "label": "Continue link",
+      "max": 40,
+      "default": "Continue shopping"
+    },
+    "continue_url": {
+      "type": "url",
+      "label": "Continue address"
+    },
+    "update_url": {
+      "type": "url",
+      "label": "Update address",
+      "help": "Where changed quantities post."
+    },
+    "empty_text": {
+      "type": "text",
+      "label": "When it's empty",
+      "max": 100,
+      "default": "Your basket is empty."
+    },
+    "button_label": {
+      "type": "text",
+      "label": "Open button",
+      "help": "The drawer's button; the header's basket link can open it instead.",
+      "max": 30,
+      "default": "Basket"
+    }
+  }
+}

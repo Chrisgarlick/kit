@@ -1,0 +1,145 @@
+[
+  {
+    "title": "Four products: on sale, sold out and new",
+    "content": {
+      "crumbs": [
+        {
+          "label": "Home",
+          "url": "/"
+        },
+        {
+          "label": "Shop",
+          "url": "/shop"
+        }
+      ],
+      "title": "Shop all",
+      "count": "24 products",
+      "categories": [
+        {
+          "label": "All",
+          "url": "/shop",
+          "current": true
+        },
+        {
+          "label": "Category one",
+          "url": "/shop/one"
+        },
+        {
+          "label": "Category two",
+          "url": "/shop/two"
+        },
+        {
+          "label": "Gift sets",
+          "url": "/shop/gifts"
+        }
+      ],
+      "sort_options": [
+        {
+          "label": "Featured",
+          "value": "featured",
+          "current": true
+        },
+        {
+          "label": "Price, low to high",
+          "value": "price"
+        },
+        {
+          "label": "Price, high to low",
+          "value": "price-desc"
+        },
+        {
+          "label": "Newest",
+          "value": "date"
+        }
+      ],
+      "products": [
+        {
+          "name": "Product name",
+          "url": "/shop/p1",
+          "price": "£14.99",
+          "add_url": "?add-to-cart=1"
+        },
+        {
+          "name": "Product name",
+          "url": "/shop/p2",
+          "price": "£14.99",
+          "was_price": "£19.99",
+          "badge": "sale",
+          "add_url": "?add-to-cart=2"
+        },
+        {
+          "name": "Product name",
+          "url": "/shop/p3",
+          "price": "£14.99",
+          "badge": "sold-out"
+        },
+        {
+          "name": "Product name",
+          "url": "/shop/p4",
+          "price": "£14.99",
+          "badge": "new",
+          "add_url": "?add-to-cart=4"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone: two a row",
+    "width": "mobile",
+    "content": {
+      "crumbs": [
+        {
+          "label": "Home",
+          "url": "/"
+        },
+        {
+          "label": "Shop",
+          "url": "/shop"
+        }
+      ],
+      "title": "Shop all",
+      "count": "24 products",
+      "categories": [
+        {
+          "label": "All",
+          "url": "/shop",
+          "current": true
+        },
+        {
+          "label": "Category one",
+          "url": "/shop/one"
+        },
+        {
+          "label": "Gift sets",
+          "url": "/shop/gifts"
+        }
+      ],
+      "products": [
+        {
+          "name": "Product name",
+          "url": "/shop/p1",
+          "price": "£14.99",
+          "add_url": "?add-to-cart=1"
+        },
+        {
+          "name": "Product name",
+          "url": "/shop/p2",
+          "price": "£14.99",
+          "was_price": "£19.99",
+          "badge": "sale"
+        },
+        {
+          "name": "Product name",
+          "url": "/shop/p3",
+          "price": "£14.99",
+          "badge": "sold-out"
+        },
+        {
+          "name": "Another product",
+          "url": "/shop/p4",
+          "price": "£24.00"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "title": "As a page",
+    "variant": "page",
+    "content": {
+      "items": [
+        {
+          "name": "Product name",
+          "url": "/shop/p1",
+          "options": "Natural · M",
+          "price": "£14.99"
+        },
+        {
+          "name": "Another product",
+          "url": "/shop/p2",
+          "options": "One size",
+          "price": "£14.00"
+        }
+      ],
+      "delivery_text": "You're **£11.01** away from free delivery",
+      "delivery_progress": 72,
+      "subtotal": "£28.99",
+      "checkout_url": "/checkout",
+      "continue_url": "/shop",
+      "update_url": "/basket/update"
+    }
+  },
+  {
+    "title": "As a drawer: press the button",
+    "content": {
+      "items": [
+        {
+          "name": "Product name",
+          "url": "/shop/p1",
+          "options": "Natural · M",
+          "price": "£14.99"
+        },
+        {
+          "name": "Another product",
+          "url": "/shop/p2",
+          "options": "One size",
+          "price": "£14.00",
+          "quantity": 2
+        }
+      ],
+      "delivery_text": "You're **£11.01** away from free delivery",
+      "delivery_progress": 72,
+      "subtotal": "£42.99",
+      "checkout_url": "/checkout",
+      "continue_url": "/shop",
+      "update_url": "/basket/update"
+    }
+  },
+  {
+    "title": "Empty, phone",
+    "width": "mobile",
+    "variant": "page",
+    "content": {
+      "continue_url": "/shop"
+    }
+  }
+]

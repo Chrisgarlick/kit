@@ -47,6 +47,7 @@ func (s *Section) WordPress(dir string) error {
 			"align":           []string{"full"},
 			"customClassName": false,
 			"reusable":        false,
+			"inserter":        s.Schema.Inserter,
 		},
 		"editorScript": "kit-blocks-editor",
 		// kit.css (registered by the plugin as "kit") first, so the section's

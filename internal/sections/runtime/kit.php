@@ -142,6 +142,13 @@ if (!function_exists('kit_e')) {
         return $out;
     }
 
+    /** A hex colour as it is, anything else 'transparent': safe in a style attribute. */
+    function kit_colour(mixed $value): string
+    {
+        $s = trim((string) ($value ?? ''));
+        return preg_match('/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $s) ? $s : 'transparent';
+    }
+
     /** @class([...]): the always-on names, and the keyed ones whose condition is true. */
     function kit_classes(array $classes): string
     {

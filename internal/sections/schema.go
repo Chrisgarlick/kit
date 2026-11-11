@@ -30,6 +30,9 @@ type Schema struct {
 	Description string
 	Variants    []Variant // the first is the default
 	Fields      []*Field  // in the order the editor shows them
+	// Inserter is false for a section a CMS fills itself (the basket, from
+	// the shop) rather than one an owner adds and types into.
+	Inserter bool
 }
 
 // Variant is one of a section's layouts (hero: split or centred).
@@ -70,13 +73,14 @@ func ParseSchema(b []byte) (*Schema, error) {
 		Description string          `json:"description"`
 		Variants    json.RawMessage `json:"variants"`
 		Fields      json.RawMessage `json:"fields"`
+		Inserter    *bool           `json:"inserter"`
 	}
 	dec := json.NewDecoder(bytes.NewReader(b))
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(&raw); err != nil {
 		return nil, err
 	}
-	s := &Schema{Name: raw.Name, Title: raw.Title, Version: raw.Version, Category: raw.Category, Description: raw.Description}
+	s := &Schema{Name: raw.Name, Title: raw.Title, Version: raw.Version, Category: raw.Category, Description: raw.Description, Inserter: raw.Inserter == nil || *raw.Inserter}
 	var errs []error
 	if raw.Schema != SchemaURL {
 		errs = append(errs, fmt.Errorf("$schema is %s", SchemaURL))

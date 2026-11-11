@@ -1,0 +1,201 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "product-page",
+  "title": "Product page",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "One product: a photo gallery beside breadcrumbs, the name, rating and price, a description, its options, quantity and add to basket, delivery notes and details.",
+  "fields": {
+    "crumbs": {
+      "type": "list",
+      "label": "Breadcrumbs",
+      "help": "The trail above the heading, the current page last.",
+      "max": 5,
+      "item": {
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "required": true,
+          "max": 60
+        },
+        "url": {
+          "type": "url",
+          "label": "Link"
+        }
+      }
+    },
+    "name": {
+      "type": "text",
+      "label": "Name",
+      "required": true,
+      "max": 100
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 1
+    },
+    "rating": {
+      "type": "text",
+      "label": "Rating",
+      "help": "\"4.9\". Left empty, there's no rating line.",
+      "max": 4
+    },
+    "reviews_label": {
+      "type": "text",
+      "label": "Reviews",
+      "help": "\"32 reviews\".",
+      "max": 30
+    },
+    "reviews_url": {
+      "type": "url",
+      "label": "Reviews link"
+    },
+    "price": {
+      "type": "text",
+      "label": "Price",
+      "required": true,
+      "max": 20
+    },
+    "was_price": {
+      "type": "text",
+      "label": "Was",
+      "max": 20
+    },
+    "description": {
+      "type": "textarea",
+      "label": "Description",
+      "help": "A blank line starts a new paragraph.",
+      "max": 1200
+    },
+    "images": {
+      "type": "list",
+      "label": "Photos",
+      "help": "The first is the main one.",
+      "max": 8,
+      "item": {
+        "image": {
+          "type": "image",
+          "label": "Photo",
+          "alt": "required",
+          "sizes": "product"
+        }
+      }
+    },
+    "options": {
+      "type": "list",
+      "label": "Options",
+      "help": "Colour, size…",
+      "max": 3,
+      "item": {
+        "name": {
+          "type": "text",
+          "label": "Option",
+          "required": true,
+          "max": 30
+        },
+        "kind": {
+          "type": "enum",
+          "label": "Shown as",
+          "options": [
+            "buttons",
+            "swatches"
+          ],
+          "default": "buttons"
+        },
+        "values": {
+          "type": "list",
+          "label": "Choices",
+          "min": 1,
+          "max": 12,
+          "item": {
+            "label": {
+              "type": "text",
+              "label": "Choice",
+              "required": true,
+              "max": 30
+            },
+            "colour": {
+              "type": "text",
+              "label": "Swatch colour",
+              "help": "For swatches: a hex colour, like #e8e2d6.",
+              "max": 9
+            },
+            "selected": {
+              "type": "boolean",
+              "label": "Chosen to start with"
+            },
+            "unavailable": {
+              "type": "boolean",
+              "label": "Out of stock"
+            }
+          }
+        }
+      }
+    },
+    "quantity": {
+      "type": "boolean",
+      "label": "Quantity",
+      "help": "Show a quantity box.",
+      "default": true
+    },
+    "sold_out": {
+      "type": "boolean",
+      "label": "Sold out"
+    },
+    "add_label": {
+      "type": "text",
+      "label": "Button",
+      "max": 30,
+      "default": "Add to basket"
+    },
+    "form_action": {
+      "type": "url",
+      "label": "Basket address",
+      "help": "Where the form posts: the shop's add-to-basket address."
+    },
+    "product_id": {
+      "type": "text",
+      "label": "Product id",
+      "help": "Sent with the form as \"product\".",
+      "max": 40
+    },
+    "perks": {
+      "type": "list",
+      "label": "Notes under the button",
+      "max": 3,
+      "item": {
+        "icon": {
+          "type": "icon",
+          "label": "Icon"
+        },
+        "text": {
+          "type": "text",
+          "label": "Text",
+          "required": true,
+          "max": 60
+        }
+      }
+    },
+    "details": {
+      "type": "list",
+      "label": "Details",
+      "help": "Folded sections: details and care, delivery and returns.",
+      "max": 6,
+      "item": {
+        "title": {
+          "type": "text",
+          "label": "Heading",
+          "required": true,
+          "max": 60
+        },
+        "body": {
+          "type": "textarea",
+          "label": "Text",
+          "required": true,
+          "max": 1500
+        }
+      }
+    }
+  }
+}

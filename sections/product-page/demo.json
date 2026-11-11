@@ -1,0 +1,141 @@
+[
+  {
+    "title": "Desktop",
+    "content": {
+      "crumbs": [
+        {
+          "label": "Home",
+          "url": "/"
+        },
+        {
+          "label": "Category",
+          "url": "/shop/category"
+        },
+        {
+          "label": "Product name",
+          "url": "/shop/product"
+        }
+      ],
+      "name": "Product name",
+      "rating": "4.9",
+      "reviews_label": "32 reviews",
+      "reviews_url": "#reviews",
+      "price": "£24.00",
+      "description": "Two lines on what it is, what it's made from and why someone would want it.",
+      "images": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "options": [
+        {
+          "name": "Colour",
+          "kind": "swatches",
+          "values": [
+            {
+              "label": "Natural",
+              "colour": "#f1efe9",
+              "selected": true
+            },
+            {
+              "label": "Mist",
+              "colour": "#e4e9fb"
+            },
+            {
+              "label": "Cobalt",
+              "colour": "#3d63f2"
+            },
+            {
+              "label": "Ink",
+              "colour": "#14171f",
+              "unavailable": true
+            }
+          ]
+        },
+        {
+          "name": "Size",
+          "values": [
+            {
+              "label": "S"
+            },
+            {
+              "label": "M",
+              "selected": true
+            },
+            {
+              "label": "L"
+            }
+          ]
+        }
+      ],
+      "form_action": "/basket/add",
+      "product_id": "1042",
+      "perks": [
+        {
+          "icon": "truck",
+          "text": "Free delivery over £40"
+        },
+        {
+          "icon": "returns",
+          "text": "30-day returns"
+        }
+      ],
+      "details": [
+        {
+          "title": "Details and care",
+          "body": "What it's made of, how big it is and how to look after it."
+        },
+        {
+          "title": "Delivery and returns",
+          "body": "Sent within two working days. Free returns within 30 days."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone, sold out",
+    "width": "mobile",
+    "content": {
+      "crumbs": [
+        {
+          "label": "Home",
+          "url": "/"
+        },
+        {
+          "label": "Product name",
+          "url": "/shop/product"
+        }
+      ],
+      "name": "Product name",
+      "price": "£18.00",
+      "was_price": "£24.00",
+      "images": [
+        {},
+        {}
+      ],
+      "sold_out": true,
+      "options": [
+        {
+          "name": "Size",
+          "values": [
+            {
+              "label": "S",
+              "unavailable": true
+            },
+            {
+              "label": "M",
+              "unavailable": true
+            }
+          ]
+        }
+      ],
+      "details": [
+        {
+          "title": "Details and care",
+          "body": "What it's made of and how to look after it."
+        }
+      ]
+    }
+  }
+]

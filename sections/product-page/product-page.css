@@ -1,0 +1,72 @@
+/* SPDX-License-Identifier: MIT
+ * Section: product page (tier 1). A gallery beside the product's details
+ * and a real form that posts its options and quantity.
+ *   <section class="kit-section-product-page"> … </section>
+ * The gallery is a scroll-snap strip: swipe it, or the thumbnails jump to
+ * each photo (plain links), so it needs no script. Options are radio
+ * groups (buttons, or colour swatches with their names for screen readers;
+ * a swatch is an SVG fill, so no inline style for a CSP to block).
+ * Below 56rem (the section's own width) the gallery goes above the details.
+ */
+.kit-section-product-page { container: kit-pp / inline-size; padding-block: calc(var(--kit-section-pad-y) * 0.5) var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-pp-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.kit-pp-gallery { display: grid; gap: var(--kit-space-3); position: sticky; inset-block-start: var(--kit-space-5); }
+.kit-pp-slides { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; border-radius: var(--kit-card-radius); scrollbar-width: none; }
+.kit-pp-slides::-webkit-scrollbar { display: none; }
+.kit-pp-slides:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-pp-slide { margin: 0; scroll-snap-align: start; aspect-ratio: 1 / 1.05; display: grid; background: var(--kit-surface-2); }
+.kit-pp-slide img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.kit-pp-thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--kit-space-3); list-style: none; margin: 0; padding: 0; }
+.kit-pp-thumbs a { display: grid; aspect-ratio: 6 / 5; border-radius: var(--kit-radius-2); background: var(--kit-surface-2); overflow: hidden; outline: 2px solid transparent; outline-offset: 2px; }
+.kit-pp-thumbs a:hover { outline-color: var(--kit-line-strong); }
+.kit-pp-thumbs a:focus-visible { outline-color: var(--kit-focus-ring); }
+.kit-pp-thumbs img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) { .kit-pp-slides { scroll-behavior: auto; } }
+.kit-pp-placeholder { display: grid; place-items: center; color: var(--kit-fg-3); }
+.kit-pp-placeholder .kit-icon { inline-size: 40px; block-size: 40px; }
+
+.kit-pp-info { display: grid; gap: var(--kit-space-4); }
+.kit-pp-info > * { margin: 0; }
+.kit-pp-name { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem); line-height: 1.08; }
+.kit-pp-rating { display: flex; align-items: center; gap: 6px; font-size: var(--kit-text-md); color: var(--kit-fg-2); margin-block-start: calc(var(--kit-space-2) * -1) !important; }
+.kit-pp-rating .kit-icon { inline-size: 16px; block-size: 16px; color: var(--kit-warn); fill: currentColor; }
+.kit-pp-rating strong { color: var(--kit-fg); }
+.kit-pp-rating a { color: inherit; }
+.kit-pp-price { font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); font-variant-numeric: tabular-nums; }
+.kit-pp-now { color: var(--kit-bad); font-weight: 700; }
+.kit-pp-was { color: var(--kit-fg-3); font-size: 0.6em; }
+.kit-pp-description { display: grid; gap: var(--kit-space-3); color: var(--kit-fg-2); font-size: var(--kit-text-lg); line-height: 1.6; }
+.kit-pp-description p { margin: 0; }
+
+.kit-pp-buy { display: grid; gap: var(--kit-space-5); }
+.kit-pp-option { margin: 0; padding: 0; border: 0; display: grid; gap: var(--kit-space-2); }
+.kit-pp-option legend { padding: 0; margin-block-end: var(--kit-space-2); font-size: var(--kit-text-md); font-weight: 600; }
+.kit-pp-choices { display: flex; flex-wrap: wrap; gap: var(--kit-space-2); }
+.kit-pp-choice { position: relative; display: inline-grid; cursor: pointer; }
+.kit-pp-choice input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: inherit; }
+.kit-pp-choice-label { display: grid; place-items: center; min-inline-size: 56px; min-block-size: 40px; padding-inline: var(--kit-space-3); border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-1); font-size: var(--kit-text-md); }
+.kit-pp-choice input:checked + .kit-pp-choice-label { background: var(--kit-fg); border-color: var(--kit-fg); color: var(--kit-bg); }
+.kit-pp-choice input:disabled + .kit-pp-choice-label { color: var(--kit-fg-3); text-decoration: line-through; cursor: not-allowed; }
+.kit-pp-choice input:focus-visible + .kit-pp-choice-label { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+.kit-pp-option[data-kind="swatches"] .kit-pp-choice { inline-size: 36px; block-size: 36px; border-radius: 50%; }
+/* The swatch's colour is the SVG's fill attribute, not a style: a strict style-src CSP allows it. */
+.kit-pp-swatch { display: block; border-radius: 50%; }
+.kit-pp-swatch circle { stroke: color-mix(in srgb, var(--kit-fg) 18%, transparent); stroke-width: 1; }
+.kit-pp-option[data-kind="swatches"] .kit-pp-choice:has(input:checked) { outline: 2px solid var(--kit-fg); outline-offset: 3px; }
+.kit-pp-option[data-kind="swatches"] .kit-pp-choice:has(input:focus-visible) { outline: 2px solid var(--kit-focus-ring); outline-offset: 3px; }
+.kit-pp-option[data-kind="swatches"] .kit-pp-choice:has(input:disabled) { opacity: 0.35; cursor: not-allowed; }
+.kit-pp-actions { display: flex; gap: var(--kit-space-3); }
+.kit-pp-qty { flex: none; inline-size: 6rem; }
+.kit-pp-qty .kit-input { block-size: 100%; text-align: center; font-size: var(--kit-text-lg); }
+.kit-section-product-page .kit-pp-add { flex: 1; --_h: 52px; }
+.kit-pp-add .kit-icon { inline-size: 20px; block-size: 20px; }
+.kit-pp-perks { display: flex; flex-wrap: wrap; gap: var(--kit-space-2) var(--kit-space-5); list-style: none; margin: 0; padding: 0; font-size: var(--kit-text-md); color: var(--kit-fg-2); }
+.kit-pp-perks li { display: inline-flex; align-items: center; gap: 8px; }
+.kit-pp-perks .kit-icon { inline-size: 18px; block-size: 18px; }
+.kit-pp-details .kit-accordion > summary { padding-block: 16px; font-size: var(--kit-text-lg); }
+.kit-pp-details .kit-accordion-body { color: var(--kit-fg-2); line-height: 1.6; }
+.kit-pp-details .kit-accordion-body p { margin: 0 0 var(--kit-space-3); }
+@container kit-pp (max-width: 56rem) {
+  .kit-pp-inner { grid-template-columns: minmax(0, 1fr); }
+  .kit-pp-gallery { position: static; }
+}

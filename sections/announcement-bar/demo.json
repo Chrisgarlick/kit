@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Dark",
+    "content": {
+      "text": "Free UK delivery on orders over £40",
+      "link_label": "Shop now",
+      "link_url": "/shop"
+    }
+  },
+  {
+    "title": "Accent, phone",
+    "width": "mobile",
+    "content": {
+      "icon": "sparkles",
+      "text": "New: the winter collection is in",
+      "link_label": "See it",
+      "link_url": "/shop/winter",
+      "tone": "accent"
+    }
+  }
+]

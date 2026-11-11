@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "announcement-bar",
+  "title": "Announcement bar",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A thin band across the top of every page: one offer or notice, and a link.",
+  "fields": {
+    "icon": {
+      "type": "icon",
+      "label": "Icon",
+      "default": "truck"
+    },
+    "text": {
+      "type": "text",
+      "label": "Notice",
+      "required": true,
+      "max": 100
+    },
+    "link_label": {
+      "type": "text",
+      "label": "Link",
+      "max": 30
+    },
+    "link_url": {
+      "type": "url",
+      "label": "Link address"
+    },
+    "tone": {
+      "type": "enum",
+      "label": "Colour",
+      "options": [
+        "dark",
+        "accent"
+      ],
+      "default": "dark"
+    }
+  }
+}

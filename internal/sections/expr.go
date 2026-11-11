@@ -14,9 +14,11 @@ import (
 //	'text'  "text"  12  1.5           literals, and true, false, null
 //	!a  a && b  a || b  a ?? b        logic, and the null-coalescing default
 //	a === b  a !== b                  strict comparison only (no ==)
+//	a + b  a - b                      on numbers only
 //	a ? b : c                         a conditional
 //	kit_url(x) kit_tel(x) kit_mailto(x) kit_heading(x)
-//	kit_rich(x) kit_paragraphs(x) kit_icon(x) kit_initials(x)   kit's helpers and a few of PHP's:
+//	kit_rich(x) kit_paragraphs(x) kit_icon(x) kit_initials(x)
+//	kit_colour(x)   kit's helpers and a few of PHP's:
 //	count(x)
 //	empty(x) isset(x)
 //
@@ -176,6 +178,16 @@ func (e binExpr) eval(s *scope) (any, error) {
 		return identical(l, r), nil
 	case "!==":
 		return !identical(l, r), nil
+	case "+", "-":
+		a, aok := l.(float64)
+		b, bok := r.(float64)
+		if !aok || !bok {
+			return nil, fmt.Errorf("%s works on numbers only, not a %s and a %s", e.op, kind(l), kind(r))
+		}
+		if e.op == "+" {
+			return a + b, nil
+		}
+		return a - b, nil
 	}
 	return nil, fmt.Errorf("unknown operator %s", e.op)
 }
@@ -194,7 +206,7 @@ func (e condExpr) eval(s *scope) (any, error) {
 func (e condExpr) php() string { return "(" + e.c.php() + " ? " + e.t.php() + " : " + e.f.php() + ")" }
 
 // The functions a template may call, with how many arguments each takes.
-var functions = map[string]int{"kit_url": 1, "kit_tel": 1, "kit_mailto": 1, "kit_heading": 1, "kit_paragraphs": 1, "kit_icon": 1, "kit_initials": 1, "kit_rich": 1, "count": 1, "empty": 1, "isset": 1}
+var functions = map[string]int{"kit_url": 1, "kit_tel": 1, "kit_mailto": 1, "kit_heading": 1, "kit_paragraphs": 1, "kit_icon": 1, "kit_initials": 1, "kit_colour": 1, "kit_rich": 1, "count": 1, "empty": 1, "isset": 1}
 
 func (e callExpr) eval(s *scope) (any, error) {
 	if e.fn == "isset" || e.fn == "empty" {
@@ -224,6 +236,8 @@ func (e callExpr) eval(s *scope) (any, error) {
 		return iconSVG(v), nil
 	case "kit_initials":
 		return initials(v)
+	case "kit_colour":
+		return colour(v)
 	case "kit_rich":
 		return rich(v)
 	case "count":
@@ -298,7 +312,7 @@ func lex(src string) ([]tok, error) {
 			i = j + 1
 		default:
 			matched := false
-			for _, op := range []string{"===", "!==", "&&", "||", "??", "=>", "!", "?", ":", "(", ")", "[", "]", ","} {
+			for _, op := range []string{"===", "!==", "&&", "||", "??", "=>", "!", "?", ":", "(", ")", "[", "]", ",", "+", "-"} {
 				if strings.HasPrefix(src[i:], op) {
 					out = append(out, tok{"op", op, i})
 					i += len(op)
@@ -422,19 +436,31 @@ func (p *parser) and() (expr, error) {
 }
 
 func (p *parser) cmp() (expr, error) {
-	l, err := p.unary()
+	l, err := p.additive()
 	if err != nil {
 		return nil, err
 	}
 	if p.isOp("===") || p.isOp("!==") {
 		op := p.next().text
-		r, err := p.unary()
+		r, err := p.additive()
 		if err != nil {
 			return nil, err
 		}
 		return binExpr{op, l, r}, nil
 	}
 	return l, nil
+}
+
+// additive is a + b and a - b, on numbers only (a counter, the last index).
+func (p *parser) additive() (expr, error) {
+	l, err := p.unary()
+	for err == nil && (p.isOp("+") || p.isOp("-")) {
+		op := p.next().text
+		var r expr
+		r, err = p.unary()
+		l = binExpr{op, l, r}
+	}
+	return l, err
 }
 
 func (p *parser) unary() (expr, error) {
@@ -489,7 +515,7 @@ func (p *parser) primary() (expr, error) {
 		}
 		n, ok := functions[t.text]
 		if !ok {
-			return nil, fmt.Errorf("%s isn't allowed in a kit section template (only kit_url, kit_tel, kit_mailto, kit_heading, kit_rich, kit_paragraphs, kit_icon, kit_initials, count, empty, isset)", t.text)
+			return nil, fmt.Errorf("%s isn't allowed in a kit section template (only kit_url, kit_tel, kit_mailto, kit_heading, kit_rich, kit_paragraphs, kit_icon, kit_initials, kit_colour, count, empty, isset)", t.text)
 		}
 		if err := p.expect("("); err != nil {
 			return nil, err

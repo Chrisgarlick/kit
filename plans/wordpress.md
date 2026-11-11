@@ -255,8 +255,13 @@ writing (each plugin is something Scout will one day flag as out of date):
    preview is the plan; full client-side rendering of each section in the editor would be
    smoother but means a JavaScript copy of every template. Start server-side.
 3. **Names.** "kit Blocks", "kit Fields", "kit Theme" are working names.
-4. **Forms.** A small kit Forms handler (spam protection, email, stored submissions, like
-   cg-cms's) or one forms plugin.
+4. **Forms (decided 11 November 2026).** Forms come from a WordPress plugin: built and
+   changed in the admin (fields, notifications, where submissions go), and placed on a page with
+   a shortcode or block. What it prints is kit's markup (`kit-field`, `kit-input`, `kit-select`,
+   `kit-checkbox`, `kit-button`, errors linked with `aria-describedby`), so a form looks like the
+   rest of the site. The contact section then holds the plugin's form beside kit's contact details.
+   Whether the plugin is kit's own (kit Forms in `wp-base/plugins`) or an existing forms plugin
+   with its output templated to kit's markup is still to settle; not needed yet.
 5. **Update hosting.** A tiny update server on the droplet, or GitHub releases with a token.
 6. **Minimum WordPress version.** 6.5 or later (Block Bindings, script modules, the
    Interactivity API if the tier 2 pieces use it).

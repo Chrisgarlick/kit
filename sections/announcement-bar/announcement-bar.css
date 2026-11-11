@@ -1,0 +1,11 @@
+/* SPDX-License-Identifier: MIT
+ * Section: announcement bar (tier 1). A thin band above the header.
+ *   <aside class="kit-section-announcement-bar" data-tone="dark|accent"> … </aside>
+ */
+.kit-section-announcement-bar { padding-block: 9px; background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); font: 500 var(--kit-text-sm)/1.4 var(--kit-font-ui); }
+.kit-section-announcement-bar[data-tone="accent"] { background: var(--kit-accent); color: var(--kit-accent-fg); }
+.kit-announce-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px var(--kit-space-3); margin: 0 auto; text-align: center; }
+.kit-announce-inner .kit-icon { inline-size: 16px; block-size: 16px; flex: none; }
+.kit-announce-inner a { color: inherit; font-weight: 700; text-decoration: underline 1px transparent; text-underline-offset: 3px; }
+.kit-announce-inner a:hover { text-decoration-color: currentColor; }
+.kit-announce-inner a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }

@@ -235,6 +235,23 @@ func paragraphs(v any) (Safe, error) {
 	return Safe(b.String()), nil
 }
 
+var colourRe = regexp.MustCompile(`^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$`)
+
+// colour is kit_colour(): a hex colour ("#e8e2d6") as it is, anything else
+// "transparent", so content can go in a style attribute (a swatch) without
+// carrying anything but a colour.
+func colour(v any) (string, error) {
+	s, err := str(v)
+	if err != nil {
+		return "", err
+	}
+	s = strings.Trim(s, " \t\n\r\x00\x0B")
+	if colourRe.MatchString(s) {
+		return s, nil
+	}
+	return "transparent", nil
+}
+
 // iconSVG is kit_icon(): one of kit's icons as inline SVG, hidden from screen
 // readers (the words beside it say what it means). An unknown name is nothing.
 func iconSVG(v any) Safe {

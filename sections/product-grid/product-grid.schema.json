@@ -1,0 +1,175 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "product-grid",
+  "title": "Product grid",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A shop page: breadcrumbs, a heading and the product count, category filters and sorting, and a grid of product cards.",
+  "fields": {
+    "crumbs": {
+      "type": "list",
+      "label": "Breadcrumbs",
+      "help": "The trail above the heading, the current page last.",
+      "max": 5,
+      "item": {
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "required": true,
+          "max": 60
+        },
+        "url": {
+          "type": "url",
+          "label": "Link"
+        }
+      }
+    },
+    "title": {
+      "type": "text",
+      "label": "Heading",
+      "required": true,
+      "max": 80
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 1
+    },
+    "count": {
+      "type": "text",
+      "label": "Product count",
+      "help": "\"24 products\".",
+      "max": 30
+    },
+    "categories": {
+      "type": "list",
+      "label": "Categories",
+      "help": "Filters above the grid; mark the one being shown.",
+      "max": 12,
+      "item": {
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "required": true,
+          "max": 40
+        },
+        "url": {
+          "type": "url",
+          "label": "Link",
+          "required": true
+        },
+        "current": {
+          "type": "boolean",
+          "label": "Showing"
+        }
+      }
+    },
+    "sort_options": {
+      "type": "list",
+      "label": "Sort options",
+      "help": "Left empty, there's no sort.",
+      "max": 8,
+      "item": {
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "required": true,
+          "max": 40
+        },
+        "value": {
+          "type": "text",
+          "label": "Value",
+          "help": "What the shop reads, like \"price-asc\".",
+          "required": true,
+          "max": 40
+        },
+        "current": {
+          "type": "boolean",
+          "label": "Chosen"
+        }
+      }
+    },
+    "sort_url": {
+      "type": "url",
+      "label": "Sort address",
+      "help": "Where the sort form goes (this page, usually).",
+      "default": "?"
+    },
+    "sort_name": {
+      "type": "text",
+      "label": "Sort parameter",
+      "max": 30,
+      "default": "orderby"
+    },
+    "columns": {
+      "type": "enum",
+      "label": "Columns",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "default": "4"
+    },
+    "products": {
+      "type": "list",
+      "label": "Products",
+      "max": 48,
+      "item": {
+        "name": {
+          "type": "text",
+          "label": "Name",
+          "required": true,
+          "max": 80
+        },
+        "url": {
+          "type": "url",
+          "label": "Product page"
+        },
+        "image": {
+          "type": "image",
+          "label": "Photo",
+          "alt": "optional",
+          "help": "The name is read out for the photo, so its alt can stay empty.",
+          "sizes": "card"
+        },
+        "price": {
+          "type": "text",
+          "label": "Price",
+          "help": "As it reads: \"£14.99\".",
+          "required": true,
+          "max": 20
+        },
+        "was_price": {
+          "type": "text",
+          "label": "Was",
+          "help": "The price before a sale, shown struck through.",
+          "max": 20
+        },
+        "badge": {
+          "type": "enum",
+          "label": "Badge",
+          "options": [
+            "none",
+            "sale",
+            "sold-out",
+            "new"
+          ],
+          "default": "none"
+        },
+        "add_label": {
+          "type": "text",
+          "label": "Quick add",
+          "help": "The button on the photo, like \"Add\".",
+          "max": 20,
+          "default": "Add"
+        },
+        "add_url": {
+          "type": "url",
+          "label": "Quick add link",
+          "help": "Adds it to the basket. Left empty, there's no button."
+        }
+      }
+    }
+  }
+}
