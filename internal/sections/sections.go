@@ -150,7 +150,7 @@ var Targets = []string{"blade", "php"}
 
 // Export writes the section into out for a project: the template as Blade
 // (target "blade") or compiled to PHP with kit.php beside it ("php"), plus its
-// CSS and schema.
+// CSS, its schema and its demo content, filled.
 func (s *Section) Export(target, out string) ([]string, error) {
 	files := map[string]string{}
 	switch target {
@@ -163,6 +163,21 @@ func (s *Section) Export(target, out string) ([]string, error) {
 	default:
 		return nil, fmt.Errorf("target is one of %s", strings.Join(Targets, ", "))
 	}
+	// The demos with every field filled, ready to render: content passed to a
+	// section must have every field (the CMS fills it from the schema).
+	var demos []Demo
+	for _, d := range s.Demos {
+		d.Content = s.Schema.Fill(d.Content)
+		if d.Variant == "" {
+			d.Variant = s.Schema.Variants[0].Name
+		}
+		demos = append(demos, d)
+	}
+	db, err := json.MarshalIndent(demos, "", "  ")
+	if err != nil {
+		return nil, err
+	}
+	files[s.Name+".demo.json"] = string(db) + "\n"
 	for _, f := range []string{s.Name + ".css", s.Name + ".schema.json"} {
 		b, err := os.ReadFile(filepath.Join(s.Dir, f))
 		if err != nil {
