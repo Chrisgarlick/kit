@@ -73,6 +73,15 @@
   --kit-button-radius: var(--kit-radius-2); /* 999px for pill buttons */
   --kit-button-radius-sm: var(--kit-radius-1);
   --kit-radius-pill: 999px;
+  --kit-card-radius: var(--kit-radius-3);
+
+  /* Sections (website sections: header, hero, footer…) */
+  --kit-section-pad-y: clamp(3rem, 6vw, 6rem);
+  --kit-display-case: none; /* uppercase for a shouting style guide */
+  --kit-inverse-bg: #12161e; /* the footer: a dark band in light mode */
+  --kit-inverse-fg: #f3f5f8;
+  --kit-inverse-fg-2: #b3bac5;
+  --kit-inverse-line: #2a303b;
 
   /* Space and size (density changes these) */
   --kit-space-1: 4px;
@@ -103,6 +112,7 @@
     --kit-shadow-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 30px -14px rgb(0 0 0 / 0.75);
     --kit-shadow-3: 0 2px 6px rgb(0 0 0 / 0.5), 0 30px 70px -24px rgb(0 0 0 / 0.9);
     --kit-scrim: rgb(0 0 0 / 0.6);
+    --kit-inverse-bg: #12151a; --kit-inverse-fg: #e8ebef; --kit-inverse-fg-2: #a8b0bb; --kit-inverse-line: #232830;
   }
 }
 :root[data-theme="dark"] {
@@ -117,6 +127,7 @@
   --kit-shadow-2: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 30px -14px rgb(0 0 0 / 0.75);
   --kit-shadow-3: 0 2px 6px rgb(0 0 0 / 0.5), 0 30px 70px -24px rgb(0 0 0 / 0.9);
   --kit-scrim: rgb(0 0 0 / 0.6);
+  --kit-inverse-bg: #12151a; --kit-inverse-fg: #e8ebef; --kit-inverse-fg-2: #a8b0bb; --kit-inverse-line: #232830;
 }
 
 /* Accents: the same components, re-themed by four tokens. */

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "hero",
+  "title": "Hero",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "The first thing on a page: a promise, a line of detail, up to two actions, a line of proof and an image.",
+  "variants": { "default": "Split: the image beside the text", "centred": "Centred: the image below the text" },
+  "fields": {
+    "eyebrow": { "type": "text", "label": "Label above the heading", "max": 60 },
+    "title": { "type": "rich-text", "label": "Heading", "help": "*Words in stars* are set in italics.", "required": true, "max": 120 },
+    "lede": { "type": "textarea", "label": "Supporting line", "max": 240 },
+    "actions": { "type": "list", "label": "Buttons", "max": 2, "item": {
+      "label": { "type": "text", "label": "Label", "required": true, "max": 40 },
+      "url": { "type": "url", "label": "Link", "required": true },
+      "style": { "type": "enum", "label": "Style", "options": ["primary", "secondary"], "default": "primary" }
+    }},
+    "proof": { "type": "rich-text", "label": "Proof line", "help": "A review score or a fact. **Stars** make it bold.", "max": 80, "bind": "site.review_summary" },
+    "image": { "type": "image", "label": "Image", "alt": "required", "sizes": "hero" },
+    "heading_level": { "type": "heading-level", "label": "Heading level", "help": "1 on a page's first section.", "default": 1 }
+  }
+}

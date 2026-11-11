@@ -109,8 +109,8 @@ func (s *Site) Dist(out string, opt DistOptions) (*DistResult, error) {
 		imp(&css, "@import", "tokens/tokens.css")
 	}
 	for _, c := range s.Components {
-		if len(opt.CSS) > 0 && !inCSS[c.Slug] {
-			continue
+		if len(opt.CSS) > 0 && !inCSS[c.Slug] || c.Section != nil && !inCSS[c.Slug] {
+			continue // a website section's CSS goes in only when it's asked for
 		}
 		for _, f := range c.CSS {
 			imp(&css, "@import", f)

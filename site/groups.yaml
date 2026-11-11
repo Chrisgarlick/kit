@@ -33,3 +33,7 @@
   title: Charts
   summary: Small, fast SVG charts on one shared scale system. Every chart has a text summary and can show its data as a table.
   planned: []
+- id: sections
+  title: Sections
+  summary: Whole website sections for client sites, written once as a Blade template with a content schema, and used as Blade, as plain PHP or as CMS blocks.
+  planned: [Header, Hero, Hero collage, Trust strip, Section with grid, Split, Text block, Stats, Quote and stats, Process, Pill row, FAQ, Call to action, Contact, Footer]

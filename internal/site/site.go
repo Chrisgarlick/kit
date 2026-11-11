@@ -19,6 +19,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/Chrisgarlick/kit/internal/sections"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
@@ -60,7 +61,13 @@ type Component struct {
 	Tier    int    `yaml:"tier"`
 
 	Body template.HTML `yaml:"-"` // the README below its front matter
-	Demo template.HTML `yaml:"-"` // demo.html, run against the placeholder data
+	Demo template.HTML `yaml:"-"` // demo.html, run against the placeholder data; a section's every demo
+	Card template.HTML `yaml:"-"` // the demo on its group's page: Demo, or a section's first demo
+
+	// Section is set for a website section (sections/<name>/): its demos are
+	// rendered from its template and demo.json, and its CSS stays out of
+	// `kit dist` unless asked for.
+	Section *sections.Section `yaml:"-"`
 	CSS  []string      `yaml:"-"` // stylesheets, relative to the root
 	JS   []string      `yaml:"-"` // tier 2 modules, relative to the root
 
@@ -211,7 +218,7 @@ func Load(root string) (*Site, error) {
 		if !d.IsDir() {
 			continue
 		}
-		c, err := loadComponent(root, d.Name(), md, s.Data)
+		c, err := loadComponent(root, "components", d.Name(), md, s.Data)
 		if err != nil {
 			errs = append(errs, err)
 			continue
@@ -219,6 +226,28 @@ func Load(root string) (*Site, error) {
 		g := byID[c.Group]
 		if g == nil {
 			errs = append(errs, fmt.Errorf("components/%s: group %q is not in site/groups.yaml", c.Slug, c.Group))
+			continue
+		}
+		c.group = g
+		g.Components = append(g.Components, c)
+		s.Components = append(s.Components, c)
+	}
+	secDirs, err := os.ReadDir(filepath.Join(root, "sections"))
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		return nil, err
+	}
+	for _, d := range secDirs {
+		if !d.IsDir() {
+			continue
+		}
+		c, err := loadComponent(root, "sections", d.Name(), md, s.Data)
+		if err != nil {
+			errs = append(errs, err)
+			continue
+		}
+		g := byID[c.Group]
+		if c.Group != "sections" || g == nil {
+			errs = append(errs, fmt.Errorf("sections/%s: group is sections, and site/groups.yaml needs it", c.Slug))
 			continue
 		}
 		c.group = g
@@ -237,9 +266,9 @@ func Load(root string) (*Site, error) {
 	return s, errors.Join(errs...)
 }
 
-func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any) (*Component, error) {
-	dir := filepath.Join(root, "components", slug)
-	where := "components/" + slug
+func loadComponent(root, kind, slug string, md goldmark.Markdown, data map[string]any) (*Component, error) {
+	dir := filepath.Join(root, kind, slug)
+	where := kind + "/" + slug
 	if !slugRe.MatchString(slug) {
 		return nil, fmt.Errorf("%s: folder names are lower-case letters, digits and dashes", where)
 	}
@@ -286,7 +315,16 @@ func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any)
 	body2 := strings.NewReplacer("<pre>", `<pre tabindex="0">`, "<table>", `<table tabindex="0">`).Replace(html.String())
 	c.Body = template.HTML(body2) //nolint:gosec // Markdown rendered by goldmark, which escapes raw HTML
 
-	if b, err := os.ReadFile(filepath.Join(dir, "demo.html")); err == nil {
+	if kind == "sections" {
+		sec, err := sections.LoadOne(dir)
+		if err != nil {
+			return nil, err
+		}
+		c.Section = sec
+		if c.Demo, c.Card, err = sectionDemos(sec); err != nil {
+			return nil, err
+		}
+	} else if b, err := os.ReadFile(filepath.Join(dir, "demo.html")); err == nil {
 		t, err := template.New(slug).Option("missingkey=error").Funcs(demoFuncs).Parse(string(b))
 		if err != nil {
 			return nil, fmt.Errorf("%s/demo.html: %w", where, err)
@@ -296,6 +334,7 @@ func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any)
 			return nil, fmt.Errorf("%s/demo.html: %w", where, err)
 		}
 		c.Demo = template.HTML(out.String()) //nolint:gosec // html/template output
+		c.Card = c.Demo
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return nil, err
 	}
@@ -314,6 +353,24 @@ func loadComponent(root, slug string, md goldmark.Markdown, data map[string]any)
 		return nil, fmt.Errorf("%s: a tier 2 component past preview needs its .js", where)
 	}
 	return c, nil
+}
+
+// sectionDemos renders each of a section's demos in a frame, at full width or
+// a phone's, and returns them all and the first alone.
+func sectionDemos(sec *sections.Section) (all, first template.HTML, err error) {
+	var b strings.Builder
+	for i, d := range sec.Demos {
+		html, err := sec.Render(d.Content, d.Variant)
+		if err != nil {
+			return "", "", fmt.Errorf("sections/%s/demo.json (%s): %w", sec.Name, d.Title, err)
+		}
+		frame := `<div class="section-frame"` + map[bool]string{true: ` data-width="mobile"`, false: ""}[d.Width == "mobile"] + ">" + html + "</div>"
+		if i == 0 {
+			first = template.HTML(frame) //nolint:gosec // kit's renderer escapes all content
+		}
+		fmt.Fprintf(&b, "<figure class=\"section-demo\"><figcaption>%s</figcaption>%s</figure>\n", template.HTMLEscapeString(d.Title), frame)
+	}
+	return template.HTML(b.String()), first, nil //nolint:gosec // kit's renderer escapes all content
 }
 
 // splitFrontMatter separates a leading ---\n…\n--- block from the rest.

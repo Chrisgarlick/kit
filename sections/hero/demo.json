@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Split (default)",
+    "content": {
+      "eyebrow": "Local service · Your town",
+      "title": "A clear promise in one line, *said plainly.*",
+      "lede": "One or two sentences on who you help and what happens next. Keep it short enough to read on a phone.",
+      "actions": [
+        { "label": "Get a free quote", "url": "/contact" },
+        { "label": "See our work", "url": "/work", "style": "secondary" }
+      ],
+      "proof": "**4.9** from 120 Google reviews"
+    }
+  },
+  {
+    "title": "Centred",
+    "variant": "centred",
+    "content": {
+      "eyebrow": "Local service · Your town",
+      "title": "A clear promise in one line, *said plainly.*",
+      "lede": "One or two sentences on who you help and what happens next.",
+      "actions": [
+        { "label": "Get a free quote", "url": "/contact" },
+        { "label": "See our work", "url": "/work", "style": "secondary" }
+      ],
+      "proof": "**4.9** from 120 Google reviews"
+    }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "Local service · Your town",
+      "title": "A clear promise in one line, *said plainly.*",
+      "lede": "One or two sentences on who you help and what happens next.",
+      "actions": [
+        { "label": "Get a free quote", "url": "/contact" },
+        { "label": "See our work", "url": "/work", "style": "secondary" }
+      ],
+      "proof": "**4.9** from 120 Google reviews"
+    }
+  }
+]

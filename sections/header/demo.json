@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Desktop",
+    "content": {
+      "brand_name": "Your brand",
+      "links": [
+        { "label": "Services", "url": "/services", "current": true },
+        { "label": "About", "url": "/about" },
+        { "label": "Reviews", "url": "/reviews" },
+        { "label": "Pricing", "url": "/pricing" },
+        { "label": "Contact", "url": "/contact" }
+      ],
+      "phone": "01234 567890",
+      "action_label": "Book now",
+      "action_url": "/contact"
+    }
+  },
+  {
+    "title": "Phone: the links fold into a menu",
+    "width": "mobile",
+    "content": {
+      "brand_name": "Your brand",
+      "links": [
+        { "label": "Services", "url": "/services" },
+        { "label": "About", "url": "/about" },
+        { "label": "Contact", "url": "/contact" }
+      ],
+      "phone": "01234 567890",
+      "action_label": "Book now",
+      "action_url": "/contact"
+    }
+  }
+]

@@ -1,0 +1,36 @@
+/* SPDX-License-Identifier: MIT
+ * Section: footer (tier 1). A dark band (--kit-inverse-*) with the brand,
+ * columns of links, contact details, social links and the small print.
+ *   <footer class="kit-section-footer"> … </footer>
+ * The columns wrap by the section's own width.
+ */
+.kit-section-footer { container: kit-footer / inline-size; padding-block: 64px 40px; background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); font-family: var(--kit-font-ui); }
+.kit-section-footer svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; display: block; }
+.kit-section-footer ul { list-style: none; margin: 0; padding: 0; }
+.kit-section-footer p { margin: 0; }
+.kit-section-footer a { color: var(--kit-inverse-fg-2); text-decoration: underline 1px transparent; text-underline-offset: 3px; transition: color var(--kit-duration), text-decoration-color var(--kit-duration); }
+.kit-section-footer a:hover { color: var(--kit-inverse-fg); text-decoration-color: currentColor; }
+.kit-section-footer a:focus-visible { outline: 2px solid var(--kit-inverse-fg); outline-offset: 3px; border-radius: 2px; }
+
+.kit-footer-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--kit-space-6); }
+.kit-footer-about { display: grid; align-content: start; gap: var(--kit-space-4); }
+.kit-footer-brand { display: flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-xl); font-weight: 600; letter-spacing: -0.01em; }
+.kit-footer-mark { inline-size: 28px; block-size: 28px; border-radius: var(--kit-radius-1); background: var(--kit-inverse-fg); }
+.kit-footer-logo { display: block; block-size: 36px; inline-size: auto; }
+.kit-footer-blurb { color: var(--kit-inverse-fg-2); font-size: var(--kit-text-md); line-height: 1.5; max-inline-size: 22em; }
+
+.kit-footer-heading { margin: 0 0 var(--kit-space-4); font-size: var(--kit-text-md); font-weight: 600; color: var(--kit-inverse-fg); }
+.kit-footer-column ul { display: grid; gap: var(--kit-space-3); font-size: var(--kit-text-lg); }
+.kit-footer-column .kit-footer-social { display: flex; gap: var(--kit-space-3); margin-block-start: var(--kit-space-4); }
+.kit-footer-social a { display: grid; place-items: center; inline-size: 32px; block-size: 32px; margin: -6px; }
+
+.kit-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--kit-space-3) var(--kit-space-6); margin-block-start: var(--kit-space-6); padding-block-start: var(--kit-space-6); border-block-start: 1px solid var(--kit-inverse-line); font-size: var(--kit-text-sm); color: var(--kit-inverse-fg-2); }
+.kit-footer-legal { display: flex; flex-wrap: wrap; }
+.kit-footer-legal li + li::before { content: "·"; padding-inline: 0.4em; }
+
+@container kit-footer (max-width: 40rem) {
+  .kit-section-footer { padding-block: 48px 32px; }
+  .kit-footer-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .kit-footer-about { grid-column: 1 / -1; }
+  .kit-footer-bottom { flex-direction: column; }
+}

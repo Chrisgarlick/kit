@@ -1,0 +1,58 @@
+/* SPDX-License-Identifier: MIT
+ * Section: header (tier 1). The brand, the main links, a phone number and one
+ * action. Below 72rem the phone number shows its icon alone; below 54rem the
+ * links and the action fold into a <details> menu.
+ *   <header class="kit-section-header"> … </header>   (from header.blade.php)
+ * The section is a size container, so it folds by its own width, not the page's.
+ */
+.kit-section-header { container: kit-header / inline-size; position: relative; z-index: 10; background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-header svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+:where(.kit-section-header) a:not(.kit-button) { color: inherit; text-decoration: none; }
+.kit-section-header a:focus-visible, .kit-header-menu > summary:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 3px; border-radius: var(--kit-radius-1); }
+.kit-section-header ul { list-style: none; margin: 0; padding: 0; }
+
+.kit-header-bar { display: flex; align-items: center; gap: var(--kit-space-6); min-block-size: 96px; }
+.kit-header-brand { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-xl); font-weight: 600; letter-spacing: -0.01em; }
+.kit-header-mark { inline-size: 28px; block-size: 28px; border-radius: var(--kit-radius-1); background: var(--kit-accent); }
+.kit-header-logo { display: block; block-size: 36px; inline-size: auto; }
+
+.kit-header-nav { margin-inline: auto; }
+.kit-header-nav ul { display: flex; gap: var(--kit-space-6); }
+.kit-header-nav a { font-size: var(--kit-text-md); padding-block: var(--kit-space-2); text-decoration: underline 2px transparent; text-underline-offset: 8px; transition: text-decoration-color var(--kit-duration); }
+.kit-header-nav a:hover, .kit-header-nav a[aria-current="page"] { text-decoration-color: var(--kit-accent); }
+
+.kit-header-end { display: flex; align-items: center; gap: var(--kit-space-4); margin-inline-start: auto; }
+.kit-header-nav + .kit-header-end { margin-inline-start: 0; }
+.kit-header-phone { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-md); font-variant-numeric: tabular-nums; color: var(--kit-fg-2); }
+.kit-header-phone:hover { color: var(--kit-fg); }
+.kit-header-action { --_h: var(--kit-control-lg); }
+
+/* The menu: a native disclosure, no script. Hidden while the links fit. */
+.kit-header-menu { display: none; }
+.kit-header-menu > summary { list-style: none; gap: var(--kit-space-2); cursor: pointer; }
+.kit-header-menu > summary::-webkit-details-marker { display: none; }
+.kit-header-sheet { position: absolute; inset-inline: 0; inset-block-start: 100%; display: grid; gap: var(--kit-space-5); padding: var(--kit-space-5) clamp(16px, 4vw, 32px) var(--kit-space-6); background: var(--kit-bg); border-block: 1px solid var(--kit-line); box-shadow: var(--kit-shadow-2); }
+.kit-header-sheet ul { display: grid; }
+.kit-header-sheet li + li { border-block-start: 1px solid var(--kit-line); }
+.kit-header-sheet ul a { display: block; padding-block: var(--kit-space-4); font-size: var(--kit-text-xl); }
+.kit-header-sheet ul a[aria-current="page"] { color: var(--kit-accent); }
+.kit-header-sheet .kit-button { --_h: var(--kit-control-lg); justify-content: center; }
+
+/* Tighter first: the phone shows its icon alone and the gaps close up. */
+@container kit-header (max-width: 72rem) {
+  .kit-header-bar, .kit-header-nav ul { gap: var(--kit-space-5); }
+  .kit-header-phone span { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } /* still the link's name */
+  .kit-header-phone { inline-size: var(--kit-control); block-size: var(--kit-control); justify-content: center; }
+}
+/* Then the links and the button fold into the menu. */
+@container kit-header (max-width: 54rem) {
+  .kit-header-bar { min-block-size: 72px; gap: var(--kit-space-4); }
+  .kit-header-nav, .kit-header-action { display: none; }
+  .kit-header-menu { display: block; }
+}
+@container kit-header (max-width: 22rem) {
+  .kit-header-phone { display: none; }
+}
+@media (forced-colors: active) {
+  .kit-header-mark { background: CanvasText; }
+}
