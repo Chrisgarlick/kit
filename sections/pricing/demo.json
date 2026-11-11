@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Centred, the middle price highlighted",
+    "variant": "centred",
+    "content": {
+      "eyebrow": "Prices",
+      "title": "Clear prices, no surprises",
+      "lede": "What's included and what isn't, before anyone books.",
+      "plans": [
+        {
+          "name": "Basic",
+          "price": "£49",
+          "per": "per visit",
+          "description": "Who this is for, in one line.",
+          "features": [
+            {
+              "text": "What's included"
+            },
+            {
+              "text": "Another thing included"
+            },
+            {
+              "text": "A third, the one they care about"
+            }
+          ],
+          "action_label": "Choose this",
+          "action_url": "/contact?plan=basic"
+        },
+        {
+          "name": "Standard",
+          "price": "£79",
+          "per": "per visit",
+          "description": "Who this is for, in one line.",
+          "features": [
+            {
+              "text": "What's included"
+            },
+            {
+              "text": "Another thing included"
+            },
+            {
+              "text": "A third, the one they care about"
+            }
+          ],
+          "featured": true,
+          "badge": "Most popular",
+          "action_label": "Choose this",
+          "action_url": "/contact?plan=standard"
+        },
+        {
+          "name": "Complete",
+          "price": "£129",
+          "per": "per visit",
+          "description": "Who this is for, in one line.",
+          "features": [
+            {
+              "text": "What's included"
+            },
+            {
+              "text": "Another thing included"
+            },
+            {
+              "text": "A third, the one they care about"
+            }
+          ],
+          "action_label": "Choose this",
+          "action_url": "/contact?plan=complete"
+        }
+      ],
+      "background": "tinted"
+    }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "variant": "centred",
+    "content": {
+      "eyebrow": "Prices",
+      "title": "Clear prices, no surprises",
+      "plans": [
+        {
+          "name": "Standard",
+          "price": "£79",
+          "per": "per visit",
+          "description": "Who this is for, in one line.",
+          "features": [
+            {
+              "text": "What's included"
+            },
+            {
+              "text": "Another thing included"
+            },
+            {
+              "text": "A third, the one they care about"
+            }
+          ],
+          "featured": true,
+          "badge": "Most popular",
+          "action_label": "Choose this",
+          "action_url": "/contact?plan=standard"
+        }
+      ]
+    }
+  }
+]

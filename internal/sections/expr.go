@@ -16,7 +16,7 @@ import (
 //	a === b  a !== b                  strict comparison only (no ==)
 //	a ? b : c                         a conditional
 //	kit_url(x) kit_tel(x) kit_mailto(x) kit_heading(x)
-//	kit_rich(x) kit_paragraphs(x)   kit's helpers and a few of PHP's:
+//	kit_rich(x) kit_paragraphs(x) kit_icon(x) kit_initials(x)   kit's helpers and a few of PHP's:
 //	count(x)
 //	empty(x) isset(x)
 //
@@ -194,7 +194,7 @@ func (e condExpr) eval(s *scope) (any, error) {
 func (e condExpr) php() string { return "(" + e.c.php() + " ? " + e.t.php() + " : " + e.f.php() + ")" }
 
 // The functions a template may call, with how many arguments each takes.
-var functions = map[string]int{"kit_url": 1, "kit_tel": 1, "kit_mailto": 1, "kit_heading": 1, "kit_paragraphs": 1, "kit_rich": 1, "count": 1, "empty": 1, "isset": 1}
+var functions = map[string]int{"kit_url": 1, "kit_tel": 1, "kit_mailto": 1, "kit_heading": 1, "kit_paragraphs": 1, "kit_icon": 1, "kit_initials": 1, "kit_rich": 1, "count": 1, "empty": 1, "isset": 1}
 
 func (e callExpr) eval(s *scope) (any, error) {
 	if e.fn == "isset" || e.fn == "empty" {
@@ -220,6 +220,10 @@ func (e callExpr) eval(s *scope) (any, error) {
 		return heading(v), nil
 	case "kit_paragraphs":
 		return paragraphs(v)
+	case "kit_icon":
+		return iconSVG(v), nil
+	case "kit_initials":
+		return initials(v)
 	case "kit_rich":
 		return rich(v)
 	case "count":
@@ -485,7 +489,7 @@ func (p *parser) primary() (expr, error) {
 		}
 		n, ok := functions[t.text]
 		if !ok {
-			return nil, fmt.Errorf("%s isn't allowed in a kit section template (only kit_url, kit_tel, kit_mailto, kit_heading, kit_rich, kit_paragraphs, count, empty, isset)", t.text)
+			return nil, fmt.Errorf("%s isn't allowed in a kit section template (only kit_url, kit_tel, kit_mailto, kit_heading, kit_rich, kit_paragraphs, kit_icon, kit_initials, count, empty, isset)", t.text)
 		}
 		if err := p.expect("("); err != nil {
 			return nil, err

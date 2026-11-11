@@ -53,9 +53,9 @@ type Field struct {
 	Item     []*Field // list: each item's fields
 }
 
-// The field types. Phase 1 has these; link, icon, colour and reference come
+// The field types. Phase 1 has these; link, colour and reference come
 // with the sections that need them.
-var fieldTypes = []string{"text", "textarea", "rich-text", "number", "boolean", "enum", "url", "image", "heading-level", "list"}
+var fieldTypes = []string{"text", "textarea", "rich-text", "number", "boolean", "enum", "url", "image", "heading-level", "icon", "list"}
 
 var nameRe = regexp.MustCompile(`^[a-z][a-z0-9_]*$`)
 
@@ -245,7 +245,7 @@ func (f *Field) zero() any {
 		return f.Default
 	}
 	switch f.Type {
-	case "text", "textarea", "rich-text", "url":
+	case "text", "textarea", "rich-text", "url", "icon":
 		return ""
 	case "boolean":
 		return false
@@ -358,6 +358,11 @@ func (f *Field) validate(v any, where string) []error {
 		s, ok := v.(string)
 		if !ok || !slices.Contains(f.Options, s) {
 			return bad("one of %s", strings.Join(f.Options, ", "))
+		}
+	case "icon":
+		s, ok := v.(string)
+		if _, known := Icons[s]; !ok || !known {
+			return bad("one of kit's icons: %s", strings.Join(IconNames, ", "))
 		}
 	case "heading-level":
 		n, ok := v.(float64)

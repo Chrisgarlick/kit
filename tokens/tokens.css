@@ -153,3 +153,8 @@
 @media (prefers-reduced-motion: reduce) {
   :root { --kit-duration: 0ms; }
 }
+
+/* kit's components and sections are sized border-box, whatever the page
+ * around them does (WordPress and most themes don't set it). :where() keeps
+ * it at zero specificity, so a page's own choice still wins. */
+:where([class*="kit-"], [class*="kit-"] *, [class*="kit-"] *::before, [class*="kit-"] *::after) { box-sizing: border-box; }

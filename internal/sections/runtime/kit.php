@@ -120,6 +120,28 @@ if (!function_exists('kit_e')) {
         return new KitSafe(implode("\n", $out));
     }
 
+    /** One of kit's icons as inline SVG, hidden from screen readers; '' for an unknown name. */
+    function kit_icon(mixed $name): KitSafe
+    {
+        // Written in by kit from its icon set (internal/sections/runtime/icons.json).
+        static $icons = /* KIT_ICONS */ [];
+        if (!is_string($name) || !isset($icons[$name])) {
+            return new KitSafe('');
+        }
+        return new KitSafe('<svg class="kit-icon" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">' . $icons[$name] . '</svg>');
+    }
+
+    /** The first letters of a name's first two words, in capitals ("Jo Smith" is "JS"). */
+    function kit_initials(mixed $name): string
+    {
+        $words = preg_split('/\s+/u', trim((string) ($name ?? '')), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $out = '';
+        foreach (array_slice($words, 0, 2) as $w) {
+            $out .= mb_strtoupper(mb_substr($w, 0, 1));
+        }
+        return $out;
+    }
+
     /** @class([...]): the always-on names, and the keyed ones whose condition is true. */
     function kit_classes(array $classes): string
     {

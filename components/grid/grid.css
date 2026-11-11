@@ -28,3 +28,5 @@
 .kit-grid[data-gap="4"] { --_gap: var(--kit-space-4); }
 .kit-grid[data-gap="5"] { --_gap: var(--kit-space-5); }
 .kit-grid[data-gap="6"] { --_gap: var(--kit-space-6); }
+/* A list as a grid (cards, photos): no bullets or indent. */
+:is(ul, ol).kit-grid { list-style: none; margin: 0; padding: 0; }

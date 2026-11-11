@@ -1,0 +1,25 @@
+/* SPDX-License-Identifier: MIT
+ * Section: reviews (tier 1). A section head and a grid of review cards.
+ *   <section class="kit-section-reviews" data-background="plain|tinted"> … </section>
+ * Stars are drawn five times and dimmed past the rating (data-rating), with
+ * the rating in words for screen readers.
+ */
+.kit-section-reviews { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
+.kit-section-reviews[data-background="tinted"] { background: var(--kit-band); }
+.kit-review-card { padding: var(--kit-space-5); border-radius: var(--kit-card-radius); }
+.kit-review-card figure { display: grid; gap: var(--kit-space-4); align-content: start; block-size: 100%; margin: 0; }
+.kit-review-stars { display: flex; gap: 3px; margin: 0; color: var(--kit-warn); }
+.kit-review-stars .kit-icon { inline-size: 17px; block-size: 17px; fill: currentColor; }
+.kit-review-stars[data-rating="4"] .kit-icon:nth-of-type(n+5),
+.kit-review-stars[data-rating="3"] .kit-icon:nth-of-type(n+4),
+.kit-review-stars[data-rating="2"] .kit-icon:nth-of-type(n+3),
+.kit-review-stars[data-rating="1"] .kit-icon:nth-of-type(n+2) { fill: none; opacity: 0.45; }
+.kit-review-quote { margin: 0; font-size: var(--kit-text-lg); line-height: 1.55; color: var(--kit-fg); }
+.kit-review-quote p { margin: 0 0 var(--kit-space-2); }
+.kit-review-quote p:first-child::before { content: "\201C"; }
+.kit-review-quote p:last-child { margin: 0; }
+.kit-review-quote p:last-child::after { content: "\201D"; }
+.kit-review-who { display: flex; align-items: center; gap: var(--kit-space-3); margin-block-start: auto; font-size: var(--kit-text-sm); }
+.kit-review-avatar { display: grid; place-items: center; flex: none; inline-size: 36px; block-size: 36px; border-radius: 50%; background: var(--kit-accent-soft); color: var(--kit-accent); font-weight: 600; font-size: var(--kit-text-xs); }
+.kit-review-name { display: block; font-weight: 600; color: var(--kit-fg); }
+.kit-review-detail { display: block; color: var(--kit-fg-3); }

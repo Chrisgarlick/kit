@@ -235,6 +235,35 @@ func paragraphs(v any) (Safe, error) {
 	return Safe(b.String()), nil
 }
 
+// iconSVG is kit_icon(): one of kit's icons as inline SVG, hidden from screen
+// readers (the words beside it say what it means). An unknown name is nothing.
+func iconSVG(v any) Safe {
+	name, _ := v.(string)
+	inner, ok := Icons[name]
+	if !ok {
+		return ""
+	}
+	return Safe(`<svg class="kit-icon" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">` + inner + `</svg>`)
+}
+
+// initials is kit_initials(): the first letters of a name's first two words,
+// in capitals ("Jo Smith" is "JS"), for an avatar.
+func initials(v any) (string, error) {
+	s, err := str(v)
+	if err != nil {
+		return "", err
+	}
+	var b strings.Builder
+	for i, w := range strings.Fields(s) {
+		if i == 2 {
+			break
+		}
+		r, _ := utf8.DecodeRuneInString(w)
+		b.WriteString(strings.ToUpper(string(r)))
+	}
+	return b.String(), nil
+}
+
 // classes is @class([...]): Laravel's Arr::toCssClasses. Entries without a key
 // are always in; keyed ones are in when their condition is truthy.
 type classEntry struct {

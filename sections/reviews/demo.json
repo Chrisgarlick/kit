@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Centred, three reviews",
+    "variant": "centred",
+    "content": {
+      "eyebrow": "Reviews",
+      "title": "What customers say",
+      "lede": "**4.9** average from 120 reviews on Google",
+      "reviews": [
+        {
+          "quote": "A short, real quote from a customer about the job, what went well and how they felt afterwards.",
+          "name": "Jo Smith",
+          "detail": "Leeds · Google review"
+        },
+        {
+          "quote": "A short, real quote from a customer about the job, what went well and how they felt afterwards.",
+          "name": "Amir Khan",
+          "detail": "Headingley · Google review"
+        },
+        {
+          "quote": "A short, real quote from a customer about the job, what went well and how they felt afterwards.",
+          "name": "Mary Rose",
+          "detail": "Otley · Facebook",
+          "rating": 4
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "variant": "centred",
+    "content": {
+      "eyebrow": "Reviews",
+      "title": "What customers say",
+      "lede": "**4.9** average from 120 reviews on Google",
+      "reviews": [
+        {
+          "quote": "A short, real quote from a customer about the job, what went well and how they felt afterwards.",
+          "name": "Jo Smith",
+          "detail": "Leeds · Google review"
+        }
+      ]
+    }
+  }
+]

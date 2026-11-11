@@ -1,0 +1,18 @@
+/* SPDX-License-Identifier: MIT
+ * Section: services (tier 1). A section head and a grid of service cards.
+ *   <section class="kit-section-services" data-background="plain|tinted"> … </section>
+ * The grid wraps by itself (kit's grid): up to the chosen columns, one on a phone.
+ */
+.kit-section-services { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
+.kit-section-services[data-background="tinted"] { background: var(--kit-band); }
+.kit-service-card { display: grid; align-content: start; justify-items: start; gap: var(--kit-space-3); padding: var(--kit-space-5); border-color: transparent; border-radius: var(--kit-card-radius); background: var(--kit-band); font-size: var(--kit-text-md); }
+.kit-section-services[data-background="tinted"] .kit-service-card { background: var(--kit-surface); }
+.kit-service-card > * { margin: 0; }
+.kit-service-icon { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--kit-accent-soft); color: var(--kit-accent); }
+.kit-service-icon .kit-icon { inline-size: 20px; block-size: 20px; }
+.kit-service-title { font: 600 var(--kit-text-xl)/1.25 var(--kit-font-ui); letter-spacing: -0.01em; color: var(--kit-fg); }
+.kit-service-text { color: var(--kit-fg-2); line-height: 1.55; }
+.kit-service-proof { display: inline-flex; align-items: start; gap: 6px; padding: 4px 10px; border-radius: var(--kit-radius-pill); background: var(--kit-good-soft); color: var(--kit-fg); font-size: var(--kit-text-sm); }
+.kit-service-proof { border-radius: var(--kit-radius-2); line-height: 1.4; }
+.kit-service-proof .kit-icon { inline-size: 14px; block-size: 14px; margin-block-start: 2px; color: var(--kit-good); flex: none; }
+.kit-service-link { margin-block-start: var(--kit-space-1); }

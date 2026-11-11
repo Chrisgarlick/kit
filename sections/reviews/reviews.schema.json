@@ -1,0 +1,100 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "reviews",
+  "title": "Reviews",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A heading, a summary of the score and a grid of review cards: stars, the quote, and who said it.",
+  "variants": {
+    "default": "Heading on the left, link at the end of the row",
+    "centred": "Heading centred"
+  },
+  "fields": {
+    "eyebrow": {
+      "type": "text",
+      "label": "Label above the heading",
+      "max": 60
+    },
+    "title": {
+      "type": "rich-text",
+      "label": "Heading",
+      "help": "*Words in stars* are set in italics.",
+      "required": true,
+      "max": 120
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 2
+    },
+    "lede": {
+      "type": "rich-text",
+      "label": "Line under the heading",
+      "help": "A summary, like \"**4.9** average from 120 reviews on Google\".",
+      "max": 200,
+      "bind": "site.review_summary"
+    },
+    "link_label": {
+      "type": "text",
+      "label": "Link",
+      "help": "A link at the end of the heading row, like \"All services\".",
+      "max": 40
+    },
+    "link_url": {
+      "type": "url",
+      "label": "Link address"
+    },
+    "columns": {
+      "type": "enum",
+      "label": "Columns",
+      "help": "The most cards in a row; fewer fit on a narrow screen.",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "default": "3"
+    },
+    "reviews": {
+      "type": "list",
+      "label": "Reviews",
+      "max": 12,
+      "item": {
+        "rating": {
+          "type": "number",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "default": 5
+        },
+        "quote": {
+          "type": "textarea",
+          "label": "What they said",
+          "required": true,
+          "max": 400
+        },
+        "name": {
+          "type": "text",
+          "label": "Name",
+          "required": true,
+          "max": 60
+        },
+        "detail": {
+          "type": "text",
+          "label": "Where it's from",
+          "help": "Their town and where the review was left, like \"Leeds · Google review\".",
+          "max": 80
+        }
+      }
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "plain"
+    }
+  }
+}

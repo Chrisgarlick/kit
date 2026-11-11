@@ -24,10 +24,50 @@ import (
 	"strings"
 )
 
-// Runtime is kit.php, the helpers compiled templates call.
-//
 //go:embed runtime/kit.php
-var Runtime string
+var runtimeSource string
+
+//go:embed runtime/icons.json
+var iconsJSON []byte
+
+// Icons are the icons kit_icon() draws, by name: each one's SVG content, on a
+// 24px grid, drawn with currentColor strokes (Lucide's shapes).
+var Icons = func() map[string]string {
+	var m map[string]string
+	if err := json.Unmarshal(iconsJSON, &m); err != nil {
+		panic("runtime/icons.json: " + err.Error())
+	}
+	return m
+}()
+
+// IconNames is the icon set's names, sorted: an icon field's options.
+var IconNames = func() []string {
+	names := make([]string, 0, len(Icons))
+	for n := range Icons {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	return names
+}()
+
+// Runtime is kit.php, the helpers compiled templates call, with the icon set
+// written into kit_icon().
+var Runtime = func() string {
+	var b strings.Builder
+	b.WriteString("[")
+	for i, n := range IconNames {
+		if i > 0 {
+			b.WriteString(", ")
+		}
+		b.WriteString(phpString(n) + " => " + phpString(Icons[n]))
+	}
+	b.WriteString("]")
+	const mark = "/* KIT_ICONS */ []"
+	if !strings.Contains(runtimeSource, mark) {
+		panic("runtime/kit.php: no " + mark)
+	}
+	return strings.Replace(runtimeSource, mark, b.String(), 1)
+}()
 
 // Section is one folder under sections/.
 type Section struct {

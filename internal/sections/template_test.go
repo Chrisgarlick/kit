@@ -33,6 +33,7 @@ var corpus = []struct {
 	{"@@if literal, @{{ $x }} stays, mail me@example.com, {{-- gone --}}kept\n{{-- a\nmulti-line comment --}}\n<p>{{ $variant }}</p>", map[string]any{}},
 	{"{{ $content['s'] }}", map[string]any{"s": "bad \xff byte é"}},
 	{"<{{ kit_heading($content['a']) }}>|{{ kit_heading($content['b']) }}|{{ kit_heading($content['c']) }}|{{ kit_heading($content['d']) }}", map[string]any{"a": float64(3), "b": float64(9), "c": "1 onclick=x", "d": 2.5}},
+	{"{{ kit_icon($content['a']) }}|{{ kit_icon($content['b']) }}|{{ kit_icon(3) }}|{{ kit_initials($content['n']) }}|{{ kit_initials($content['m']) }}|{{ kit_initials($content['e']) }}", map[string]any{"a": "key", "b": "nope", "n": "  jo  ann smith", "m": "émile", "e": ""}},
 	{"{{ kit_paragraphs($content['p']) }}|{{ kit_paragraphs($content['e']) }}", map[string]any{"p": "  One *two*\nline.\n\n\n  Three <b>\r\n \r\nFour  ", "e": "   "}},
 }
 

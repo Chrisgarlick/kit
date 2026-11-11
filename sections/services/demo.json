@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Three columns",
+    "content": {
+      "eyebrow": "What we do",
+      "title": "Services, in a sentence",
+      "link_label": "All services",
+      "link_url": "/services",
+      "services": [
+        {
+          "icon": "wrench",
+          "title": "Repairs",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "proof": "Same-day repair or no call-out charge",
+          "link_label": "Find out more",
+          "link_url": "/services/repairs"
+        },
+        {
+          "icon": "hammer",
+          "title": "Installations",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/installations"
+        },
+        {
+          "icon": "calendar",
+          "title": "Servicing",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/servicing"
+        },
+        {
+          "icon": "siren",
+          "title": "Emergencies",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/emergencies"
+        },
+        {
+          "icon": "chat",
+          "title": "Advice",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/advice"
+        },
+        {
+          "icon": "key",
+          "title": "Landlords",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/landlords"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "What we do",
+      "title": "Services, in a sentence",
+      "link_label": "All services",
+      "link_url": "/services",
+      "services": [
+        {
+          "icon": "wrench",
+          "title": "Repairs",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/repairs"
+        },
+        {
+          "icon": "hammer",
+          "title": "Installations",
+          "text": "Two lines about what's included and who it's for, in plain words.",
+          "link_label": "Find out more",
+          "link_url": "/services/installations"
+        }
+      ]
+    }
+  }
+]

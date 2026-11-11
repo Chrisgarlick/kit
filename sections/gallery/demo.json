@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Three columns, before the photos are chosen",
+    "content": {
+      "eyebrow": "Our work",
+      "title": "Jobs we're proud of",
+      "link_label": "See more on Instagram",
+      "link_url": "https://instagram.com/yourbrand",
+      "images": [
+        {
+          "caption": "Kitchen rewire, Headingley"
+        },
+        {
+          "caption": "Consumer unit upgrade"
+        },
+        {
+          "caption": "Garden lighting"
+        },
+        {
+          "caption": ""
+        },
+        {
+          "caption": "Loft conversion"
+        },
+        {
+          "caption": ""
+        }
+      ]
+    }
+  }
+]

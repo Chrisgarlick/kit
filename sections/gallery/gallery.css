@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: MIT
+ * Section: gallery (tier 1). A section head and a grid of photos.
+ *   <section class="kit-section-gallery" data-background="plain|tinted"> … </section>
+ * Photos are cropped to 4:3 so the grid stays even; an empty one shows a
+ * placeholder until it's chosen.
+ */
+.kit-section-gallery { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
+.kit-section-gallery[data-background="tinted"] { background: var(--kit-band); }
+.kit-gallery-item { display: grid; gap: var(--kit-space-2); margin: 0; }
+.kit-gallery-media { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--kit-card-radius); background: var(--kit-surface-2); }
+.kit-gallery-media[data-empty] { display: grid; place-items: center; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); box-sizing: border-box; }
+.kit-gallery-media[data-empty] .kit-icon { inline-size: 28px; block-size: 28px; }
+.kit-gallery-item figcaption { font-size: var(--kit-text-sm); color: var(--kit-fg-2); }

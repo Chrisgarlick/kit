@@ -1,0 +1,105 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "services",
+  "title": "Services",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A heading and a grid of service cards: an icon, a name, two lines about it, a proof point and a link.",
+  "variants": {
+    "default": "Heading on the left, link at the end of the row",
+    "centred": "Heading centred"
+  },
+  "fields": {
+    "eyebrow": {
+      "type": "text",
+      "label": "Label above the heading",
+      "max": 60
+    },
+    "title": {
+      "type": "rich-text",
+      "label": "Heading",
+      "help": "*Words in stars* are set in italics.",
+      "required": true,
+      "max": 120
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 2
+    },
+    "lede": {
+      "type": "rich-text",
+      "label": "Line under the heading",
+      "help": "One line of introduction, if the section needs it.",
+      "max": 200
+    },
+    "link_label": {
+      "type": "text",
+      "label": "Link",
+      "help": "A link at the end of the heading row, like \"All services\".",
+      "max": 40
+    },
+    "link_url": {
+      "type": "url",
+      "label": "Link address"
+    },
+    "columns": {
+      "type": "enum",
+      "label": "Columns",
+      "help": "The most cards in a row; fewer fit on a narrow screen.",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "default": "3"
+    },
+    "services": {
+      "type": "list",
+      "label": "Services",
+      "max": 12,
+      "item": {
+        "icon": {
+          "type": "icon",
+          "label": "Icon"
+        },
+        "title": {
+          "type": "text",
+          "label": "Name",
+          "required": true,
+          "max": 60
+        },
+        "text": {
+          "type": "textarea",
+          "label": "About it",
+          "help": "Two lines on what's included and who it's for.",
+          "max": 240
+        },
+        "proof": {
+          "type": "text",
+          "label": "Proof point",
+          "help": "A result or guarantee, shown as a chip.",
+          "max": 80
+        },
+        "link_label": {
+          "type": "text",
+          "label": "Link",
+          "max": 30
+        },
+        "link_url": {
+          "type": "url",
+          "label": "Link address"
+        }
+      }
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "plain"
+    }
+  }
+}

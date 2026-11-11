@@ -1,0 +1,23 @@
+/* SPDX-License-Identifier: MIT
+ * Section head (tier 1): what sits above a grid of cards. A label, a
+ * heading, a line, and a "see all" link at the end of the row.
+ *   <div class="kit-section-head" [data-align="centre"]>
+ *     <div class="kit-section-head-text">
+ *       <p class="kit-section-head-eyebrow">What we do</p>
+ *       <h2 class="kit-section-head-title">…</h2>
+ *       <p class="kit-section-head-lede">…</p>
+ *     </div>
+ *     <a class="kit-link" data-variant="arrow" href="…">All services</a>
+ *   </div>
+ * Centred, the link goes below the text.
+ */
+.kit-section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--kit-space-3) var(--kit-space-6); margin-block-end: clamp(1.5rem, 3vw, 2.5rem); font-family: var(--kit-font-ui); color: var(--kit-fg); }
+.kit-section-head-text { display: grid; gap: var(--kit-space-3); max-inline-size: 44rem; }
+.kit-section-head-text > * { margin: 0; }
+.kit-section-head-eyebrow { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kit-accent); }
+.kit-section-head-title { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); line-height: 1.12; text-wrap: balance; }
+.kit-section-head-title em { font-style: italic; }
+.kit-section-head-lede { font-size: var(--kit-text-lg); line-height: 1.5; color: var(--kit-fg-2); text-wrap: pretty; }
+.kit-section-head-lede strong { color: var(--kit-fg); }
+.kit-section-head[data-align="centre"] { flex-direction: column; align-items: center; text-align: center; }
+.kit-section-head[data-align="centre"] .kit-section-head-text { justify-items: center; }
