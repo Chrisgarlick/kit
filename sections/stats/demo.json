@@ -1,0 +1,50 @@
+[
+  {
+    "title": "On the dark band",
+    "content": {
+      "stats": [
+        {
+          "value": "15 yrs",
+          "label": "in business locally"
+        },
+        {
+          "value": "2,400+",
+          "label": "jobs completed"
+        },
+        {
+          "value": "4.9",
+          "label": "average review"
+        },
+        {
+          "value": "24 hr",
+          "label": "emergency call-outs"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone, tinted",
+    "width": "mobile",
+    "content": {
+      "stats": [
+        {
+          "value": "15 yrs",
+          "label": "in business locally"
+        },
+        {
+          "value": "2,400+",
+          "label": "jobs completed"
+        },
+        {
+          "value": "4.9",
+          "label": "average review"
+        },
+        {
+          "value": "24 hr",
+          "label": "emergency call-outs"
+        }
+      ],
+      "tone": "tinted"
+    }
+  }
+]

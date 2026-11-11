@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Packages, two of them linked",
+    "content": {
+      "label": "Ways to work together:",
+      "pills": [
+        {
+          "text": "Option one · a week",
+          "url": "/packages/one"
+        },
+        {
+          "text": "Option two · 1 to 3 weeks",
+          "url": "/packages/two"
+        },
+        {
+          "text": "Option three · 2 to 4 weeks"
+        },
+        {
+          "text": "Option four · scoped"
+        },
+        {
+          "text": "Option five · monthly"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone, areas covered",
+    "width": "mobile",
+    "content": {
+      "label": "Areas we cover:",
+      "pills": [
+        {
+          "text": "Leeds"
+        },
+        {
+          "text": "Headingley"
+        },
+        {
+          "text": "Otley"
+        },
+        {
+          "text": "Horsforth"
+        },
+        {
+          "text": "Wetherby"
+        }
+      ],
+      "background": "tinted"
+    }
+  }
+]

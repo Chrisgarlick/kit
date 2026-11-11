@@ -1,0 +1,52 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "quote-stats",
+  "title": "Quote and stats",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A quote that sums up working with you, in the accent colour, beside two or three numbers that back it up.",
+  "fields": {
+    "quote": {
+      "type": "rich-text",
+      "label": "Quote",
+      "help": "A customer's words or your own promise. *Stars* for italics.",
+      "required": true,
+      "max": 300
+    },
+    "attribution": {
+      "type": "text",
+      "label": "Who said it",
+      "help": "\"Name · where it's from\".",
+      "max": 80
+    },
+    "stats": {
+      "type": "list",
+      "label": "Numbers",
+      "max": 3,
+      "item": {
+        "value": {
+          "type": "text",
+          "label": "Number",
+          "help": "\"500+\", \"58 → 13\".",
+          "required": true,
+          "max": 16
+        },
+        "label": {
+          "type": "text",
+          "label": "What it counts",
+          "required": true,
+          "max": 80
+        }
+      }
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "plain"
+    }
+  }
+}

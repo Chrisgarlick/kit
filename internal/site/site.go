@@ -374,7 +374,14 @@ func sectionDemos(sec *sections.Section) (all, first template.HTML, err error) {
 		if err != nil {
 			return "", "", fmt.Errorf("sections/%s/demo.json (%s): %w", sec.Name, d.Title, err)
 		}
-		frame := `<div class="section-frame"` + map[bool]string{true: ` data-width="mobile"`, false: ""}[d.Width == "mobile"] + ">" + html + "</div>"
+		frame := `<div class="section-frame">` + html + "</div>"
+		switch d.Width {
+		case "mobile":
+			frame = `<div class="section-frame" data-width="mobile">` + html + "</div>"
+		case "wide":
+			// Drawn at a desktop's 1440px and scaled down to the column.
+			frame = `<div class="section-frame" data-width="wide"><div class="section-frame-wide">` + html + "</div></div>"
+		}
 		if i == 0 {
 			first = template.HTML(frame) //nolint:gosec // kit's renderer escapes all content
 		}

@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Before the logos are chosen: the names stand in",
+    "content": {
+      "logos": [
+        {
+          "name": "NICEIC"
+        },
+        {
+          "name": "TrustMark",
+          "url": "https://www.trustmark.org.uk"
+        },
+        {
+          "name": "Which? Trusted Trader"
+        },
+        {
+          "name": "Checkatrade"
+        },
+        {
+          "name": "Federation of Master Builders"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "content": {
+      "logos": [
+        {
+          "name": "NICEIC"
+        },
+        {
+          "name": "TrustMark"
+        },
+        {
+          "name": "Checkatrade"
+        }
+      ]
+    }
+  }
+]

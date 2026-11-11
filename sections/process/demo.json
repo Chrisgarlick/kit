@@ -1,0 +1,99 @@
+[
+  {
+    "title": "Steps and two example cards",
+    "content": {
+      "eyebrow": "How it works",
+      "title": "A process in one line, *with a twist.*",
+      "steps": [
+        {
+          "title": "First step",
+          "text": "What happens and what you get."
+        },
+        {
+          "title": "Second step",
+          "text": "What happens and what you get."
+        },
+        {
+          "title": "Third step",
+          "text": "What happens and what you get."
+        },
+        {
+          "title": "Last step",
+          "text": "What you're left with."
+        }
+      ],
+      "link_label": "How it works",
+      "link_url": "/how-it-works",
+      "cards": [
+        {
+          "label": "Example",
+          "title": "A short title",
+          "points": [
+            {
+              "text": "Something that's done"
+            },
+            {
+              "text": "Another thing that's done"
+            },
+            {
+              "text": "Something left out",
+              "included": false
+            }
+          ]
+        },
+        {
+          "label": "Another example",
+          "title": "A short title",
+          "points": [
+            {
+              "text": "Something that's done"
+            },
+            {
+              "text": "Another thing that's done"
+            },
+            {
+              "text": "Something left out",
+              "included": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone: the example cards are left out",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "How it works",
+      "title": "Four steps, *no surprises.*",
+      "steps": [
+        {
+          "title": "Call or message",
+          "text": "Tell us what's wrong."
+        },
+        {
+          "title": "A fixed quote",
+          "text": "In writing, within a day."
+        },
+        {
+          "title": "The work",
+          "text": "On the day we agreed."
+        },
+        {
+          "title": "Signed off",
+          "text": "With a certificate."
+        }
+      ],
+      "cards": [
+        {
+          "title": "A short title",
+          "points": [
+            {
+              "text": "Something that's done"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

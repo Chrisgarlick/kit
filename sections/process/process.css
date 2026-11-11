@@ -1,0 +1,34 @@
+/* SPDX-License-Identifier: MIT
+ * Section: process (tier 1). Numbered steps beside up to two layered
+ * example cards ("note cards").
+ *   <section class="kit-section-process" data-background="plain|tinted"> … </section>
+ * Below 56rem (the section's own width) the example cards are left out, as
+ * in Design: the steps carry the section on a phone.
+ */
+.kit-section-process { container: kit-process / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-process[data-background="tinted"] { background: var(--kit-band); }
+.kit-process-inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.kit-process-text { display: grid; justify-items: start; gap: var(--kit-space-5); }
+.kit-process-text > * { margin: 0; }
+.kit-process-eyebrow { font-size: var(--kit-text-md); color: var(--kit-fg-2); }
+.kit-process-title { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); line-height: 1.08; text-wrap: balance; }
+.kit-process-title em { font-style: italic; }
+.kit-process-steps { display: grid; gap: var(--kit-space-3); margin: 0; padding: 0; list-style: none; counter-reset: kit-step; font-size: var(--kit-text-lg); line-height: 1.5; color: var(--kit-fg-2); }
+.kit-process-steps li { counter-increment: kit-step; }
+.kit-process-steps li::before { content: counter(kit-step) "\00a0\00a0"; font-weight: 700; color: var(--kit-fg); font-variant-numeric: tabular-nums; }
+.kit-process-steps strong { color: var(--kit-fg); }
+.kit-process-cards { position: relative; display: grid; gap: var(--kit-space-5); list-style: none; margin: 0; padding: 0; }
+.kit-process-cards > :nth-child(1) { margin-inline-end: 22%; }
+.kit-process-cards > :nth-child(2) { margin-inline-start: 22%; }
+.kit-note-card { display: grid; gap: var(--kit-space-2); padding: var(--kit-space-4) var(--kit-space-4) var(--kit-space-5); border-radius: var(--kit-card-radius); background: var(--kit-surface); box-shadow: var(--kit-shadow-3); }
+.kit-note-card > * { margin: 0; }
+.kit-note-label { font-size: var(--kit-text-sm); color: var(--kit-fg-3); }
+.kit-note-title { font-size: var(--kit-text-xl); font-weight: 500; }
+.kit-note-points { display: grid; gap: var(--kit-space-2); list-style: none; margin: 0; padding: 0; font-size: var(--kit-text-md); }
+.kit-note-points li { display: flex; gap: 6px; align-items: center; }
+.kit-note-points li[data-left-out] { color: var(--kit-fg-3); }
+.kit-note-points .kit-icon { flex: none; inline-size: 14px; block-size: 14px; }
+@container kit-process (max-width: 56rem) {
+  .kit-process-inner { grid-template-columns: minmax(0, 1fr); }
+  .kit-process-cards { display: none; }
+}

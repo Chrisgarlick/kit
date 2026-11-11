@@ -1,0 +1,110 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "hero-collage",
+  "title": "Hero, collage",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "The first thing on a page, centred and big, with up to four floating cards around it: a number, a score, a photo or a note.",
+  "fields": {
+    "eyebrow": {
+      "type": "text",
+      "label": "Label above the heading",
+      "max": 60
+    },
+    "title": {
+      "type": "rich-text",
+      "label": "Heading",
+      "help": "*Words in stars* are set in italics.",
+      "required": true,
+      "max": 100
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 1
+    },
+    "lede": {
+      "type": "textarea",
+      "label": "Supporting line",
+      "max": 200
+    },
+    "actions": {
+      "type": "list",
+      "label": "Buttons",
+      "max": 2,
+      "item": {
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "required": true,
+          "max": 40
+        },
+        "url": {
+          "type": "url",
+          "label": "Link",
+          "required": true
+        },
+        "style": {
+          "type": "enum",
+          "label": "Style",
+          "options": [
+            "primary",
+            "secondary"
+          ],
+          "default": "primary"
+        }
+      }
+    },
+    "cards": {
+      "type": "list",
+      "label": "Floating cards",
+      "help": "In the corners, in order: top left, bottom left, top right, bottom right. Left out on a phone.",
+      "max": 4,
+      "item": {
+        "kind": {
+          "type": "enum",
+          "label": "Kind",
+          "options": [
+            "stat",
+            "score",
+            "photo",
+            "note"
+          ],
+          "default": "stat"
+        },
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "help": "A stat's or note's small label; a score's name; a photo's caption.",
+          "max": 60
+        },
+        "value": {
+          "type": "text",
+          "label": "Value",
+          "help": "A stat's number (\"4.4 ms\") or a note's title.",
+          "max": 30
+        },
+        "text": {
+          "type": "text",
+          "label": "Line",
+          "help": "What it means, in a few words.",
+          "max": 80
+        },
+        "score": {
+          "type": "number",
+          "label": "Score",
+          "help": "For a score card: 0 to 100.",
+          "min": 0,
+          "max": 100
+        },
+        "image": {
+          "type": "image",
+          "label": "Photo",
+          "help": "For a photo card.",
+          "alt": "required",
+          "sizes": "card"
+        }
+      }
+    }
+  }
+}

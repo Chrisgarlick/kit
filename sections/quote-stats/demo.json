@@ -1,0 +1,33 @@
+[
+  {
+    "title": "A quote and two numbers",
+    "content": {
+      "quote": "A quote that sums up what working with you is like, in your customer's words or your own *promise.*",
+      "attribution": "Name · where it's from",
+      "stats": [
+        {
+          "value": "500+",
+          "label": "What the number counts, in one line"
+        },
+        {
+          "value": "58 → 13",
+          "label": "A before-and-after that proves the point"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "content": {
+      "quote": "They turned up when they said, fixed it first time and left the place *cleaner than they found it.*",
+      "attribution": "Sarah · Google review",
+      "stats": [
+        {
+          "value": "500+",
+          "label": "boilers fitted since 2012"
+        }
+      ]
+    }
+  }
+]

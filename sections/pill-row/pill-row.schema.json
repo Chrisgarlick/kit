@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "pill-row",
+  "title": "Pill row",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A label and a row of pills: packages, areas covered, specialisms. Each can link to its page.",
+  "fields": {
+    "label": {
+      "type": "text",
+      "label": "Label",
+      "max": 60
+    },
+    "pills": {
+      "type": "list",
+      "label": "Pills",
+      "min": 1,
+      "max": 10,
+      "item": {
+        "text": {
+          "type": "text",
+          "label": "Text",
+          "required": true,
+          "max": 60
+        },
+        "url": {
+          "type": "url",
+          "label": "Link"
+        }
+      }
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "plain"
+    }
+  }
+}

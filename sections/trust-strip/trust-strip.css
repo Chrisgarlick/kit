@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: MIT
+ * Section: trust strip (tier 1). A label and a row of logos, greyed until
+ * hovered so they don't shout. A logo not chosen yet shows its name.
+ *   <section class="kit-section-trust-strip" data-background="plain|tinted"> … </section>
+ * Below 48rem (the section's own width) the label goes above the logos.
+ */
+.kit-section-trust-strip { container: kit-trust / inline-size; padding-block: clamp(1.75rem, 3vw, 2.5rem); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-trust-strip[data-background="tinted"] { background: var(--kit-band); }
+.kit-trust-row { display: flex; align-items: center; justify-content: space-between; gap: var(--kit-space-4) var(--kit-space-6); }
+.kit-trust-label { margin: 0; flex: none; font-size: var(--kit-text-md); font-weight: 600; color: var(--kit-fg-2); }
+.kit-trust-logos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--kit-space-4) clamp(1.5rem, 3vw, 3rem); list-style: none; margin: 0; padding: 0; }
+.kit-trust-logo { display: inline-flex; align-items: center; color: var(--kit-fg-2); text-decoration: none; border-radius: var(--kit-radius-1); }
+.kit-trust-logo img { display: block; block-size: 36px; inline-size: auto; max-inline-size: 140px; object-fit: contain; filter: grayscale(1); opacity: 0.75; transition: filter var(--kit-duration), opacity var(--kit-duration); }
+a.kit-trust-logo:hover img { filter: none; opacity: 1; }
+a.kit-trust-logo:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 4px; }
+.kit-trust-name { display: inline-block; padding: 8px 14px; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); font-size: var(--kit-text-sm); font-weight: 600; letter-spacing: 0.01em; white-space: nowrap; }
+@container kit-trust (max-width: 48rem) {
+  .kit-trust-row { flex-direction: column; align-items: start; }
+}

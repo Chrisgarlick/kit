@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: MIT
+ * Section: quote and stats (tier 1). A quote on the accent's soft colour
+ * beside a column of number cards.
+ *   <section class="kit-section-quote-stats" data-background="plain|tinted"> … </section>
+ * Below 48rem (the section's own width) the numbers go under the quote.
+ */
+.kit-section-quote-stats { container: kit-qs / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-quote-stats[data-background="tinted"] { background: var(--kit-band); }
+.kit-qs-inner { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: var(--kit-space-5); align-items: stretch; }
+.kit-qs-quote { display: grid; align-content: center; gap: var(--kit-space-5); margin: 0; padding: clamp(1.75rem, 4vw, 3rem); border-radius: var(--kit-card-radius); background: var(--kit-accent-soft); color: var(--kit-accent); }
+.kit-qs-quote blockquote { margin: 0; }
+.kit-qs-quote blockquote p { margin: 0; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem); line-height: 1.25; text-wrap: pretty; }
+.kit-qs-quote em { font-style: italic; }
+.kit-qs-quote figcaption { font-size: var(--kit-text-md); color: var(--kit-fg-2); } /* small text: the accent on its soft colour is only safe large */
+.kit-qs-stats { display: grid; gap: var(--kit-space-5); margin: 0; }
+.kit-qs-stat { display: flex; flex-direction: column-reverse; justify-content: center; gap: var(--kit-space-1); padding: var(--kit-space-5); border-radius: var(--kit-card-radius); background: var(--kit-band); }
+.kit-section-quote-stats[data-background="tinted"] .kit-qs-stat { background: var(--kit-surface); }
+.kit-qs-stat dd { margin: 0; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.kit-qs-stat dt { font-size: var(--kit-text-sm); color: var(--kit-fg-2); }
+@container kit-qs (max-width: 48rem) {
+  .kit-qs-inner { grid-template-columns: minmax(0, 1fr); }
+}

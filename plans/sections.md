@@ -1,10 +1,13 @@
 # kit sections: website sections for client sites
 
-**Status (11 November 2026): phase 1 under way.** Built: the template compiler, the schema
-format, the PHP runtime, `kit section check|compile|export`, the section tokens, and **header,
-hero and footer** with demos on the docs site (the Sections group). Still to do in phase 1: the
-cg-cms block type and the WordPress `block.json` generators, and the screenshot comparison with
-Design. Designed in Design, in Base theme → Kit sections (file `aaca632a61d340b1a735f13a5c1abce7`): 22
+**Status (11 November 2026): phases 1 and 2 built, but for contact.** Sixteen sections:
+header, hero, hero collage, trust strip, services, stats, split (about and FAQ), text block,
+pill row, quote and stats, process, reviews, pricing, gallery, call to action and footer, with
+the section head and text block components they share. They run as Blade, as plain PHP and as
+WordPress blocks (`~/dev/wp-base`: kit Blocks and the kit base theme), and the Kit sections
+showcase homepage builds from them in WordPress. Waiting: **contact**, on the forms decision
+(kit Forms or a forms plugin), and with it the collage hero's "check your site" input card; the
+cg-cms block types; the screenshot comparison with Design. Designed in Design, in Base theme → Kit sections (file `aaca632a61d340b1a735f13a5c1abce7`): 22
 sections and about 35 components, each with a desktop layout and a mobile state, plus
 Steep-styled versions in chrisgarlick.com redesign: win clients
 (`38bc0169c69841d6a7a0ab1e4bef2e5b`, the "Kit · Steep / …" components). Owner: kit,

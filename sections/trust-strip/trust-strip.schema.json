@@ -1,0 +1,50 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "trust-strip",
+  "title": "Trust strip",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A quiet row of logos: accreditations, memberships, the brands you fit or the places you've been featured.",
+  "fields": {
+    "label": {
+      "type": "text",
+      "label": "Label",
+      "max": 60,
+      "default": "Trusted and accredited"
+    },
+    "logos": {
+      "type": "list",
+      "label": "Logos",
+      "max": 8,
+      "item": {
+        "name": {
+          "type": "text",
+          "label": "Name",
+          "help": "The organisation's name: read out for the logo, and shown until a logo is chosen.",
+          "required": true,
+          "max": 60
+        },
+        "image": {
+          "type": "image",
+          "label": "Logo",
+          "help": "Its alt text is the name, so it can stay empty.",
+          "alt": "optional"
+        },
+        "url": {
+          "type": "url",
+          "label": "Link",
+          "help": "Their page about you, if there is one (a register entry, a listing)."
+        }
+      }
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "plain"
+    }
+  }
+}

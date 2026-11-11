@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: MIT
+ * Section: pill row (tier 1). A label and a centred row of pills that wraps.
+ *   <section class="kit-section-pill-row" data-background="plain|tinted"> … </section>
+ * A pill with a link is a link, with a hover and focus ring; one without is text.
+ */
+.kit-section-pill-row { padding-block: clamp(1.5rem, 3vw, 2.5rem); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-pill-row[data-background="tinted"] { background: var(--kit-band); }
+.kit-pills-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--kit-space-3); }
+.kit-pills-label { margin: 0; font-size: var(--kit-text-md); color: var(--kit-fg-2); }
+.kit-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--kit-space-2); list-style: none; margin: 0; padding: 0; }
+.kit-pill { display: inline-block; padding: 7px 14px; border: 1px solid var(--kit-line-strong); border-radius: var(--kit-radius-pill); background: var(--kit-surface); color: var(--kit-fg); font-size: var(--kit-text-md); line-height: 1.3; text-decoration: none; }
+a.kit-pill { transition: border-color var(--kit-duration), color var(--kit-duration); }
+a.kit-pill:hover { border-color: var(--kit-accent); color: var(--kit-accent); }
+a.kit-pill:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }

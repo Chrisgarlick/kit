@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "stats",
+  "title": "Stats",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A band of two to four numbers that prove the point, each with a line saying what it counts.",
+  "fields": {
+    "stats": {
+      "type": "list",
+      "label": "Numbers",
+      "min": 1,
+      "max": 4,
+      "item": {
+        "value": {
+          "type": "text",
+          "label": "Number",
+          "help": "As it reads: \"15 yrs\", \"2,400+\", \"4.9\".",
+          "required": true,
+          "max": 16
+        },
+        "label": {
+          "type": "text",
+          "label": "What it counts",
+          "required": true,
+          "max": 60
+        }
+      }
+    },
+    "tone": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "dark",
+        "tinted",
+        "plain"
+      ],
+      "default": "dark"
+    }
+  }
+}

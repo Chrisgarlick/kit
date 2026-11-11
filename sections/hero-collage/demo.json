@@ -1,0 +1,73 @@
+[
+  {
+    "title": "With four floating cards (at 1440, scaled)",
+    "content": {
+      "eyebrow": "What you do · where",
+      "title": "A big promise that *stays with people.*",
+      "lede": "One line on who it's for and what they get, short enough to read at a glance.",
+      "actions": [
+        {
+          "label": "Get started",
+          "url": "/contact"
+        },
+        {
+          "label": "See an example",
+          "url": "/work",
+          "style": "secondary"
+        }
+      ],
+      "cards": [
+        {
+          "kind": "stat",
+          "label": "Metric name",
+          "value": "4.4 ms",
+          "text": "What it means, in a few words"
+        },
+        {
+          "kind": "score",
+          "score": 99,
+          "label": "Score name",
+          "text": "What was measured"
+        },
+        {
+          "kind": "photo",
+          "label": "Name · what they do"
+        },
+        {
+          "kind": "note",
+          "label": "Example",
+          "value": "A short title",
+          "text": "One line about it"
+        }
+      ]
+    },
+    "width": "wide"
+  },
+  {
+    "title": "Phone: the cards are left out",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "What you do · where",
+      "title": "A big promise that *stays with people.*",
+      "lede": "One line on who it's for and what they get.",
+      "actions": [
+        {
+          "label": "Get started",
+          "url": "/contact"
+        },
+        {
+          "label": "See an example",
+          "url": "/work",
+          "style": "secondary"
+        }
+      ],
+      "cards": [
+        {
+          "kind": "stat",
+          "label": "Metric name",
+          "value": "4.4 ms"
+        }
+      ]
+    }
+  }
+]

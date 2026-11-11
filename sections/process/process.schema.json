@@ -1,0 +1,101 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "process",
+  "title": "Process",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "How it works: a heading, numbered steps and a link, beside up to two example cards that show what you get.",
+  "fields": {
+    "eyebrow": {
+      "type": "text",
+      "label": "Label above the heading",
+      "max": 60
+    },
+    "title": {
+      "type": "rich-text",
+      "label": "Heading",
+      "help": "*Words in stars* are set in italics.",
+      "required": true,
+      "max": 120
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 2
+    },
+    "steps": {
+      "type": "list",
+      "label": "Steps",
+      "min": 1,
+      "max": 6,
+      "item": {
+        "title": {
+          "type": "text",
+          "label": "Step",
+          "required": true,
+          "max": 60
+        },
+        "text": {
+          "type": "text",
+          "label": "What happens",
+          "max": 200
+        }
+      }
+    },
+    "link_label": {
+      "type": "text",
+      "label": "Link",
+      "max": 40
+    },
+    "link_url": {
+      "type": "url",
+      "label": "Link address"
+    },
+    "cards": {
+      "type": "list",
+      "label": "Example cards",
+      "help": "Shown beside the steps on wider screens: what a customer gets, with what's included and what isn't.",
+      "max": 2,
+      "item": {
+        "label": {
+          "type": "text",
+          "label": "Label",
+          "max": 40
+        },
+        "title": {
+          "type": "text",
+          "label": "Title",
+          "required": true,
+          "max": 60
+        },
+        "points": {
+          "type": "list",
+          "label": "Points",
+          "max": 5,
+          "item": {
+            "text": {
+              "type": "text",
+              "label": "Point",
+              "required": true,
+              "max": 80
+            },
+            "included": {
+              "type": "boolean",
+              "label": "Included",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "tinted"
+    }
+  }
+}

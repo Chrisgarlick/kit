@@ -179,8 +179,11 @@ main { padding-block: var(--kit-space-6) 80px; min-inline-size: 0; outline: none
 
 /* ---------- website sections: each demo in a page-like frame ---------- */
 .section-demo { margin: 0; display: grid; gap: var(--kit-space-2); }
-.section-demo figcaption { font-size: var(--kit-text-sm); color: var(--kit-fg-3); }
+.section-demo > figcaption { font-size: var(--kit-text-sm); color: var(--kit-fg-3); }
 .section-frame { position: relative; inline-size: 100%; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-bg); overflow: clip; overflow-clip-margin: content-box; }
 .section-frame:has(.kit-header-menu[open]) { min-block-size: 27rem; } /* room for the open menu, which overlays the page */
 .section-frame[data-width="mobile"] { inline-size: min(100%, 390px); }
 .demo .section-frame { min-inline-size: 0; }
+.section-frame[data-width="wide"] { overflow-x: auto; }
+/* A desktop's 1440px, scaled to the docs column (about 950px wide). */
+.section-frame-wide { inline-size: 1440px; zoom: 0.66; }

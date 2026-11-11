@@ -84,7 +84,7 @@ type Section struct {
 type Demo struct {
 	Title   string         `json:"title"`
 	Variant string         `json:"variant"`
-	Width   string         `json:"width"` // the frame the demo is shown in: "" (full) or "mobile"
+	Width   string         `json:"width"` // the frame the demo is shown in: "" (the page's), "mobile" (390px) or "wide" (1440px, scaled to fit)
 	Content map[string]any `json:"content"`
 }
 
@@ -160,8 +160,8 @@ func LoadOne(dir string) (*Section, error) {
 		if d.Title == "" {
 			errs = append(errs, fmt.Errorf("%s/demo.json[%d]: needs a title", where, i))
 		}
-		if d.Width != "" && d.Width != "mobile" {
-			errs = append(errs, fmt.Errorf("%s/demo.json[%d]: width is \"\" or \"mobile\"", where, i))
+		if d.Width != "" && d.Width != "mobile" && d.Width != "wide" {
+			errs = append(errs, fmt.Errorf("%s/demo.json[%d]: width is \"\", \"mobile\" or \"wide\"", where, i))
 		}
 		if _, err := s.Render(d.Content, d.Variant); err != nil {
 			errs = append(errs, fmt.Errorf("%s/demo.json[%d] (%s): %w", where, i, d.Title, err))
