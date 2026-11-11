@@ -47,6 +47,12 @@ type DistResult struct {
 // chunk, and VERSION (the kit commit and each bundle's components). Entry
 // names aren't hashed: the app versions its own asset URLs.
 func (s *Site) Dist(out string, opt DistOptions) (*DistResult, error) {
+	// esbuild resolves a relative outdir against the kit repository, not the
+	// working directory: make it absolute first.
+	out, err := filepath.Abs(out)
+	if err != nil {
+		return nil, err
+	}
 	res := &DistResult{Files: map[string]int{}}
 	known := map[string]*Component{}
 	for _, c := range s.Components {

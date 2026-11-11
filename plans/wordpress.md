@@ -22,9 +22,9 @@ is specified first, carefully, and versioned.
 | Piece | What it is | Repository |
 |---|---|---|
 | **Schema format** | The description of a section's content, its validation and its versions | kit (`schema/`, with the Go validator in `internal/schema`) |
-| **kit Blocks** (plugin) | Blocks from schemas: registration, the generated editor form, server-side rendering, the Blade or PHP runtime, migrations | `~/dev/kit-wp` (new) |
-| **kit Fields** (plugin, later) | Site settings and custom fields from the same schema format, bound into blocks | `~/dev/kit-wp`, a second plugin in the same repo |
-| **kit Theme** (base theme) | A block theme: brand → `theme.json`, header and footer template parts, page patterns, WooCommerce templates, asset loading | `~/dev/kit-wp-theme` (new) |
+| **kit Blocks** (plugin) | Blocks from schemas: registration, the generated editor form, server-side rendering, the Blade or PHP runtime, migrations | `~/dev/wp-base/plugins/kit-blocks` |
+| **kit Fields** (plugin, later) | Site settings and custom fields from the same schema format, bound into blocks | `~/dev/wp-base/plugins`, a second plugin beside it |
+| **kit Theme** (base theme) | A block theme: brand → `theme.json`, header and footer template parts, page patterns, WooCommerce templates, asset loading | `~/dev/wp-base/themes/kit-base` |
 | **Plugin set** | The small, vetted third-party list every site gets | documented in the theme's README |
 
 ## 1. The schema format
@@ -95,6 +95,27 @@ present in the demo content, every field used by the template and every template
 schema).
 
 ## 2. kit Blocks (the plugin)
+
+**Built 11 November 2026, in `~/dev/wp-base`** (one repo for the base setup: `plugins/kit-blocks`
+and `themes/kit-base`, run in WordPress Playground with `make serve`). What was built, and where
+it differs from the plan below:
+
+- `kit build-wp -out plugins/kit-blocks/build -fixtures tests/fixtures.json` writes each
+  section's `block.json`, compiled template, `render.php`, `style.css`, `schema.json` and
+  `patterns.json`, plus `kit.php` and `kit.css`.
+- A block's content is **one `content` object attribute** shaped by the schema, plus `variant`,
+  not one attribute per field: a schema change migrates one value, and the plugin sanitises and
+  fills it from the schema on render (mirroring kit's Go fill, checked byte for byte by
+  `make test`).
+- Variants are a select in the block's sidebar rather than block styles (a style is only a
+  class; a variant changes the template's markup).
+- The editor is the sidebar form and a server-rendered preview. **Inline editing on the canvas
+  is not built yet**; neither are `bind`, migrations or the Blade target via Acorn.
+- The theme's header and footer template parts start from the header and footer patterns.
+- Tested: the blocks render kit's HTML for every demo, bad content (scripts, `javascript:`
+  links, wrong types, too many items) is cleaned, and in Playground an edit in the sidebar is
+  saved and shown on the front end, with saving locked while a required field is empty.
+
 
 ### Registration
 
@@ -173,8 +194,8 @@ can see and edit as blocks.
 - **A focused editor:** `allowed_block_types_all` keeps the inserter to kit blocks plus the core
   text, list, image, buttons, columns and embed blocks; colour and font pickers limited to the
   brand; the block directory off.
-- **Assets:** built with Vite (the current `wp-vite-plugin` is the starting point, without
-  Tailwind: kit's CSS replaces it), hashed file names, no external requests.
+- **Assets:** kit's CSS from kit Blocks (`kit.css` plus each block's own), no build tool in the
+  theme, hashed or versioned file names, no external requests.
 - **WooCommerce:** template overrides that print kit's `product-card`, `product-grid`,
   `product-page` and `basket-drawer` markup, through WooCommerce's hooks where it has them.
   WooCommerce's own block checkout stays as it is (payments are WooCommerce's and Stripe's).
@@ -220,7 +241,7 @@ writing (each plugin is something Scout will one day flag as out of date):
 |---|---|---|
 | 1. Schema | The format, its JSON Schema, `kit section check`, schemas for header, hero and footer (built, but for the published JSON Schema) | The three schemas validate, and a change that breaks one fails CI |
 | 2. Blocks | kit Blocks: registration from `block.json`, the generic editor (sidebar, inline text, lists), server-side render with the compiled PHP template, per-block CSS | An owner builds a page from header, hero and footer blocks in the editor, and it renders identically on the front end |
-| 3. Theme | kit Theme: `theme.json` from `kit brand`, header and footer template parts, a focused editor, Vite assets; the content sections from phase 2 of the sections plan as blocks, with `children` and patterns | A full brochure site (the Kit sections showcase) is built from patterns and blocks in a fresh install |
+| 3. Theme | kit Theme: `theme.json` from `kit brand`, header and footer template parts, a focused editor; the content sections from phase 2 of the sections plan as blocks, with `children` and patterns | A full brochure site (the Kit sections showcase) is built from patterns and blocks in a fresh install |
 | 4. Settings and bindings | kit Fields' site settings and `bind`; the Blade target via Acorn as an option | Changing the phone number once updates the header, footer and contact section |
 | 5. Shop and plugin set | WooCommerce templates with kit's shop sections; the plugin set settled and documented; signed updates | A WooCommerce test shop runs on kit Theme, and a client site updates its plugins from the dashboard |
 | 6. Custom fields | Field groups, post types and query or reference fields | A services post type with its own fields feeds a section grid |

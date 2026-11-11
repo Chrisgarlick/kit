@@ -35,12 +35,13 @@ Usage:
   kit section check                     (templates, schemas and demos agree)
   kit section compile [-check]          (each section's Blade template to plain PHP)
   kit section export -target blade|php -out <dir> <name>...   (sections for a project)
+  kit build-wp -out <plugin build folder> [-fixtures <file.json>]  (sections as WordPress blocks)
   kit bundle-charts   (the chart renderer for crates/kit-render)
 `
 
 func main() {
-	if len(os.Args) >= 2 && (os.Args[1] == "brand" || os.Args[1] == "bundle-charts" || os.Args[1] == "dist" || os.Args[1] == "section") {
-		run := map[string]func([]string) error{"brand": brandCmd, "bundle-charts": bundleCharts, "dist": dist, "section": sectionCmd}[os.Args[1]]
+	if len(os.Args) >= 2 && (os.Args[1] == "brand" || os.Args[1] == "bundle-charts" || os.Args[1] == "dist" || os.Args[1] == "section" || os.Args[1] == "build-wp") {
+		run := map[string]func([]string) error{"brand": brandCmd, "bundle-charts": bundleCharts, "dist": dist, "section": sectionCmd, "build-wp": buildWP}[os.Args[1]]
 		if err := run(os.Args[2:]); err != nil {
 			fmt.Fprintln(os.Stderr, "kit:", err)
 			os.Exit(1)

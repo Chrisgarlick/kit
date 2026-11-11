@@ -197,7 +197,7 @@ Each section's README carries its contract, as components' do. The ones that mat
 | 2. Content sections | `split`, `text-block`, `section-grid` and the cards, `trust-strip`, `stats`, `cta`, `faq`, `contact`, `pill-row`, `quote-stats`, `process`, `hero-collage` | A full brochure homepage (the Kit sections showcase) builds from blocks in both CMSs |
 | 3. Shop | `announcement-bar`, `product-card`, `product-grid`, `product-page`, `basket-drawer`; WooCommerce template overrides that output them | A WooCommerce test shop uses kit sections for its shop, product and basket pages |
 | 4. Presets and brands | Steep and Brutalist presets; a client's Clients brand → `kit brand` → theme in a site | The chrisgarlick.com homepage renders in both presets from the same content, matching the Design comparison artboard |
-| 5. Starters | The WordPress base theme (wp-vite-plugin, the blocks, patterns for home, services, about, contact and shop pages) and the cg-cms starter theme with the same pages | A new client site starts from either starter with no code written, only content and a brand |
+| 5. Starters | The WordPress base setup (`~/dev/wp-base`: the blocks, the theme, patterns for home, services, about, contact and shop pages) and the cg-cms starter theme with the same pages | A new client site starts from either starter with no code written, only content and a brand |
 
 Visual parity with Design is checked by screenshot: the docs site's demo of each section,
 captured at 390 and 1440 in the base theme, beside Design's render of the same component.

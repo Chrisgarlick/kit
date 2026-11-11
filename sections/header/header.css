@@ -12,7 +12,7 @@
 .kit-section-header ul { list-style: none; margin: 0; padding: 0; }
 
 .kit-header-bar { display: flex; align-items: center; gap: var(--kit-space-6); min-block-size: 96px; }
-.kit-header-brand { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-xl); font-weight: 600; letter-spacing: -0.01em; }
+.kit-header-brand { display: inline-flex; white-space: nowrap; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-xl); font-weight: 600; letter-spacing: -0.01em; }
 .kit-header-mark { inline-size: 28px; block-size: 28px; border-radius: var(--kit-radius-1); background: var(--kit-accent); }
 .kit-header-logo { display: block; block-size: 36px; inline-size: auto; }
 
@@ -25,7 +25,8 @@
 .kit-header-nav + .kit-header-end { margin-inline-start: 0; }
 .kit-header-phone { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-md); font-variant-numeric: tabular-nums; color: var(--kit-fg-2); }
 .kit-header-phone:hover { color: var(--kit-fg); }
-.kit-header-action { --_h: var(--kit-control-lg); }
+/* Scoped to the section, so these win over kit's button whichever stylesheet loads first. */
+.kit-section-header .kit-header-action { --_h: var(--kit-control-lg); }
 
 /* The menu: a native disclosure, no script. Hidden while the links fit. */
 .kit-header-menu { display: none; }
@@ -36,7 +37,7 @@
 .kit-header-sheet li + li { border-block-start: 1px solid var(--kit-line); }
 .kit-header-sheet ul a { display: block; padding-block: var(--kit-space-4); font-size: var(--kit-text-xl); }
 .kit-header-sheet ul a[aria-current="page"] { color: var(--kit-accent); }
-.kit-header-sheet .kit-button { --_h: var(--kit-control-lg); justify-content: center; }
+.kit-section-header .kit-header-sheet .kit-button { --_h: var(--kit-control-lg); justify-content: center; }
 
 /* Tighter first: the phone shows its icon alone and the gaps close up. */
 @container kit-header (max-width: 72rem) {
@@ -47,8 +48,9 @@
 /* Then the links and the button fold into the menu. */
 @container kit-header (max-width: 54rem) {
   .kit-header-bar { min-block-size: 72px; gap: var(--kit-space-4); }
-  .kit-header-nav, .kit-header-action { display: none; }
+  .kit-header-nav, .kit-section-header .kit-header-action { display: none; }
   .kit-header-menu { display: block; }
+  .kit-header-nav + .kit-header-end { margin-inline-start: auto; }
 }
 @container kit-header (max-width: 22rem) {
   .kit-header-phone { display: none; }

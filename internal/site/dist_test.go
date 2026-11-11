@@ -82,3 +82,18 @@ func TestDist(t *testing.T) {
 		t.Error("-fonts should write the woff2 files")
 	}
 }
+
+// A relative -out is relative to the working directory, not the kit repository.
+func TestDistRelativeOut(t *testing.T) {
+	s, err := Load("../..")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Chdir(t.TempDir())
+	if _, err := s.Dist("vendored", DistOptions{NoJS: true, CSS: []string{"button"}}); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(filepath.Join("vendored", "kit.css")); err != nil {
+		t.Errorf("kit.css isn't in ./vendored: %v", err)
+	}
+}
