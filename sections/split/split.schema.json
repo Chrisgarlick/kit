@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "split",
+  "title": "Split",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "Two halves: a text block beside an image (an about section) or beside a list of questions and answers (an FAQ).",
+  "fields": {
+    "eyebrow": { "type": "text", "label": "Label above the heading", "max": 60 },
+    "title": { "type": "rich-text", "label": "Heading", "help": "*Words in stars* are set in italics.", "required": true, "max": 120 },
+    "heading_level": { "type": "heading-level", "label": "Heading level", "default": 2 },
+    "body": { "type": "textarea", "label": "Text", "help": "A blank line starts a new paragraph. *Stars* for italics, **double stars** for bold.", "max": 1200 },
+    "points": { "type": "list", "label": "Ticked points", "max": 6, "item": {
+      "text": { "type": "text", "label": "Point", "required": true, "max": 80 }
+    }},
+    "link_label": { "type": "text", "label": "Link", "max": 40 },
+    "link_url": { "type": "url", "label": "Link address" },
+    "media": { "type": "enum", "label": "Beside the text", "options": ["image", "questions"], "default": "image" },
+    "image": { "type": "image", "label": "Image", "help": "When an image is beside the text.", "alt": "required", "sizes": "half" },
+    "questions": { "type": "list", "label": "Questions", "help": "When questions are beside the text. The first starts open.", "max": 12, "item": {
+      "question": { "type": "text", "label": "Question", "required": true, "max": 120 },
+      "answer": { "type": "textarea", "label": "Answer", "required": true, "max": 800 }
+    }},
+    "swap": { "type": "boolean", "label": "Swap the sides", "help": "An image starts on the left and questions on the right." },
+    "background": { "type": "enum", "label": "Background", "options": ["plain", "tinted"], "default": "plain" }
+  }
+}

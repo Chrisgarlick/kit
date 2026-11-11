@@ -1,0 +1,30 @@
+/* SPDX-License-Identifier: MIT
+ * Text block (tier 1): a label, a heading, a few paragraphs, ticked points
+ * and one link, for the text side of a page section.
+ *   <div class="kit-text-block" [data-align="centre"]>
+ *     <p class="kit-text-block-eyebrow">About us</p>
+ *     <h2 class="kit-text-block-title">…</h2>
+ *     <div class="kit-text-block-body"><p>…</p></div>
+ *     <ul class="kit-text-block-points" role="list"><li>…</li></ul>
+ *     <p class="kit-text-block-actions"><a class="kit-link" data-variant="arrow" href="…">…</a></p>
+ *   </div>
+ */
+.kit-text-block { display: grid; justify-items: start; gap: var(--kit-space-4); max-inline-size: 36rem; color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-text-block > * { margin: 0; }
+.kit-text-block-eyebrow { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kit-accent); }
+.kit-text-block-title { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); line-height: 1.12; text-wrap: balance; }
+.kit-text-block-title em { font-style: italic; }
+.kit-text-block-body { display: grid; gap: var(--kit-space-3); font-size: var(--kit-text-lg); line-height: 1.6; color: var(--kit-fg-2); text-wrap: pretty; }
+.kit-text-block-body p { margin: 0; }
+.kit-text-block-body strong { color: var(--kit-fg); }
+.kit-text-block-points { display: grid; gap: var(--kit-space-3); list-style: none; margin: 0; padding: 0; font-size: var(--kit-text-md); }
+.kit-text-block-points li { display: flex; gap: var(--kit-space-2); align-items: start; line-height: 1.45; }
+.kit-text-block-points li::before {
+  content: ""; flex: none; inline-size: 18px; block-size: 18px; margin-block-start: 1px; background: var(--kit-accent);
+  mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Cpath d=%27m8 12 3 3 5-6%27/%3E%3C/svg%3E") center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Cpath d=%27m8 12 3 3 5-6%27/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.kit-text-block-actions { padding-block-start: var(--kit-space-1); }
+.kit-text-block[data-align="centre"] { justify-items: center; text-align: center; margin-inline: auto; max-inline-size: 44rem; }
+.kit-text-block[data-align="centre"] .kit-text-block-points { justify-items: center; }
+@media (forced-colors: active) { .kit-text-block-points li::before { background: CanvasText; } }

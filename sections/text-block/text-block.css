@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: MIT
+ * Section: text block (tier 1). kit's text block as a section of its own.
+ *   <section class="kit-section-text-block" data-background="plain|tinted"> … </section>
+ */
+.kit-section-text-block { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
+.kit-section-text-block[data-background="tinted"] { background: var(--kit-band); }

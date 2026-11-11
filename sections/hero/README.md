@@ -4,6 +4,7 @@ group: sections
 order: 20
 tier: 1
 pattern: Website section
+uses: [container, button]
 status: preview
 summary: The first thing on a page. A label, a heading with emphasis, a supporting line, up to two buttons, a line of proof and an image, split or centred.
 ---

@@ -1,0 +1,32 @@
+/* SPDX-License-Identifier: MIT
+ * Section: split (tier 1). A text block beside an image or a list of
+ * questions, half and half.
+ *   <section class="kit-section-split" data-media="image|questions" [data-swap] data-background="plain|tinted">
+ * An image starts on the left and questions on the right; data-swap swaps
+ * them. Below 48rem (the section's own width) the halves stack, an image
+ * above the text and questions below it.
+ */
+.kit-section-split { container: kit-split / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); }
+.kit-section-split[data-background="tinted"] { background: var(--kit-band); }
+.kit-section-split svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+.kit-split-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }
+.kit-section-split[data-media="questions"] .kit-split-inner { align-items: start; }
+.kit-section-split[data-media="image"] .kit-split-media { order: -1; }
+.kit-section-split[data-media="image"][data-swap] .kit-split-media { order: 1; }
+.kit-section-split[data-media="questions"][data-swap] .kit-split-questions { order: -1; }
+
+.kit-split-media { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--kit-card-radius); background: var(--kit-surface-2); }
+.kit-split-media[data-empty] { display: grid; place-items: center; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); box-sizing: border-box; }
+
+.kit-split-questions .kit-accordion > summary { padding-block: 18px; font-size: var(--kit-text-lg); }
+.kit-split-questions .kit-accordion-body { color: var(--kit-fg-2); line-height: 1.55; }
+.kit-split-questions .kit-accordion-body p { margin: 0 0 var(--kit-space-3); }
+.kit-split-questions .kit-accordion:first-of-type { border-block-start: 0; }
+
+@container kit-split (max-width: 48rem) {
+  .kit-split-inner { grid-template-columns: minmax(0, 1fr); gap: var(--kit-space-6); }
+  .kit-section-split[data-media="image"] .kit-split-media,
+  .kit-section-split[data-media="image"][data-swap] .kit-split-media { order: -1; aspect-ratio: 4 / 3; }
+  .kit-section-split[data-media="questions"][data-swap] .kit-split-questions { order: 1; }
+}

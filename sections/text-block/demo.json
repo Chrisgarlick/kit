@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Left-aligned",
+    "content": {
+      "eyebrow": "Our approach",
+      "title": "Fixed prices, *agreed before we start*",
+      "body": "We quote for the whole job up front, in writing, so the price you agree is the price you pay.\n\nIf we find something unexpected, we stop and talk it through before doing any more.",
+      "points": [{ "text": "Written quotes within a day" }, { "text": "No call-out charge" }, { "text": "Twelve-month guarantee on all work" }],
+      "link_label": "How we price", "link_url": "/pricing"
+    }
+  },
+  {
+    "title": "Centred, tinted",
+    "variant": "centred",
+    "content": {
+      "eyebrow": "Why us",
+      "title": "A heading that says one thing",
+      "body": "A short paragraph in plain words: what this is, who it's for, and what to do next.",
+      "link_label": "Learn more", "link_url": "/about",
+      "background": "tinted"
+    }
+  }
+]

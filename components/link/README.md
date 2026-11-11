@@ -13,12 +13,13 @@ summary: Text links in the accent colour with a calm underline, a quiet variant 
 ```html
 <a class="kit-link" href="/pricing">See pricing</a>
 <a class="kit-link" data-variant="quiet" href="/team">Team</a>
+<a class="kit-link" data-variant="arrow" href="/about">Our story</a>
 <a class="kit-link" href="https://example.com" data-external>Example<span class="kit-vh"> (another site)</span></a>
 ```
 
 | Attribute | Values | Default |
 |---|---|---|
-| `data-variant` | `quiet`: text colour, underlined on hover | accent, always underlined |
+| `data-variant` | `quiet`: text colour, underlined on hover; `arrow`: bolder, with an arrow after it, underlined on hover, for the one link that ends a block of text | accent, always underlined |
 | `data-external` | adds an arrow for a link to another site | none |
 
 `kit-vh` hides text visually but keeps it for screen readers; use it wherever words help out of context ("Edit<span class="kit-vh"> project one</span>").
@@ -26,4 +27,5 @@ summary: Text links in the accent colour with a calm underline, a quiet variant 
 ## Accessibility
 
 - Links in running text are underlined, not told apart by colour alone (WCAG 1.4.1); the quiet variant is for navigation lists where the context says "link".
+- The arrow variant's arrow is drawn by CSS and isn't read out. It stands alone at the end of a block, so its words must make sense on their own ("Our story", not "More").
 - The external arrow is decoration: say "another site" in hidden text if it matters. Only open new tabs when there's a strong reason, and say so.

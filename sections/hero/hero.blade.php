@@ -6,15 +6,7 @@
       @if($content['eyebrow'])
       <p class="kit-hero-eyebrow">{{ $content['eyebrow'] }}</p>
       @endif
-      @if($content['heading_level'] === 1)
-      <h1 class="kit-hero-title">{{ kit_rich($content['title']) }}</h1>
-      @elseif($content['heading_level'] === 2)
-      <h2 class="kit-hero-title">{{ kit_rich($content['title']) }}</h2>
-      @elseif($content['heading_level'] === 3)
-      <h3 class="kit-hero-title">{{ kit_rich($content['title']) }}</h3>
-      @else
-      <h4 class="kit-hero-title">{{ kit_rich($content['title']) }}</h4>
-      @endif
+      <{{ kit_heading($content['heading_level']) }} class="kit-hero-title">{{ kit_rich($content['title']) }}</{{ kit_heading($content['heading_level']) }}>
       @if($content['lede'])
       <p class="kit-hero-lede">{{ $content['lede'] }}</p>
       @endif

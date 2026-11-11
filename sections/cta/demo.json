@@ -1,0 +1,11 @@
+[
+  {
+    "title": "Desktop",
+    "content": { "title": "Ready when you are", "lede": "Tell us what you need and we'll reply the same day.", "action_label": "Get a free quote", "action_url": "/contact", "phone": "01234 567890" }
+  },
+  {
+    "title": "Phone",
+    "width": "mobile",
+    "content": { "title": "Ready when you are", "lede": "Tell us what you need and we'll reply the same day.", "action_label": "Get a free quote", "action_url": "/contact", "phone": "01234 567890" }
+  }
+]

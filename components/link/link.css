@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT
- * Link (tier 1): a.kit-link [data-variant="quiet"] [data-external], and
+ * Link (tier 1): a.kit-link [data-variant="quiet|arrow"] [data-external], and
  * .kit-vh, the visually hidden helper used across kit.
  */
 .kit-link { color: var(--kit-accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); border-radius: 2px; transition: text-decoration-color var(--kit-duration) var(--kit-ease), color var(--kit-duration); }
@@ -7,6 +7,11 @@
 .kit-link:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
 .kit-link[data-variant="quiet"] { color: inherit; text-decoration-color: transparent; }
 .kit-link[data-variant="quiet"]:hover { color: var(--kit-accent); text-decoration-color: currentColor; }
+.kit-link[data-variant="arrow"] { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration-color: transparent; }
+.kit-link[data-variant="arrow"]::after { content: "→"; transition: translate var(--kit-duration) var(--kit-ease); }
+.kit-link[data-variant="arrow"]:hover { text-decoration-color: currentColor; }
+.kit-link[data-variant="arrow"]:hover::after { translate: 3px 0; }
+@media (prefers-reduced-motion: reduce) { .kit-link[data-variant="arrow"]::after { transition: none; } }
 .kit-link[data-external]::after { content: "↗"; display: inline-block; margin-inline-start: 2px; font-size: 0.85em; text-decoration: none; }
 .kit-vh { position: absolute !important; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 @media (forced-colors: active) { .kit-link { color: LinkText; } }

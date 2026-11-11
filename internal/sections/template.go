@@ -161,6 +161,10 @@ func (p *tparser) nodes(t *Template, top bool) ([]node, string, error) {
 			m := directiveRe.FindString(rest[1:])
 			text.WriteString(m[1:])
 			p.i += len(m) - 1
+		case rest[0] == '@' && p.i > 0 && isIdent(p.src[p.i-1], true) && glued(rest):
+			// Blade reads word@endif as text (an email address), so the
+			// block would never close: say so rather than "needs @endif".
+			return nil, "", p.errAt(p.i, "%s straight after a letter is text to Blade, not a directive: put a space or a quote before it", directiveRe.FindString(rest))
 		case rest[0] == '@' && (p.i == 0 || !isIdent(p.src[p.i-1], true)):
 			m := directiveRe.FindStringSubmatch(rest)
 			if m == nil {
@@ -251,6 +255,20 @@ func (p *tparser) nodes(t *Template, top bool) ([]node, string, error) {
 	}
 	flush()
 	return out, "", nil
+}
+
+// glued reports whether rest starts with a directive kit knows, as in
+// "open@endif", where Blade wouldn't see it.
+func glued(rest string) bool {
+	m := directiveRe.FindStringSubmatch(rest)
+	if m == nil {
+		return false
+	}
+	switch m[1] {
+	case "if", "elseif", "else", "endif", "foreach", "endforeach", "isset", "endisset", "class", "props":
+		return true
+	}
+	return false
 }
 
 var classNameRe = regexp.MustCompile(`^[a-z][a-z0-9_-]*$`)

@@ -4,6 +4,7 @@ group: sections
 order: 90
 tier: 1
 pattern: Website section
+uses: [container]
 status: preview
 summary: The bottom of every page, on a dark band. The brand and a line about it, up to three columns of links, contact details, social links and the small print.
 ---

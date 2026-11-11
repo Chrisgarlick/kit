@@ -78,6 +78,7 @@
   /* Sections (website sections: header, hero, footer…) */
   --kit-section-pad-y: clamp(3rem, 6vw, 6rem);
   --kit-display-case: none; /* uppercase for a shouting style guide */
+  --kit-band: color-mix(in srgb, var(--kit-bg), var(--kit-fg) 4%); /* a tinted section, a step from the page in any theme */
   --kit-inverse-bg: #12161e; /* the footer: a dark band in light mode */
   --kit-inverse-fg: #f3f5f8;
   --kit-inverse-fg-2: #b3bac5;

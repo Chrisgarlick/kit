@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 
 	"github.com/Chrisgarlick/kit/internal/sections"
 	"github.com/Chrisgarlick/kit/internal/site"
@@ -14,8 +15,8 @@ import (
 
 // buildWP writes kit's sections as WordPress blocks for the kit Blocks
 // plugin: <out>/sections/<name>/ for each section, and <out>/kit/ with the
-// runtime (kit.php) and the CSS the sections stand on (tokens, fonts, button,
-// container, link). With -fixtures it also writes every demo with the HTML
+// runtime (kit.php) and the CSS the sections stand on (tokens, fonts, and the
+// components their READMEs list under uses). With -fixtures it also writes every demo with the HTML
 // kit renders for it, for the plugin's tests.
 func buildWP(args []string) error {
 	fl := flag.NewFlagSet("build-wp", flag.ExitOnError)
@@ -54,7 +55,15 @@ func buildWP(args []string) error {
 		return err
 	}
 	kitDir := filepath.Join(*out, "kit")
-	res, err := st.Dist(kitDir, site.DistOptions{CSS: []string{"button", "container", "link"}, Fonts: true, NoJS: true})
+	// kit.css: the components the sections use (their READMEs' uses).
+	var css []string
+	for _, c := range st.Components {
+		if c.Section != nil {
+			css = append(css, c.Uses...)
+		}
+	}
+	slices.Sort(css)
+	res, err := st.Dist(kitDir, site.DistOptions{CSS: slices.Compact(css), Fonts: true, NoJS: true})
 	if err != nil {
 		return err
 	}

@@ -97,6 +97,29 @@ if (!function_exists('kit_e')) {
         return new KitSafe($s);
     }
 
+    /** A heading level as its tag name, h1 to h4, and h2 for anything else. */
+    function kit_heading(mixed $level): string
+    {
+        if ((is_int($level) || is_float($level)) && $level == (int) $level && $level >= 1 && $level <= 4) {
+            return 'h' . (int) $level;
+        }
+        return 'h2';
+    }
+
+    /** Text with blank lines between paragraphs, as <p> elements of rich text. */
+    function kit_paragraphs(mixed $value): KitSafe
+    {
+        $s = trim(str_replace("\r\n", "\n", (string) ($value ?? '')));
+        if ($s === '') {
+            return new KitSafe('');
+        }
+        $out = [];
+        foreach (preg_split('/\n[ \t]*\n\s*/', $s) as $p) {
+            $out[] = '<p>' . kit_rich($p)->toHtml() . '</p>';
+        }
+        return new KitSafe(implode("\n", $out));
+    }
+
     /** @class([...]): the always-on names, and the keyed ones whose condition is true. */
     function kit_classes(array $classes): string
     {

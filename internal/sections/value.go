@@ -201,6 +201,40 @@ func rich(v any) (Safe, error) {
 	return Safe(s), nil
 }
 
+// heading is kit_heading(): a heading level as its tag name, h1 to h4, and
+// h2 for anything else, so a template can write <{{ kit_heading($l) }}>
+// without content ever reaching the tag.
+func heading(v any) string {
+	if n, ok := v.(float64); ok && n == math.Trunc(n) && n >= 1 && n <= 4 {
+		return "h" + strconv.Itoa(int(n))
+	}
+	return "h2"
+}
+
+var paraRe = regexp.MustCompile(`\n[ \t]*\n\s*`)
+
+// paragraphs is kit_paragraphs(): text with blank lines between paragraphs
+// as <p> elements, each one rich text. Empty text is nothing.
+func paragraphs(v any) (Safe, error) {
+	s, err := str(v)
+	if err != nil {
+		return "", err
+	}
+	s = strings.Trim(strings.ReplaceAll(s, "\r\n", "\n"), " \t\n\r\x00\x0B")
+	if s == "" {
+		return "", nil
+	}
+	var b strings.Builder
+	for i, p := range paraRe.Split(s, -1) {
+		r, _ := rich(p)
+		if i > 0 {
+			b.WriteString("\n")
+		}
+		b.WriteString("<p>" + string(r) + "</p>")
+	}
+	return Safe(b.String()), nil
+}
+
 // classes is @class([...]): Laravel's Arr::toCssClasses. Entries without a key
 // are always in; keyed ones are in when their condition is truthy.
 type classEntry struct {

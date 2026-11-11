@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "cta",
+  "title": "Call to action",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A band in the accent colour: one line that asks, one that reassures, a button and a phone number.",
+  "fields": {
+    "title": { "type": "rich-text", "label": "Heading", "required": true, "max": 80 },
+    "heading_level": { "type": "heading-level", "label": "Heading level", "default": 2 },
+    "lede": { "type": "text", "label": "Supporting line", "max": 160 },
+    "action_label": { "type": "text", "label": "Button", "max": 30 },
+    "action_url": { "type": "url", "label": "Button link" },
+    "phone": { "type": "text", "label": "Phone number", "max": 30, "bind": "site.phone" }
+  }
+}

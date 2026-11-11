@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "text-block",
+  "title": "Text block",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "A section of words: a label, a heading, a few paragraphs, ticked points and a link. Left-aligned or centred.",
+  "variants": { "default": "Left-aligned", "centred": "Centred" },
+  "fields": {
+    "eyebrow": { "type": "text", "label": "Label above the heading", "max": 60 },
+    "title": { "type": "rich-text", "label": "Heading", "help": "*Words in stars* are set in italics.", "required": true, "max": 120 },
+    "heading_level": { "type": "heading-level", "label": "Heading level", "default": 2 },
+    "body": { "type": "textarea", "label": "Text", "help": "A blank line starts a new paragraph. *Stars* for italics, **double stars** for bold.", "max": 1200 },
+    "points": { "type": "list", "label": "Ticked points", "max": 6, "item": {
+      "text": { "type": "text", "label": "Point", "required": true, "max": 80 }
+    }},
+    "link_label": { "type": "text", "label": "Link", "max": 40 },
+    "link_url": { "type": "url", "label": "Link address" },
+    "background": { "type": "enum", "label": "Background", "options": ["plain", "tinted"], "default": "plain" }
+  }
+}

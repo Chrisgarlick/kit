@@ -59,6 +59,9 @@ type Component struct {
 	Status  string `yaml:"status"`
 	Order   int    `yaml:"order"`
 	Tier    int    `yaml:"tier"`
+	// Uses lists the components a section's markup stands on (button,
+	// accordion…), so a project that takes the section takes their CSS too.
+	Uses []string `yaml:"uses"`
 
 	Body template.HTML `yaml:"-"` // the README below its front matter
 	Demo template.HTML `yaml:"-"` // demo.html, run against the placeholder data; a section's every demo
@@ -253,6 +256,13 @@ func Load(root string) (*Site, error) {
 		c.group = g
 		g.Components = append(g.Components, c)
 		s.Components = append(s.Components, c)
+	}
+	for _, c := range s.Components {
+		for _, u := range c.Uses {
+			if c.Section == nil || !slices.ContainsFunc(s.Components, func(o *Component) bool { return o.Slug == u && o.Section == nil }) {
+				errs = append(errs, fmt.Errorf("sections/%s/README.md: uses %q, which isn't a component (and only sections have uses)", c.Slug, u))
+			}
+		}
 	}
 	for _, g := range s.Groups {
 		sort.SliceStable(g.Components, func(i, j int) bool {

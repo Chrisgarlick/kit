@@ -4,6 +4,7 @@ group: sections
 order: 10
 tier: 1
 pattern: Website section
+uses: [container, button]
 status: preview
 summary: The top of every page. The brand, up to seven links, a phone number and one action; on a phone the links fold into a menu, with no script.
 ---

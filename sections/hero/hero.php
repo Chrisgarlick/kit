@@ -9,15 +9,7 @@ return function ($content = [], $variant = 'default'): void {
       <?php if ($content['eyebrow']): ?>
       <p class="kit-hero-eyebrow"><?php echo kit_e($content['eyebrow']); ?></p>
       <?php endif; ?>
-      <?php if (($content['heading_level'] === 1)): ?>
-      <h1 class="kit-hero-title"><?php echo kit_e(kit_rich($content['title'])); ?></h1>
-      <?php elseif (($content['heading_level'] === 2)): ?>
-      <h2 class="kit-hero-title"><?php echo kit_e(kit_rich($content['title'])); ?></h2>
-      <?php elseif (($content['heading_level'] === 3)): ?>
-      <h3 class="kit-hero-title"><?php echo kit_e(kit_rich($content['title'])); ?></h3>
-      <?php else: ?>
-      <h4 class="kit-hero-title"><?php echo kit_e(kit_rich($content['title'])); ?></h4>
-      <?php endif; ?>
+      <<?php echo kit_e(kit_heading($content['heading_level'])); ?> class="kit-hero-title"><?php echo kit_e(kit_rich($content['title'])); ?></<?php echo kit_e(kit_heading($content['heading_level'])); ?>>
       <?php if ($content['lede']): ?>
       <p class="kit-hero-lede"><?php echo kit_e($content['lede']); ?></p>
       <?php endif; ?>
