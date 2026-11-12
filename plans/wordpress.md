@@ -22,8 +22,8 @@ is specified first, carefully, and versioned.
 | Piece | What it is | Repository |
 |---|---|---|
 | **Schema format** | The description of a section's content, its validation and its versions | kit (`schema/`, with the Go validator in `internal/schema`) |
-| **kit Blocks** (plugin) | Blocks from schemas: registration, the generated editor form, server-side rendering, the Blade or PHP runtime, migrations | `~/dev/wp-base/plugins/kit-blocks` |
-| **kit Fields** (plugin, later) | Site settings and custom fields from the same schema format, bound into blocks | `~/dev/wp-base/plugins`, a second plugin beside it |
+| **kit Blocks** (plugin) | Blocks from schemas: registration, the generated editor form, server-side rendering, the Blade or PHP runtime, migrations | `~/dev/wp-base/plugins/chris-plugin`, its `kit-blocks` module |
+| **kit Fields** (plugin, later) | Site settings and custom fields from the same schema format, bound into blocks | `~/dev/wp-base/plugins/chris-plugin`, another module |
 | **kit Theme** (base theme) | A block theme: brand → `theme.json`, header and footer template parts, page patterns, WooCommerce templates, asset loading | `~/dev/wp-base/themes/kit-base` |
 | **Plugin set** | The small, vetted third-party list every site gets | documented in the theme's README |
 
@@ -96,7 +96,7 @@ schema).
 
 ## 2. kit Blocks (the plugin)
 
-**Built 11 November 2026, in `~/dev/wp-base`** (one repo for the base setup: `plugins/kit-blocks`
+**Built 11 November 2026, in `~/dev/wp-base`** (one repo for the base setup: `plugins/chris-plugin` with kit Blocks as its first module
 and `themes/kit-base`, run in WordPress Playground with `make serve`). What was built, and where
 it differs from the plan below:
 
