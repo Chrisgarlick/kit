@@ -7,7 +7,7 @@
   "description": "The top of every page: the brand, the main links, a phone number and one action. On a phone the links fold into a menu.",
   "fields": {
     "brand_name": { "type": "text", "label": "Business name", "required": true, "max": 40, "bind": "site.name" },
-    "logo": { "type": "image", "label": "Logo", "help": "Shown instead of the square mark. Its alt text is the business name, so it may be left empty.", "alt": "optional" },
+    "logo": { "type": "image", "label": "Logo", "help": "Shown instead of the square mark. Its alt text is the business name, so it may be left empty.", "alt": "optional", "bind": "site.logo" },
     "home_url": { "type": "url", "label": "Home link", "default": "/" },
     "links": { "type": "list", "label": "Links", "max": 7, "item": {
       "label": { "type": "text", "label": "Label", "required": true, "max": 30 },

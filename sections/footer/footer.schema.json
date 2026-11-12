@@ -7,8 +7,8 @@
   "description": "The bottom of every page: the brand and a line about it, columns of links, contact details, social links and the small print.",
   "fields": {
     "brand_name": { "type": "text", "label": "Business name", "required": true, "max": 40, "bind": "site.name" },
-    "logo": { "type": "image", "label": "Logo", "help": "A version that reads on a dark background. Shown instead of the square mark.", "alt": "optional" },
-    "blurb": { "type": "textarea", "label": "About line", "max": 160 },
+    "logo": { "type": "image", "label": "Logo", "help": "A version that reads on a dark background. Shown instead of the square mark.", "alt": "optional", "bind": "site.logo_on_dark" },
+    "blurb": { "type": "textarea", "label": "About line", "max": 160, "bind": "site.tagline" },
     "columns": { "type": "list", "label": "Link columns", "max": 3, "item": {
       "heading": { "type": "text", "label": "Heading", "required": true, "max": 30 },
       "links": { "type": "list", "label": "Links", "max": 8, "item": {
@@ -22,7 +22,7 @@
     "social": { "type": "list", "label": "Social links", "max": 5, "item": {
       "network": { "type": "enum", "label": "Network", "options": ["instagram", "facebook", "linkedin", "tiktok", "youtube"], "default": "instagram" },
       "url": { "type": "url", "label": "Profile address", "required": true }
-    }},
+    }, "bind": "site.socials" },
     "small_print": { "type": "text", "label": "Small print", "help": "The legal name, company number and registered office, if you're a company.", "max": 200, "bind": "site.small_print" },
     "legal": { "type": "list", "label": "Legal links", "max": 4, "item": {
       "label": { "type": "text", "label": "Label", "required": true, "max": 30 },
