@@ -31,7 +31,8 @@ Usage:
   kit site serve [-root .] [-addr localhost:8150]
   kit site deploy [-host chrisgarlick-server] [-dir /var/www/ui] [-keep 5] [-rollback]
   kit dist -out <dir> [-js kit=a,b] [-js charts=c] [-css d,e] [-fonts] [-no-js] [-no-tokens]   (kit for another app)
-  kit brand [-check] <folder with brand.yaml>...
+  kit brand [-check] <folder with brand.json or brand.yaml>...   (tokens and fonts, offline)
+  kit brand pull <client> [-into folder]   (a client's published brand from Clients, into the site's repo)
   kit section check                     (templates, schemas and demos agree)
   kit section compile [-check]          (each section's Blade template to plain PHP)
   kit section export -target blade|php -out <dir> <name>...   (sections for a project)

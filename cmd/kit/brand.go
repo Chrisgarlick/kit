@@ -16,12 +16,15 @@ import (
 // tokens.typ and tokens.json beside it. With -check it only reports folders
 // whose files are out of date. Contrast failures stop it either way.
 func brandCmd(args []string) error {
+	if len(args) > 0 && args[0] == "pull" {
+		return brandPull(args[1:])
+	}
 	fl := flag.NewFlagSet("brand", flag.ExitOnError)
 	check := fl.Bool("check", false, "don't write; fail if the generated files are out of date")
 	_ = fl.Parse(args)
 	dirs := fl.Args()
 	if len(dirs) == 0 {
-		return errors.New("usage: kit brand [-check] <folder with brand.yaml> [more folders]")
+		return errors.New("usage: kit brand [-check] <folder with brand.json or brand.yaml> [more folders]\n       kit brand pull <client> [-into folder]")
 	}
 	var stale []string
 	for _, dir := range dirs {

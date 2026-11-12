@@ -33,6 +33,10 @@ type File struct {
 	Wordmark  string              `yaml:"wordmark"`
 	Print     map[string]any      `yaml:"print"`
 	Motion    map[string]any      `yaml:"motion"`
+	// A brand pulled from Clients (brand.json) also carries its version and
+	// the library files it refers to.
+	Version int              `yaml:"version"`
+	Assets  map[string]Asset `yaml:"assets"`
 }
 
 // Palette holds colour roles by name; a mode overrides any subset.
@@ -56,12 +60,12 @@ type Palette struct {
 
 // TypeRole is one of display, heading, body, mono.
 type TypeRole struct {
-	Font       string  `yaml:"font"`
-	ItalicFont string  `yaml:"italic-font"`
-	Weight     int     `yaml:"weight"`
-	Tracking   string  `yaml:"tracking"`
-	Leading    float64 `yaml:"leading"`
-	Italic     bool    `yaml:"italic"`
+	Font       string  `yaml:"font" json:"font"`
+	ItalicFont string  `yaml:"italic-font" json:"italic-font"`
+	Weight     int     `yaml:"weight" json:"weight"`
+	Tracking   string  `yaml:"tracking" json:"tracking"`
+	Leading    float64 `yaml:"leading" json:"leading"`
+	Italic     bool    `yaml:"italic" json:"italic"`
 }
 
 // Shape is radius, shadow and stroke.
@@ -85,23 +89,30 @@ type Overrides struct {
 	Both  map[string]string `yaml:"both"`
 }
 
-// Load reads dir/brand.yaml strictly, and dir/kit.yaml if it's there.
+// Load reads dir's brand strictly: brand.json (pulled from Clients by `kit
+// brand pull`) or, failing that, brand.yaml (written by hand). It reads
+// dir/kit.yaml too if it's there.
 func Load(dir string) (*File, *Overrides, error) {
-	b, err := os.ReadFile(filepath.Join(dir, "brand.yaml"))
+	file := "brand.json"
+	b, err := os.ReadFile(filepath.Join(dir, file))
+	if errors.Is(err, os.ErrNotExist) {
+		file = "brand.yaml"
+		b, err = os.ReadFile(filepath.Join(dir, file))
+	}
 	if err != nil {
 		return nil, nil, err
 	}
 	f := &File{}
-	dec := yaml.NewDecoder(bytes.NewReader(b))
+	dec := yaml.NewDecoder(bytes.NewReader(b)) // JSON is YAML, so one decoder reads both
 	dec.KnownFields(true)
 	if err := dec.Decode(f); err != nil {
-		return nil, nil, fmt.Errorf("brand.yaml: %w", err)
+		return nil, nil, fmt.Errorf("%s: %w", file, err)
 	}
 	if f.Brand != 1 {
-		return nil, nil, fmt.Errorf("brand.yaml: brand: %d is not a format kit knows (1)", f.Brand)
+		return nil, nil, fmt.Errorf("%s: brand: %d is not a format kit knows (1)", file, f.Brand)
 	}
 	if f.Name == "" || f.Palette.Paper == "" || f.Palette.Ink == "" || f.Palette.Accent == "" {
-		return nil, nil, errors.New("brand.yaml: name, palette.paper, palette.ink and palette.accent are required")
+		return nil, nil, fmt.Errorf("%s: name, palette.paper, palette.ink and palette.accent are required", file)
 	}
 	o := &Overrides{}
 	if b, err := os.ReadFile(filepath.Join(dir, "kit.yaml")); err == nil {

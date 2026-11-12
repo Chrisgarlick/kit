@@ -71,8 +71,8 @@ type Component struct {
 	// rendered from its template and demo.json, and its CSS stays out of
 	// `kit dist` unless asked for.
 	Section *sections.Section `yaml:"-"`
-	CSS  []string      `yaml:"-"` // stylesheets, relative to the root
-	JS   []string      `yaml:"-"` // tier 2 modules, relative to the root
+	CSS     []string          `yaml:"-"` // stylesheets, relative to the root
+	JS      []string          `yaml:"-"` // tier 2 modules, relative to the root
 
 	group *Group
 }
