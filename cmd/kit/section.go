@@ -27,10 +27,17 @@ func sectionCmd(args []string) error {
 		if err != nil {
 			return err
 		}
+		site, err := sections.LoadSettings(filepath.Join(*root, "settings", "site.schema.json"))
+		if err != nil {
+			return err
+		}
+		if err := sections.CheckBinds(secs, site); err != nil {
+			return err
+		}
 		for _, s := range secs {
 			fmt.Printf("  %-12s %d fields, %d variants, %d demos\n", s.Name, len(s.Schema.Fields), len(s.Schema.Variants), len(s.Demos))
 		}
-		fmt.Printf("%d sections: templates, schemas and demos agree\n", len(secs))
+		fmt.Printf("%d sections: templates, schemas and demos agree, and every bound field matches a site setting\n", len(secs))
 		return nil
 
 	case "compile":

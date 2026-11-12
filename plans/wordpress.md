@@ -162,6 +162,17 @@ One shared editor script renders every kit block's form from its schema:
 
 ## 3. kit Fields (later, when a client needs it)
 
+**Site details built 12 November 2026** (in kit Blocks, not yet a plugin of its own): Settings →
+Site details is a form built from `settings/site.schema.json` (kit's, in the section schema
+format: name, about line, phone, email, address, hours, review summary, small print, socials,
+logos), stored as one option and sanitised like block content. A section field with `bind`
+shows the site's value when the block leaves it empty, and the editor says so ("Showing the
+site's, from Site details") with the site's value as the placeholder. `kit section check` fails if
+a bind names a setting that doesn't exist or has a different shape; patterns leave bound fields
+empty so new blocks show the site's details. Block Bindings (WordPress 6.5+) aren't used: binding
+happens when kit Blocks renders, so it works the same in the editor's preview. The rest of this
+section (custom fields, post types) is still to come.
+
 Built when a site needs fields beyond sections, from the same schema format:
 
 - **Site settings:** an options page (business name, phone, email, address, opening hours,

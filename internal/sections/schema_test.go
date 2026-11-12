@@ -94,3 +94,23 @@ func TestCheck(t *testing.T) {
 		}
 	}
 }
+
+// Every bound field in kit's sections names a site setting of the same shape.
+func TestSectionBindsMatchTheSiteSettings(t *testing.T) {
+	secs, err := Load("../../sections")
+	if err != nil {
+		t.Fatal(err)
+	}
+	site, err := LoadSettings("../../settings/site.schema.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := CheckBinds(secs, site); err != nil {
+		t.Fatal(err)
+	}
+	// And a bad bind is caught.
+	secs[0].Schema.Fields[0].Bind = "site.nope"
+	if err := CheckBinds(secs[:1], site); err == nil || !strings.Contains(err.Error(), "isn't a site setting") {
+		t.Fatalf("got %v", err)
+	}
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "site",
+  "title": "Site details",
+  "version": 1,
+  "category": "kit-settings",
+  "description": "The business's details, entered once. Sections show them wherever a field is bound to one (the header's phone number, the footer's small print), unless that block says something else.",
+  "fields": {
+    "name": { "type": "text", "label": "Business name", "help": "As customers know it.", "required": true, "max": 40 },
+    "tagline": { "type": "textarea", "label": "About line", "help": "One line on what you do and where: the footer shows it.", "max": 160 },
+    "phone": { "type": "text", "label": "Phone number", "help": "As people should dial it: 01234 567890.", "max": 30 },
+    "email": { "type": "text", "label": "Email address", "max": 80 },
+    "address": { "type": "textarea", "label": "Address", "max": 200 },
+    "hours": { "type": "textarea", "label": "Opening hours", "help": "One line a day or range: \"Mon to Fri 8am to 6pm\".", "max": 300 },
+    "review_summary": { "type": "rich-text", "label": "Review summary", "help": "\"**4.9** from 120 Google reviews\": keep it true and up to date.", "max": 80 },
+    "small_print": { "type": "text", "label": "Small print", "help": "The legal name, company number and registered office: UK companies must show these on their website.", "max": 200 },
+    "socials": { "type": "list", "label": "Social profiles", "max": 5, "item": {
+      "network": { "type": "enum", "label": "Network", "options": ["instagram", "facebook", "linkedin", "tiktok", "youtube"], "default": "instagram" },
+      "url": { "type": "url", "label": "Profile address", "required": true }
+    }},
+    "logo": { "type": "image", "label": "Logo", "help": "For light backgrounds: the header.", "alt": "optional" },
+    "logo_on_dark": { "type": "image", "label": "Logo on dark", "help": "For the footer's dark band.", "alt": "optional" }
+  }
+}

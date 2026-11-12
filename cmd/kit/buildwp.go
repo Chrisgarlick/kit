@@ -70,6 +70,21 @@ func buildWP(args []string) error {
 	if err := os.WriteFile(filepath.Join(kitDir, "kit.php"), []byte(sections.Runtime), 0o644); err != nil { //nolint:gosec // plugin source
 		return err
 	}
+	// The site settings, which bound fields fall back to.
+	site, err := sections.LoadSettings(filepath.Join(*root, "settings", "site.schema.json"))
+	if err != nil {
+		return err
+	}
+	if err := sections.CheckBinds(secs, site); err != nil {
+		return err
+	}
+	sb, err := os.ReadFile(filepath.Join(*root, "settings", "site.schema.json"))
+	if err != nil {
+		return err
+	}
+	if err := os.WriteFile(filepath.Join(kitDir, "site.schema.json"), sb, 0o644); err != nil { //nolint:gosec // plugin source
+		return err
+	}
 	// The icon names, for the editor's icon fields.
 	names, err := json.Marshal(sections.IconNames)
 	if err != nil {
