@@ -1,0 +1,53 @@
+# Base theme in the Steep style (Hub library: steep): serif display at regular
+# weight on white, a near-black primary, one warm peach accent, pill buttons and
+# 24px cards. Paste into Clients (clients.kritano.com/c/base-steep), save, publish.
+brand: 1
+name: Base theme, Steep
+
+palette:
+  paper: "#FFFFFF"
+  surface: "#F2F2F3"
+  ink: "#17191C"
+  ink-muted: "#62666F"
+  heading: "#17191C"
+  rule: "#E6E6E8"
+  accent: "#17191C"           # Steep's actions are near-black pills
+  accent-soft: "#FBE1D1"      # Blush Peach, the one chromatic surface
+  accent-2: "#5D2A1A"         # Sienna Brown, ink on peach
+  on-accent: "#FFFFFF"
+  inverse: "#17191C"
+  on-inverse: "#FFFFFF"
+  good: "#1F7A4D"
+  fair: "#8A5A12"
+  poor: "#B42318"
+
+modes:
+  dark:
+    paper: "#111214"
+    surface: "#1C1D20"
+    ink: "#F2F2F3"
+    ink-muted: "#A3A6AF"
+    heading: "#FFFFFF"
+    rule: "#FFFFFF1A"
+    accent: "#F2F2F3"
+    accent-soft: "#3A2419"
+    accent-2: "#FBE1D1"
+    on-accent: "#111214"
+    inverse: "#F2F2F3"
+    on-inverse: "#111214"
+    good: "#4ADE80"
+    fair: "#FACC15"
+    poor: "#F87171"
+
+type:
+  display: { font: "lib:source-serif-4", italic-font: "lib:source-serif-4-italic", weight: 400, tracking: -0.025em, leading: 1.1 }
+  heading: { font: "lib:source-serif-4", weight: 400, tracking: -0.015em, leading: 1.2 }
+  body:    { font: "Inter", weight: 400, leading: 1.45 }
+  mono:    { font: "JetBrains Mono", weight: 400 }
+
+shape:
+  radius: { sm: 12px, md: 16px, lg: 24px }
+  shadow: { color: "#000000", opacity: 0.10, blur: 25px, y: 20px }
+  stroke: 1px
+
+wordmark: Your brand

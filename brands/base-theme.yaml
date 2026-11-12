@@ -1,0 +1,52 @@
+# Base theme: placeholder styling for designing Kit's sections before a client's
+# brand exists. Neutral greys and one placeholder blue; restyle by giving a client
+# its own brand. Paste into Clients (clients.kritano.com/c/base-theme), save, publish.
+brand: 1
+name: Base theme
+
+palette:
+  paper: "#FFFFFF"
+  surface: "#F4F4F5"
+  ink: "#18181B"
+  ink-muted: "#52525B"
+  heading: "#09090B"
+  rule: "#E4E4E7"
+  accent: "#2563EB"
+  accent-soft: "#DBEAFE"
+  accent-2: "#2563EB"
+  on-accent: "#FFFFFF"
+  inverse: "#18181B"
+  on-inverse: "#FAFAFA"
+  good: "#15803D"
+  fair: "#A16207"
+  poor: "#B91C1C"
+
+modes:
+  dark:
+    paper: "#0B0B0D"
+    surface: "#18181B"
+    ink: "#F4F4F5"
+    ink-muted: "#A1A1AA"
+    heading: "#FFFFFF"
+    rule: "#FFFFFF1A"
+    accent: "#60A5FA"
+    accent-soft: "#172554"
+    on-accent: "#0B0B0D"
+    inverse: "#F4F4F5"
+    on-inverse: "#18181B"
+    good: "#4ADE80"
+    fair: "#FACC15"
+    poor: "#F87171"
+
+type:
+  display: { font: "Inter Tight", weight: 600, tracking: -0.02em, leading: 1.05 }
+  heading: { font: "Inter Tight", weight: 600, leading: 1.2 }
+  body:    { font: "Inter", weight: 400, leading: 1.55 }
+  mono:    { font: "JetBrains Mono", weight: 400 }
+
+shape:
+  radius: { sm: 6px, md: 10px, lg: 16px }
+  shadow: { color: "#18181B", opacity: 0.12, blur: 32px, y: 12px }
+  stroke: 1px
+
+wordmark: Your brand
