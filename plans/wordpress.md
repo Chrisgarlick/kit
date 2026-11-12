@@ -190,6 +190,16 @@ the sections only need the blocks.
 
 ## 4. kit Theme (the base theme)
 
+**Built 12 November 2026, in `~/dev/wp-base/themes/kit-base`**, working but for WooCommerce:
+the brand pulled from Clients into the theme (`make brand CLIENT=<slug>`: brand.json, its fonts
+and logos, a lock; tokens and font faces built from them, all committed); site details bound into
+the sections; header and footer template parts on kit's blocks with the current page worked out;
+page patterns (home, services, about, contact, legal); a focused editor (kit's sections and the
+core text and media blocks; the brand's colours and fonts only; no remote patterns or block
+directory). `theme.json` points core blocks at kit's tokens rather than being generated, so a
+brand restyles them too; its heading styles apply to core heading blocks only. Still to do:
+WooCommerce templates filling the shop sections; the contact form from the forms plugin.
+
 A **block theme** (full site editing), so the header and footer are template parts the owner
 can see and edit as blocks.
 
