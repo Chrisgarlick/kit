@@ -1,6 +1,6 @@
 {{-- kit section: text block. Edit this, then run `kit section compile`. --}}
 @props(['content' => [], 'variant' => 'default'])
-<section class="kit-section-text-block" data-background="{{ $content['background'] }}">
+<section class="kit-section-text-block" data-background="{{ $content['background'] }}"@if($content['title_size'] !== 'normal') data-title-size="{{ $content['title_size'] }}"@endif>
   <div class="kit-container">
     <div class="kit-text-block"@if($variant === 'centred') data-align="centre"@endif>
       @if($content['eyebrow'])

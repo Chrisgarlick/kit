@@ -1,7 +1,9 @@
 /* SPDX-License-Identifier: MIT
  * Section: services (tier 1). A section head and a grid of service cards.
  *   <section class="kit-section-services" data-background="plain|tinted"> … </section>
- * The grid wraps by itself (kit's grid): up to the chosen columns, one on a phone.
+ * The grid wraps by itself (kit's grid): up to the chosen columns, one on a phone;
+ * data-cols="1" is a single column. A section head with data-rule has a heavy
+ * rule under it.
  */
 .kit-section-services { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
 .kit-section-services[data-background="tinted"] { background: var(--kit-band); }
@@ -16,3 +18,9 @@
 .kit-service-proof { border-radius: var(--kit-radius-2); line-height: 1.4; }
 .kit-service-proof .kit-icon { inline-size: 14px; block-size: 14px; margin-block-start: 2px; color: var(--kit-good); flex: none; }
 .kit-service-link { margin-block-start: var(--kit-space-1); }
+.kit-service-number { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kit-fg-2); }
+/* A second line of the name, inside its h3: *stars* set it in italics. */
+.kit-service-subtitle { display: block; font-weight: 400; color: var(--kit-fg-2); }
+.kit-service-subtitle em { font-style: italic; }
+.kit-services-grid[data-cols="1"] { --_cols: 1; }
+.kit-section-services .kit-section-head[data-rule] { padding-block-end: var(--kit-space-5); border-block-end: 3px solid var(--kit-fg); }

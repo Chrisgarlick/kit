@@ -3,7 +3,8 @@
  * questions, half and half.
  *   <section class="kit-section-split" data-media="image|questions" [data-swap] data-background="plain|tinted">
  * An image starts on the left and questions on the right; data-swap swaps
- * them. Below 48rem (the section's own width) the halves stack, an image
+ * them. With numbered questions, each summary holds .kit-split-number (decorative)
+ * and .kit-split-question. Below 48rem (the section's own width) the halves stack, an image
  * above the text and questions below it.
  */
 .kit-section-split { container: kit-split / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); }
@@ -23,6 +24,9 @@
 .kit-split-questions .kit-accordion-body { color: var(--kit-fg-2); line-height: 1.55; }
 .kit-split-questions .kit-accordion-body p { margin: 0 0 var(--kit-space-3); }
 .kit-split-questions .kit-accordion:first-of-type { border-block-start: 0; }
+/* Numbered questions: the number (aria-hidden) in the mono face, the question taking the rest of the row. */
+.kit-split-number { flex: none; min-inline-size: 2.5ch; font: 400 var(--kit-text-sm)/1 var(--kit-font-mono); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--kit-fg-3); }
+.kit-split-question { flex: 1; }
 
 @container kit-split (max-width: 48rem) {
   .kit-split-inner { grid-template-columns: minmax(0, 1fr); gap: var(--kit-space-6); }

@@ -8,6 +8,7 @@
 .kit-cta-band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--kit-space-5) var(--kit-space-6); padding: clamp(2rem, 4vw, 4rem); border-radius: var(--kit-card-radius); background: var(--kit-accent); color: var(--kit-accent-fg); }
 .kit-cta-text { display: grid; gap: var(--kit-space-2); }
 .kit-cta-text > * { margin: 0; }
+.kit-cta-eyebrow { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.08em; text-transform: uppercase; }
 .kit-cta-title { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); line-height: 1.1; text-wrap: balance; }
 .kit-cta-lede { font-size: var(--kit-text-lg); opacity: 0.88; }
 .kit-cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--kit-space-5); }

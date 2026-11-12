@@ -39,5 +39,35 @@
       ],
       "proof": "**4.9** from 120 Google reviews"
     }
+  },
+  {
+    "title": "Text only, large heading, an icon before the label",
+    "variant": "text",
+    "content": {
+      "eyebrow": "Available for new work",
+      "eyebrow_icon": "sparkles",
+      "title": "Websites that load fast, *read well and last.*",
+      "title_size": "large",
+      "lede": "One developer for the build, the hosting and the care after launch.",
+      "actions": [
+        { "label": "Start a project", "url": "/start" },
+        { "label": "See the work", "url": "/work", "style": "secondary" }
+      ]
+    }
+  },
+  {
+    "title": "Phone: text only, large heading",
+    "variant": "text",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "Available for new work",
+      "eyebrow_icon": "sparkles",
+      "title": "Websites that load fast, *read well and last.*",
+      "title_size": "large",
+      "lede": "One developer for the build, the hosting and the care after launch.",
+      "actions": [
+        { "label": "Start a project", "url": "/start" }
+      ]
+    }
   }
 ]

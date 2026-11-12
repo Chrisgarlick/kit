@@ -7,5 +7,16 @@
     "title": "Phone",
     "width": "mobile",
     "content": { "title": "Ready when you are", "lede": "Tell us what you need and we'll reply the same day.", "action_label": "Get a free quote", "action_url": "/contact", "phone": "01234 567890" }
+  },
+  {
+    "title": "With a label above the heading",
+    "content": {
+      "title": "Ready when you are",
+      "lede": "Tell us what you need and we'll reply the same day.",
+      "action_label": "Get a free quote",
+      "action_url": "/contact",
+      "phone": "01234 567890",
+      "eyebrow": "Next step"
+    }
   }
 ]

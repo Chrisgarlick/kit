@@ -77,6 +77,9 @@ return function ($content = [], $variant = 'default'): void {
       <?php endif; ?>
     </div>
   </div>
+<?php if ($content['wordmark']): ?>
+  <p class="kit-footer-wordmark" aria-hidden="true"><?php echo kit_e($content['wordmark']); ?></p>
+<?php endif; ?>
 </footer>
 <?php
 };

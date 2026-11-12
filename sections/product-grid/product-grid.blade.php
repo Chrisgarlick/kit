@@ -67,7 +67,7 @@
           @endif
         </div>
         <h3 class="kit-product-name">@if($product['url'])<a class="kit-product-link" href="{{ kit_url($product['url']) }}">{{ $product['name'] }}</a>@else{{ $product['name'] }}@endif</h3>
-        <p class="kit-product-price">@if($product['was_price'])<span class="kit-product-now"><span class="kit-vh">Now </span>{{ $product['price'] }}</span> <s class="kit-product-was"><span class="kit-vh">was </span>{{ $product['was_price'] }}</s>@else{{ $product['price'] }}@endif</p>
+        <p class="{{ $product['label'] ? 'kit-product-label' : 'kit-product-price' }}">@if($product['label']){{ $product['label'] }}@elseif($product['was_price'])<span class="kit-product-now"><span class="kit-vh">Now </span>{{ $product['price'] }}</span> <s class="kit-product-was"><span class="kit-vh">was </span>{{ $product['was_price'] }}</s>@else{{ $product['price'] }}@endif</p>
       </li>
       @endforeach
     </ul>

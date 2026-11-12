@@ -1,0 +1,60 @@
+[
+  {
+    "title": "An article's body, every kind of block",
+    "content": {
+      "blocks": [
+        { "kind": "paragraph", "text": "Most pages on a small business site change a few times a year, yet the server builds each one from scratch on every visit. A page cache keeps the finished HTML and hands it straight back, so the *second* visitor never waits for the first one's work.\n\nThis piece measures what that saves on an ordinary content site, and where it stops helping." },
+        { "kind": "heading", "number": "01", "text": "What a page cache *actually skips*" },
+        { "kind": "paragraph", "text": "Without a cache, every request boots the framework, opens a database connection, runs the queries for the page and renders the templates. With one, the request is answered from a file before **any** of that starts." },
+        { "kind": "list", "items": [
+          { "text": "Booting the framework and its service providers" },
+          { "text": "Between eight and forty database queries, depending on the page" },
+          { "text": "Rendering the layout, the sections and the *partials* inside them" }
+        ] },
+        { "kind": "stats", "stats": [
+          { "value": "28 ms", "label": "to render the page cold" },
+          { "value": "4.4 ms", "label": "to serve the same page from disk" }
+        ] },
+        { "kind": "heading", "number": "02", "text": "How it was measured" },
+        { "kind": "paragraph", "text": "Each page was requested 500 times from the same machine, after a warm-up of 50, with the median taken. The check runs before the session starts, so a cached page costs one file read." },
+        { "kind": "code", "caption": "PHP · the check at the front of the request", "code": "$html = $cache->get($key);\n\nif ($html !== null && ! $request->hasSession()) {\n    return response($html, 200, ['X-Cache' => 'hit']);\n}" },
+        { "kind": "table", "caption": "Median response time, 500 requests per page", "row_headers": true,
+          "columns": [ { "text": "Page" }, { "text": "Cold" }, { "text": "Cached" } ],
+          "rows": [
+            { "cells": [ { "text": "Home" }, { "text": "31 ms" }, { "text": "4.6 ms" } ] },
+            { "cells": [ { "text": "Service page" }, { "text": "28 ms" }, { "text": "4.4 ms" } ] },
+            { "cells": [ { "text": "Article" }, { "text": "36 ms" }, { "text": "4.5 ms" } ] }
+          ] },
+        { "kind": "figure", "size": "wide", "caption": "*Fig. 01* Response times before and after the cache, one bar per page." },
+        { "kind": "heading", "number": "03", "text": "When to clear it" },
+        { "kind": "list", "ordered": true, "items": [
+          { "text": "Clear a page when it's saved in the editor." },
+          { "text": "Clear every page when the menu or the footer changes." },
+          { "text": "Never cache a page with a form's error messages on it." }
+        ] },
+        { "kind": "quote", "text": "The fastest request is the one your application *never has to think about.*", "attribution": "A note from the build log" },
+        { "kind": "heading", "heading_level": 3, "text": "What it doesn't fix" },
+        { "kind": "paragraph", "text": "A cache hides a slow page; it doesn't make it fast. Pages behind a login, a basket or a search still run the full request, so they're worth measuring on their own." }
+      ]
+    }
+  },
+  {
+    "title": "Phone, narrow and on the left, tinted",
+    "width": "mobile",
+    "variant": "left",
+    "content": {
+      "width": "narrow",
+      "background": "tinted",
+      "blocks": [
+        { "kind": "heading", "number": "04", "text": "How long we keep your details" },
+        { "kind": "paragraph", "text": "We keep an enquiry for **two years** after we last hear from you, then delete it. Invoices are kept for six years, because the law says we must." },
+        { "kind": "list", "items": [
+          { "text": "Enquiries: two years" },
+          { "text": "Invoices and contracts: six years" },
+          { "text": "Analytics: fourteen months, with no names attached" }
+        ] },
+        { "kind": "code", "caption": "The cookie we set", "code": "consent=analytics:no; Max-Age=31536000; Path=/; SameSite=Lax; Secure" }
+      ]
+    }
+  }
+]

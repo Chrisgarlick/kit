@@ -14,8 +14,10 @@
       "url": { "type": "url", "label": "Address", "required": true },
       "current": { "type": "boolean", "label": "This page", "help": "Marks the link as the page being shown. On WordPress, kit Blocks works this out." }
     }},
+    "numbered": { "type": "boolean", "label": "Number the links", "help": "Shows 01, 02… before each link. The numbers are decoration: screen readers hear the label alone." },
     "phone": { "type": "text", "label": "Phone number", "max": 30, "bind": "site.phone" },
     "action_label": { "type": "text", "label": "Button", "max": 30 },
-    "action_url": { "type": "url", "label": "Button link" }
+    "action_url": { "type": "url", "label": "Button link" },
+    "tone": { "type": "enum", "label": "Background", "help": "Plain uses the page's colours; dark is the inverse band, like the footer (the logo must read on it).", "options": ["plain", "dark"], "default": "plain" }
   }
 }

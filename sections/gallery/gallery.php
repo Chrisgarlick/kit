@@ -5,7 +5,7 @@ return function ($content = [], $variant = 'default'): void {
 
 <section class="kit-section-gallery" data-background="<?php echo kit_e($content['background']); ?>">
   <div class="kit-container">
-    <div class="kit-section-head"<?php if (($variant === 'centred')): ?> data-align="centre"<?php endif; ?>>
+    <div class="kit-section-head"<?php if (($variant === 'centred')): ?> data-align="centre"<?php endif; ?><?php echo kit_e(($content['rule'] ? ' data-rule' : '')); ?>>
       <div class="kit-section-head-text">
         <?php if ($content['eyebrow']): ?>
         <p class="kit-section-head-eyebrow"><?php echo kit_e($content['eyebrow']); ?></p>

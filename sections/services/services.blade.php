@@ -2,7 +2,7 @@
 @props(['content' => [], 'variant' => 'default'])
 <section class="kit-section-services" data-background="{{ $content['background'] }}">
   <div class="kit-container">
-    <div class="kit-section-head"@if($variant === 'centred') data-align="centre"@endif>
+    <div class="kit-section-head"@if($variant === 'centred') data-align="centre"@endif{{ $content['rule'] ? ' data-rule' : '' }}>
       <div class="kit-section-head-text">
         @if($content['eyebrow'])
         <p class="kit-section-head-eyebrow">{{ $content['eyebrow'] }}</p>
@@ -19,10 +19,13 @@
     <ul class="kit-grid kit-services-grid" data-cols="{{ $content['columns'] }}" data-min="sm" role="list">
       @foreach($content['services'] as $service)
       <li class="kit-card kit-service-card">
+@if($service['number'])
+        <p class="kit-service-number">{{ $service['number'] }}</p>
+@endif
         @if($service['icon'])
         <span class="kit-service-icon">{{ kit_icon($service['icon']) }}</span>
         @endif
-        <h3 class="kit-service-title">{{ $service['title'] }}</h3>
+        <h3 class="kit-service-title">{{ $service['title'] }}@if($service['subtitle']) <span class="kit-service-subtitle">{{ kit_rich($service['subtitle']) }}</span>@endif</h3>
         @if($service['text'])
         <p class="kit-service-text">{{ $service['text'] }}</p>
         @endif

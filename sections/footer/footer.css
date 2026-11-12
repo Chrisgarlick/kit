@@ -28,6 +28,9 @@
 .kit-footer-legal { display: flex; flex-wrap: wrap; }
 .kit-footer-legal li + li::before { content: "·"; padding-inline: 0.4em; }
 
+/* The wordmark: display type sized to the footer's width, cropped by its bottom edge. */
+.kit-section-footer:has(> .kit-footer-wordmark) { padding-block-end: 0; overflow: hidden; }
+.kit-section-footer .kit-footer-wordmark { margin-block: var(--kit-space-6) -0.22em; padding-inline: clamp(16px, 2cqi, 32px); font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: var(--kit-footer-wordmark-size, 15cqi); line-height: 1; white-space: nowrap; overflow-x: clip; color: var(--kit-inverse-fg); user-select: none; pointer-events: none; }
 @container kit-footer (max-width: 40rem) {
   .kit-section-footer { padding-block: 48px 32px; }
   .kit-footer-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }

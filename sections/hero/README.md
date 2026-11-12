@@ -6,7 +6,7 @@ tier: 1
 pattern: Website section
 uses: [container, button]
 status: preview
-summary: The first thing on a page. A label, a heading with emphasis, a supporting line, up to two buttons, a line of proof and an image, split or centred.
+summary: The first thing on a page. A label, a heading with emphasis, a supporting line, up to two buttons, a line of proof and an image, split, centred or text only.
 ---
 
 ## Usage
@@ -23,11 +23,14 @@ echo kit_section(__DIR__ . '/kit/hero.php', ['content' => $hero, 'variant' => 'c
 |---|---|
 | `default` | Split: the text beside the image. |
 | `centred` | The text centred, the image below it, wider. |
+| `text` | Text only: no image column (`image` is ignored), and the text runs across a wider measure. |
 
 | Field | Type | Notes |
 |---|---|---|
 | `eyebrow` | text | A short label above the heading. |
+| `eyebrow_icon` | icon | Optional, empty by default. One of kit's icons before the label; decorative (`aria-hidden`), and shown only with a label. |
 | `title` | rich text, required | `*words in stars*` are set in italics. |
+| `title_size` | `normal` or `large` | `normal` by default; `large` is display size (up to 7rem), for a statement hero. |
 | `lede` | textarea | One or two sentences. |
 | `actions` | list (up to 2) | `label`, `url`, `style` (`primary` or `secondary`). |
 | `proof` | rich text | A review score or a fact; `**stars**` make it bold. Bound to the site's review summary. |

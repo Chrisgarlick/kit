@@ -2,16 +2,23 @@
  * Section: stats (tier 1). Two to four numbers, each with what it counts.
  *   <section class="kit-section-stats" data-tone="dark|tinted|plain"> <dl class="kit-stats-list"> … </dl> </section>
  * The number is the <dd> and its label the <dt>, so a screen reader hears
- * "in business locally: 15 yrs"; they're shown number first. Below 40rem
- * (the section's own width), two a row.
+ * "in business locally: 15 yrs"; they're shown number first. An optional
+ * link (a second <dd>) sits under the label. Three numbers share one row;
+ * below 40rem (the section's own width) they go two a row, or three stacked.
  */
 .kit-section-stats { container: kit-stats / inline-size; padding-block: clamp(2.5rem, 5vw, 4.5rem); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); --_label: var(--kit-fg-2); }
 .kit-section-stats[data-tone="dark"] { background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); --_label: var(--kit-inverse-fg-2); }
 .kit-section-stats[data-tone="tinted"] { background: var(--kit-band); }
 .kit-stats-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--kit-space-6); margin: 0; }
 .kit-stats-item { display: flex; flex-direction: column-reverse; justify-content: start; gap: var(--kit-space-1); }
+.kit-stats-list:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .kit-stats-item dd { margin: 0; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem); line-height: 1.05; font-variant-numeric: tabular-nums; }
 .kit-stats-item dt { font-size: var(--kit-text-md); color: var(--_label); }
+/* The link: under the label (the items run bottom up, so it's ordered first), in the band's colours. */
+.kit-stats-item .kit-stats-link { order: -1; margin-block-start: var(--kit-space-2); font: 400 var(--kit-text-md)/1.4 var(--kit-font-ui); letter-spacing: 0; }
+.kit-stats-link .kit-link { color: inherit; }
+.kit-stats-link .kit-link:focus-visible { outline-color: currentColor; }
 @container kit-stats (max-width: 40rem) {
   .kit-stats-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--kit-space-5); }
+  .kit-stats-list:has(> :nth-child(3):last-child) { grid-template-columns: minmax(0, 1fr); }
 }

@@ -1,0 +1,85 @@
+/* SPDX-License-Identifier: MIT
+ * Section: prose (tier 1). The body of an article or a legal page: a
+ * readable column of typed blocks (paragraphs, headings, lists, quotes,
+ * numbers, code, tables, figures).
+ *   <section class="kit-section-prose" data-background="plain|tinted" data-width="normal|narrow">
+ *     <div class="kit-container"><div class="kit-prose" [data-align="start"]> … </div></div>
+ *   </section>
+ * The column is about 45rem (38rem narrow), centred or on the left. A wide
+ * figure spans the container. Code and tables scroll sideways inside
+ * themselves rather than widening the page. Below 36rem (the section's own
+ * width) the type steps down and the numbers stack.
+ */
+.kit-section-prose { container: kit-prose / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-prose[data-background="tinted"] { background: var(--kit-band); }
+
+.kit-prose { --_measure: 45rem; display: grid; grid-template-columns: [full-start] minmax(0, 1fr) [col-start] minmax(0, var(--_measure)) [col-end] minmax(0, 1fr) [full-end]; font-size: var(--kit-text-xl); line-height: 1.7; text-wrap: pretty; overflow-wrap: break-word; }
+.kit-section-prose[data-width="narrow"] .kit-prose { --_measure: 38rem; }
+.kit-prose[data-align="start"] { grid-template-columns: [full-start col-start] minmax(0, var(--_measure)) [col-end] minmax(0, 1fr) [full-end]; }
+.kit-prose > * { grid-column: col; margin: 0; min-inline-size: 0; }
+.kit-prose > * + * { margin-block-start: 1.25em; }
+.kit-prose em { font-style: italic; }
+.kit-prose strong { font-weight: 600; }
+
+/* Headings: a number above, in the mono face */
+.kit-prose > .kit-prose-heading { margin-block-start: 2em; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); line-height: 1.2; text-wrap: balance; }
+.kit-prose > .kit-prose-heading:first-child { margin-block-start: 0; }
+.kit-prose > .kit-prose-heading + * { margin-block-start: 0.75em; }
+h1.kit-prose-heading { font-size: var(--kit-text-4xl); }
+h2.kit-prose-heading { font-size: clamp(var(--kit-text-2xl), 1.25rem + 1.5cqi, var(--kit-text-3xl)); }
+h3.kit-prose-heading { font-size: var(--kit-text-2xl); }
+h4.kit-prose-heading { font-size: var(--kit-text-xl); }
+.kit-prose-number { display: block; margin-block-end: 0.5em; font-family: var(--kit-font-mono); font-size: var(--kit-text-sm); font-weight: 400; letter-spacing: 0.04em; color: var(--kit-accent); }
+
+/* Lists */
+.kit-prose-list { padding-inline-start: 1.5em; }
+.kit-prose-list li + li { margin-block-start: 0.5em; }
+.kit-prose-list li::marker { color: var(--kit-fg-3); }
+ol.kit-prose-list li::marker { font-family: var(--kit-font-mono); font-size: 0.85em; }
+
+/* Quote: a rule in the accent beside larger type */
+.kit-prose > .kit-prose-quote { margin-block-start: 2em; padding-inline-start: 1.25em; border-inline-start: 3px solid var(--kit-accent); }
+.kit-prose-quote blockquote { margin: 0; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); font-size: var(--kit-text-2xl); line-height: 1.35; }
+.kit-prose-quote blockquote p { margin: 0; }
+.kit-prose-quote blockquote p + p { margin-block-start: 0.75em; }
+.kit-prose-quote figcaption { margin-block-start: 0.75em; font-size: var(--kit-text-md); color: var(--kit-fg-2); }
+
+/* Numbers: a row of two or three, the number first to the eye, read "label: number" */
+.kit-prose-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--kit-space-4); }
+.kit-prose-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: var(--kit-space-1); padding: var(--kit-space-5); border-radius: var(--kit-card-radius); background: var(--kit-band); }
+.kit-section-prose[data-background="tinted"] .kit-prose-stat { background: var(--kit-surface); }
+.kit-prose-stat dd { margin: 0; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); font-size: clamp(var(--kit-text-3xl), 1.5rem + 2cqi, var(--kit-text-4xl)); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.kit-prose-stat dt { font-size: var(--kit-text-md); line-height: 1.4; color: var(--kit-fg-2); }
+
+/* Code: kept as typed, scrolling sideways (focusable, so the keyboard can scroll it) */
+.kit-prose-code { display: grid; gap: var(--kit-space-2); }
+.kit-prose-code figcaption { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.04em; color: var(--kit-fg-2); }
+.kit-prose-code pre { margin: 0; padding: var(--kit-space-4) var(--kit-space-5); overflow-x: auto; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface-2); font-family: var(--kit-font-mono); font-size: var(--kit-text-md); line-height: 1.6; white-space: pre; tab-size: 4; }
+.kit-prose-code code { font: inherit; }
+
+/* Tables: a caption above, rules between rows, scrolling sideways when wide */
+.kit-prose-table { overflow-x: auto; }
+.kit-prose-table table { inline-size: 100%; border-collapse: collapse; font-size: var(--kit-text-md); line-height: 1.5; font-variant-numeric: tabular-nums; }
+.kit-prose-table caption { padding-block-end: var(--kit-space-3); caption-side: top; text-align: start; font-size: var(--kit-text-md); color: var(--kit-fg-2); }
+.kit-prose-table th, .kit-prose-table td { padding: var(--kit-space-3) var(--kit-space-4) var(--kit-space-3) 0; border-block-end: 1px solid var(--kit-line); text-align: start; vertical-align: top; }
+.kit-prose-table th:last-child, .kit-prose-table td:last-child { padding-inline-end: 0; }
+.kit-prose-table thead th { border-block-end-color: var(--kit-line-strong); font-size: var(--kit-text-sm); font-weight: 600; color: var(--kit-fg-2); white-space: nowrap; }
+.kit-prose-table tbody th { font-weight: 600; }
+
+/* Scrolling blocks show where focus is */
+.kit-prose-code pre:focus-visible, .kit-prose-table:focus-visible { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; }
+
+/* Figures: the column's width, or wide to the container's */
+.kit-prose > .kit-prose-figure { display: grid; gap: var(--kit-space-3); margin-block-start: 2em; }
+.kit-prose > .kit-prose-quote + *, .kit-prose > .kit-prose-figure + * { margin-block-start: 2em; }
+.kit-prose > .kit-prose-figure[data-size="wide"] { grid-column: full; }
+.kit-prose-media { display: block; inline-size: 100%; block-size: auto; border-radius: var(--kit-card-radius); background: var(--kit-surface-2); }
+.kit-prose-media[data-empty] { display: grid; place-items: center; aspect-ratio: 16 / 9; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); box-sizing: border-box; }
+.kit-prose-media[data-empty] .kit-icon { inline-size: 28px; block-size: 28px; }
+.kit-prose-figure figcaption { font-size: var(--kit-text-md); line-height: 1.5; color: var(--kit-fg-2); }
+
+@container kit-prose (max-width: 36rem) {
+  .kit-prose { font-size: var(--kit-text-lg); line-height: 1.65; }
+  .kit-prose-quote blockquote { font-size: var(--kit-text-xl); }
+  .kit-prose-code pre { padding: var(--kit-space-3) var(--kit-space-4); font-size: var(--kit-text-sm); }
+}

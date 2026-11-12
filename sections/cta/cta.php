@@ -7,6 +7,9 @@ return function ($content = [], $variant = 'default'): void {
   <div class="kit-container">
     <div class="kit-cta-band">
       <div class="kit-cta-text">
+<?php if ($content['eyebrow']): ?>
+        <p class="kit-cta-eyebrow"><?php echo kit_e($content['eyebrow']); ?></p>
+<?php endif; ?>
         <<?php echo kit_e(kit_heading($content['heading_level'])); ?> class="kit-cta-title"><?php echo kit_e(kit_rich($content['title'])); ?></<?php echo kit_e(kit_heading($content['heading_level'])); ?>>
         <?php if ($content['lede']): ?>
         <p class="kit-cta-lede"><?php echo kit_e($content['lede']); ?></p>

@@ -3,7 +3,7 @@
 return function ($content = [], $variant = 'default'): void {
 ?>
 
-<section class="kit-section-text-block" data-background="<?php echo kit_e($content['background']); ?>">
+<section class="kit-section-text-block" data-background="<?php echo kit_e($content['background']); ?>"<?php if (($content['title_size'] !== 'normal')): ?> data-title-size="<?php echo kit_e($content['title_size']); ?>"<?php endif; ?>>
   <div class="kit-container">
     <div class="kit-text-block"<?php if (($variant === 'centred')): ?> data-align="centre"<?php endif; ?>>
       <?php if ($content['eyebrow']): ?>

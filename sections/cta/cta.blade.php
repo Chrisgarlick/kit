@@ -4,6 +4,9 @@
   <div class="kit-container">
     <div class="kit-cta-band">
       <div class="kit-cta-text">
+@if($content['eyebrow'])
+        <p class="kit-cta-eyebrow">{{ $content['eyebrow'] }}</p>
+@endif
         <{{ kit_heading($content['heading_level']) }} class="kit-cta-title">{{ kit_rich($content['title']) }}</{{ kit_heading($content['heading_level']) }}>
         @if($content['lede'])
         <p class="kit-cta-lede">{{ $content['lede'] }}</p>

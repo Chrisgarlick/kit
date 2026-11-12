@@ -24,6 +24,16 @@
           "label": "What it counts",
           "required": true,
           "max": 60
+        },
+        "link_label": {
+          "type": "text",
+          "label": "Link",
+          "help": "A link under the number, like \"How I measured\".",
+          "max": 40
+        },
+        "link_url": {
+          "type": "url",
+          "label": "Link address"
         }
       }
     },

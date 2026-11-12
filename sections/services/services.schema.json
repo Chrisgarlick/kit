@@ -43,11 +43,17 @@
       "type": "url",
       "label": "Link address"
     },
+    "rule": {
+      "type": "boolean",
+      "label": "Rule under the heading",
+      "help": "A heavy line between the heading row and the grid."
+    },
     "columns": {
       "type": "enum",
       "label": "Columns",
-      "help": "The most cards in a row; fewer fit on a narrow screen.",
+      "help": "The most in a row; fewer fit on a narrow screen. One makes a single column.",
       "options": [
+        "1",
         "2",
         "3",
         "4"
@@ -63,11 +69,23 @@
           "type": "icon",
           "label": "Icon"
         },
+        "number": {
+          "type": "text",
+          "label": "Number label",
+          "help": "A small label above the name, like \"01 — Laravel\".",
+          "max": 40
+        },
         "title": {
           "type": "text",
           "label": "Name",
           "required": true,
           "max": 60
+        },
+        "subtitle": {
+          "type": "rich-text",
+          "label": "Second line of the name",
+          "help": "Shown under the name, as part of the heading. *Stars* for italics.",
+          "max": 80
         },
         "text": {
           "type": "textarea",

@@ -1,6 +1,6 @@
 {{-- kit section: header. Edit this, then run `kit section compile`. --}}
 @props(['content' => [], 'variant' => 'default'])
-<header class="kit-section-header">
+<header class="kit-section-header"@if($content['tone'] !== 'plain') data-tone="{{ $content['tone'] }}"@endif>
   <div class="kit-container kit-header-bar">
     <a class="kit-header-brand" href="{{ kit_url($content['home_url']) }}">
       @if($content['logo'])
@@ -13,8 +13,8 @@
     @if(count($content['links']))
     <nav class="kit-header-nav" aria-label="Main">
       <ul role="list">
-        @foreach($content['links'] as $link)
-        <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@endif>{{ $link['label'] }}</a></li>
+        @foreach($content['links'] as $i => $link)
+        <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@endif>@if($content['numbered'])<span class="kit-header-num" aria-hidden="true">0{{ $i + 1 }}</span>@endif{{ $link['label'] }}</a></li>
         @endforeach
       </ul>
     </nav>
@@ -31,8 +31,8 @@
         <summary class="kit-button" data-variant="ghost"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></summary>
         <nav class="kit-header-sheet" aria-label="Menu">
           <ul role="list">
-            @foreach($content['links'] as $link)
-            <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@endif>{{ $link['label'] }}</a></li>
+            @foreach($content['links'] as $i => $link)
+            <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@endif>@if($content['numbered'])<span class="kit-header-num" aria-hidden="true">0{{ $i + 1 }}</span>@endif{{ $link['label'] }}</a></li>
             @endforeach
           </ul>
           @if($content['action_label'] && $content['action_url'])

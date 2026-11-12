@@ -1,0 +1,36 @@
+/* SPDX-License-Identifier: MIT
+ * Section: ruled list (tier 1). An optional section head, then numbered rows
+ * between 1px rules: number, name, value on the right, a line of description.
+ *   <section class="kit-section-ruled-list" data-tone="dark|tinted|plain">
+ *     <ol class="kit-ruled-list"> <li class="kit-ruled-row"> … </li> </ol>
+ *   </section>
+ * An empty number (data-auto) is drawn from the row's position, 01, 02…; the
+ * list itself tells a screen reader the position, so it's aria-hidden. A row
+ * with a link is a link over its whole area. Below 36rem (the section's own
+ * width) the value drops under the name.
+ */
+.kit-section-ruled-list { container: kit-ruled-list / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); --_fg-2: var(--kit-fg-2); --_fg-3: var(--kit-fg-3); --_line: var(--kit-line-strong); --_hover: var(--kit-accent); }
+.kit-section-ruled-list[data-tone="tinted"] { background: var(--kit-band); }
+.kit-section-ruled-list[data-tone="dark"] { background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); --_fg-2: var(--kit-inverse-fg-2); --_fg-3: var(--kit-inverse-fg-2); --_line: var(--kit-inverse-line); --_hover: var(--kit-inverse-fg-2); }
+.kit-section-ruled-list[data-tone="dark"] .kit-section-head { color: inherit; }
+.kit-section-ruled-list[data-tone="dark"] .kit-section-head-eyebrow, .kit-section-ruled-list[data-tone="dark"] .kit-section-head-lede { color: var(--kit-inverse-fg-2); }
+.kit-section-ruled-list[data-tone="dark"] .kit-section-head-lede strong { color: inherit; }
+.kit-ruled-list { margin: 0; padding: 0; list-style: none; counter-reset: kit-ruled; border-block-end: 1px solid var(--_line); }
+.kit-ruled-row { position: relative; display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; grid-template-areas: "num name value" "num text ."; align-items: baseline; gap: var(--kit-space-1) var(--kit-space-5); padding-block: var(--kit-space-5); border-block-start: 1px solid var(--_line); counter-increment: kit-ruled; }
+.kit-ruled-row > * { margin: 0; }
+.kit-ruled-num { grid-area: num; font-family: var(--kit-font-mono); font-size: var(--kit-text-sm); color: var(--_fg-3); font-variant-numeric: tabular-nums; }
+.kit-ruled-num[data-auto]::before { content: counter(kit-ruled, decimal-leading-zero); }
+.kit-ruled-name { grid-area: name; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(1.375rem, 1rem + 1.4cqi, 2.125rem); line-height: 1.12; text-wrap: balance; }
+.kit-ruled-name em { font-style: italic; }
+.kit-ruled-name a { color: inherit; text-decoration: none; transition: color var(--kit-duration) var(--kit-ease); }
+.kit-ruled-name a::after { content: ""; position: absolute; inset: 0; }
+.kit-ruled-row:hover .kit-ruled-name a { color: var(--_hover); }
+.kit-ruled-name a:focus-visible { outline: none; }
+.kit-ruled-name a:focus-visible::after { outline: 2px solid var(--kit-focus-ring); outline-offset: 2px; border-radius: 2px; }
+.kit-ruled-value { grid-area: value; justify-self: end; text-align: end; font-size: var(--kit-text-md); color: var(--_fg-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kit-ruled-text { grid-area: text; font-size: var(--kit-text-md); line-height: 1.5; color: var(--_fg-2); }
+@container kit-ruled-list (max-width: 36rem) {
+  .kit-ruled-row { grid-template-columns: 2.5rem minmax(0, 1fr); grid-template-areas: "num name" "num value" "num text"; column-gap: var(--kit-space-3); padding-block: var(--kit-space-4); }
+  .kit-ruled-value { justify-self: start; text-align: start; white-space: normal; color: var(--kit-fg); }
+  .kit-section-ruled-list[data-tone="dark"] .kit-ruled-value { color: inherit; }
+}

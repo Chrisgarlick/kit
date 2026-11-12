@@ -27,6 +27,7 @@
     "legal": { "type": "list", "label": "Legal links", "max": 4, "item": {
       "label": { "type": "text", "label": "Label", "required": true, "max": 30 },
       "url": { "type": "url", "label": "Address", "required": true }
-    }}
+    }},
+    "wordmark": { "type": "text", "label": "Wordmark", "help": "Very large type at the very bottom, cropped by the edge: the brand name, usually. Decoration, so screen readers skip it.", "max": 40 }
   }
 }

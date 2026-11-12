@@ -74,4 +74,7 @@
       @endif
     </div>
   </div>
+@if($content['wordmark'])
+  <p class="kit-footer-wordmark" aria-hidden="true">{{ $content['wordmark'] }}</p>
+@endif
 </footer>

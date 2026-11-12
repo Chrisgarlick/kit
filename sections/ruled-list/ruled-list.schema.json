@@ -1,0 +1,78 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "ruled-list",
+  "title": "Ruled list",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "Numbered rows between thin rules: a name, a one-line description and a value on the right (a duration, a size). Each row can link to its page.",
+  "fields": {
+    "eyebrow": {
+      "type": "text",
+      "label": "Label above the heading",
+      "max": 60
+    },
+    "title": {
+      "type": "rich-text",
+      "label": "Heading",
+      "help": "Optional. *Words in stars* are set in italics.",
+      "max": 120
+    },
+    "heading_level": {
+      "type": "heading-level",
+      "label": "Heading level",
+      "default": 2
+    },
+    "lede": {
+      "type": "rich-text",
+      "label": "Intro",
+      "max": 240
+    },
+    "rows": {
+      "type": "list",
+      "label": "Rows",
+      "min": 1,
+      "max": 12,
+      "item": {
+        "number": {
+          "type": "text",
+          "label": "Number",
+          "help": "Leave empty to number rows in order (01, 02…).",
+          "max": 6
+        },
+        "name": {
+          "type": "rich-text",
+          "label": "Name",
+          "help": "*Words in stars* are set in italics.",
+          "required": true,
+          "max": 60
+        },
+        "text": {
+          "type": "text",
+          "label": "Description",
+          "help": "One line.",
+          "max": 140
+        },
+        "value": {
+          "type": "text",
+          "label": "Value",
+          "help": "Shown on the right: \"1 to 3 weeks\", \"Monthly\".",
+          "max": 30
+        },
+        "url": {
+          "type": "url",
+          "label": "Link"
+        }
+      }
+    },
+    "tone": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "dark",
+        "tinted",
+        "plain"
+      ],
+      "default": "plain"
+    }
+  }
+}
