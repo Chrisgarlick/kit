@@ -31,9 +31,11 @@ echo kit_section(__DIR__ . '/kit/header.php', ['content' => $header]);
 | `brand_name` | text, required | Shown beside the mark or logo. Bound to the site's name. |
 | `logo` | image | Replaces the square mark. Its alt is empty: the name beside it says it. |
 | `home_url` | url | Defaults to `/`. |
-| `links` | list (up to 7) | `label`, `url`, and `current` for the page you're on. |
+| `links` | list (up to 7) | `label`, `url`, and `current` for the page you're on (`aria-current="page"`, the accent colour and an underline). |
+| `numbered` | boolean | Shows "01", "02"… before each link, in the mono face. Off by default. The number is `aria-hidden`: the link's name stays its label. |
 | `phone` | text | Linked with `tel:`; below 72rem only the icon shows. Bound to the site's phone. |
 | `action_label`, `action_url` | text, url | The one primary button. Left out when either is empty. |
+| `tone` | `plain` or `dark` | `plain` (the default) uses the page's colours; `dark` sits on the `--kit-inverse-*` band, like the footer, so the logo must read on it. |
 
 ## Layout
 
@@ -45,6 +47,8 @@ gaps close up; below 54rem the links and the button fold into the menu.
 
 - The links are a `<nav aria-label="Main">`; the current page has `aria-current="page"`, shown
   with an underline as well as the colour.
+- Numbered links read as their label alone ("Services", not "01 Services"): the number is
+  decoration, hidden from screen readers.
 - The menu is a native `<details>`: its summary is a real control that says whether it's open
   (`aria-expanded` comes with it) and works without JavaScript. The folded menu repeats the
   links in a second `<nav aria-label="Menu">`; only one of the two is ever displayed.

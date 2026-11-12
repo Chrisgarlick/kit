@@ -2,7 +2,8 @@
  * Section: gallery (tier 1). A section head and a grid of photos.
  *   <section class="kit-section-gallery" data-background="plain|tinted"> … </section>
  * Photos are cropped to 4:3 so the grid stays even; an empty one shows a
- * placeholder until it's chosen.
+ * placeholder until it's chosen. data-cols="1" is a single column of wide
+ * (16:9) photos; a section head with data-rule has a heavy rule under it.
  */
 .kit-section-gallery { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
 .kit-section-gallery[data-background="tinted"] { background: var(--kit-band); }
@@ -11,3 +12,6 @@
 .kit-gallery-media[data-empty] { display: grid; place-items: center; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); box-sizing: border-box; }
 .kit-gallery-media[data-empty] .kit-icon { inline-size: 28px; block-size: 28px; }
 .kit-gallery-item figcaption { font-size: var(--kit-text-sm); color: var(--kit-fg-2); }
+.kit-gallery-grid[data-cols="1"] { --_cols: 1; }
+.kit-gallery-grid[data-cols="1"] .kit-gallery-media { aspect-ratio: 16 / 9; }
+.kit-section-gallery .kit-section-head[data-rule] { padding-block-end: var(--kit-space-5); border-block-end: 3px solid var(--kit-fg); }

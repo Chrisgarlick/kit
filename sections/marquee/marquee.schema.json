@@ -1,0 +1,51 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "marquee",
+  "title": "Marquee",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "One line of large type scrolling slowly between sections: a few short phrases with a separator. Still for visitors who ask for less motion.",
+  "fields": {
+    "phrases": {
+      "type": "list",
+      "label": "Phrases",
+      "min": 1,
+      "max": 8,
+      "item": {
+        "text": {
+          "type": "rich-text",
+          "label": "Phrase",
+          "help": "A few words. *Words in stars* are set in italics.",
+          "required": true,
+          "max": 60
+        }
+      }
+    },
+    "separator": {
+      "type": "text",
+      "label": "Separator",
+      "help": "Shown between phrases: \"·\", \"/\", \"✦\".",
+      "max": 3,
+      "default": "·"
+    },
+    "speed": {
+      "type": "enum",
+      "label": "Speed",
+      "options": [
+        "slow",
+        "normal"
+      ],
+      "default": "slow"
+    },
+    "tone": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "dark",
+        "tinted",
+        "plain"
+      ],
+      "default": "dark"
+    }
+  }
+}

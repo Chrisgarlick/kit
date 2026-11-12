@@ -4,6 +4,8 @@
  * links and the action fold into a <details> menu.
  *   <header class="kit-section-header"> … </header>   (from header.blade.php)
  * The section is a size container, so it folds by its own width, not the page's.
+ * data-tone="dark" puts it on the inverse band (--kit-inverse-*), like the
+ * footer; .kit-header-num is a link's decorative number (numbered links).
  */
 .kit-section-header { container: kit-header / inline-size; position: relative; z-index: 10; background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
 .kit-section-header svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
@@ -19,7 +21,12 @@
 .kit-header-nav { margin-inline: auto; }
 .kit-header-nav ul { display: flex; gap: var(--kit-space-6); }
 .kit-header-nav a { font-size: var(--kit-text-md); padding-block: var(--kit-space-2); text-decoration: underline 2px transparent; text-underline-offset: 8px; transition: text-decoration-color var(--kit-duration); }
-.kit-header-nav a:hover, .kit-header-nav a[aria-current="page"] { text-decoration-color: var(--kit-accent); }
+.kit-header-nav a:hover { text-decoration-color: var(--kit-accent); }
+/* The page you're on: the accent colour and the underline, so it isn't colour alone. */
+.kit-header-nav a[aria-current="page"] { color: var(--kit-accent); text-decoration-color: currentColor; }
+/* Numbered links: "01 Services". The number is aria-hidden, and inline-block so the underline skips it. */
+.kit-header-num { display: inline-block; margin-inline-end: 0.5em; font-family: var(--kit-font-mono); font-size: 0.75em; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--kit-fg-3); }
+.kit-section-header a[aria-current="page"] .kit-header-num { color: inherit; }
 
 .kit-header-end { display: flex; align-items: center; gap: var(--kit-space-4); margin-inline-start: auto; }
 .kit-header-nav + .kit-header-end { margin-inline-start: 0; }
@@ -55,6 +62,20 @@
 @container kit-header (max-width: 22rem) {
   .kit-header-phone { display: none; }
 }
+/* The dark tone: the inverse band, its text and lines, and focus rings that read on it. */
+.kit-section-header[data-tone="dark"] { background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); }
+.kit-section-header[data-tone="dark"] :is(.kit-header-phone, .kit-header-num) { color: var(--kit-inverse-fg-2); }
+.kit-section-header[data-tone="dark"] .kit-header-phone:hover { color: var(--kit-inverse-fg); }
+.kit-section-header[data-tone="dark"] a:focus-visible, .kit-section-header[data-tone="dark"] .kit-header-menu > summary:focus-visible { outline-color: var(--kit-inverse-fg); }
+.kit-section-header[data-tone="dark"] .kit-header-menu > summary { --_fg: var(--kit-inverse-fg-2); --_hover: color-mix(in srgb, var(--kit-inverse-fg) 12%, transparent); }
+.kit-section-header[data-tone="dark"] .kit-header-menu > summary:hover { color: var(--kit-inverse-fg); }
+.kit-section-header[data-tone="dark"] .kit-header-sheet { background: var(--kit-inverse-bg); border-color: var(--kit-inverse-line); }
+.kit-section-header[data-tone="dark"] .kit-header-sheet li + li { border-color: var(--kit-inverse-line); }
+/* On the band the links step back and the current one comes forward, its underline in the accent. */
+.kit-section-header[data-tone="dark"] :is(.kit-header-nav, .kit-header-sheet ul) a { color: var(--kit-inverse-fg-2); }
+.kit-section-header[data-tone="dark"] :is(.kit-header-nav, .kit-header-sheet ul) a:is(:hover, [aria-current="page"]) { color: var(--kit-inverse-fg); }
+.kit-section-header[data-tone="dark"] .kit-header-nav a[aria-current="page"] { text-decoration-color: var(--kit-accent); }
+.kit-section-header[data-tone="dark"] .kit-header-sheet ul a[aria-current="page"] { text-decoration: underline 2px var(--kit-accent); text-underline-offset: 6px; }
 @media (forced-colors: active) {
   .kit-header-mark { background: CanvasText; }
 }

@@ -1,0 +1,172 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "prose",
+  "title": "Prose",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "The body of an article or a legal page: a readable column of paragraphs, headings, lists, quotes, numbers, code, tables and figures, each a block of its own.",
+  "variants": {
+    "default": "Column centred",
+    "left": "Column on the left"
+  },
+  "fields": {
+    "blocks": {
+      "type": "list",
+      "label": "Blocks",
+      "help": "The body, in order. Each block is one kind; fill only the fields that kind uses.",
+      "min": 1,
+      "max": 120,
+      "item": {
+        "kind": {
+          "type": "enum",
+          "label": "Kind",
+          "help": "paragraph: Text. heading: Number, Text, Heading level. list: Points, Numbered. quote: Text, Who said it. stats: Numbers. code: Code, Caption. table: Caption, Column headings, Rows, First column names each row. figure: Image, Caption, Figure width.",
+          "options": ["paragraph", "heading", "list", "quote", "stats", "code", "table", "figure"],
+          "default": "paragraph"
+        },
+        "text": {
+          "type": "rich-text",
+          "label": "Text",
+          "help": "A paragraph, a heading or a quote. *Stars* for italics, **double stars** for bold; a blank line starts a new paragraph.",
+          "max": 3000
+        },
+        "number": {
+          "type": "text",
+          "label": "Number",
+          "help": "A heading's number, like \"01\". Optional.",
+          "max": 8
+        },
+        "heading_level": {
+          "type": "heading-level",
+          "label": "Heading level",
+          "help": "2 for the article's main headings, 3 for the ones under them.",
+          "default": 2
+        },
+        "items": {
+          "type": "list",
+          "label": "Points",
+          "help": "A list's points, in order.",
+          "max": 30,
+          "item": {
+            "text": {
+              "type": "rich-text",
+              "label": "Point",
+              "required": true,
+              "max": 400
+            }
+          }
+        },
+        "ordered": {
+          "type": "boolean",
+          "label": "Numbered",
+          "help": "Number a list's points, when their order matters (steps)."
+        },
+        "attribution": {
+          "type": "text",
+          "label": "Who said it",
+          "help": "A quote's source: \"Name · where it's from\".",
+          "max": 120
+        },
+        "stats": {
+          "type": "list",
+          "label": "Numbers",
+          "help": "Two or three numbers side by side, each with what it measures.",
+          "max": 3,
+          "item": {
+            "value": {
+              "type": "text",
+              "label": "Number",
+              "help": "\"28 ms\", \"58 → 13\".",
+              "required": true,
+              "max": 16
+            },
+            "label": {
+              "type": "text",
+              "label": "What it measures",
+              "required": true,
+              "max": 80
+            }
+          }
+        },
+        "code": {
+          "type": "textarea",
+          "label": "Code",
+          "help": "Shown exactly as typed, spaces and all, in a fixed-width face.",
+          "max": 6000
+        },
+        "caption": {
+          "type": "rich-text",
+          "label": "Caption",
+          "help": "Names a code block (its language or file), a table or a figure.",
+          "max": 240
+        },
+        "columns": {
+          "type": "list",
+          "label": "Column headings",
+          "help": "A table's header row.",
+          "max": 6,
+          "item": {
+            "text": {
+              "type": "text",
+              "label": "Heading",
+              "required": true,
+              "max": 60
+            }
+          }
+        },
+        "rows": {
+          "type": "list",
+          "label": "Rows",
+          "help": "A table's rows, each with one cell per column.",
+          "max": 40,
+          "item": {
+            "cells": {
+              "type": "list",
+              "label": "Cells",
+              "max": 6,
+              "item": {
+                "text": {
+                  "type": "rich-text",
+                  "label": "Cell",
+                  "max": 200
+                }
+              }
+            }
+          }
+        },
+        "row_headers": {
+          "type": "boolean",
+          "label": "First column names each row",
+          "help": "Read the first cell of each row as that row's heading."
+        },
+        "image": {
+          "type": "image",
+          "label": "Image",
+          "help": "A figure's image. Describe it in the alt text, or leave the alt text empty if the caption says it all and the image adds nothing.",
+          "alt": "optional",
+          "sizes": "hero"
+        },
+        "size": {
+          "type": "enum",
+          "label": "Figure width",
+          "help": "Wide figures break out of the column to the width of the page.",
+          "options": ["column", "wide"],
+          "default": "column"
+        }
+      }
+    },
+    "width": {
+      "type": "enum",
+      "label": "Column width",
+      "help": "Normal is about 45rem (around 75 characters a line); narrow suits a legal page or a short note.",
+      "options": ["normal", "narrow"],
+      "default": "normal"
+    },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": ["plain", "tinted"],
+      "default": "plain"
+    }
+  }
+}

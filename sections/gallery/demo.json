@@ -27,5 +27,22 @@
         }
       ]
     }
+  },
+  {
+    "title": "One column, with a rule under the heading",
+    "content": {
+      "eyebrow": "Recent work",
+      "title": "The work, *large*",
+      "rule": true,
+      "columns": "1",
+      "images": [
+        {
+          "caption": "A kitchen refit, Leeds"
+        },
+        {
+          "caption": "A bathroom, York"
+        }
+      ]
+    }
   }
 ]

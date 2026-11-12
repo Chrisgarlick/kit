@@ -5,7 +5,7 @@ return function ($content = [], $variant = 'default'): void {
 
 <section class="kit-section-services" data-background="<?php echo kit_e($content['background']); ?>">
   <div class="kit-container">
-    <div class="kit-section-head"<?php if (($variant === 'centred')): ?> data-align="centre"<?php endif; ?>>
+    <div class="kit-section-head"<?php if (($variant === 'centred')): ?> data-align="centre"<?php endif; ?><?php echo kit_e(($content['rule'] ? ' data-rule' : '')); ?>>
       <div class="kit-section-head-text">
         <?php if ($content['eyebrow']): ?>
         <p class="kit-section-head-eyebrow"><?php echo kit_e($content['eyebrow']); ?></p>
@@ -22,10 +22,13 @@ return function ($content = [], $variant = 'default'): void {
     <ul class="kit-grid kit-services-grid" data-cols="<?php echo kit_e($content['columns']); ?>" data-min="sm" role="list">
       <?php foreach ($content['services'] as $service): ?>
       <li class="kit-card kit-service-card">
+<?php if ($service['number']): ?>
+        <p class="kit-service-number"><?php echo kit_e($service['number']); ?></p>
+<?php endif; ?>
         <?php if ($service['icon']): ?>
         <span class="kit-service-icon"><?php echo kit_e(kit_icon($service['icon'])); ?></span>
         <?php endif; ?>
-        <h3 class="kit-service-title"><?php echo kit_e($service['title']); ?></h3>
+        <h3 class="kit-service-title"><?php echo kit_e($service['title']); ?><?php if ($service['subtitle']): ?> <span class="kit-service-subtitle"><?php echo kit_e(kit_rich($service['subtitle'])); ?></span><?php endif; ?></h3>
         <?php if ($service['text']): ?>
         <p class="kit-service-text"><?php echo kit_e($service['text']); ?></p>
         <?php endif; ?>

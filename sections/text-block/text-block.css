@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: MIT
  * Section: text block (tier 1). kit's text block as a section of its own.
- *   <section class="kit-section-text-block" data-background="plain|tinted"> … </section>
+ *   <section class="kit-section-text-block" data-background="plain|tinted" [data-title-size="large"]> … </section>
+ * A large title is display size, and the block widens to carry it.
  */
 .kit-section-text-block { padding-block: var(--kit-section-pad-y); background: var(--kit-bg); }
 .kit-section-text-block[data-background="tinted"] { background: var(--kit-band); }
+.kit-section-text-block[data-title-size="large"] .kit-text-block { max-inline-size: 52rem; }
+.kit-section-text-block[data-title-size="large"] .kit-text-block-title { font-size: clamp(2.5rem, 1.5rem + 4vw, 5rem); line-height: 1; }

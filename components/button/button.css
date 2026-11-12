@@ -3,6 +3,7 @@
  *   data-variant  primary | secondary (default) | ghost | danger
  *   data-size     sm | md (default) | lg
  *   data-icon     square, icon-only (give it an aria-label)
+ *   data-arrow    a trailing arrow, drawn by CSS (not read out), nudged on hover
  *   aria-busy="true" shows a spinner and keeps the button focusable
  */
 .kit-button {
@@ -38,6 +39,15 @@
 .kit-button[data-size="lg"] { --_h: var(--kit-control-lg); font-size: var(--kit-text-lg); }
 .kit-button[data-icon] { inline-size: var(--_h); padding-inline: 0; }
 
+/* The trailing arrow: a masked shape in the text colour, so it follows every variant. */
+.kit-button[data-arrow]::after {
+  content: ""; inline-size: 1em; block-size: 1em; flex: none; background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 12h14M13 6l6 6-6 6%27/%3E%3C/svg%3E") center / contain no-repeat; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 12h14M13 6l6 6-6 6%27/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: translate var(--kit-duration) var(--kit-ease);
+}
+.kit-button[data-arrow]:hover::after { translate: 3px 0; }
+.kit-button[data-arrow]:dir(rtl)::after { scale: -1 1; }
+
 .kit-button:disabled, .kit-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; transform: none; }
 .kit-button[aria-busy="true"] { cursor: progress; }
 .kit-button[aria-busy="true"]::before {
@@ -46,5 +56,5 @@
   animation: kit-spin 700ms linear infinite;
 }
 @keyframes kit-spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .kit-button[aria-busy="true"]::before { animation-duration: 2s; } }
-@media (forced-colors: active) { .kit-button { border-color: ButtonText; } }
+@media (prefers-reduced-motion: reduce) { .kit-button[aria-busy="true"]::before { animation-duration: 2s; } .kit-button[data-arrow]::after { transition: none; } }
+@media (forced-colors: active) { .kit-button { border-color: ButtonText; } .kit-button[data-arrow]::after { forced-color-adjust: none; } }

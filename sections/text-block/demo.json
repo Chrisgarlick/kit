@@ -19,5 +19,59 @@
       "link_label": "Learn more", "link_url": "/about",
       "background": "tinted"
     }
+  },
+  {
+    "title": "Large heading, eight points",
+    "content": {
+      "eyebrow": "How I work",
+      "title": "READ THIS *first*",
+      "title_size": "large",
+      "body": "What happens from the first message to the site going live, in plain words.",
+      "points": [
+        {
+          "text": "A written scope before any code"
+        },
+        {
+          "text": "A fixed price, in stages"
+        },
+        {
+          "text": "Something to see every week"
+        },
+        {
+          "text": "Your content, in your CMS"
+        },
+        {
+          "text": "Tested on phones and screen readers"
+        },
+        {
+          "text": "Hosting and backups set up"
+        },
+        {
+          "text": "A handover call and notes"
+        },
+        {
+          "text": "Care after launch, if you want it"
+        }
+      ],
+      "link_label": "Start a project",
+      "link_url": "/start"
+    }
+  },
+  {
+    "title": "Phone: large heading",
+    "width": "mobile",
+    "content": {
+      "title": "READ THIS *first*",
+      "title_size": "large",
+      "body": "What happens from the first message to the site going live.",
+      "points": [
+        {
+          "text": "A written scope before any code"
+        },
+        {
+          "text": "A fixed price, in stages"
+        }
+      ]
+    }
   }
 ]

@@ -1,8 +1,9 @@
 /* SPDX-License-Identifier: MIT
  * Section: hero (tier 1). The first section on a page.
- *   <section class="kit-section-hero" data-variant="default|centred"> … </section>
+ *   <section class="kit-section-hero" data-variant="default|centred|text" [data-title-size="large"]> … </section>
  * default: the text and the image side by side; centred: the text centred
- * with the image below. Below 48rem (of the section's own width) both stack.
+ * with the image below; text: no image, the text across a wider measure.
+ * Below 48rem (of the section's own width) both stack.
  */
 .kit-section-hero { container: kit-hero / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
 .kit-section-hero svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
@@ -13,6 +14,9 @@
 .kit-hero-eyebrow { font-family: var(--kit-font-mono); font-size: var(--kit-text-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kit-accent); }
 .kit-hero-title { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(2.5rem, 2rem + 2.6vw, 4rem); line-height: 1.04; text-wrap: balance; }
 .kit-hero-title em { font-style: italic; }
+.kit-section-hero[data-title-size="large"] .kit-hero-title { font-size: clamp(3rem, 1.6rem + 5.6vw, 7rem); line-height: 0.96; }
+.kit-hero-eyebrow:has(.kit-icon) { display: inline-flex; align-items: center; gap: var(--kit-space-2); }
+.kit-hero-eyebrow .kit-icon { inline-size: 1.25em; block-size: 1.25em; }
 .kit-hero-lede { font-size: var(--kit-text-xl); line-height: 1.45; color: var(--kit-fg-2); max-inline-size: 34em; text-wrap: pretty; }
 .kit-hero-actions { display: flex; flex-wrap: wrap; gap: var(--kit-space-3); padding-block-start: var(--kit-space-2); }
 .kit-hero-proof { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-md); color: var(--kit-fg-2); }
@@ -26,6 +30,11 @@
 .kit-section-hero[data-variant="centred"] .kit-hero-text { justify-items: center; text-align: center; max-inline-size: 48rem; }
 .kit-section-hero[data-variant="centred"] .kit-hero-actions { justify-content: center; }
 .kit-section-hero[data-variant="centred"] .kit-hero-media { aspect-ratio: 16 / 7; }
+
+/* Text only: one column, the heading free to run wider than half the page. */
+.kit-section-hero[data-variant="text"] .kit-hero-inner { grid-template-columns: minmax(0, 1fr); }
+.kit-section-hero[data-variant="text"] .kit-hero-text { max-inline-size: 64rem; }
+.kit-section-hero[data-variant="text"] .kit-hero-title { max-inline-size: 18em; }
 
 @container kit-hero (max-width: 48rem) {
   .kit-hero-inner { grid-template-columns: minmax(0, 1fr); gap: var(--kit-space-6); }

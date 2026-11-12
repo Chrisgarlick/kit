@@ -37,5 +37,59 @@
       "link_label": "Our story", "link_url": "/about",
       "background": "tinted"
     }
+  },
+  {
+    "title": "FAQ: numbered questions (ten)",
+    "content": {
+      "eyebrow": "Questions",
+      "title": "Questions, *numbered*",
+      "body": "The things people want to know before they get in touch. Anything else, just ask.",
+      "link_label": "Ask us something",
+      "link_url": "/contact",
+      "media": "questions",
+      "questions": [
+        {
+          "question": "How quickly can you come out?",
+          "answer": "A short, straight answer: two or three sentences, with the detail people actually need before they get in touch."
+        },
+        {
+          "question": "Do you charge for a quote?",
+          "answer": "No. Quotes are free and in writing, usually within a day."
+        },
+        {
+          "question": "Which areas do you cover?",
+          "answer": "Leeds and anywhere within about 20 miles."
+        },
+        {
+          "question": "Are you insured and accredited?",
+          "answer": "Yes: fully insured, and Gas Safe registered."
+        },
+        {
+          "question": "How do I pay?",
+          "answer": "By bank transfer or card when the job's done. **No deposits** for jobs under £500."
+        },
+        {
+          "question": "Another question people ask (6)?",
+          "answer": "A short, plain answer."
+        },
+        {
+          "question": "Another question people ask (7)?",
+          "answer": "A short, plain answer."
+        },
+        {
+          "question": "Another question people ask (8)?",
+          "answer": "A short, plain answer."
+        },
+        {
+          "question": "Another question people ask (9)?",
+          "answer": "A short, plain answer."
+        },
+        {
+          "question": "Another question people ask (10)?",
+          "answer": "A short, plain answer."
+        }
+      ],
+      "numbered": true
+    }
   }
 ]

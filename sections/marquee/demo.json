@@ -1,0 +1,42 @@
+[
+  {
+    "title": "On the dark band",
+    "content": {
+      "phrases": [
+        {
+          "text": "Websites that *load fast*"
+        },
+        {
+          "text": "WordPress *rescued*"
+        },
+        {
+          "text": "Laravel *built to last*"
+        },
+        {
+          "text": "Written scope, *no surprises*"
+        }
+      ],
+      "separator": "✦"
+    }
+  },
+  {
+    "title": "Phone, plain, normal speed",
+    "width": "mobile",
+    "content": {
+      "phrases": [
+        {
+          "text": "Audit"
+        },
+        {
+          "text": "*Fix*"
+        },
+        {
+          "text": "Rebuild"
+        }
+      ],
+      "separator": "/",
+      "speed": "normal",
+      "tone": "plain"
+    }
+  }
+]

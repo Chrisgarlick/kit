@@ -26,7 +26,7 @@ block it can be filled by hand, for a few featured products that link to another
 | `categories` | list | Filter links: `label`, `url`, `current`. |
 | `sort_options`, `sort_url`, `sort_name` | | A GET form: the select's name is `sort_name` (WooCommerce's `orderby`), its options `label` and `value`. Empty, no sort. |
 | `columns` | `2`, `3` or `4` | Two a row on a phone. |
-| `products` | list (up to 48) | `name`, `url`, `image`, `price`, `was_price`, `badge` (`none`, `sale`, `sold-out`, `new`), `add_label`, `add_url`. |
+| `products` | list (up to 48) | `name`, `url`, `image`, `price`, `was_price`, `badge` (`none`, `sale`, `sold-out`, `new`), `add_label`, `add_url`, and `label`: optional text shown in place of the price ("Free PDF · checklist", "Email first"), so a grid can list resources. With a label, `price` may be left empty. |
 
 ## Accessibility
 

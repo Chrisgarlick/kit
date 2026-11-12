@@ -3,7 +3,7 @@
 return function ($content = [], $variant = 'default'): void {
 ?>
 
-<header class="kit-section-header">
+<header class="kit-section-header"<?php if (($content['tone'] !== 'plain')): ?> data-tone="<?php echo kit_e($content['tone']); ?>"<?php endif; ?>>
   <div class="kit-container kit-header-bar">
     <a class="kit-header-brand" href="<?php echo kit_e(kit_url($content['home_url'])); ?>">
       <?php if ($content['logo']): ?>
@@ -16,8 +16,8 @@ return function ($content = [], $variant = 'default'): void {
     <?php if (count($content['links'])): ?>
     <nav class="kit-header-nav" aria-label="Main">
       <ul role="list">
-        <?php foreach ($content['links'] as $link): ?>
-        <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php endif; ?>><?php echo kit_e($link['label']); ?></a></li>
+        <?php foreach ($content['links'] as $i => $link): ?>
+        <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php endif; ?>><?php if ($content['numbered']): ?><span class="kit-header-num" aria-hidden="true">0<?php echo kit_e(($i + 1)); ?></span><?php endif; ?><?php echo kit_e($link['label']); ?></a></li>
         <?php endforeach; ?>
       </ul>
     </nav>
@@ -34,8 +34,8 @@ return function ($content = [], $variant = 'default'): void {
         <summary class="kit-button" data-variant="ghost"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></summary>
         <nav class="kit-header-sheet" aria-label="Menu">
           <ul role="list">
-            <?php foreach ($content['links'] as $link): ?>
-            <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php endif; ?>><?php echo kit_e($link['label']); ?></a></li>
+            <?php foreach ($content['links'] as $i => $link): ?>
+            <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php endif; ?>><?php if ($content['numbered']): ?><span class="kit-header-num" aria-hidden="true">0<?php echo kit_e(($i + 1)); ?></span><?php endif; ?><?php echo kit_e($link['label']); ?></a></li>
             <?php endforeach; ?>
           </ul>
           <?php if (($content['action_label'] && $content['action_url'])): ?>

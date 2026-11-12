@@ -19,11 +19,12 @@ The heading row has the [section head](/content/section-head/)'s fields. Then:
 
 | Field | Type | Notes |
 |---|---|---|
-| `columns` | `2`, `3` or `4` | |
+| `rule` | boolean | Off by default. A heavy rule (3px, the text colour) under the heading row. |
+| `columns` | `1`, `2`, `3` or `4` | 3 by default. `1` is a single column of wide photos, cropped to 16:9. |
 | `images` | list (up to 24) | `image` (alt text required), `caption`. A photo not chosen yet shows a placeholder. |
 | `background` | `plain` or `tinted` | |
 
-Photos are lazy-loaded and cropped to 4:3 so the grid stays even.
+Photos are lazy-loaded and cropped to 4:3 (16:9 in one column) so the grid stays even.
 
 ## Accessibility
 

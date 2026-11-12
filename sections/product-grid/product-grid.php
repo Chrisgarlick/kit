@@ -70,7 +70,7 @@ return function ($content = [], $variant = 'default'): void {
           <?php endif; ?>
         </div>
         <h3 class="kit-product-name"><?php if ($product['url']): ?><a class="kit-product-link" href="<?php echo kit_e(kit_url($product['url'])); ?>"><?php echo kit_e($product['name']); ?></a><?php else: ?><?php echo kit_e($product['name']); ?><?php endif; ?></h3>
-        <p class="kit-product-price"><?php if ($product['was_price']): ?><span class="kit-product-now"><span class="kit-vh">Now </span><?php echo kit_e($product['price']); ?></span> <s class="kit-product-was"><span class="kit-vh">was </span><?php echo kit_e($product['was_price']); ?></s><?php else: ?><?php echo kit_e($product['price']); ?><?php endif; ?></p>
+        <p class="<?php echo kit_e(($product['label'] ? 'kit-product-label' : 'kit-product-price')); ?>"><?php if ($product['label']): ?><?php echo kit_e($product['label']); ?><?php elseif ($product['was_price']): ?><span class="kit-product-now"><span class="kit-vh">Now </span><?php echo kit_e($product['price']); ?></span> <s class="kit-product-was"><span class="kit-vh">was </span><?php echo kit_e($product['was_price']); ?></s><?php else: ?><?php echo kit_e($product['price']); ?><?php endif; ?></p>
       </li>
       <?php endforeach; ?>
     </ul>

@@ -78,5 +78,91 @@
         }
       ]
     }
+  },
+  {
+    "title": "Numbered cards, two-line names, a rule under the heading",
+    "content": {
+      "eyebrow": "Services",
+      "title": "One developer *for all three*",
+      "rule": true,
+      "services": [
+        {
+          "number": "01 — Laravel",
+          "title": "Custom builds",
+          "subtitle": "*from a written scope*",
+          "text": "A site or tool built on Laravel, with the hosting and the care after launch.",
+          "link_label": "Find out more",
+          "link_url": "/services/laravel"
+        },
+        {
+          "number": "02 — WordPress",
+          "title": "Rebuilds and rescues",
+          "subtitle": "*fast, safe, yours*",
+          "text": "A WordPress site made quick and secure, on blocks you can edit yourself.",
+          "link_label": "Find out more",
+          "link_url": "/services/wordpress"
+        },
+        {
+          "number": "03 — AI",
+          "title": "One workflow",
+          "subtitle": "*automated properly*",
+          "text": "One repeated job taken off your plate, with a person checking what matters.",
+          "link_label": "Find out more",
+          "link_url": "/services/ai"
+        }
+      ]
+    }
+  },
+  {
+    "title": "One column, with a rule",
+    "content": {
+      "title": "Ways to work together",
+      "rule": true,
+      "columns": "1",
+      "services": [
+        {
+          "number": "01 — Laravel",
+          "title": "Custom builds",
+          "subtitle": "*from a written scope*",
+          "text": "A site or tool built on Laravel, with the hosting and the care after launch.",
+          "link_label": "Find out more",
+          "link_url": "/services/laravel"
+        },
+        {
+          "number": "02 — WordPress",
+          "title": "Rebuilds and rescues",
+          "subtitle": "*fast, safe, yours*",
+          "text": "A WordPress site made quick and secure, on blocks you can edit yourself.",
+          "link_label": "Find out more",
+          "link_url": "/services/wordpress"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone: numbered cards",
+    "width": "mobile",
+    "content": {
+      "title": "One developer *for all three*",
+      "rule": true,
+      "services": [
+        {
+          "number": "01 — Laravel",
+          "title": "Custom builds",
+          "subtitle": "*from a written scope*",
+          "text": "A site or tool built on Laravel, with the hosting and the care after launch.",
+          "link_label": "Find out more",
+          "link_url": "/services/laravel"
+        },
+        {
+          "number": "02 — WordPress",
+          "title": "Rebuilds and rescues",
+          "subtitle": "*fast, safe, yours*",
+          "text": "A WordPress site made quick and secure, on blocks you can edit yourself.",
+          "link_label": "Find out more",
+          "link_url": "/services/wordpress"
+        }
+      ]
+    }
   }
 ]

@@ -179,5 +179,30 @@
         }
       ]
     }
+  },
+  {
+    "title": "Resources: labels in place of prices",
+    "content": {
+      "title": "Guides and checklists",
+      "heading_level": 2,
+      "columns": "3",
+      "products": [
+        {
+          "name": "Website rebuild checklist",
+          "url": "/resources/rebuild-checklist",
+          "label": "Free PDF · checklist"
+        },
+        {
+          "name": "WordPress speed and security checklist",
+          "url": "/resources/wordpress-checklist",
+          "label": "Free PDF · checklist"
+        },
+        {
+          "name": "How to write a website brief",
+          "url": "/resources/brief",
+          "label": "Email first · template"
+        }
+      ]
+    }
   }
 ]

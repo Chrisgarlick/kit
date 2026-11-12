@@ -1,0 +1,67 @@
+[
+  {
+    "title": "With a heading, rows linked",
+    "content": {
+      "eyebrow": "Services",
+      "title": "Ways to work *together*",
+      "lede": "Each one starts with a written scope, so you know what you're getting before work begins.",
+      "rows": [
+        {
+          "name": "Fix sprint",
+          "text": "A focused week on the issues slowing your site down.",
+          "value": "About a week",
+          "url": "/services/fix-sprint"
+        },
+        {
+          "name": "WordPress *rescue*",
+          "text": "Updates, security and speed for a site nobody looks after.",
+          "value": "1 to 3 weeks",
+          "url": "/services/wordpress-rescue"
+        },
+        {
+          "name": "Laravel takeover",
+          "text": "An audit, then a plan for an app another team built.",
+          "value": "2 to 4 weeks",
+          "url": "/services/laravel-takeover"
+        },
+        {
+          "name": "New build",
+          "text": "A site or app from brief to launch.",
+          "value": "Scoped"
+        },
+        {
+          "name": "Care plan",
+          "text": "Updates, backups and small changes, every month.",
+          "value": "Monthly"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Phone, dark, numbers given, no heading",
+    "width": "mobile",
+    "content": {
+      "rows": [
+        {
+          "number": "I",
+          "name": "Fix sprint",
+          "text": "A focused week on the issues slowing your site down.",
+          "value": "About a week"
+        },
+        {
+          "number": "II",
+          "name": "WordPress *rescue*",
+          "text": "Updates, security and speed for a site nobody looks after.",
+          "value": "1 to 3 weeks"
+        },
+        {
+          "number": "III",
+          "name": "Care plan",
+          "text": "Updates, backups and small changes, every month.",
+          "value": "Monthly"
+        }
+      ],
+      "tone": "dark"
+    }
+  }
+]

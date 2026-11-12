@@ -2,7 +2,7 @@
 @props(['content' => [], 'variant' => 'default'])
 <section class="kit-section-gallery" data-background="{{ $content['background'] }}">
   <div class="kit-container">
-    <div class="kit-section-head"@if($variant === 'centred') data-align="centre"@endif>
+    <div class="kit-section-head"@if($variant === 'centred') data-align="centre"@endif{{ $content['rule'] ? ' data-rule' : '' }}>
       <div class="kit-section-head-text">
         @if($content['eyebrow'])
         <p class="kit-section-head-eyebrow">{{ $content['eyebrow'] }}</p>

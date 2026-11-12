@@ -23,9 +23,10 @@ echo kit_section(__DIR__ . '/kit/text-block.php', ['content' => $intro, 'variant
 |---|---|---|
 | `eyebrow` | text | A short label above the heading. |
 | `title` | rich text, required | `*Stars*` for italics. |
+| `title_size` | `normal` or `large` | `normal` by default; `large` is display size (up to 5rem), and the block widens to 52rem to carry it. |
 | `heading_level` | heading level | 2 by default. |
 | `body` | textarea | A blank line starts a new paragraph; `*italics*` and `**bold**`. |
-| `points` | list (up to 6) | Ticked points: `text`. |
+| `points` | list (any length) | Ticked points: `text`. |
 | `link_label`, `link_url` | text, url | One arrow link at the end. |
 | `background` | `plain` or `tinted` | Tinted is `--kit-band`, a step from the page colour. |
 

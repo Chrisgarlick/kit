@@ -25,7 +25,11 @@
     <div class="kit-split-questions">
       @foreach($content['questions'] as $i => $item)
       <details class="kit-accordion"{{ $i === 0 ? ' open' : '' }}>
+@if($content['numbered'])
+        <summary><span class="kit-split-number" aria-hidden="true">{{ ($i === 9 || $i === 10 || $i === 11) ? '' : '0' }}{{ $i + 1 }}</span><span class="kit-split-question">{{ $item['question'] }}</span></summary>
+@else
         <summary>{{ $item['question'] }}</summary>
+@endif
         <div class="kit-accordion-body">{{ kit_paragraphs($item['answer']) }}</div>
       </details>
       @endforeach

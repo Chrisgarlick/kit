@@ -28,7 +28,11 @@ return function ($content = [], $variant = 'default'): void {
     <div class="kit-split-questions">
       <?php foreach ($content['questions'] as $i => $item): ?>
       <details class="kit-accordion"<?php echo kit_e((($i === 0) ? ' open' : '')); ?>>
+<?php if ($content['numbered']): ?>
+        <summary><span class="kit-split-number" aria-hidden="true"><?php echo kit_e((((($i === 9) || ($i === 10)) || ($i === 11)) ? '' : '0')); ?><?php echo kit_e(($i + 1)); ?></span><span class="kit-split-question"><?php echo kit_e($item['question']); ?></span></summary>
+<?php else: ?>
         <summary><?php echo kit_e($item['question']); ?></summary>
+<?php endif; ?>
         <div class="kit-accordion-body"><?php echo kit_e(kit_paragraphs($item['answer'])); ?></div>
       </details>
       <?php endforeach; ?>

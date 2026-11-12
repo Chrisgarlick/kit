@@ -46,5 +46,27 @@
       ],
       "tone": "tinted"
     }
+  },
+  {
+    "title": "Three, each with a link",
+    "content": {
+      "stats": [
+        { "value": "4.4 ms", "label": "to serve a cached page", "link_label": "How I measured", "link_url": "/writing/caching" },
+        { "value": "58 → 13", "label": "pages after the rebuild", "link_label": "The case study", "link_url": "/work/this-site" },
+        { "value": "100", "label": "accessibility score, every page", "link_label": "How I measured", "link_url": "/writing/audits" }
+      ]
+    }
+  },
+  {
+    "title": "Phone: three stack, plain",
+    "width": "mobile",
+    "content": {
+      "stats": [
+        { "value": "4.4 ms", "label": "to serve a cached page", "link_label": "How I measured", "link_url": "/writing/caching" },
+        { "value": "58 → 13", "label": "pages after the rebuild" },
+        { "value": "100", "label": "accessibility score, every page" }
+      ],
+      "tone": "plain"
+    }
   }
 ]

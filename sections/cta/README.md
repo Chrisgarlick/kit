@@ -21,6 +21,7 @@ echo kit_section(__DIR__ . '/kit/cta.php', ['content' => $cta]);
 
 | Field | Type | Notes |
 |---|---|---|
+| `eyebrow` | text | Optional. A short kicker above the heading, in the band's text colour. |
 | `title` | rich text, required | |
 | `heading_level` | heading level | 2 by default. |
 | `lede` | text | One reassuring line. |

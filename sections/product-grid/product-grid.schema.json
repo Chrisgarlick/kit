@@ -146,9 +146,14 @@
         "price": {
           "type": "text",
           "label": "Price",
-          "help": "As it reads: \"£14.99\".",
-          "required": true,
+          "help": "As it reads: \"£14.99\". Needed unless there's a label instead.",
           "max": 20
+        },
+        "label": {
+          "type": "text",
+          "label": "Label instead of a price",
+          "help": "For things that aren't sold, like a guide: \"Free PDF · checklist\". Shown in place of the price.",
+          "max": 60
         },
         "was_price": {
           "type": "text",

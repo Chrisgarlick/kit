@@ -30,6 +30,7 @@ echo kit_section(__DIR__ . '/kit/footer.php', ['content' => $footer]);
 | `social` | list (up to 5) | `network` (Instagram, Facebook, LinkedIn, TikTok, YouTube) and `url`. |
 | `small_print` | text | The legal name, company number and registered office. UK companies must show these. |
 | `legal` | list (up to 4) | Privacy, terms, cookies. |
+| `wordmark` | text | Optional. Very large display type at the very bottom, sized to the footer's width and cropped by its bottom edge (the footer drops its bottom padding). Decorative: `aria-hidden`, since the brand name is already in the footer. Its size is `--kit-footer-wordmark-size` (15% of the footer's width by default): set it for a long name or a wide face, since the line never wraps. |
 
 The band's colours are the `--kit-inverse-*` tokens: dark in light mode, the surface colour in dark mode.
 
@@ -42,6 +43,7 @@ The columns wrap by the section's own width; below 40rem they sit two by two und
 - Each link column is a `<nav>` named by its heading.
 - Social links are icons with an `aria-label` naming the network.
 - Text on the band meets 4.5:1 in both modes.
+- The wordmark is hidden from screen readers and can't be selected: it repeats the brand name as decoration.
 
 ## Design
 

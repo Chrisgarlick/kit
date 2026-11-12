@@ -5,7 +5,8 @@
  *   <section class="kit-section-product-grid"> … </section>
  * A card's name links to the product, and the whole card is its click
  * target; quick add sits above it. Below 40rem (the section's own width)
- * two cards a row.
+ * two cards a row. A card with a label (.kit-product-label) shows it in place
+ * of the price, for a grid of resources rather than products.
  */
 .kit-section-product-grid { container: kit-shop / inline-size; padding-block: calc(var(--kit-section-pad-y) * 0.66) var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
 .kit-shop-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--kit-space-3); margin-block-end: var(--kit-space-5); }
@@ -52,6 +53,8 @@
 .kit-product-now { color: var(--kit-bad); font-weight: 700; }
 .kit-product-was { color: var(--kit-fg-3); font-size: var(--kit-text-sm); }
 .kit-product-card[data-sold-out] .kit-product-price { color: var(--kit-fg-3); }
+/* A label in place of the price, for things that aren't sold ("Free PDF · checklist"). */
+.kit-product-label { font-size: var(--kit-text-sm); color: var(--kit-fg-2); }
 @container kit-shop (max-width: 40rem) {
   .kit-shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--kit-space-3); }
   .kit-shop-tools { flex-direction: column; align-items: stretch; }
