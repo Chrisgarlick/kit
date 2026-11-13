@@ -19,7 +19,7 @@
     "media": { "type": "enum", "label": "Beside the text", "options": ["image", "questions", "card"], "default": "image" },
     "image": { "type": "image", "label": "Image", "help": "When an image is beside the text.", "alt": "required", "sizes": "half" },
     "caption": { "type": "text", "label": "Image caption", "help": "A short line under the image, like where or when it was taken.", "max": 160 },
-    "frame": { "type": "enum", "label": "Image frame", "help": "Browser puts the image in a window, a bar with three dots and the address over it, so a screenshot reads as the product. Not drawn on a text panel.", "options": ["none", "browser"], "default": "none" },
+    "frame": { "type": "enum", "label": "Image frame", "help": "Browser puts the image in a window, a bar with three dots and the address over it, so a screenshot reads as the product. Beside a text panel, it floats in the panel's colour.", "options": ["none", "browser"], "default": "none" },
     "frame_url": { "type": "text", "label": "Address in the frame", "help": "With the browser frame: the address shown in its bar, like \"kritano.com\". Optional.", "max": 80 },
     "questions": { "type": "list", "label": "Questions", "help": "When questions are beside the text. The first starts open.", "max": 12, "item": {
       "question": { "type": "text", "label": "Question", "required": true, "max": 120 },

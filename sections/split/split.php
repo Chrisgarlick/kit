@@ -3,7 +3,7 @@
 return function ($content = [], $variant = 'default'): void {
 ?>
 
-<section class="kit-section-split" data-background="<?php echo kit_e($content['background']); ?>" data-media="<?php echo kit_e($content['media']); ?>"<?php echo kit_e(($content['swap'] ? ' data-swap' : '')); ?><?php if (($content['panel'] !== 'none')): ?> data-panel="<?php echo kit_e($content['panel']); ?>"<?php endif; ?>>
+<section class="kit-section-split" data-background="<?php echo kit_e($content['background']); ?>" data-media="<?php echo kit_e($content['media']); ?>"<?php echo kit_e(($content['swap'] ? ' data-swap' : '')); ?><?php echo kit_e(((($content['frame'] === 'browser') && ($content['media'] === 'image')) ? ' data-frame' : '')); ?><?php if (($content['panel'] !== 'none')): ?> data-panel="<?php echo kit_e($content['panel']); ?>"<?php endif; ?>>
   <div class="kit-container kit-split-inner">
     <div class="kit-text-block kit-split-text">
       <?php if ($content['eyebrow']): ?>
@@ -52,46 +52,46 @@ return function ($content = [], $variant = 'default'): void {
     <?php elseif ($content['image']): ?>
 <?php if ($content['caption']): ?>
     <figure class="kit-split-figure">
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
       <div class="kit-split-window" data-frame="browser">
         <div class="kit-split-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-split-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
       <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
       </div>
 <?php endif; ?>
       <figcaption class="kit-split-caption"><?php echo kit_e($content['caption']); ?></figcaption>
     </figure>
 <?php else: ?>
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
     <div class="kit-split-window" data-frame="browser">
       <div class="kit-split-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-split-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
     <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
     </div>
 <?php endif; ?>
 <?php endif; ?>
     <?php else: ?>
 <?php if ($content['caption']): ?>
     <figure class="kit-split-figure">
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
       <div class="kit-split-window" data-frame="browser">
         <div class="kit-split-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-split-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
       <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
       </div>
 <?php endif; ?>
       <figcaption class="kit-split-caption"><?php echo kit_e($content['caption']); ?></figcaption>
     </figure>
 <?php else: ?>
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
     <div class="kit-split-window" data-frame="browser">
       <div class="kit-split-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-split-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
     <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
-<?php if ((($content['frame'] === 'browser') && ($content['panel'] === 'none'))): ?>
+<?php if (($content['frame'] === 'browser')): ?>
     </div>
 <?php endif; ?>
 <?php endif; ?>

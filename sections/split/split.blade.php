@@ -1,6 +1,6 @@
 {{-- kit section: split. Edit this, then run `kit section compile`. --}}
 @props(['content' => [], 'variant' => 'default'])
-<section class="kit-section-split" data-background="{{ $content['background'] }}" data-media="{{ $content['media'] }}"{{ $content['swap'] ? ' data-swap' : '' }}@if($content['panel'] !== 'none') data-panel="{{ $content['panel'] }}"@endif>
+<section class="kit-section-split" data-background="{{ $content['background'] }}" data-media="{{ $content['media'] }}"{{ $content['swap'] ? ' data-swap' : '' }}{{ ($content['frame'] === 'browser' && $content['media'] === 'image') ? ' data-frame' : '' }}@if($content['panel'] !== 'none') data-panel="{{ $content['panel'] }}"@endif>
   <div class="kit-container kit-split-inner">
     <div class="kit-text-block kit-split-text">
       @if($content['eyebrow'])
@@ -49,46 +49,46 @@
     @elseif($content['image'])
 @if($content['caption'])
     <figure class="kit-split-figure">
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
       <div class="kit-split-window" data-frame="browser">
         <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
       <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
       </div>
 @endif
       <figcaption class="kit-split-caption">{{ $content['caption'] }}</figcaption>
     </figure>
 @else
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
     <div class="kit-split-window" data-frame="browser">
       <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
     <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
     </div>
 @endif
 @endif
     @else
 @if($content['caption'])
     <figure class="kit-split-figure">
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
       <div class="kit-split-window" data-frame="browser">
         <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
       <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
       </div>
 @endif
       <figcaption class="kit-split-caption">{{ $content['caption'] }}</figcaption>
     </figure>
 @else
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
     <div class="kit-split-window" data-frame="browser">
       <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
     <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
-@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+@if($content['frame'] === 'browser')
     </div>
 @endif
 @endif

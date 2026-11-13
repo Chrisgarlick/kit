@@ -12,9 +12,10 @@
  * data-media="card" puts a paper card (.kit-split-card) beside the text, on the right; data-swap
  * puts it on the left, and stacked it sits under the text. A point with data-excluded has
  * a cross (kit's text block).
- * With frame "browser" (and no panel) the image is in .kit-split-window[data-frame="browser"]: a
- * bar (.kit-split-bar, aria-hidden: three dots, the address in .kit-split-url) over it, rounded,
- * bordered and lifted, the image at its own shape under the bar (no square crop).
+ * With frame "browser" the section has [data-frame] and the image is in
+ * .kit-split-window[data-frame="browser"]: a bar (.kit-split-bar, aria-hidden: three dots, the
+ * address in .kit-split-url) over it, rounded, bordered and lifted, the image at its own shape
+ * under the bar (no square crop). Beside a panel, the window floats in the panel's colour.
  */
 .kit-section-split { container: kit-split / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); }
 .kit-section-split[data-background="tinted"] { background: var(--kit-band); }
@@ -39,7 +40,7 @@
 /* The browser frame: a window round the image, a bar on top with three dots (decoration) and
  * the address in a pill. The image keeps its own shape under the bar; the bar scales with the
  * section, and the address shortens with an ellipsis, then goes, on a narrow section. */
-.kit-split-window { inline-size: 100%; overflow: hidden; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-2); box-sizing: border-box; }
+.kit-split-window { overflow: hidden; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-2); box-sizing: border-box; }
 .kit-section-split[data-media="image"] .kit-split-window .kit-split-media { aspect-ratio: auto; border-radius: 0; }
 .kit-section-split[data-media="image"] .kit-split-window .kit-split-media[data-empty] { aspect-ratio: 16 / 10; border: 0; }
 .kit-split-bar { display: grid; grid-template-columns: 1fr minmax(0, auto) 1fr; align-items: center; gap: var(--kit-space-3); block-size: clamp(1.75rem, 1.25rem + 1.2cqi, 2.25rem); padding-inline: clamp(0.75rem, 0.5rem + 0.6cqi, 1rem); border-block-end: 1px solid var(--kit-line); background: var(--kit-surface-2); font-size: clamp(0.5rem, 0.4rem + 0.3cqi, 0.625rem); box-sizing: border-box; }
@@ -83,6 +84,19 @@
 .kit-section-split[data-panel][data-media="image"] .kit-split-media[data-empty] { border: 0; }
 .kit-section-split[data-panel][data-media="image"] .kit-split-figure { grid-template-rows: minmax(0, 1fr) auto; gap: 0; background: var(--kit-surface); }
 .kit-section-split[data-panel][data-media="image"] .kit-split-caption { padding: var(--kit-space-3) var(--kit-space-4); }
+/* A browser frame beside a panel: the panel's colour runs under the image half too, and the
+ * window floats in it, centred, at its own shape, the caption (if any) under it. */
+.kit-section-split[data-frame][data-panel] { --_stage-pad: clamp(2rem, 5cqi, 4.5rem); }
+.kit-section-split[data-frame][data-panel="accent"] .kit-split-inner { background: var(--kit-accent); }
+.kit-section-split[data-frame][data-panel="surface"] .kit-split-inner { background: var(--kit-surface); }
+.kit-section-split[data-frame][data-panel] .kit-split-inner > .kit-split-window { align-self: center; margin: var(--_stage-pad) 0 var(--_stage-pad) var(--_stage-pad); }
+.kit-section-split[data-frame][data-panel][data-swap] .kit-split-inner > .kit-split-window { margin: var(--_stage-pad) var(--_stage-pad) var(--_stage-pad) 0; }
+.kit-section-split[data-frame][data-panel] .kit-split-figure { align-content: center; grid-template-rows: auto; gap: var(--kit-space-3); padding: var(--_stage-pad) 0 var(--_stage-pad) var(--_stage-pad); background: none; box-sizing: border-box; }
+.kit-section-split[data-frame][data-panel][data-swap] .kit-split-figure { padding: var(--_stage-pad) var(--_stage-pad) var(--_stage-pad) 0; }
+.kit-section-split[data-frame][data-panel] .kit-split-window .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: auto; contain: none; }
+.kit-section-split[data-frame][data-panel] .kit-split-window .kit-split-media[data-empty] { aspect-ratio: 16 / 10; }
+.kit-section-split[data-frame][data-panel] .kit-split-caption { padding: 0; }
+.kit-section-split[data-frame][data-panel="accent"] .kit-split-caption { color: var(--kit-accent-fg); }
 
 @container kit-split (max-width: 48rem) {
   .kit-split-inner { grid-template-columns: minmax(0, 1fr); gap: var(--kit-space-6); }
@@ -100,5 +114,9 @@
   .kit-split-card { min-block-size: 0; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: 4 / 3; contain: none; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-figure { grid-template-rows: auto; }
+  .kit-section-split[data-frame][data-panel] .kit-split-inner > .kit-split-window,
+  .kit-section-split[data-frame][data-panel][data-swap] .kit-split-inner > .kit-split-window { margin: var(--_stage-pad) var(--_stage-pad) 0; }
+  .kit-section-split[data-frame][data-panel] .kit-split-figure,
+  .kit-section-split[data-frame][data-panel][data-swap] .kit-split-figure { padding: var(--_stage-pad) var(--_stage-pad) 0; }
 }
 @container kit-split (max-width: 20rem) { .kit-split-url { display: none; } }

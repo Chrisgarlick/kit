@@ -229,5 +229,17 @@
       "frame_url": "kritano.com",
       "swap": true
     }
+  },
+  {
+    "title": "A browser frame on an accent panel, with a caption",
+    "content": {
+      "eyebrow": "Example audit",
+      "title": "What a site audit *finds*",
+      "body": "Every page checked for accessibility, speed and broken links, with what to fix first.",
+      "panel": "accent",
+      "frame": "browser",
+      "frame_url": "kritano.com",
+      "caption": "Fig. 01 · An example audit"
+    }
   }
 ]

@@ -26,7 +26,7 @@ The text side has the [text block](/sections/text-block/)'s fields (`eyebrow`, `
 | `media` | `image`, `questions` or `card` | What sits beside the text. `image` by default. |
 | `image` | image | Alt text required. Lazy-loaded: a split is rarely the first section. Empty, it shows a placeholder. |
 | `caption` | text | Optional, up to 160 characters. Set, the image goes in a `<figure>` with the caption as its `<figcaption>`, under it. |
-| `frame` | `none` or `browser` | With an image: `none` by default. `browser` puts the image in a window, so a screenshot reads as the product: a bar on top (three dots and the address), rounded `--kit-radius-2` corners, a 1px `--kit-line` border and `--kit-shadow-2`. The image keeps its own shape under the bar, not cropped square. Not drawn with a text `panel` (the panel and image are already one block). |
+| `frame` | `none` or `browser` | With an image: `none` by default. `browser` puts the image in a window, so a screenshot reads as the product: a bar on top (three dots and the address), rounded `--kit-radius-2` corners, a 1px `--kit-line` border and `--kit-shadow-2`. The image keeps its own shape under the bar, not cropped square. Beside a text `panel`, the panel's colour runs under the image half too and the window floats in it, centred. |
 | `frame_url` | text | Optional, up to 80 characters. With the browser frame, the address in the bar ("kritano.com"), in the mono face. |
 | `card_label` | text | With `card`: a short label at the top of the card, in the mono face ("Time to first byte · cg-cms, live 1GB server"). Optional. |
 | `card_title` | rich text | With `card`: the card's main words in the display face; a new line is a line break, `*stars*` for italics ("0.4 ms a page\n6,300 a second"). |
