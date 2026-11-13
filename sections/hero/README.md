@@ -4,7 +4,7 @@ group: sections
 order: 20
 tier: 1
 pattern: Website section
-uses: [container, button]
+uses: [container, button, link]
 status: preview
 summary: The first thing on a page. A label, a heading with emphasis, a supporting line, up to two buttons, a line of proof and an image, split, centred or text only.
 ---
@@ -33,8 +33,11 @@ echo kit_section(__DIR__ . '/kit/hero.php', ['content' => $hero, 'variant' => 'c
 | `title_size` | `normal` or `large` | `normal` by default; `large` is display size (up to 7rem), for a statement hero. |
 | `lede` | textarea | One or two sentences. |
 | `actions` | list (up to 2) | `label`, `url`, `style` (`primary` or `secondary`). |
+| `secondary_style` | `button` or `link` | `button` by default. `link` shows the second action as a text link with an arrow (kit's arrow link) instead of a button. |
 | `proof` | rich text | A review score or a fact; `**stars**` make it bold. Bound to the site's review summary. |
+| `proof_icon` | icon | `star` by default (drawn in `--kit-warn`, as before). Any of kit's icons; decorative (`aria-hidden`). |
 | `image` | image | Alt text is required. Loaded with `fetchpriority="high"`: it's above the fold. |
+| `caption` | text | Optional, up to 160 characters. Set, the image goes in a `<figure>` with the caption as its `<figcaption>`, under it. |
 | `heading_level` | heading level | 1 by default: the hero carries the page's `<h1>`. |
 
 Without an image the hero shows a placeholder box, as in Design, so the layout holds while the

@@ -69,5 +69,63 @@
         { "label": "Start a project", "url": "/start" }
       ]
     }
+  },
+  {
+    "title": "A caption, a text link and a tick",
+    "content": {
+      "eyebrow": "Local service · Your town",
+      "title": "A clear promise in one line, *said plainly.*",
+      "lede": "One or two sentences on who you help and what happens next. Keep it short enough to read on a phone.",
+      "actions": [
+        {
+          "label": "Get a free quote",
+          "url": "/contact"
+        },
+        {
+          "label": "See our work",
+          "url": "/work",
+          "style": "secondary"
+        }
+      ],
+      "proof": "**58 pages to 13**, no broken links",
+      "caption": "Chris at work in Leeds, 2026.",
+      "proof_icon": "check",
+      "secondary_style": "link",
+      "image": {
+        "src": "/images/demo/hero.jpg",
+        "alt": "Chris at a desk with two screens of code",
+        "width": 1136,
+        "height": 1040
+      }
+    }
+  },
+  {
+    "title": "Phone: a caption and a text link",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "Local service · Your town",
+      "title": "A clear promise in one line, *said plainly.*",
+      "lede": "One or two sentences on who you help and what happens next.",
+      "actions": [
+        {
+          "label": "Get a free quote",
+          "url": "/contact"
+        },
+        {
+          "label": "See our work",
+          "url": "/work",
+          "style": "secondary"
+        }
+      ],
+      "proof": "**4.9** from 120 Google reviews",
+      "caption": "Chris at work in Leeds, 2026.",
+      "secondary_style": "link",
+      "image": {
+        "src": "/images/demo/hero.jpg",
+        "alt": "Chris at a desk with two screens of code",
+        "width": 1136,
+        "height": 1040
+      }
+    }
   }
 ]

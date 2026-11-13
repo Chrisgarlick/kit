@@ -17,8 +17,11 @@
       "url": { "type": "url", "label": "Link", "required": true },
       "style": { "type": "enum", "label": "Style", "options": ["primary", "secondary"], "default": "primary" }
     }},
+    "secondary_style": { "type": "enum", "label": "Second button as", "help": "A text link with an arrow, instead of a second button, if you want one clear action.", "options": ["button", "link"], "default": "button" },
     "proof": { "type": "rich-text", "label": "Proof line", "help": "A review score or a fact. **Stars** make it bold.", "max": 80, "bind": "site.review_summary" },
+    "proof_icon": { "type": "icon", "label": "Proof line icon", "help": "Decoration before the proof line. A star by default.", "default": "star" },
     "image": { "type": "image", "label": "Image", "help": "Not shown in the text-only layout.", "alt": "required", "sizes": "hero" },
+    "caption": { "type": "text", "label": "Image caption", "help": "A short line under the image, like where or when it was taken.", "max": 160 },
     "heading_level": { "type": "heading-level", "label": "Heading level", "help": "1 on a page's first section.", "default": 1 }
   }
 }
