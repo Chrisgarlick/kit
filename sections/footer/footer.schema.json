@@ -10,7 +10,7 @@
     "logo": { "type": "image", "label": "Logo", "help": "A version that reads on a dark background. Shown instead of the square mark.", "alt": "optional", "bind": "site.logo_on_dark" },
     "blurb": { "type": "textarea", "label": "About line", "max": 160, "bind": "site.tagline" },
     "columns": { "type": "list", "label": "Link columns", "max": 3, "item": {
-      "heading": { "type": "text", "label": "Heading", "required": true, "max": 30 },
+      "heading": { "type": "text", "label": "Heading", "help": "Optional. Left empty, the links stand on their own.", "max": 30 },
       "links": { "type": "list", "label": "Links", "max": 8, "item": {
         "label": { "type": "text", "label": "Label", "required": true, "max": 40 },
         "url": { "type": "url", "label": "Address", "required": true }
@@ -20,7 +20,7 @@
     "phone": { "type": "text", "label": "Phone number", "max": 30, "bind": "site.phone" },
     "email": { "type": "text", "label": "Email address", "max": 80, "bind": "site.email" },
     "social": { "type": "list", "label": "Social links", "max": 5, "item": {
-      "network": { "type": "enum", "label": "Network", "options": ["instagram", "facebook", "linkedin", "tiktok", "youtube"], "default": "instagram" },
+      "network": { "type": "enum", "label": "Network", "options": ["instagram", "facebook", "linkedin", "tiktok", "youtube", "github", "x", "bluesky"], "default": "instagram" },
       "url": { "type": "url", "label": "Profile address", "required": true }
     }, "bind": "site.socials" },
     "small_print": { "type": "text", "label": "Small print", "help": "The legal name, company number and registered office, if you're a company.", "max": 200, "bind": "site.small_print" },
@@ -28,6 +28,7 @@
       "label": { "type": "text", "label": "Label", "required": true, "max": 30 },
       "url": { "type": "url", "label": "Address", "required": true }
     }},
+    "cookie_label": { "type": "text", "label": "Cookie settings button", "help": "Set, a button with these words joins the legal links, like \"Cookie settings\". It does nothing alone: the site's cookie script opens its preferences from it.", "max": 30 },
     "wordmark": { "type": "text", "label": "Wordmark", "help": "Very large type at the very bottom, cropped by the edge: the brand name, usually. Decoration, so screen readers skip it.", "max": 40 }
   }
 }

@@ -2,7 +2,9 @@
  * Section: footer (tier 1). A dark band (--kit-inverse-*) with the brand,
  * columns of links, contact details, social links and the small print.
  *   <footer class="kit-section-footer"> … </footer>
- * The columns wrap by the section's own width.
+ * The columns wrap by the section's own width. A column's heading is optional.
+ * .kit-footer-cookies is a button (data-cookie-preferences) among the legal links,
+ * styled as one of them, for the site's cookie script to open its preferences.
  */
 .kit-section-footer { container: kit-footer / inline-size; padding-block: 64px 40px; background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); font-family: var(--kit-font-ui); }
 .kit-section-footer svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; display: block; }
@@ -27,6 +29,9 @@
 .kit-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--kit-space-3) var(--kit-space-6); margin-block-start: var(--kit-space-6); padding-block-start: var(--kit-space-6); border-block-start: 1px solid var(--kit-inverse-line); font-size: var(--kit-text-sm); color: var(--kit-inverse-fg-2); }
 .kit-footer-legal { display: flex; flex-wrap: wrap; }
 .kit-footer-legal li + li::before { content: "·"; padding-inline: 0.4em; }
+.kit-footer-cookies { padding: 0; border: 0; background: none; font: inherit; color: var(--kit-inverse-fg-2); cursor: pointer; text-decoration: underline 1px transparent; text-underline-offset: 3px; transition: color var(--kit-duration), text-decoration-color var(--kit-duration); }
+.kit-footer-cookies:hover { color: var(--kit-inverse-fg); text-decoration-color: currentColor; }
+.kit-footer-cookies:focus-visible { outline: 2px solid var(--kit-inverse-fg); outline-offset: 3px; border-radius: 2px; }
 
 /* The wordmark: display type sized to the footer's width, cropped by its bottom edge. */
 .kit-section-footer:has(> .kit-footer-wordmark) { padding-block-end: 0; overflow: hidden; }

@@ -22,5 +22,148 @@
       "small_print": "© 2026 Your brand Ltd. Company no. 01234567",
       "legal": [ { "label": "Privacy", "url": "/privacy" }, { "label": "Terms", "url": "/terms" }, { "label": "Cookies", "url": "/cookies" } ] } },
   {"title": "With an oversize wordmark", "content": {"brand_name": "Your brand", "blurb": "One line on what you do and where.", "columns": [{"heading": "Services", "links": [{"label": "Repairs", "url": "/repairs"}, {"label": "Installations", "url": "/installations"}, {"label": "Emergencies", "url": "/emergencies"}]}, {"heading": "Company", "links": [{"label": "About", "url": "/about"}, {"label": "Reviews", "url": "/reviews"}, {"label": "Contact", "url": "/contact"}]}], "phone": "01234 567890", "email": "hello@yourbrand.co.uk", "social": [{"network": "instagram", "url": "https://instagram.com/yourbrand"}, {"network": "facebook", "url": "https://facebook.com/yourbrand"}], "small_print": "© 2026 Your brand Ltd. Company no. 01234567", "legal": [{"label": "Privacy", "url": "/privacy"}, {"label": "Terms", "url": "/terms"}, {"label": "Cookies", "url": "/cookies"}], "wordmark": "Your brand"}},
-  {"title": "Phone, with the wordmark", "width": "mobile", "content": {"brand_name": "Your brand", "blurb": "One line on what you do and where.", "columns": [{"heading": "Services", "links": [{"label": "Repairs", "url": "/repairs"}, {"label": "Installations", "url": "/installations"}, {"label": "Emergencies", "url": "/emergencies"}]}, {"heading": "Company", "links": [{"label": "About", "url": "/about"}, {"label": "Reviews", "url": "/reviews"}, {"label": "Contact", "url": "/contact"}]}], "phone": "01234 567890", "email": "hello@yourbrand.co.uk", "social": [{"network": "instagram", "url": "https://instagram.com/yourbrand"}, {"network": "facebook", "url": "https://facebook.com/yourbrand"}], "small_print": "© 2026 Your brand Ltd. Company no. 01234567", "legal": [{"label": "Privacy", "url": "/privacy"}, {"label": "Terms", "url": "/terms"}, {"label": "Cookies", "url": "/cookies"}], "wordmark": "Your brand"}}
+  {"title": "Phone, with the wordmark", "width": "mobile", "content": {"brand_name": "Your brand", "blurb": "One line on what you do and where.", "columns": [{"heading": "Services", "links": [{"label": "Repairs", "url": "/repairs"}, {"label": "Installations", "url": "/installations"}, {"label": "Emergencies", "url": "/emergencies"}]}, {"heading": "Company", "links": [{"label": "About", "url": "/about"}, {"label": "Reviews", "url": "/reviews"}, {"label": "Contact", "url": "/contact"}]}], "phone": "01234 567890", "email": "hello@yourbrand.co.uk", "social": [{"network": "instagram", "url": "https://instagram.com/yourbrand"}, {"network": "facebook", "url": "https://facebook.com/yourbrand"}], "small_print": "© 2026 Your brand Ltd. Company no. 01234567", "legal": [{"label": "Privacy", "url": "/privacy"}, {"label": "Terms", "url": "/terms"}, {"label": "Cookies", "url": "/cookies"}], "wordmark": "Your brand"}},
+  {
+    "title": "GitHub, X and Bluesky, a cookie settings button, a column without a heading",
+    "content": {
+      "brand_name": "Your brand",
+      "blurb": "One line on what you do and where.",
+      "columns": [
+        {
+          "heading": "Services",
+          "links": [
+            {
+              "label": "Repairs",
+              "url": "/repairs"
+            },
+            {
+              "label": "Installations",
+              "url": "/installations"
+            },
+            {
+              "label": "Emergencies",
+              "url": "/emergencies"
+            }
+          ]
+        },
+        {
+          "heading": "",
+          "links": [
+            {
+              "label": "About",
+              "url": "/about"
+            },
+            {
+              "label": "Reviews",
+              "url": "/reviews"
+            },
+            {
+              "label": "Contact",
+              "url": "/contact"
+            }
+          ]
+        }
+      ],
+      "phone": "01234 567890",
+      "email": "hello@yourbrand.co.uk",
+      "social": [
+        {
+          "network": "github",
+          "url": "https://github.com/yourbrand"
+        },
+        {
+          "network": "x",
+          "url": "https://x.com/yourbrand"
+        },
+        {
+          "network": "bluesky",
+          "url": "https://bsky.app/profile/yourbrand"
+        },
+        {
+          "network": "linkedin",
+          "url": "https://linkedin.com/in/yourbrand"
+        }
+      ],
+      "small_print": "© 2026 Your brand Ltd. Company no. 01234567",
+      "legal": [
+        {
+          "label": "Privacy",
+          "url": "/privacy"
+        }
+      ],
+      "cookie_label": "Cookie settings"
+    }
+  },
+  {
+    "title": "Phone: the cookie settings button",
+    "width": "mobile",
+    "content": {
+      "brand_name": "Your brand",
+      "blurb": "One line on what you do and where.",
+      "columns": [
+        {
+          "heading": "Services",
+          "links": [
+            {
+              "label": "Repairs",
+              "url": "/repairs"
+            },
+            {
+              "label": "Installations",
+              "url": "/installations"
+            },
+            {
+              "label": "Emergencies",
+              "url": "/emergencies"
+            }
+          ]
+        },
+        {
+          "heading": "",
+          "links": [
+            {
+              "label": "About",
+              "url": "/about"
+            },
+            {
+              "label": "Reviews",
+              "url": "/reviews"
+            },
+            {
+              "label": "Contact",
+              "url": "/contact"
+            }
+          ]
+        }
+      ],
+      "phone": "01234 567890",
+      "email": "hello@yourbrand.co.uk",
+      "social": [
+        {
+          "network": "github",
+          "url": "https://github.com/yourbrand"
+        },
+        {
+          "network": "x",
+          "url": "https://x.com/yourbrand"
+        },
+        {
+          "network": "bluesky",
+          "url": "https://bsky.app/profile/yourbrand"
+        },
+        {
+          "network": "linkedin",
+          "url": "https://linkedin.com/in/yourbrand"
+        }
+      ],
+      "small_print": "© 2026 Your brand Ltd. Company no. 01234567",
+      "legal": [
+        {
+          "label": "Privacy",
+          "url": "/privacy"
+        }
+      ],
+      "cookie_label": "Cookie settings"
+    }
+  }
 ]

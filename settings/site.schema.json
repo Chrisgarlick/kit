@@ -15,7 +15,7 @@
     "review_summary": { "type": "rich-text", "label": "Review summary", "help": "\"**4.9** from 120 Google reviews\": keep it true and up to date.", "max": 80 },
     "small_print": { "type": "text", "label": "Small print", "help": "The legal name, company number and registered office: UK companies must show these on their website.", "max": 200 },
     "socials": { "type": "list", "label": "Social profiles", "max": 5, "item": {
-      "network": { "type": "enum", "label": "Network", "options": ["instagram", "facebook", "linkedin", "tiktok", "youtube"], "default": "instagram" },
+      "network": { "type": "enum", "label": "Network", "options": ["instagram", "facebook", "linkedin", "tiktok", "youtube", "github", "x", "bluesky"], "default": "instagram" },
       "url": { "type": "url", "label": "Profile address", "required": true }
     }},
     "logo": { "type": "image", "label": "Logo", "help": "For light backgrounds: the header.", "alt": "optional" },
