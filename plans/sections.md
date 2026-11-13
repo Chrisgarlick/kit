@@ -173,7 +173,8 @@ repeaters (nested too), images media fields (`requireAlt` unless alt is optional
 `sizes`), numbers with their range (`min`/`max`, which cg-cms validates), a `variant` select first
 when a section has more than one layout; defaults are typed (numbers, `true`, strings for text and
 selects) and `kit_content()` casts everything back. The header's links leave out "This page"
-(`current`): `kit_cgcms_block` marks the link to the page being shown itself. Bound fields aren't
+(`current`) and "This section" (`section`): `kit_cgcms_block` marks the link to the page being
+shown, and the one whose path the page is under, itself. Bound fields aren't
 required: left empty they show the site's details, from cg-cms's settings (`Settings::site()`,
 edited under Settings > Site details once the app sets `cg-cms.site_schema` to
 `<folder>/kit/site.schema.json`) over `config('kit-blocks.site')`; a block with bound fields tags
