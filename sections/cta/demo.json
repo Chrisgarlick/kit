@@ -18,5 +18,30 @@
       "phone": "01234 567890",
       "eyebrow": "Next step"
     }
+  },
+  {
+    "title": "With a text link beside the button",
+    "content": {
+      "eyebrow": "Next step",
+      "title": "Ready when you are",
+      "lede": "Tell us what you need and we'll reply the same day.",
+      "action_label": "Get a free quote",
+      "action_url": "/contact",
+      "secondary_label": "See how it works",
+      "secondary_url": "/how-it-works",
+      "phone": "01234 567890"
+    }
+  },
+  {
+    "title": "Phone: with a text link",
+    "width": "mobile",
+    "content": {
+      "title": "Ready when you are",
+      "lede": "Tell us what you need and we'll reply the same day.",
+      "action_label": "Get a free quote",
+      "action_url": "/contact",
+      "secondary_label": "See how it works",
+      "secondary_url": "/how-it-works"
+    }
   }
 ]

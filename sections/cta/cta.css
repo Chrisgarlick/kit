@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: MIT
  * Section: call to action (tier 1). A rounded band in the accent colour.
  *   <section class="kit-section-cta"> <div class="kit-cta-band"> … </div> </section>
- * Below 48rem (the section's own width) the text and actions stack.
+ * Below 48rem (the section's own width) the text and actions stack. A second
+ * action is an arrow link (.kit-cta-secondary) after the button; stacked, it sits under it.
  */
 .kit-section-cta { container: kit-cta / inline-size; padding-block: calc(var(--kit-section-pad-y) * 0.66); background: var(--kit-bg); font-family: var(--kit-font-ui); }
 .kit-section-cta svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
@@ -16,6 +17,7 @@
 .kit-section-cta .kit-button { --_bg: var(--kit-accent-fg); --_fg: var(--kit-accent); --_border: transparent; --_hover: color-mix(in srgb, var(--kit-accent-fg) 88%, var(--kit-accent)); --_shadow: none; }
 .kit-section-cta a:not(.kit-button) { color: inherit; text-decoration: none; }
 .kit-section-cta a:focus-visible { outline: 2px solid var(--kit-accent-fg); outline-offset: 3px; border-radius: var(--kit-radius-1); }
+.kit-cta-secondary { font-size: var(--kit-text-md); }
 .kit-cta-phone { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-weight: 600; font-variant-numeric: tabular-nums; }
 .kit-cta-phone:hover span { text-decoration: underline; text-underline-offset: 3px; }
 

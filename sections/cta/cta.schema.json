@@ -12,6 +12,8 @@
     "lede": { "type": "text", "label": "Supporting line", "max": 160 },
     "action_label": { "type": "text", "label": "Button", "max": 30 },
     "action_url": { "type": "url", "label": "Button link" },
+    "secondary_label": { "type": "text", "label": "Text link", "help": "A second, quieter action beside the button, like \"See how it works\". Shown with an arrow.", "max": 40 },
+    "secondary_url": { "type": "url", "label": "Text link address" },
     "phone": { "type": "text", "label": "Phone number", "max": 30, "bind": "site.phone" }
   }
 }
