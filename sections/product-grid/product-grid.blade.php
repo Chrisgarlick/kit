@@ -1,6 +1,6 @@
 {{-- kit section: product grid. Edit this, then run `kit section compile`. --}}
 @props(['content' => [], 'variant' => 'default'])
-<section class="kit-section-product-grid">
+<section class="kit-section-product-grid"@if($content['background'] !== 'plain') data-background="{{ $content['background'] }}"@endif>
   <div class="kit-container">
     <div class="kit-shop-head">
       <div class="kit-shop-title">
@@ -13,7 +13,7 @@
           </ol>
         </nav>
         @endif
-        <{{ kit_heading($content['heading_level']) }} class="kit-shop-heading">{{ $content['title'] }}</{{ kit_heading($content['heading_level']) }}>
+        <{{ kit_heading($content['heading_level']) }} class="kit-shop-heading">{{ kit_rich($content['title']) }}</{{ kit_heading($content['heading_level']) }}>
       </div>
       @if($content['count'])
       <p class="kit-shop-count">{{ $content['count'] }}</p>
@@ -67,6 +67,9 @@
           @endif
         </div>
         <h3 class="kit-product-name">@if($product['url'])<a class="kit-product-link" href="{{ kit_url($product['url']) }}">{{ $product['name'] }}</a>@else{{ $product['name'] }}@endif</h3>
+@if($product['description'])
+        <p class="kit-product-description">{{ $product['description'] }}</p>
+@endif
         <p class="{{ $product['label'] ? 'kit-product-label' : 'kit-product-price' }}">@if($product['label']){{ $product['label'] }}@elseif($product['was_price'])<span class="kit-product-now"><span class="kit-vh">Now </span>{{ $product['price'] }}</span> <s class="kit-product-was"><span class="kit-vh">was </span>{{ $product['was_price'] }}</s>@else{{ $product['price'] }}@endif</p>
       </li>
       @endforeach

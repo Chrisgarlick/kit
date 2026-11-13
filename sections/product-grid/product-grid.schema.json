@@ -25,10 +25,11 @@
       }
     },
     "title": {
-      "type": "text",
+      "type": "rich-text",
       "label": "Heading",
+      "help": "*Words in stars* are set in italics.",
       "required": true,
-      "max": 80
+      "max": 120
     },
     "heading_level": {
       "type": "heading-level",
@@ -121,6 +122,15 @@
       ],
       "default": "4"
     },
+    "background": {
+      "type": "enum",
+      "label": "Background",
+      "options": [
+        "plain",
+        "tinted"
+      ],
+      "default": "plain"
+    },
     "products": {
       "type": "list",
       "label": "Products",
@@ -135,6 +145,12 @@
         "url": {
           "type": "url",
           "label": "Product page"
+        },
+        "description": {
+          "type": "textarea",
+          "label": "Description",
+          "help": "A line or two under the name, for a grid of articles or guides rather than products.",
+          "max": 240
         },
         "image": {
           "type": "image",

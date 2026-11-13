@@ -21,12 +21,13 @@ block it can be filled by hand, for a few featured products that link to another
 | Field | Type | Notes |
 |---|---|---|
 | `crumbs` | list | The trail, current page last. |
-| `title`, `heading_level`, `count` | | "Shop all", h1, "24 products". |
+| `title`, `heading_level`, `count` | | "Shop all", h1, "24 products". The title is rich text: `*stars*` for italics. |
 | `link_label`, `link_url` | | A link at the end of the heading row: "Shop all" when it's a few featured products on another page. |
 | `categories` | list | Filter links: `label`, `url`, `current`. |
 | `sort_options`, `sort_url`, `sort_name` | | A GET form: the select's name is `sort_name` (WooCommerce's `orderby`), its options `label` and `value`. Empty, no sort. |
 | `columns` | `2`, `3` or `4` | Two a row on a phone. |
-| `products` | list (up to 48) | `name`, `url`, `image`, `price`, `was_price`, `badge` (`none`, `sale`, `sold-out`, `new`), `add_label`, `add_url`, and `label`: optional text shown in place of the price ("Free PDF · checklist", "Email first"), so a grid can list resources. With a label, `price` may be left empty. |
+| `background` | `plain` or `tinted` | Plain by default; tinted is `--kit-band`, as in the other sections (`data-background="tinted"` on the section). |
+| `products` | list (up to 48) | `name`, `url`, `image`, `price`, `was_price`, `badge` (`none`, `sale`, `sold-out`, `new`), `add_label`, `add_url`, and `label`: optional text shown in place of the price ("Free PDF · checklist", "Email first"), so a grid can list resources. With a label, `price` may be left empty. And `description`: optional text under the name (up to 240 characters), so the grid works as cards of articles or guides. |
 
 ## Accessibility
 

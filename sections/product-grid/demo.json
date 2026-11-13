@@ -204,5 +204,36 @@
         }
       ]
     }
+  },
+  {
+    "title": "Writing: a tinted grid of articles with descriptions",
+    "content": {
+      "title": "Notes from *the work*",
+      "heading_level": 2,
+      "columns": "3",
+      "background": "tinted",
+      "link_label": "All writing",
+      "link_url": "/writing",
+      "products": [
+        {
+          "name": "Why one repeated issue shouldn't zero a score",
+          "url": "/writing/scores",
+          "label": "Essay · 6 min",
+          "description": "How Kritano weighs a problem that shows up on every page, and why counting it once is fairer."
+        },
+        {
+          "name": "My Laravel CMS serves pages in 4.4 ms",
+          "url": "/writing/caching",
+          "label": "Case note · 8 min",
+          "description": "Full-page caching in front of Laravel, measured: what it skips and what it still has to do."
+        },
+        {
+          "name": "How to write a website brief",
+          "url": "/writing/brief",
+          "label": "Guide · 5 min",
+          "description": "The seven questions that make a quote accurate."
+        }
+      ]
+    }
   }
 ]

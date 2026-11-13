@@ -2,13 +2,16 @@
  * Section: product grid (tier 1). A shop page: breadcrumbs, heading and
  * count, category filters (links) and sorting (a GET form, so it works
  * without script), then product cards.
- *   <section class="kit-section-product-grid"> … </section>
+ *   <section class="kit-section-product-grid" [data-background="tinted"]> … </section>
  * A card's name links to the product, and the whole card is its click
  * target; quick add sits above it. Below 40rem (the section's own width)
  * two cards a row. A card with a label (.kit-product-label) shows it in place
- * of the price, for a grid of resources rather than products.
+ * of the price, for a grid of resources rather than products; a description
+ * (.kit-product-description) sits under the name, for articles and guides.
  */
 .kit-section-product-grid { container: kit-shop / inline-size; padding-block: calc(var(--kit-section-pad-y) * 0.66) var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
+.kit-section-product-grid[data-background="tinted"] { background: var(--kit-band); }
+.kit-shop-heading em { font-style: italic; }
 .kit-shop-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--kit-space-3); margin-block-end: var(--kit-space-5); }
 .kit-shop-title { display: grid; gap: var(--kit-space-2); }
 .kit-shop-heading { margin: 0; font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem); line-height: 1.08; }
@@ -54,6 +57,7 @@
 .kit-product-was { color: var(--kit-fg-3); font-size: var(--kit-text-sm); }
 .kit-product-card[data-sold-out] .kit-product-price { color: var(--kit-fg-3); }
 /* A label in place of the price, for things that aren't sold ("Free PDF · checklist"). */
+.kit-product-description { font-size: var(--kit-text-md); line-height: 1.5; color: var(--kit-fg-2); text-wrap: pretty; }
 .kit-product-label { font-size: var(--kit-text-sm); color: var(--kit-fg-2); }
 @container kit-shop (max-width: 40rem) {
   .kit-shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--kit-space-3); }
