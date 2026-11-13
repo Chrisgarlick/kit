@@ -171,5 +171,50 @@
         }
       ]
     }
+  },
+  {
+    "title": "A note card beside the text",
+    "content": {
+      "eyebrow": "Speed",
+      "title": "Fast because it does *less*",
+      "body": "Pages are built once and served as files, so a visit costs the server almost nothing.",
+      "points": [{ "text": "Cached pages, purged when you save" }, { "text": "No page builder", "excluded": true }],
+      "media": "card",
+      "card_label": "Time to first byte · cg-cms, live 1GB server",
+      "card_title": "0.4 ms a page\n6,300 a second",
+      "card_text": "Measured with wrk against the live server, November 2026."
+    }
+  },
+  {
+    "title": "Phone: the card under the text",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "Speed",
+      "title": "Fast because it does *less*",
+      "body": "Pages are built once and served as files.",
+      "media": "card",
+      "card_label": "Time to first byte",
+      "card_title": "0.4 ms a page\n6,300 a second"
+    }
+  },
+  {
+    "title": "An image with a caption, swapped",
+    "content": {
+      "eyebrow": "About",
+      "title": "A small studio in *Leeds*",
+      "body": "Two of us, working from a converted mill on the canal.",
+      "caption": "The studio, Saltaire, spring 2026",
+      "swap": true
+    }
+  },
+  {
+    "title": "Accent panel, an image with a caption",
+    "content": {
+      "eyebrow": "About",
+      "title": "A small studio in *Leeds*",
+      "body": "Two of us, working from a converted mill on the canal.",
+      "panel": "accent",
+      "caption": "The studio, Saltaire, spring 2026"
+    }
   }
 ]

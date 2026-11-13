@@ -8,6 +8,10 @@
  * above the text and questions below it.
  * [data-panel="accent|surface"] puts the text on a filled panel; beside an image the two meet
  * edge to edge as one rounded block, the image filling the panel's height.
+ * With a caption the image is in a figure (.kit-split-figure, .kit-split-caption).
+ * data-media="card" puts a paper card (.kit-split-card) beside the text, on the right; data-swap
+ * puts it on the left, and stacked it sits under the text. A point with data-excluded has
+ * a cross (kit's text block).
  */
 .kit-section-split { container: kit-split / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); }
 .kit-section-split[data-background="tinted"] { background: var(--kit-band); }
@@ -18,9 +22,24 @@
 .kit-section-split[data-media="image"] .kit-split-media { order: -1; }
 .kit-section-split[data-media="image"][data-swap] .kit-split-media { order: 1; }
 .kit-section-split[data-media="questions"][data-swap] .kit-split-questions { order: -1; }
+.kit-section-split[data-media="image"] .kit-split-figure { order: -1; }
+.kit-section-split[data-media="image"][data-swap] .kit-split-figure { order: 1; }
+.kit-section-split[data-media="card"][data-swap] .kit-split-card { order: -1; }
 
 .kit-split-media { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--kit-card-radius); background: var(--kit-surface-2); }
 .kit-split-media[data-empty] { display: grid; place-items: center; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); box-sizing: border-box; }
+.kit-split-figure { display: grid; gap: var(--kit-space-3); inline-size: 100%; margin: 0; }
+.kit-split-caption { font-size: var(--kit-text-sm); line-height: 1.45; color: var(--kit-fg-2); }
+
+/* The card: a sheet of paper beside the text, a mono label over a line or two in the display face. */
+.kit-split-card { display: grid; align-content: center; gap: var(--kit-space-4); min-block-size: 18rem; padding: clamp(2rem, 5cqi, 4rem); border: 1px solid var(--kit-line); border-radius: var(--kit-card-radius); background: var(--kit-surface); color: var(--kit-fg); box-shadow: var(--kit-shadow-3); box-sizing: border-box; }
+.kit-split-card > * { margin: 0; }
+.kit-split-card-label { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kit-fg-2); }
+.kit-split-card-title { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); text-transform: var(--kit-display-case); font-size: clamp(1.75rem, 1rem + 3cqi, 3rem); line-height: 1.1; text-wrap: balance; font-variant-numeric: tabular-nums; }
+.kit-split-card-title em { font-style: italic; }
+.kit-split-card-text { font-size: var(--kit-text-md); line-height: 1.5; color: var(--kit-fg-2); }
+.kit-section-split[data-media="card"] .kit-split-inner { align-items: center; }
+
 
 .kit-split-questions .kit-accordion > summary { padding-block: 18px; font-size: var(--kit-text-lg); }
 .kit-split-questions .kit-accordion-body { color: var(--kit-fg-2); line-height: 1.55; }
@@ -37,7 +56,7 @@
 .kit-section-split[data-panel="accent"] .kit-split-text { background: var(--kit-accent); color: var(--kit-accent-fg); }
 .kit-section-split[data-panel="accent"] .kit-split-text > * { --kit-fg: var(--kit-accent-fg); --kit-fg-2: var(--kit-accent-fg); --kit-accent: var(--kit-accent-fg); --kit-accent-hover: var(--kit-accent-fg); --kit-focus-ring: var(--kit-accent-fg); }
 .kit-section-split[data-panel="surface"] .kit-split-text { background: var(--kit-surface); color: var(--kit-fg); }
-.kit-section-split[data-panel="surface"][data-media="questions"] .kit-split-text,
+.kit-section-split[data-panel="surface"]:is([data-media="questions"], [data-media="card"]) .kit-split-text,
 .kit-section-split[data-panel="surface"][data-media="image"] .kit-split-inner { box-shadow: var(--kit-shadow-3); }
 /* Beside an image the halves are one block: the container's gutter becomes a margin, so the
  * block's own edges (its radius, its shadow) are the halves' edges. */
@@ -46,11 +65,18 @@
 /* The image fills the panel's height and doesn't set it (contain: size), never shorter than a square's worth of text. */
 .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: 100%; min-block-size: 24rem; aspect-ratio: auto; contain: size; }
 .kit-section-split[data-panel][data-media="image"] .kit-split-media[data-empty] { border: 0; }
+.kit-section-split[data-panel][data-media="image"] .kit-split-figure { grid-template-rows: minmax(0, 1fr) auto; gap: 0; background: var(--kit-surface); }
+.kit-section-split[data-panel][data-media="image"] .kit-split-caption { padding: var(--kit-space-3) var(--kit-space-4); }
 
 @container kit-split (max-width: 48rem) {
   .kit-split-inner { grid-template-columns: minmax(0, 1fr); gap: var(--kit-space-6); }
   .kit-section-split[data-media="image"] .kit-split-media,
   .kit-section-split[data-media="image"][data-swap] .kit-split-media { order: -1; aspect-ratio: 4 / 3; }
   .kit-section-split[data-media="questions"][data-swap] .kit-split-questions { order: 1; }
+  .kit-section-split[data-media="image"] .kit-split-figure,
+  .kit-section-split[data-media="image"][data-swap] .kit-split-figure { order: -1; }
+  .kit-section-split[data-media="card"][data-swap] .kit-split-card { order: 1; }
+  .kit-split-card { min-block-size: 0; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: 4 / 3; contain: none; }
+  .kit-section-split[data-panel][data-media="image"] .kit-split-figure { grid-template-rows: auto; }
 }

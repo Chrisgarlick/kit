@@ -11,16 +11,21 @@
     "heading_level": { "type": "heading-level", "label": "Heading level", "default": 2 },
     "body": { "type": "textarea", "label": "Text", "help": "A blank line starts a new paragraph. *Stars* for italics, **double stars** for bold.", "max": 1200 },
     "points": { "type": "list", "label": "Ticked points", "max": 6, "item": {
-      "text": { "type": "text", "label": "Point", "required": true, "max": 80 }
+      "text": { "type": "text", "label": "Point", "required": true, "max": 80 },
+      "excluded": { "type": "boolean", "label": "Not included", "help": "Shows a cross instead of the tick, and screen readers hear \"Not included\" first." }
     }},
     "link_label": { "type": "text", "label": "Link", "max": 40 },
     "link_url": { "type": "url", "label": "Link address" },
-    "media": { "type": "enum", "label": "Beside the text", "options": ["image", "questions"], "default": "image" },
+    "media": { "type": "enum", "label": "Beside the text", "options": ["image", "questions", "card"], "default": "image" },
     "image": { "type": "image", "label": "Image", "help": "When an image is beside the text.", "alt": "required", "sizes": "half" },
+    "caption": { "type": "text", "label": "Image caption", "help": "A short line under the image, like where or when it was taken.", "max": 160 },
     "questions": { "type": "list", "label": "Questions", "help": "When questions are beside the text. The first starts open.", "max": 12, "item": {
       "question": { "type": "text", "label": "Question", "required": true, "max": 120 },
       "answer": { "type": "textarea", "label": "Answer", "required": true, "max": 800 }
     }},
+    "card_label": { "type": "text", "label": "Card label", "help": "When a card is beside the text. A short label at the top of the card, like \"Time to first byte\".", "max": 80 },
+    "card_title": { "type": "rich-text", "label": "Card text, large", "help": "The card's main words, in the display face. A new line starts a new line; *stars* for italics.", "max": 160 },
+    "card_text": { "type": "text", "label": "Card note", "help": "Optional. A smaller line under it.", "max": 200 },
     "numbered": { "type": "boolean", "label": "Number the questions", "help": "Shows 01, 02… before each question. Decoration: screen readers hear the question alone." },
     "swap": { "type": "boolean", "label": "Swap the sides", "help": "An image starts on the left and questions on the right." },
     "panel": { "type": "enum", "label": "Text panel", "help": "Puts the text on a filled panel, edge to edge with the image: accent is the brand colour, surface a lifted card. None leaves the text on the page.", "options": ["none", "accent", "surface"], "default": "none" },

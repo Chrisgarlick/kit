@@ -16,7 +16,7 @@ return function ($content = [], $variant = 'default'): void {
       <?php if (count($content['points'])): ?>
       <ul class="kit-text-block-points" role="list">
         <?php foreach ($content['points'] as $point): ?>
-        <li><?php echo kit_e($point['text']); ?></li>
+        <li<?php echo kit_e(($point['excluded'] ? ' data-excluded' : '')); ?>><?php if ($point['excluded']): ?><span class="kit-vh">Not included: </span><?php endif; ?><?php echo kit_e($point['text']); ?></li>
         <?php endforeach; ?>
       </ul>
       <?php endif; ?>
@@ -37,10 +37,36 @@ return function ($content = [], $variant = 'default'): void {
       </details>
       <?php endforeach; ?>
     </div>
+    <?php elseif (($content['media'] === 'card')): ?>
+    <div class="kit-split-card">
+<?php if ($content['card_label']): ?>
+      <p class="kit-split-card-label"><?php echo kit_e($content['card_label']); ?></p>
+<?php endif; ?>
+<?php if ($content['card_title']): ?>
+      <p class="kit-split-card-title"><?php echo kit_e(kit_rich($content['card_title'])); ?></p>
+<?php endif; ?>
+<?php if ($content['card_text']): ?>
+      <p class="kit-split-card-text"><?php echo kit_e($content['card_text']); ?></p>
+<?php endif; ?>
+    </div>
     <?php elseif ($content['image']): ?>
+<?php if ($content['caption']): ?>
+    <figure class="kit-split-figure">
+      <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
+      <figcaption class="kit-split-caption"><?php echo kit_e($content['caption']); ?></figcaption>
+    </figure>
+<?php else: ?>
     <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
+<?php endif; ?>
     <?php else: ?>
+<?php if ($content['caption']): ?>
+    <figure class="kit-split-figure">
+      <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+      <figcaption class="kit-split-caption"><?php echo kit_e($content['caption']); ?></figcaption>
+    </figure>
+<?php else: ?>
     <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+<?php endif; ?>
     <?php endif; ?>
   </div>
 </section>

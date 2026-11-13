@@ -13,7 +13,7 @@
       @if(count($content['points']))
       <ul class="kit-text-block-points" role="list">
         @foreach($content['points'] as $point)
-        <li>{{ $point['text'] }}</li>
+        <li{{ $point['excluded'] ? ' data-excluded' : '' }}>@if($point['excluded'])<span class="kit-vh">Not included: </span>@endif{{ $point['text'] }}</li>
         @endforeach
       </ul>
       @endif
@@ -34,10 +34,36 @@
       </details>
       @endforeach
     </div>
+    @elseif($content['media'] === 'card')
+    <div class="kit-split-card">
+@if($content['card_label'])
+      <p class="kit-split-card-label">{{ $content['card_label'] }}</p>
+@endif
+@if($content['card_title'])
+      <p class="kit-split-card-title">{{ kit_rich($content['card_title']) }}</p>
+@endif
+@if($content['card_text'])
+      <p class="kit-split-card-text">{{ $content['card_text'] }}</p>
+@endif
+    </div>
     @elseif($content['image'])
+@if($content['caption'])
+    <figure class="kit-split-figure">
+      <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+      <figcaption class="kit-split-caption">{{ $content['caption'] }}</figcaption>
+    </figure>
+@else
     <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+@endif
     @else
+@if($content['caption'])
+    <figure class="kit-split-figure">
+      <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+      <figcaption class="kit-split-caption">{{ $content['caption'] }}</figcaption>
+    </figure>
+@else
     <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+@endif
     @endif
   </div>
 </section>
