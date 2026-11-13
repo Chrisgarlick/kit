@@ -89,10 +89,8 @@
 .kit-section-split[data-frame][data-panel] { --_stage-pad: clamp(2rem, 5cqi, 4.5rem); }
 .kit-section-split[data-frame][data-panel="accent"] .kit-split-inner { background: var(--kit-accent); }
 .kit-section-split[data-frame][data-panel="surface"] .kit-split-inner { background: var(--kit-surface); }
-.kit-section-split[data-frame][data-panel] .kit-split-inner > .kit-split-window { align-self: center; margin: var(--_stage-pad) 0 var(--_stage-pad) var(--_stage-pad); }
-.kit-section-split[data-frame][data-panel][data-swap] .kit-split-inner > .kit-split-window { margin: var(--_stage-pad) var(--_stage-pad) var(--_stage-pad) 0; }
-.kit-section-split[data-frame][data-panel] .kit-split-figure { align-content: center; grid-template-rows: auto; gap: var(--kit-space-3); padding: var(--_stage-pad) 0 var(--_stage-pad) var(--_stage-pad); background: none; box-sizing: border-box; }
-.kit-section-split[data-frame][data-panel][data-swap] .kit-split-figure { padding: var(--_stage-pad) var(--_stage-pad) var(--_stage-pad) 0; }
+.kit-section-split[data-frame][data-panel] .kit-split-inner > .kit-split-window { align-self: center; margin: var(--_stage-pad); }
+.kit-section-split[data-frame][data-panel] .kit-split-figure { align-content: center; grid-template-rows: auto; gap: var(--kit-space-3); padding: var(--_stage-pad); background: none; box-sizing: border-box; }
 .kit-section-split[data-frame][data-panel] .kit-split-window .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: auto; contain: none; }
 .kit-section-split[data-frame][data-panel] .kit-split-window .kit-split-media[data-empty] { aspect-ratio: 16 / 10; }
 .kit-section-split[data-frame][data-panel] .kit-split-caption { padding: 0; }
@@ -114,9 +112,5 @@
   .kit-split-card { min-block-size: 0; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: 4 / 3; contain: none; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-figure { grid-template-rows: auto; }
-  .kit-section-split[data-frame][data-panel] .kit-split-inner > .kit-split-window,
-  .kit-section-split[data-frame][data-panel][data-swap] .kit-split-inner > .kit-split-window { margin: var(--_stage-pad) var(--_stage-pad) 0; }
-  .kit-section-split[data-frame][data-panel] .kit-split-figure,
-  .kit-section-split[data-frame][data-panel][data-swap] .kit-split-figure { padding: var(--_stage-pad) var(--_stage-pad) 0; }
 }
 @container kit-split (max-width: 20rem) { .kit-split-url { display: none; } }
