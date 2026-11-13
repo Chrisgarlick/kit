@@ -23,7 +23,7 @@ echo kit_section(__DIR__ . '/kit/figure.php', ['content' => $figure]);
 |---|---|---|
 | `image` | image | Alt text required. Shown at its own shape, the container's width, lazy-loaded. Empty, it shows a 16:9 placeholder. |
 | `frame` | `none` or `browser` | `none` by default. `browser` puts the image in a window, so a screenshot reads as the product: a bar on top (three dots and the address), rounded `--kit-radius-2` corners, a 1px `--kit-line` border and `--kit-shadow-2`. The image keeps its own shape under the bar. |
-| `frame_url` | text | Optional, up to 80 characters. With the browser frame, the address in the bar ("chrisgarlick.com/admin"), in the mono face. |
+| `frame_url` | text | Optional, up to 80 characters. With the browser frame, the address in the bar ("example.com/dashboard"), in the mono face. |
 | `caption_left` | text | Optional. What the image shows, on the left of the caption row. |
 | `caption_right` | text | Optional. A short note on the right (a date, a client), in the mono face. |
 | `proof_label` | text | Optional. The card's small label, in the mono face. |

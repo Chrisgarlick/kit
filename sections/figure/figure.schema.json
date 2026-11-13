@@ -8,7 +8,7 @@
   "fields": {
     "image": { "type": "image", "label": "Image", "help": "Shown at its own shape, the width of the page. Empty, it shows a placeholder.", "alt": "required", "sizes": "hero" },
     "frame": { "type": "enum", "label": "Frame", "help": "Browser puts the image in a window, a bar with three dots and the address over it, so a screenshot reads as the product.", "options": ["none", "browser"], "default": "none" },
-    "frame_url": { "type": "text", "label": "Address in the frame", "help": "With the browser frame: the address shown in its bar, like \"chrisgarlick.com/admin\". Optional.", "max": 80 },
+    "frame_url": { "type": "text", "label": "Address in the frame", "help": "With the browser frame: the address shown in its bar, like \"example.com/dashboard\". Optional.", "max": 80 },
     "caption_left": { "type": "text", "label": "Caption", "help": "What the image shows, under it on the left.", "max": 160 },
     "caption_right": { "type": "text", "label": "Caption, right", "help": "A second, shorter note on the right, like the date or the client.", "max": 80 },
     "proof_label": { "type": "text", "label": "Proof card label", "help": "A small label at the top of the card, like \"Lighthouse performance\".", "max": 60 },
