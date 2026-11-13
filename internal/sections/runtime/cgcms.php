@@ -5,8 +5,9 @@
 // Each kit block's view (<out>/views/<name>.blade.php) pushes the section's
 // CSS once and prints {{ kit_cgcms_block('<name>', $data) }}: the block's stored data becomes the
 // section's content through kit_content() (kit.php), with the variant the
-// block chose, and the section's compiled template renders it. Loading this
-// file also registers the views' namespace, kit-blocks::, with Laravel.
+// block chose, and the section's compiled template renders it. kit-blocks.php
+// registers the views' namespace, kit-blocks::, with Laravel each time it's
+// loaded (kit_cgcms_register_views()).
 //
 // The site's details (settings/site.schema.json's fields), which bound fields
 // show when a block leaves them empty, come from cg-cms's settings
@@ -152,8 +153,17 @@ if (!function_exists('kit_cgcms_block')) {
         return rtrim($base, '/') . '/' . $path;
     }
 
-    // The block views, as kit-blocks::<name>.
-    if (function_exists('app') && class_exists(\Illuminate\Container\Container::class)) {
+    /**
+     * Registers the block views, as kit-blocks::<name>, with the current
+     * Laravel app. kit-blocks.php calls it each time it's loaded, not once per
+     * process: a long-running process (a queue worker, Octane, a test suite)
+     * boots a new app whose view factory needs the namespace again.
+     */
+    function kit_cgcms_register_views(): void
+    {
+        if (!function_exists('app') || !class_exists(\Illuminate\Container\Container::class)) {
+            return;
+        }
         $register = fn ($view) => $view->addNamespace('kit-blocks', KIT_CGCMS_DIR . '/views');
         app()->resolved('view') ? $register(app('view')) : app()->afterResolving('view', $register);
     }

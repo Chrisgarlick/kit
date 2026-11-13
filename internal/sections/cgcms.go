@@ -263,6 +263,9 @@ use Cg\Cms\Schema\Field;
 
 require_once __DIR__ . '/kit/cgcms.php';
 
+// Every load, so each new app (a test, a queue job under Octane) gets the views.
+kit_cgcms_register_views();
+
 return [
 ` + strings.Join(blocks, "") + "];\n"
 }
