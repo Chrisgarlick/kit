@@ -19,8 +19,9 @@ summary: How it works. A heading, numbered steps and a link, beside up to two la
 |---|---|---|
 | `eyebrow`, `title`, `heading_level` | | The heading, `*stars*` for italics. |
 | `steps` | list (1 to 6) | `title` and `text`, numbered in order. |
+| `step_punctuation` | boolean | On by default: a full stop after each step's `title`. Off, the title is shown as written (for titles that end in a question mark, or are sentences). |
 | `link_label`, `link_url` | | One arrow link under the steps. |
-| `cards` | list (up to 2) | Example cards: `label`, `title`, `points` (each `text` and `included`). |
+| `cards` | list (up to 2) | Example cards: `label`, `title` (rich text: `*stars*` for italics, a new line for a line break), `points` (each `text` and `included`). |
 | `background` | `plain` or `tinted` | Tinted by default, so the white cards stand out. |
 
 ## Layout

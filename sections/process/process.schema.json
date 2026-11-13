@@ -33,7 +33,7 @@
           "type": "text",
           "label": "Step",
           "required": true,
-          "max": 60
+          "max": 100
         },
         "text": {
           "type": "text",
@@ -41,6 +41,12 @@
           "max": 200
         }
       }
+    },
+    "step_punctuation": {
+      "type": "boolean",
+      "label": "Full stop after each step",
+      "help": "Adds a full stop after each step's name. Turn it off when the names are sentences or end in their own punctuation.",
+      "default": true
     },
     "link_label": {
       "type": "text",
@@ -60,13 +66,14 @@
         "label": {
           "type": "text",
           "label": "Label",
-          "max": 40
+          "max": 80
         },
         "title": {
-          "type": "text",
+          "type": "rich-text",
           "label": "Title",
+          "help": "A new line starts a second line. *Stars* for italics.",
           "required": true,
-          "max": 60
+          "max": 100
         },
         "points": {
           "type": "list",

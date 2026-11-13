@@ -12,7 +12,7 @@ return function ($content = [], $variant = 'default'): void {
       <<?php echo kit_e(kit_heading($content['heading_level'])); ?> class="kit-process-title"><?php echo kit_e(kit_rich($content['title'])); ?></<?php echo kit_e(kit_heading($content['heading_level'])); ?>>
       <ol class="kit-process-steps">
         <?php foreach ($content['steps'] as $step): ?>
-        <li><strong><?php echo kit_e($step['title']); ?>.</strong><?php if ($step['text']): ?> <?php echo kit_e($step['text']); ?><?php endif; ?></li>
+        <li><strong><?php echo kit_e($step['title']); ?><?php echo kit_e(($content['step_punctuation'] ? '.' : '')); ?></strong><?php if ($step['text']): ?> <?php echo kit_e($step['text']); ?><?php endif; ?></li>
         <?php endforeach; ?>
       </ol>
       <?php if (($content['link_label'] && $content['link_url'])): ?>
@@ -26,7 +26,7 @@ return function ($content = [], $variant = 'default'): void {
         <?php if ($card['label']): ?>
         <p class="kit-note-label"><?php echo kit_e($card['label']); ?></p>
         <?php endif; ?>
-        <p class="kit-note-title"><?php echo kit_e($card['title']); ?></p>
+        <p class="kit-note-title"><?php echo kit_e(kit_rich($card['title'])); ?></p>
         <?php if (count($card['points'])): ?>
         <ul class="kit-note-points" role="list">
           <?php foreach ($card['points'] as $point): ?>

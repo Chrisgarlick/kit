@@ -95,5 +95,47 @@
         }
       ]
     }
+  },
+  {
+    "title": "No full stops, a two-line card title",
+    "content": {
+      "eyebrow": "How I work",
+      "title": "Four stages, *each one something you can see and sign off.*",
+      "step_punctuation": false,
+      "steps": [
+        {
+          "title": "Audit first: what's there, what's slow and what's at risk",
+          "text": "A written report before anything changes."
+        },
+        {
+          "title": "What does done look like?",
+          "text": "A scope with what's in, what's out and the price."
+        },
+        {
+          "title": "Build, in small pieces you can see each week",
+          "text": "Every change on a preview site first."
+        },
+        {
+          "title": "Hand-over!",
+          "text": "Your code, your logins, written notes."
+        }
+      ],
+      "cards": [
+        {
+          "label": "Every week · a short written update you can forward",
+          "title": "What changed this week\n*and what's next*",
+          "points": [
+            {
+              "text": "A preview link"
+            },
+            {
+              "text": "Surprise invoices",
+              "included": false
+            }
+          ]
+        }
+      ],
+      "background": "plain"
+    }
   }
 ]

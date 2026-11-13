@@ -9,7 +9,7 @@
       <{{ kit_heading($content['heading_level']) }} class="kit-process-title">{{ kit_rich($content['title']) }}</{{ kit_heading($content['heading_level']) }}>
       <ol class="kit-process-steps">
         @foreach($content['steps'] as $step)
-        <li><strong>{{ $step['title'] }}.</strong>@if($step['text']) {{ $step['text'] }}@endif</li>
+        <li><strong>{{ $step['title'] }}{{ $content['step_punctuation'] ? '.' : '' }}</strong>@if($step['text']) {{ $step['text'] }}@endif</li>
         @endforeach
       </ol>
       @if($content['link_label'] && $content['link_url'])
@@ -23,7 +23,7 @@
         @if($card['label'])
         <p class="kit-note-label">{{ $card['label'] }}</p>
         @endif
-        <p class="kit-note-title">{{ $card['title'] }}</p>
+        <p class="kit-note-title">{{ kit_rich($card['title']) }}</p>
         @if(count($card['points']))
         <ul class="kit-note-points" role="list">
           @foreach($card['points'] as $point)
