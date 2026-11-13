@@ -59,7 +59,7 @@ func TestCgCmsFieldMapping(t *testing.T) {
 		`Field::media('photo')->requireAlt()->preset('hero'),`,
 		`Field::media('logo'),`,
 		`Field::select('level')->options(['1', '2', '3', '4'])->default('1'),`,
-		`Field::select('icon')->options(['', 'bag',`,
+		`Field::select('icon')->options(['', 'app-window', 'bag',`,
 		`Field::text('phone')->label('Phone')->help('Left empty, it shows the site\'s phone number.'),`,
 		`Field::repeater('prices')->min(1)->max(3)->rowLabel('name')->fields([`,
 		`            Field::repeater('features')->max(8)->rowLabel('text')->fields([`,

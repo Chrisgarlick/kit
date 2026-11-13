@@ -31,7 +31,8 @@ var runtimeSource string
 var iconsJSON []byte
 
 // Icons are the icons kit_icon() draws, by name: each one's SVG content, on a
-// 24px grid, drawn with currentColor strokes (Lucide's shapes).
+// 24px grid, drawn with currentColor strokes (Lucide's shapes, lucide.dev, ISC
+// licence: Copyright (c) Lucide Contributors; drawn at kit's 1.75 stroke).
 var Icons = func() map[string]string {
 	var m map[string]string
 	if err := json.Unmarshal(iconsJSON, &m); err != nil {
