@@ -10,7 +10,7 @@ showcase homepage builds from them in WordPress. Next for the shop: WooCommerce 
 cart (phase 3's done-when). Waiting: **contact**: its form comes from a
 WordPress forms plugin that prints kit's inputs (decided 11 November 2026; `plans/wordpress.md`,
 open decision 4), not needed yet; with it the collage hero's "check your site" input card; the
-cg-cms block types (planned in `~/dev/cg-cms/docs/kit-sections.md`); the screenshot comparison with Design. Designed in Design, in Base theme → Kit sections (file `aaca632a61d340b1a735f13a5c1abce7`): 22
+cg-cms block types in cg-cms itself (`kit build-cgcms` writes them; `~/dev/cg-cms/docs/kit-sections.md`); the screenshot comparison with Design. Designed in Design, in Base theme → Kit sections (file `aaca632a61d340b1a735f13a5c1abce7`): 22
 sections and about 35 components, each with a desktop layout and a mobile state, plus
 Steep-styled versions in chrisgarlick.com redesign: win clients
 (`38bc0169c69841d6a7a0ab1e4bef2e5b`, the "Kit · Steep / …" components). Owner: kit,
@@ -144,6 +144,43 @@ The schema is the single description of a section's content (eyebrow, title, led
 images, actions), so the two CMSs can't drift apart, and a future importer (Scout's Wix and
 Squarespace migration) has one target format. The schema format itself is specified in
 `plans/wordpress.md`, since the WordPress plugin is its first full consumer.
+
+**Stored content to a template's content is kit's too** (13 November 2026): `kit_content($schema,
+$data, $site, $resolveImage)` in kit.php sanitises stored content against the schema (unknown
+fields and wrong types dropped, values cast to their type, text and lists cut to their maximum,
+unsafe addresses emptied), fills empty bound fields from the site's details (`kit_site()`) and
+fills every field, with `kit_variant()` for the layout. WordPress (kit Blocks) and cg-cms both call
+it; a CMS that stores image references passes `$resolveImage`. `content_test.go` checks it in PHP.
+
+### cg-cms blocks: `kit build-cgcms` (stage A, 13 November 2026)
+
+`kit build-cgcms -out <folder> [-fixtures <file.json>] [-check]` writes, into a folder in the app:
+
+```
+kit-blocks.php               return [Block::make('kit-<name>', '<Title>')->fields([...])->view('kit-blocks::<name>'), ...]
+views/<name>.blade.php       pushes the section's CSS once (kit-styles stack), prints {{ kit_cgcms_block('<name>', $data) }}
+sections/<name>/             <name>.php (compiled), schema.json, style.css
+kit/                         kit.php, cgcms.php (kit_cgcms_block, the media resolver, the view namespace), kit.css, fonts/, site.schema.json, icons.json
+VERSION                      the kit commit
+```
+
+The app adds the blocks with `return [...require base_path('<folder>/kit-blocks.php'), /* its own */];`
+in its blocks file and allows the ones a page wants. Loading kit-blocks.php loads the runtime and
+registers the `kit-blocks::` view namespace, so nothing in cg-cms changes. Fields map from the
+schema: rich text is a plain **textarea** (never cg-cms's `richText`, whose HTML would reach the
+page as it is; `kit_rich` makes the marks), enums, heading levels and icons are selects, lists
+repeaters (nested too), images media fields (`requireAlt` unless alt is optional, `preset` from
+`sizes`), a `variant` select first when a section has more than one layout; defaults are strings
+for now (cg-cms's `Field::default` takes only strings) and `kit_content()` casts everything back.
+Bound fields aren't required: left empty they show the site's details, read for now from
+`config('kit-blocks.site')`. The app serves `sections/*/style.css` and `kit/` (CSS and fonts only)
+at `config('kit-blocks.url')` (default `/kit-blocks`) and prints `@stack('kit-styles')` and kit.css
+in its layout. `-fixtures` writes every demo as cg-cms stores it (selects as strings) with kit's
+HTML, for a parity test in the app; `-check` fails if the folder is out of date (VERSION aside).
+`cgcms_test.go` loads the blocks against stand-ins for cg-cms's classes and renders every demo
+through the views with real Blade. Still to come (stage B, in cg-cms): site settings from the
+schema, `Field::default` for non-strings, the CSS in the admin's preview, `marks` and `icon`
+admin fields. The wider plan: `~/dev/cg-cms/docs/kit-sections.md`.
 
 ### Security
 
