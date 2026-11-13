@@ -13,7 +13,7 @@
       @if(count($content['points']))
       <ul class="kit-text-block-points" role="list">
         @foreach($content['points'] as $point)
-        <li>{{ $point['text'] }}</li>
+        <li{{ $point['excluded'] ? ' data-excluded' : '' }}>@if($point['excluded'])<span class="kit-vh">Not included: </span>@endif{{ $point['text'] }}</li>
         @endforeach
       </ul>
       @endif

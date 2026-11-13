@@ -6,6 +6,7 @@
  *     <h2 class="kit-text-block-title">…</h2>
  *     <div class="kit-text-block-body"><p>…</p></div>
  *     <ul class="kit-text-block-points" role="list"><li>…</li></ul>
+ *       (a point not included: <li data-excluded><span class="kit-vh">Not included: </span>…</li>, a cross)
  *     <p class="kit-text-block-actions"><a class="kit-link" data-variant="arrow" href="…">…</a></p>
  *   </div>
  */
@@ -23,6 +24,13 @@
   content: ""; flex: none; inline-size: 18px; block-size: 18px; margin-block-start: 1px; background: var(--kit-accent);
   mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Cpath d=%27m8 12 3 3 5-6%27/%3E%3C/svg%3E") center / contain no-repeat;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Cpath d=%27m8 12 3 3 5-6%27/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* A point that isn't included: a cross in place of the tick, in the quieter text colour. */
+.kit-text-block-points li[data-excluded] { color: var(--kit-fg-2); }
+.kit-text-block-points li[data-excluded]::before {
+  background: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Cpath d=%27m15 9-6 6M9 9l6 6%27/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27black%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Cpath d=%27m15 9-6 6M9 9l6 6%27/%3E%3C/svg%3E");
 }
 .kit-text-block-actions { padding-block-start: var(--kit-space-1); }
 .kit-text-block[data-align="centre"] { justify-items: center; text-align: center; margin-inline: auto; max-inline-size: 44rem; }

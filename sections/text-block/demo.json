@@ -73,5 +73,21 @@
         }
       ]
     }
+  },
+  {
+    "title": "Points, some not included",
+    "content": {
+      "eyebrow": "The care plan",
+      "title": "What's in it, *and what isn't*",
+      "body": "Updates, backups and a fix within a day. New features are quoted separately.",
+      "points": [
+        { "text": "Security and plugin updates every week" },
+        { "text": "Daily backups, kept for 30 days" },
+        { "text": "Fixes within one working day" },
+        { "text": "New pages and features", "excluded": true },
+        { "text": "Content writing", "excluded": true }
+      ],
+      "link_label": "See the care plan", "link_url": "/care"
+    }
   }
 ]

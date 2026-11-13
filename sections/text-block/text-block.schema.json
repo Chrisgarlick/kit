@@ -13,7 +13,8 @@
     "heading_level": { "type": "heading-level", "label": "Heading level", "default": 2 },
     "body": { "type": "textarea", "label": "Text", "help": "A blank line starts a new paragraph. *Stars* for italics, **double stars** for bold.", "max": 1200 },
     "points": { "type": "list", "label": "Ticked points", "help": "As many as the section needs.", "item": {
-      "text": { "type": "text", "label": "Point", "required": true, "max": 80 }
+      "text": { "type": "text", "label": "Point", "required": true, "max": 80 },
+      "excluded": { "type": "boolean", "label": "Not included", "help": "Shows a cross instead of the tick, and screen readers hear \"Not included\" first." }
     }},
     "link_label": { "type": "text", "label": "Link", "max": 40 },
     "link_url": { "type": "url", "label": "Link address" },

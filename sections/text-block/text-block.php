@@ -16,7 +16,7 @@ return function ($content = [], $variant = 'default'): void {
       <?php if (count($content['points'])): ?>
       <ul class="kit-text-block-points" role="list">
         <?php foreach ($content['points'] as $point): ?>
-        <li><?php echo kit_e($point['text']); ?></li>
+        <li<?php echo kit_e(($point['excluded'] ? ' data-excluded' : '')); ?>><?php if ($point['excluded']): ?><span class="kit-vh">Not included: </span><?php endif; ?><?php echo kit_e($point['text']); ?></li>
         <?php endforeach; ?>
       </ul>
       <?php endif; ?>
