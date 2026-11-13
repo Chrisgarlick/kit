@@ -130,7 +130,7 @@
           "type": "text",
           "label": "Name",
           "required": true,
-          "max": 80
+          "max": 100
         },
         "url": {
           "type": "url",

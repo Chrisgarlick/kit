@@ -7,7 +7,7 @@
   "description": "A band in the accent colour: one line that asks, one that reassures, a button and a phone number.",
   "fields": {
     "eyebrow": { "type": "text", "label": "Label above the heading", "help": "A short kicker, like \"Next step\".", "max": 60 },
-    "title": { "type": "rich-text", "label": "Heading", "required": true, "max": 80 },
+    "title": { "type": "rich-text", "label": "Heading", "required": true, "max": 120 },
     "heading_level": { "type": "heading-level", "label": "Heading level", "default": 2 },
     "lede": { "type": "text", "label": "Supporting line", "max": 160 },
     "action_label": { "type": "text", "label": "Button", "max": 30 },

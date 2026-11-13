@@ -73,19 +73,19 @@
           "type": "text",
           "label": "Number label",
           "help": "A small label above the name, like \"01 — Laravel\".",
-          "max": 40
+          "max": 60
         },
         "title": {
           "type": "text",
           "label": "Name",
           "required": true,
-          "max": 60
+          "max": 100
         },
         "subtitle": {
           "type": "rich-text",
           "label": "Second line of the name",
           "help": "Shown under the name, as part of the heading. *Stars* for italics.",
-          "max": 80
+          "max": 120
         },
         "text": {
           "type": "textarea",

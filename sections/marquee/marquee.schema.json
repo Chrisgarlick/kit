@@ -17,7 +17,7 @@
           "label": "Phrase",
           "help": "A few words. *Words in stars* are set in italics.",
           "required": true,
-          "max": 60
+          "max": 80
         }
       }
     },

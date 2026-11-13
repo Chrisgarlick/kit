@@ -44,7 +44,7 @@
           "label": "Name",
           "help": "*Words in stars* are set in italics.",
           "required": true,
-          "max": 60
+          "max": 100
         },
         "text": {
           "type": "text",
