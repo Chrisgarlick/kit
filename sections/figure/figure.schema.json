@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.chrisgarlick.com/schema/section/1.json",
+  "name": "figure",
+  "title": "Figure",
+  "version": 1,
+  "category": "kit-sections",
+  "description": "One wide image, like a screenshot of the work, with a caption row under it and an optional card of proof over its corner.",
+  "fields": {
+    "image": { "type": "image", "label": "Image", "help": "Shown at its own shape, the width of the page. Empty, it shows a placeholder.", "alt": "required", "sizes": "hero" },
+    "caption_left": { "type": "text", "label": "Caption", "help": "What the image shows, under it on the left.", "max": 160 },
+    "caption_right": { "type": "text", "label": "Caption, right", "help": "A second, shorter note on the right, like the date or the client.", "max": 80 },
+    "proof_label": { "type": "text", "label": "Proof card label", "help": "A small label at the top of the card, like \"Lighthouse performance\".", "max": 60 },
+    "proof_value": { "type": "text", "label": "Proof card number", "help": "The big number, like \"100\" or \"0.4 s\". Left empty, there's no card.", "max": 20 },
+    "proof_note": { "type": "text", "label": "Proof card note", "help": "A line under the number, like \"on a phone, over 4G\".", "max": 80 },
+    "tone": { "type": "enum", "label": "Background", "help": "Tinted is a step from the page colour; dark is the inverse band, like the footer.", "options": ["plain", "tinted", "dark"], "default": "plain" }
+  }
+}

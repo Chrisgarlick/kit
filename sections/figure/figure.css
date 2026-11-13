@@ -1,0 +1,38 @@
+/* SPDX-License-Identifier: MIT
+ * Section: figure (tier 1). One wide image (a screenshot of the work) in a
+ * figure, a caption row under it, and an optional proof card over its corner.
+ *   <section class="kit-section-figure" data-tone="plain|tinted|dark">
+ *     <figure class="kit-figure">
+ *       <div class="kit-figure-frame"> <img class="kit-figure-media"> <div class="kit-figure-proof"> … </div> </div>
+ *       <figcaption class="kit-figure-caption"> <span class="kit-figure-caption-left"> <span class="kit-figure-caption-right"> </figcaption>
+ *     </figure>
+ *   </section>
+ * The image keeps its own shape (a placeholder is 16:9). The proof card floats
+ * over the image's bottom-right corner; below 40rem (the section's own width)
+ * it sits under the image instead, and the caption's two halves stack.
+ */
+.kit-section-figure { container: kit-figure / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); --_fg-2: var(--kit-fg-2); --_line: var(--kit-line); }
+.kit-section-figure[data-tone="tinted"] { background: var(--kit-band); }
+.kit-section-figure[data-tone="dark"] { background: var(--kit-inverse-bg); color: var(--kit-inverse-fg); --_fg-2: var(--kit-inverse-fg-2); --_line: var(--kit-inverse-line); }
+.kit-figure { display: grid; gap: var(--kit-space-4); margin: 0; }
+.kit-figure-frame { position: relative; }
+.kit-figure-media { display: block; inline-size: 100%; block-size: auto; border: 1px solid var(--_line); border-radius: var(--kit-card-radius); background: var(--kit-surface-2); box-sizing: border-box; }
+.kit-figure-media[data-empty] { display: grid; place-items: center; aspect-ratio: 16 / 9; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); }
+.kit-figure-media[data-empty] .kit-icon { inline-size: 36px; block-size: 36px; }
+
+/* The proof card: a small label, a big number and a note, on the surface colour. */
+.kit-figure-proof { position: absolute; inset-block-end: var(--kit-space-5); inset-inline-end: var(--kit-space-5); display: grid; gap: var(--kit-space-1); min-inline-size: 12rem; max-inline-size: 18rem; padding: var(--kit-space-4) var(--kit-space-5); border-radius: var(--kit-card-radius); background: var(--kit-surface); color: var(--kit-fg); box-shadow: var(--kit-shadow-3); }
+.kit-figure-proof > * { margin: 0; }
+.kit-figure-proof-label { font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--kit-fg-2); }
+.kit-figure-proof-value { font-family: var(--kit-font-display); font-weight: var(--kit-display-weight); letter-spacing: var(--kit-display-tracking); font-size: var(--kit-text-4xl); line-height: 1; font-variant-numeric: tabular-nums; }
+.kit-figure-proof-note { font-size: var(--kit-text-sm); line-height: 1.45; color: var(--kit-fg-2); }
+
+.kit-figure-caption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--kit-space-2) var(--kit-space-5); font-size: var(--kit-text-sm); line-height: 1.45; color: var(--_fg-2); }
+.kit-figure-caption-right { margin-inline-start: auto; font-family: var(--kit-font-mono); font-size: var(--kit-text-xs); letter-spacing: 0.04em; text-align: end; }
+
+@container kit-figure (max-width: 40rem) {
+  .kit-figure-proof { position: static; max-inline-size: none; margin-block-start: var(--kit-space-3); box-shadow: none; border: 1px solid var(--kit-line); }
+  .kit-figure-caption { display: grid; }
+  .kit-figure-caption-right { margin-inline-start: 0; text-align: start; }
+}
+@media (forced-colors: active) { .kit-figure-proof { border: 1px solid CanvasText; } }

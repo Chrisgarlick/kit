@@ -1,0 +1,30 @@
+[
+  {
+    "title": "A screenshot with captions and a proof card",
+    "content": {
+      "caption_left": "The booking flow on a phone and a laptop: one page, three steps.",
+      "caption_right": "Harrogate Physio · 2026",
+      "proof_label": "Lighthouse performance",
+      "proof_value": "100",
+      "proof_note": "On a mid-range phone, over 4G"
+    }
+  },
+  {
+    "title": "Phone: the card under the image",
+    "width": "mobile",
+    "content": {
+      "caption_left": "The booking flow: one page, three steps.",
+      "caption_right": "2026",
+      "proof_label": "Lighthouse performance",
+      "proof_value": "100",
+      "proof_note": "On a mid-range phone, over 4G"
+    }
+  },
+  {
+    "title": "Dark, a caption only",
+    "content": {
+      "caption_left": "The admin: every page, its blocks and their fields.",
+      "tone": "dark"
+    }
+  }
+]
