@@ -90,6 +90,9 @@ test('date range: presets and the calendar in a popover; the inputs carry the va
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole('grid')).toBeVisible();
   expect(await page.evaluate(() => document.activeElement.getAttribute('role'))).toBe('gridcell');
+  // The popover fades in (0.14s); measured mid-fade, its greys blend with the
+  // page and fail contrast they pass once it's open. Check it open.
+  await dialog.evaluate((el) => Promise.all(el.getAnimations({ subtree: true }).map((a) => a.finished)));
   expect(await axe(page, 'kit-date-range')).toEqual([]);
   await dialog.getByRole('button', { name: 'Last 7 days' }).click();
   await expect(dialog).toBeHidden();
