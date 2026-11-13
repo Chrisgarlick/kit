@@ -91,5 +91,85 @@
       ],
       "numbered": true
     }
+  },
+  {
+    "title": "About on an accent panel",
+    "content": {
+      "eyebrow": "About",
+      "title": "Twenty years of fixing websites, *in plain English.*",
+      "body": "I build and look after websites for small firms: Laravel, WordPress and the odd thing in between.\n\nYou deal with me from the first call to the hand-over.",
+      "points": [
+        {
+          "text": "Fixed prices, in writing"
+        },
+        {
+          "text": "Your code and your logins, always"
+        }
+      ],
+      "link_label": "More about me",
+      "link_url": "/about",
+      "panel": "accent"
+    }
+  },
+  {
+    "title": "About on a surface panel, swapped, tinted",
+    "content": {
+      "eyebrow": "About",
+      "title": "Twenty years of fixing websites, *in plain English.*",
+      "body": "I build and look after websites for small firms: Laravel, WordPress and the odd thing in between.\n\nYou deal with me from the first call to the hand-over.",
+      "points": [
+        {
+          "text": "Fixed prices, in writing"
+        },
+        {
+          "text": "Your code and your logins, always"
+        }
+      ],
+      "link_label": "More about me",
+      "link_url": "/about",
+      "panel": "surface",
+      "swap": true,
+      "background": "tinted"
+    }
+  },
+  {
+    "title": "Phone: the accent panel under the image",
+    "width": "mobile",
+    "content": {
+      "eyebrow": "About",
+      "title": "Twenty years of fixing websites, *in plain English.*",
+      "body": "I build and look after websites for small firms: Laravel, WordPress and the odd thing in between.\n\nYou deal with me from the first call to the hand-over.",
+      "points": [
+        {
+          "text": "Fixed prices, in writing"
+        },
+        {
+          "text": "Your code and your logins, always"
+        }
+      ],
+      "link_label": "More about me",
+      "link_url": "/about",
+      "panel": "accent"
+    }
+  },
+  {
+    "title": "FAQ with the text on a surface panel",
+    "content": {
+      "eyebrow": "Questions",
+      "title": "Before you *ask*",
+      "body": "The answers to what most people want to know first.",
+      "media": "questions",
+      "panel": "surface",
+      "questions": [
+        {
+          "question": "How long does a rebuild take?",
+          "answer": "Four to eight weeks, most of it waiting on content."
+        },
+        {
+          "question": "Do you work with agencies?",
+          "answer": "Yes, as a named developer on your team."
+        }
+      ]
+    }
   }
 ]

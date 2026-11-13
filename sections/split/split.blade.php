@@ -1,6 +1,6 @@
 {{-- kit section: split. Edit this, then run `kit section compile`. --}}
 @props(['content' => [], 'variant' => 'default'])
-<section class="kit-section-split" data-background="{{ $content['background'] }}" data-media="{{ $content['media'] }}"{{ $content['swap'] ? ' data-swap' : '' }}>
+<section class="kit-section-split" data-background="{{ $content['background'] }}" data-media="{{ $content['media'] }}"{{ $content['swap'] ? ' data-swap' : '' }}@if($content['panel'] !== 'none') data-panel="{{ $content['panel'] }}"@endif>
   <div class="kit-container kit-split-inner">
     <div class="kit-text-block kit-split-text">
       @if($content['eyebrow'])

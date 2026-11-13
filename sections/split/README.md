@@ -27,6 +27,7 @@ The text side has the [text block](/sections/text-block/)'s fields (`eyebrow`, `
 | `image` | image | Alt text required. Lazy-loaded: a split is rarely the first section. Empty, it shows a placeholder. |
 | `questions` | list (up to 12) | `question`, `answer` (paragraphs). The first starts open. |
 | `numbered` | boolean | Off by default. Shows "01", "02"… before each question, in the mono face. |
+| `panel` | `none`, `accent` or `surface` | None by default. Puts the text on a filled panel: `accent` is `--kit-accent` with `--kit-accent-fg` text (the label, body, ticks and link all take the panel's text colour), `surface` is `--kit-surface`, lifted with `--kit-shadow-3`. Beside an image the panel and the image meet edge to edge, as one rounded block, the image filling the panel's height; beside questions the panel keeps the gap. |
 | `swap` | boolean | An image starts on the left and questions on the right; this swaps them. |
 | `background` | `plain` or `tinted` | Tinted is `--kit-band`, a step from the page colour. |
 

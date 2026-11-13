@@ -3,7 +3,7 @@
 return function ($content = [], $variant = 'default'): void {
 ?>
 
-<section class="kit-section-split" data-background="<?php echo kit_e($content['background']); ?>" data-media="<?php echo kit_e($content['media']); ?>"<?php echo kit_e(($content['swap'] ? ' data-swap' : '')); ?>>
+<section class="kit-section-split" data-background="<?php echo kit_e($content['background']); ?>" data-media="<?php echo kit_e($content['media']); ?>"<?php echo kit_e(($content['swap'] ? ' data-swap' : '')); ?><?php if (($content['panel'] !== 'none')): ?> data-panel="<?php echo kit_e($content['panel']); ?>"<?php endif; ?>>
   <div class="kit-container kit-split-inner">
     <div class="kit-text-block kit-split-text">
       <?php if ($content['eyebrow']): ?>

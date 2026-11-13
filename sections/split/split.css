@@ -6,6 +6,8 @@
  * them. With numbered questions, each summary holds .kit-split-number (decorative)
  * and .kit-split-question. Below 48rem (the section's own width) the halves stack, an image
  * above the text and questions below it.
+ * [data-panel="accent|surface"] puts the text on a filled panel; beside an image the two meet
+ * edge to edge as one rounded block, the image filling the panel's height.
  */
 .kit-section-split { container: kit-split / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); }
 .kit-section-split[data-background="tinted"] { background: var(--kit-band); }
@@ -28,9 +30,25 @@
 .kit-split-number { flex: none; min-inline-size: 2.5ch; font: 400 var(--kit-text-sm)/1 var(--kit-font-mono); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--kit-fg-3); }
 .kit-split-question { flex: 1; }
 
+/* The text panel. On accent, everything in it takes --kit-accent-fg: the text, the ticks, the
+ * link and its focus ring (the tokens are set again on its children, so kit's text block and
+ * link pick them up). */
+.kit-section-split[data-panel] .kit-split-text { max-inline-size: none; align-content: center; padding: clamp(2rem, 5cqi, 4.5rem); border-radius: var(--kit-card-radius); box-sizing: border-box; }
+.kit-section-split[data-panel="accent"] .kit-split-text { background: var(--kit-accent); color: var(--kit-accent-fg); }
+.kit-section-split[data-panel="accent"] .kit-split-text > * { --kit-fg: var(--kit-accent-fg); --kit-fg-2: var(--kit-accent-fg); --kit-accent: var(--kit-accent-fg); --kit-accent-hover: var(--kit-accent-fg); --kit-focus-ring: var(--kit-accent-fg); }
+.kit-section-split[data-panel="surface"] .kit-split-text { background: var(--kit-surface); color: var(--kit-fg); }
+.kit-section-split[data-panel="surface"][data-media="questions"] .kit-split-text,
+.kit-section-split[data-panel="surface"][data-media="image"] .kit-split-inner { box-shadow: var(--kit-shadow-3); }
+.kit-section-split[data-panel][data-media="image"] .kit-split-inner { gap: 0; align-items: stretch; border-radius: var(--kit-card-radius); overflow: hidden; }
+.kit-section-split[data-panel][data-media="image"] :is(.kit-split-text, .kit-split-media) { border-radius: 0; }
+/* The image fills the panel's height and doesn't set it (contain: size), never shorter than a square's worth of text. */
+.kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: 100%; min-block-size: 24rem; aspect-ratio: auto; contain: size; }
+.kit-section-split[data-panel][data-media="image"] .kit-split-media[data-empty] { border: 0; }
+
 @container kit-split (max-width: 48rem) {
   .kit-split-inner { grid-template-columns: minmax(0, 1fr); gap: var(--kit-space-6); }
   .kit-section-split[data-media="image"] .kit-split-media,
   .kit-section-split[data-media="image"][data-swap] .kit-split-media { order: -1; aspect-ratio: 4 / 3; }
   .kit-section-split[data-media="questions"][data-swap] .kit-split-questions { order: 1; }
+  .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: 4 / 3; contain: none; }
 }

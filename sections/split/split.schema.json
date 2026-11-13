@@ -23,6 +23,7 @@
     }},
     "numbered": { "type": "boolean", "label": "Number the questions", "help": "Shows 01, 02… before each question. Decoration: screen readers hear the question alone." },
     "swap": { "type": "boolean", "label": "Swap the sides", "help": "An image starts on the left and questions on the right." },
+    "panel": { "type": "enum", "label": "Text panel", "help": "Puts the text on a filled panel, edge to edge with the image: accent is the brand colour, surface a lifted card. None leaves the text on the page.", "options": ["none", "accent", "surface"], "default": "none" },
     "background": { "type": "enum", "label": "Background", "options": ["plain", "tinted"], "default": "plain" }
   }
 }
