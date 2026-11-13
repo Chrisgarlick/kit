@@ -14,7 +14,7 @@
     <nav class="kit-header-nav" aria-label="Main">
       <ul role="list">
         @foreach($content['links'] as $i => $link)
-        <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@endif>@if($content['numbered'])<span class="kit-header-num" aria-hidden="true">0{{ $i + 1 }}</span>@endif{{ $link['label'] }}</a></li>
+        <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@elseif($link['section']) aria-current="true"@endif>@if($content['numbered'])<span class="kit-header-num" aria-hidden="true">0{{ $i + 1 }}</span>@endif{{ $link['label'] }}</a></li>
         @endforeach
       </ul>
     </nav>
@@ -35,7 +35,7 @@
         <nav class="kit-header-sheet" aria-label="Menu">
           <ul role="list">
             @foreach($content['links'] as $i => $link)
-            <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@endif>@if($content['numbered'])<span class="kit-header-num" aria-hidden="true">0{{ $i + 1 }}</span>@endif{{ $link['label'] }}</a></li>
+            <li><a href="{{ kit_url($link['url']) }}"@if($link['current']) aria-current="page"@elseif($link['section']) aria-current="true"@endif>@if($content['numbered'])<span class="kit-header-num" aria-hidden="true">0{{ $i + 1 }}</span>@endif{{ $link['label'] }}</a></li>
             @endforeach
           </ul>
 @if($content['secondary_label'] && $content['secondary_url'])

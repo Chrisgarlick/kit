@@ -84,9 +84,10 @@ func (s *Section) CgCmsBlock(site *Schema) string {
 
 // cgcmsWorkedOut lists the fields cg-cms's runtime works out for itself,
 // which its blocks leave out of the admin: the header link that is the page
-// being shown (kit_cgcms_block marks it from the request, as kit Blocks does
-// in WordPress). A value stored before is still honoured.
-var cgcmsWorkedOut = map[string][]string{"header": {"links.current"}}
+// being shown, and the one whose section it's in (kit_cgcms_block marks them
+// from the request; kit Blocks marks the page in WordPress). A value stored
+// before is still honoured.
+var cgcmsWorkedOut = map[string][]string{"header": {"links.current", "links.section"}}
 
 // CgCmsFields is the section's fields as its cg-cms block has them: the
 // schema's, less those cg-cms works out (cgcmsWorkedOut).

@@ -80,7 +80,7 @@ func TestCgCmsFieldMapping(t *testing.T) {
 	}
 }
 
-// The header's links leave out "This page": cg-cms works it out.
+// The header's links leave out "This page" and "This section": cg-cms works them out.
 func TestCgCmsWorkedOut(t *testing.T) {
 	secs, err := Load("../../sections")
 	if err != nil {
@@ -91,12 +91,12 @@ func TestCgCmsWorkedOut(t *testing.T) {
 			continue
 		}
 		php := s.CgCmsBlock(nil)
-		if strings.Contains(php, "Field::boolean('current')") || !strings.Contains(php, "Field::repeater('links')") {
+		if strings.Contains(php, "Field::boolean('current')") || strings.Contains(php, "Field::boolean('section')") || !strings.Contains(php, "Field::repeater('links')") {
 			t.Errorf("the header's links:\n%s", php)
 		}
 		// The schema itself keeps it, for WordPress and kit's own checks.
 		links := s.Schema.Fields[slices.IndexFunc(s.Schema.Fields, func(f *Field) bool { return f.Name == "links" })]
-		if !slices.ContainsFunc(links.Item, func(f *Field) bool { return f.Name == "current" }) {
+		if !slices.ContainsFunc(links.Item, func(f *Field) bool { return f.Name == "current" }) || !slices.ContainsFunc(links.Item, func(f *Field) bool { return f.Name == "section" }) {
 			t.Error("CgCmsFields changed the schema")
 		}
 		return
@@ -240,6 +240,37 @@ func TestCgCmsBlocks(t *testing.T) {
 		// Settings win; a detail empty there shows config's.
 		if got.Site["name"] != "Settings Ltd" || got.Site["phone"] != "01234 999999" || got.Site["email"] != "hello@config.test" {
 			t.Errorf("site: %v", got.Site)
+		}
+	})
+
+	// The header's current page and section, from the request's path.
+	t.Run("current", func(t *testing.T) {
+		b, err := exec.Command(php, "testdata/cgcms-current.php", out, "services", "services/laravel", "services/laravel/hosting", "work", "", "services-extra/more").CombinedOutput()
+		if err != nil {
+			t.Fatalf("php: %v\n%s", err, b)
+		}
+		var got map[string]map[string]string
+		if err := json.Unmarshal(b, &got); err != nil {
+			t.Fatalf("php output: %v\n%s", err, b)
+		}
+		// On every path the stored marks are honoured and another site's link is never marked.
+		always := map[string]string{"Marked": "true", "Stored": "page", "Elsewhere": ""}
+		for path, want := range map[string]map[string]string{
+			"services":                 {"Home": "", "Services": "page", "Laravel": "", "Services extra": ""},
+			"services/laravel":         {"Home": "", "Services": "true", "Laravel": "page", "Services extra": ""},
+			"services/laravel/hosting": {"Home": "", "Services": "true", "Laravel": "true", "Services extra": ""},
+			"work":                     {"Home": "", "Services": "", "Laravel": "", "Services extra": ""},
+			"":                         {"Home": "page", "Services": "", "Laravel": "", "Services extra": ""},
+			"services-extra/more":      {"Home": "", "Services": "", "Laravel": "", "Services extra": "true"},
+		} {
+			for label, mark := range always {
+				want[label] = mark
+			}
+			for label, mark := range want {
+				if got[path][label] != mark {
+					t.Errorf("/%s: %s is %q, want %q", path, label, got[path][label], mark)
+				}
+			}
 		}
 	})
 

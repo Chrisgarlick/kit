@@ -17,7 +17,7 @@ return function ($content = [], $variant = 'default'): void {
     <nav class="kit-header-nav" aria-label="Main">
       <ul role="list">
         <?php foreach ($content['links'] as $i => $link): ?>
-        <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php endif; ?>><?php if ($content['numbered']): ?><span class="kit-header-num" aria-hidden="true">0<?php echo kit_e(($i + 1)); ?></span><?php endif; ?><?php echo kit_e($link['label']); ?></a></li>
+        <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php elseif ($link['section']): ?> aria-current="true"<?php endif; ?>><?php if ($content['numbered']): ?><span class="kit-header-num" aria-hidden="true">0<?php echo kit_e(($i + 1)); ?></span><?php endif; ?><?php echo kit_e($link['label']); ?></a></li>
         <?php endforeach; ?>
       </ul>
     </nav>
@@ -38,7 +38,7 @@ return function ($content = [], $variant = 'default'): void {
         <nav class="kit-header-sheet" aria-label="Menu">
           <ul role="list">
             <?php foreach ($content['links'] as $i => $link): ?>
-            <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php endif; ?>><?php if ($content['numbered']): ?><span class="kit-header-num" aria-hidden="true">0<?php echo kit_e(($i + 1)); ?></span><?php endif; ?><?php echo kit_e($link['label']); ?></a></li>
+            <li><a href="<?php echo kit_e(kit_url($link['url'])); ?>"<?php if ($link['current']): ?> aria-current="page"<?php elseif ($link['section']): ?> aria-current="true"<?php endif; ?>><?php if ($content['numbered']): ?><span class="kit-header-num" aria-hidden="true">0<?php echo kit_e(($i + 1)); ?></span><?php endif; ?><?php echo kit_e($link['label']); ?></a></li>
             <?php endforeach; ?>
           </ul>
 <?php if (($content['secondary_label'] && $content['secondary_url'])): ?>

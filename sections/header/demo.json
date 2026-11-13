@@ -152,5 +152,19 @@
       "secondary_label": "Book a call",
       "secondary_url": "/book"
     }
+  },
+  {
+    "title": "On a service's page: its section marked",
+    "content": {
+      "brand_name": "Your brand",
+      "links": [
+        { "label": "Services", "url": "/services", "section": true },
+        { "label": "Work", "url": "/work" },
+        { "label": "About", "url": "/about" },
+        { "label": "Contact", "url": "/contact" }
+      ],
+      "action_label": "Book now",
+      "action_url": "/contact"
+    }
   }
 ]

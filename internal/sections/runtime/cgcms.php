@@ -35,11 +35,16 @@ if (!function_exists('kit_cgcms_block')) {
         $schema = kit_cgcms_schema($name);
         if ($name === 'header' && isset($data['links']) && is_array($data['links'])) {
             // The current page is worked out: the link whose address is the
-            // page being shown, as well as one the block marks itself.
+            // page being shown, as well as one the block marks itself. A link
+            // the page is under (/services for /services/laravel) is marked as
+            // its section.
             foreach ($data['links'] as $i => $link) {
                 if (is_array($link)) {
-                    $data['links'][$i]['current'] = kit_sanitise_value(['type' => 'boolean'], $link['current'] ?? null) === true
-                        || kit_cgcms_is_current(is_string($link['url'] ?? null) ? $link['url'] : '');
+                    $url = is_string($link['url'] ?? null) ? $link['url'] : '';
+                    $current = kit_sanitise_value(['type' => 'boolean'], $link['current'] ?? null) === true || kit_cgcms_is_current($url);
+                    $data['links'][$i]['current'] = $current;
+                    $data['links'][$i]['section'] = !$current
+                        && (kit_sanitise_value(['type' => 'boolean'], $link['section'] ?? null) === true || kit_cgcms_is_section($url));
                 }
             }
         }
@@ -144,6 +149,24 @@ if (!function_exists('kit_cgcms_block')) {
             return false;
         }
         return trim($link['path'] ?? '', '/') === trim(request()->path(), '/');
+    }
+
+    /**
+     * Whether the page being shown is under a link's address: /services for
+     * /services/laravel, a whole path segment at a time. Never the home page's
+     * link, and not the page itself (that's kit_cgcms_is_current).
+     */
+    function kit_cgcms_is_section(string $url): bool
+    {
+        if ($url === '' || str_starts_with($url, '#') || !function_exists('request')) {
+            return false;
+        }
+        $link = parse_url($url);
+        if ($link === false || (!empty($link['host']) && $link['host'] !== request()->getHost())) {
+            return false;
+        }
+        $base = trim($link['path'] ?? '', '/');
+        return $base !== '' && str_starts_with(trim(request()->path(), '/') . '/', $base . '/') && trim(request()->path(), '/') !== $base;
     }
 
     /** The address of one of kit's stylesheets: kit/kit.css or sections/<name>/style.css. */
