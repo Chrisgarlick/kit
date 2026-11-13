@@ -39,7 +39,9 @@
 .kit-section-split[data-panel="surface"] .kit-split-text { background: var(--kit-surface); color: var(--kit-fg); }
 .kit-section-split[data-panel="surface"][data-media="questions"] .kit-split-text,
 .kit-section-split[data-panel="surface"][data-media="image"] .kit-split-inner { box-shadow: var(--kit-shadow-3); }
-.kit-section-split[data-panel][data-media="image"] .kit-split-inner { gap: 0; align-items: stretch; border-radius: var(--kit-card-radius); overflow: hidden; }
+/* Beside an image the halves are one block: the container's gutter becomes a margin, so the
+ * block's own edges (its radius, its shadow) are the halves' edges. */
+.kit-section-split[data-panel][data-media="image"] .kit-split-inner { gap: 0; align-items: stretch; padding-inline: 0; inline-size: calc(100% - 2 * var(--_gutter)); max-inline-size: var(--_max); border-radius: var(--kit-card-radius); overflow: hidden; }
 .kit-section-split[data-panel][data-media="image"] :is(.kit-split-text, .kit-split-media) { border-radius: 0; }
 /* The image fills the panel's height and doesn't set it (contain: size), never shorter than a square's worth of text. */
 .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: 100%; min-block-size: 24rem; aspect-ratio: auto; contain: size; }
