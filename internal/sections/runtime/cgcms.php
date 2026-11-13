@@ -8,9 +8,15 @@
 // block chose, and the section's compiled template renders it. Loading this
 // file also registers the views' namespace, kit-blocks::, with Laravel.
 //
+// The site's details (settings/site.schema.json's fields), which bound fields
+// show when a block leaves them empty, come from cg-cms's settings
+// (Settings::site(), edited under Settings > Site details once the app points
+// cg-cms.site_schema at kit/site.schema.json), over config('kit-blocks.site')
+// for anything not set there. A block that shows them tags the page
+// settings:site, so saving the settings purges it from cg-cms's page cache.
+//
 // Settings, read from Laravel's config when there is one:
-//   kit-blocks.site  the site's details (settings/site.schema.json's fields),
-//                    which bound fields show when a block leaves them empty
+//   kit-blocks.site  site details, under cg-cms's (or alone, without cg-cms)
 //   kit-blocks.url   where <out>'s CSS is served (default /kit-blocks): each
 //                    view pushes its section's style.css onto the kit-styles stack
 
@@ -36,6 +42,9 @@ if (!function_exists('kit_cgcms_block')) {
                 }
             }
         }
+        if ($site === null && kit_cgcms_binds($schema['fields'] ?? [])) {
+            kit_cgcms_depends_on_site();
+        }
         $content = kit_content($schema, $data, $site ?? kit_cgcms_site(), kit_cgcms_images());
         $html = kit_section(KIT_CGCMS_DIR . "/sections/$name/$name.php", ['content' => $content, 'variant' => kit_variant($schema, $data['variant'] ?? null)]);
         return new KitSafe($html);
@@ -51,14 +60,50 @@ if (!function_exists('kit_cgcms_block')) {
         return $schemas[$name] ??= json_decode(file_get_contents(KIT_CGCMS_DIR . "/sections/$name/schema.json"), true, 64, JSON_THROW_ON_ERROR);
     }
 
-    /** The site's details from config('kit-blocks.site'), sanitised; the name falls back to the app's. */
+    /** Whether any of a schema's fields (a list's items too) is bound to a site detail. */
+    function kit_cgcms_binds(array $fields): bool
+    {
+        foreach ($fields as $field) {
+            if (!empty($field['bind']) || (isset($field['item']) && is_array($field['item']) && kit_cgcms_binds($field['item']))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Tags the page being rendered with cg-cms's settings:site, so saving the
+     * site's details purges it from the page cache. Nothing without cg-cms.
+     */
+    function kit_cgcms_depends_on_site(): void
+    {
+        if (!function_exists('app') || !class_exists(\Cg\Cms\Cache\CacheContext::class) || !app()->bound(\Cg\Cms\Cache\CacheContext::class)) {
+            return;
+        }
+        $tag = defined('Cg\Cms\Settings\Settings::SITE_TAG') ? \Cg\Cms\Settings\Settings::SITE_TAG : 'settings:site';
+        app(\Cg\Cms\Cache\CacheContext::class)->registerTag($tag);
+    }
+
+    /**
+     * The site's details, sanitised: cg-cms's settings (Settings::site()) over
+     * config('kit-blocks.site'), a detail left empty in the settings showing
+     * the config's; the name falls back to the app's.
+     */
     function kit_cgcms_site(): array
     {
         if (!function_exists('config')) {
             return [];
         }
+        $values = (array) config('kit-blocks.site', []);
+        if (function_exists('app') && method_exists(\Cg\Cms\Settings\Settings::class, 'site')) {
+            foreach ((array) app(\Cg\Cms\Settings\Settings::class)->site() as $key => $value) {
+                if ($value !== null && $value !== '' && $value !== []) {
+                    $values[$key] = $value;
+                }
+            }
+        }
         $schema = json_decode(file_get_contents(KIT_CGCMS_DIR . '/kit/site.schema.json'), true, 64, JSON_THROW_ON_ERROR);
-        $site = kit_site($schema, (array) config('kit-blocks.site', []), kit_cgcms_images());
+        $site = kit_site($schema, $values, kit_cgcms_images());
         if (($site['name'] ?? '') === '') {
             $site['name'] = (string) config('app.name', '');
         }

@@ -170,17 +170,25 @@ registers the `kit-blocks::` view namespace, so nothing in cg-cms changes. Field
 schema: rich text is a plain **textarea** (never cg-cms's `richText`, whose HTML would reach the
 page as it is; `kit_rich` makes the marks), enums, heading levels and icons are selects, lists
 repeaters (nested too), images media fields (`requireAlt` unless alt is optional, `preset` from
-`sizes`), a `variant` select first when a section has more than one layout; defaults are strings
-for now (cg-cms's `Field::default` takes only strings) and `kit_content()` casts everything back.
-Bound fields aren't required: left empty they show the site's details, read for now from
-`config('kit-blocks.site')`. The app serves `sections/*/style.css` and `kit/` (CSS and fonts only)
-at `config('kit-blocks.url')` (default `/kit-blocks`) and prints `@stack('kit-styles')` and kit.css
-in its layout. `-fixtures` writes every demo as cg-cms stores it (selects as strings) with kit's
-HTML, for a parity test in the app; `-check` fails if the folder is out of date (VERSION aside).
-`cgcms_test.go` loads the blocks against stand-ins for cg-cms's classes and renders every demo
-through the views with real Blade. Still to come (stage B, in cg-cms): site settings from the
-schema, `Field::default` for non-strings, the CSS in the admin's preview, `marks` and `icon`
-admin fields. The wider plan: `~/dev/cg-cms/docs/kit-sections.md`.
+`sizes`), numbers with their range (`min`/`max`, which cg-cms validates), a `variant` select first
+when a section has more than one layout; defaults are typed (numbers, `true`, strings for text and
+selects) and `kit_content()` casts everything back. The header's links leave out "This page"
+(`current`): `kit_cgcms_block` marks the link to the page being shown itself. Bound fields aren't
+required: left empty they show the site's details, from cg-cms's settings (`Settings::site()`,
+edited under Settings > Site details once the app sets `cg-cms.site_schema` to
+`<folder>/kit/site.schema.json`) over `config('kit-blocks.site')`; a block with bound fields tags
+the page `settings:site`, so saving the settings purges it. The app copies the CSS and fonts (never
+the PHP) to `public/kit-blocks` with cg-cms's `php artisan cms:kit-assets <folder>`, served at
+`config('kit-blocks.url')` (default `/kit-blocks`), and prints `@stack('kit-styles')` and kit.css
+in its layout; the admin's previews get them from `cg-cms.preview_styles` and
+`@include('cgcms::preview-styles')`. `-fixtures` writes every demo as cg-cms stores it (selects as
+strings) with kit's HTML, for a parity test in the app; `-check` fails if the folder is out of
+date (VERSION aside). `cgcms_test.go` loads the blocks against stand-ins for cg-cms's classes,
+renders every demo through the views with real Blade, and renders blocks against stand-ins for
+cg-cms's settings and cache context. Stage B (cg-cms, 13 November 2026) is done: typed field
+defaults, site settings from the schema, the cache purge, media presets named as `sizes`, the CSS
+in the admin's preview, `cms:kit-assets` (cg-cms's `KIT-BLOCKS.md`). Still to come: `marks` and
+`icon` admin fields. The wider plan: `~/dev/cg-cms/docs/kit-sections.md`.
 
 ### Security
 

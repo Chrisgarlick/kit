@@ -75,11 +75,43 @@ func (s *Section) CgCmsBlock(site *Schema) string {
 		fmt.Fprintf(&b, "        Field::select('variant')->label('Layout')->options(%s)->default(%s)->help(%s),\n",
 			phpList(names), phpString(names[0]), phpString(strings.Join(help, ". ")+"."))
 	}
-	for _, f := range s.Schema.Fields {
+	for _, f := range s.CgCmsFields() {
 		writeCgCmsField(&b, f, site, "        ")
 	}
 	fmt.Fprintf(&b, "    ])->view(%s),\n", phpString("kit-blocks::"+s.Name))
 	return b.String()
+}
+
+// cgcmsWorkedOut lists the fields cg-cms's runtime works out for itself,
+// which its blocks leave out of the admin: the header link that is the page
+// being shown (kit_cgcms_block marks it from the request, as kit Blocks does
+// in WordPress). A value stored before is still honoured.
+var cgcmsWorkedOut = map[string][]string{"header": {"links.current"}}
+
+// CgCmsFields is the section's fields as its cg-cms block has them: the
+// schema's, less those cg-cms works out (cgcmsWorkedOut).
+func (s *Section) CgCmsFields() []*Field {
+	return withoutFields(s.Schema.Fields, cgcmsWorkedOut[s.Name], "")
+}
+
+func withoutFields(fields []*Field, drop []string, prefix string) []*Field {
+	if len(drop) == 0 {
+		return fields
+	}
+	var out []*Field
+	for _, f := range fields {
+		path := prefix + f.Name
+		if slices.Contains(drop, path) {
+			continue
+		}
+		if f.Type == "list" {
+			c := *f
+			c.Item = withoutFields(f.Item, drop, path+".")
+			f = &c
+		}
+		out = append(out, f)
+	}
+	return out
 }
 
 // The cg-cms field type for each kit field type, which is also the name of
@@ -109,6 +141,14 @@ func writeCgCmsField(b *strings.Builder, f *Field, site *Schema, indent string) 
 		fmt.Fprintf(b, "->options(['1', '2', '3', '4'])")
 	case "icon":
 		fmt.Fprintf(b, "->options(%s)", phpList(append([]string{""}, IconNames...)))
+	case "number":
+		// cg-cms validates a number field's range (min: and max:).
+		if f.Min != 0 || f.Max > 0 {
+			fmt.Fprintf(b, "->min(%d)", f.Min)
+		}
+		if f.Max > 0 {
+			fmt.Fprintf(b, "->max(%d)", f.Max)
+		}
 	case "image":
 		if f.Alt == "required" {
 			b.WriteString("->requireAlt()")
@@ -128,7 +168,7 @@ func writeCgCmsField(b *strings.Builder, f *Field, site *Schema, indent string) 
 		}
 	}
 	if d, ok := cgcmsDefault(f); ok {
-		fmt.Fprintf(b, "->default(%s)", phpString(d))
+		fmt.Fprintf(b, "->default(%s)", d)
 	}
 	if h := cgcmsHelp(f, site); h != "" {
 		fmt.Fprintf(b, "->help(%s)", phpString(h))
@@ -143,26 +183,32 @@ func writeCgCmsField(b *strings.Builder, f *Field, site *Schema, indent string) 
 	b.WriteString(",\n")
 }
 
-// cgcmsDefault is a field's default as a string, cg-cms's Field::default
-// taking only strings for now: kit_content() casts it back. An enum or
-// heading level always has one (as kit fills them); a list's isn't carried.
+// cgcmsDefault is a field's default as a PHP literal, typed as cg-cms's
+// Field::default takes it: a number a number, a toggle true, text and selects
+// strings (a select's options are strings). An enum or heading level always
+// has one (as kit fills them); a list's isn't carried, nor a toggle's false
+// (a toggle starts off).
 func cgcmsDefault(f *Field) (string, bool) {
 	switch d := f.Default.(type) {
 	case string:
-		return d, true
+		return phpString(d), true
 	case float64:
-		return strconv.FormatFloat(d, 'f', -1, 64), true
+		n := strconv.FormatFloat(d, 'f', -1, 64)
+		if f.Type == "number" {
+			return n, true
+		}
+		return phpString(n), true
 	case bool:
 		if d {
-			return "1", true
+			return "true", true
 		}
 		return "", false
 	case nil:
 		switch f.Type {
 		case "enum":
-			return f.Options[0], true
+			return phpString(f.Options[0]), true
 		case "heading-level":
-			return "2", true
+			return phpString("2"), true
 		}
 	}
 	return "", false

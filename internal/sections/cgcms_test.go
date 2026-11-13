@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -50,8 +51,8 @@ func TestCgCmsFieldMapping(t *testing.T) {
 		`Field::textarea('lede')->help('*Stars* are italics.'),`,
 		`Field::text('eyebrow')->maxLength(60)->default('Hello'),`,
 		`Field::textarea('body'),`,
-		`Field::number('count')->default('3')->help('From 1 to 9.'),`,
-		`Field::boolean('boxed')->default('1'),`,
+		`Field::number('count')->min(1)->max(9)->default(3)->help('From 1 to 9.'),`,
+		`Field::boolean('boxed')->default(true),`,
 		`Field::boolean('plain'),`,
 		`Field::select('tone')->options(['plain', 'dark'])->default('plain'),`,
 		`Field::url('url'),`,
@@ -77,6 +78,30 @@ func TestCgCmsFieldMapping(t *testing.T) {
 	if php := (&Section{Name: "demo", Schema: s}).CgCmsBlock(nil); strings.Contains(php, "'variant'") || !strings.Contains(php, `Left empty, it shows the site\'s details.`) {
 		t.Errorf("one layout, no site schema:\n%s", php)
 	}
+}
+
+// The header's links leave out "This page": cg-cms works it out.
+func TestCgCmsWorkedOut(t *testing.T) {
+	secs, err := Load("../../sections")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, s := range secs {
+		if s.Name != "header" {
+			continue
+		}
+		php := s.CgCmsBlock(nil)
+		if strings.Contains(php, "Field::boolean('current')") || !strings.Contains(php, "Field::repeater('links')") {
+			t.Errorf("the header's links:\n%s", php)
+		}
+		// The schema itself keeps it, for WordPress and kit's own checks.
+		links := s.Schema.Fields[slices.IndexFunc(s.Schema.Fields, func(f *Field) bool { return f.Name == "links" })]
+		if !slices.ContainsFunc(links.Item, func(f *Field) bool { return f.Name == "current" }) {
+			t.Error("CgCmsFields changed the schema")
+		}
+		return
+	}
+	t.Fatal("no header section")
 }
 
 // Every section, generated for cg-cms, loads as blocks against stand-ins for
@@ -176,7 +201,7 @@ func TestCgCmsBlocks(t *testing.T) {
 			}
 			got = got[1:]
 		}
-		walk(s.Name, s.Schema.Fields, got)
+		walk(s.Name, s.CgCmsFields(), got)
 		view, err := os.ReadFile(filepath.Join(out, "views", s.Name+".blade.php"))
 		if err != nil || !strings.Contains(string(view), "{{ kit_cgcms_block('"+s.Name+"', $data) }}") {
 			t.Errorf("%s: the view doesn't render the block", s.Name)
@@ -190,6 +215,33 @@ func TestCgCmsBlocks(t *testing.T) {
 			t.Errorf("%s: %s: cg-cms and kit differ\n--- kit\n%s\n--- cg-cms\n%s", f.Section, f.Title, f.HTML, res.HTML[i])
 		}
 	}
+
+	// Inside a cg-cms app: the site's details from its settings, the page tagged.
+	t.Run("settings", func(t *testing.T) {
+		b, err := exec.Command(php, "testdata/cgcms-settings.php", out).CombinedOutput()
+		if err != nil {
+			t.Fatalf("php: %v\n%s", err, b)
+		}
+		var got struct {
+			StatsTags []string          `json:"stats_tags"`
+			Tags      []string          `json:"tags"`
+			CTA       string            `json:"cta"`
+			Site      map[string]string `json:"site"`
+		}
+		if err := json.Unmarshal(b, &got); err != nil {
+			t.Fatalf("php output: %v\n%s", err, b)
+		}
+		if len(got.StatsTags) != 0 || !slices.Equal(got.Tags, []string{"settings:site"}) {
+			t.Errorf("tags: %v after stats (no bound fields), %v after the call to action", got.StatsTags, got.Tags)
+		}
+		if !strings.Contains(got.CTA, "01234 999999") {
+			t.Errorf("the call to action doesn't show the settings' phone number:\n%s", got.CTA)
+		}
+		// Settings win; a detail empty there shows config's.
+		if got.Site["name"] != "Settings Ltd" || got.Site["phone"] != "01234 999999" || got.Site["email"] != "hello@config.test" {
+			t.Errorf("site: %v", got.Site)
+		}
+	})
 
 	// The views, with real Blade.
 	t.Run("blade", func(t *testing.T) {
