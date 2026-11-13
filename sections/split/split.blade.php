@@ -49,20 +49,48 @@
     @elseif($content['image'])
 @if($content['caption'])
     <figure class="kit-split-figure">
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+      <div class="kit-split-window" data-frame="browser">
+        <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
+@endif
       <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+      </div>
+@endif
       <figcaption class="kit-split-caption">{{ $content['caption'] }}</figcaption>
     </figure>
 @else
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+    <div class="kit-split-window" data-frame="browser">
+      <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
+@endif
     <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+    </div>
+@endif
 @endif
     @else
 @if($content['caption'])
     <figure class="kit-split-figure">
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+      <div class="kit-split-window" data-frame="browser">
+        <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
+@endif
       <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+      </div>
+@endif
       <figcaption class="kit-split-caption">{{ $content['caption'] }}</figcaption>
     </figure>
 @else
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+    <div class="kit-split-window" data-frame="browser">
+      <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
+@endif
     <div class="kit-split-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+@if($content['frame'] === 'browser' && $content['panel'] === 'none')
+    </div>
+@endif
 @endif
     @endif
   </div>

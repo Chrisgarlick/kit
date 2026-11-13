@@ -216,5 +216,18 @@
       "panel": "accent",
       "caption": "The studio, Saltaire, spring 2026"
     }
+  },
+  {
+    "title": "A screenshot in a browser frame, swapped",
+    "content": {
+      "eyebrow": "Example audit",
+      "title": "What a site audit *finds*",
+      "body": "Every page checked for accessibility, speed and broken links, with what to fix first.",
+      "link_label": "See the example",
+      "link_url": "/audit",
+      "frame": "browser",
+      "frame_url": "kritano.com",
+      "swap": true
+    }
   }
 ]

@@ -12,6 +12,9 @@
  * data-media="card" puts a paper card (.kit-split-card) beside the text, on the right; data-swap
  * puts it on the left, and stacked it sits under the text. A point with data-excluded has
  * a cross (kit's text block).
+ * With frame "browser" (and no panel) the image is in .kit-split-window[data-frame="browser"]: a
+ * bar (.kit-split-bar, aria-hidden: three dots, the address in .kit-split-url) over it, rounded,
+ * bordered and lifted, the image at its own shape under the bar (no square crop).
  */
 .kit-section-split { container: kit-split / inline-size; padding-block: var(--kit-section-pad-y); background: var(--kit-bg); color: var(--kit-fg); }
 .kit-section-split[data-background="tinted"] { background: var(--kit-band); }
@@ -25,11 +28,24 @@
 .kit-section-split[data-media="image"] .kit-split-figure { order: -1; }
 .kit-section-split[data-media="image"][data-swap] .kit-split-figure { order: 1; }
 .kit-section-split[data-media="card"][data-swap] .kit-split-card { order: -1; }
+.kit-section-split[data-media="image"] .kit-split-window { order: -1; }
+.kit-section-split[data-media="image"][data-swap] .kit-split-window { order: 1; }
 
 .kit-split-media { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--kit-card-radius); background: var(--kit-surface-2); }
 .kit-split-media[data-empty] { display: grid; place-items: center; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); box-sizing: border-box; }
 .kit-split-figure { display: grid; gap: var(--kit-space-3); inline-size: 100%; margin: 0; }
 .kit-split-caption { font-size: var(--kit-text-sm); line-height: 1.45; color: var(--kit-fg-2); }
+
+/* The browser frame: a window round the image, a bar on top with three dots (decoration) and
+ * the address in a pill. The image keeps its own shape under the bar; the bar scales with the
+ * section, and the address shortens with an ellipsis, then goes, on a narrow section. */
+.kit-split-window { inline-size: 100%; overflow: hidden; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-2); box-sizing: border-box; }
+.kit-section-split[data-media="image"] .kit-split-window .kit-split-media { aspect-ratio: auto; border-radius: 0; }
+.kit-section-split[data-media="image"] .kit-split-window .kit-split-media[data-empty] { aspect-ratio: 16 / 10; border: 0; }
+.kit-split-bar { display: grid; grid-template-columns: 1fr minmax(0, auto) 1fr; align-items: center; gap: var(--kit-space-3); block-size: clamp(1.75rem, 1.25rem + 1.2cqi, 2.25rem); padding-inline: clamp(0.75rem, 0.5rem + 0.6cqi, 1rem); border-block-end: 1px solid var(--kit-line); background: var(--kit-surface-2); font-size: clamp(0.5rem, 0.4rem + 0.3cqi, 0.625rem); box-sizing: border-box; }
+.kit-split-bar::before { content: ""; inline-size: 1em; block-size: 1em; margin-inline-end: 3.2em; border-radius: 50%; background: var(--kit-line-strong); box-shadow: 1.6em 0 0 var(--kit-line-strong), 3.2em 0 0 var(--kit-line-strong); }
+.kit-split-url { overflow: hidden; min-inline-size: min(12rem, 100%); padding: 0.25rem 1rem; border-radius: var(--kit-radius-pill); background: var(--kit-surface); color: var(--kit-fg-2); font: var(--kit-text-xs)/1.4 var(--kit-font-mono); letter-spacing: 0.02em; text-align: center; text-overflow: ellipsis; white-space: nowrap; box-sizing: border-box; }
+@media (forced-colors: active) { .kit-split-window { border: 1px solid CanvasText; } .kit-split-bar::before { background: CanvasText; box-shadow: 1.6em 0 0 CanvasText, 3.2em 0 0 CanvasText; } }
 
 /* The card: a sheet of paper beside the text, a mono label over a line or two in the display face. */
 .kit-split-card { display: grid; align-content: center; gap: var(--kit-space-4); min-block-size: 18rem; padding: clamp(2rem, 5cqi, 4rem); border: 1px solid var(--kit-line); border-radius: var(--kit-card-radius); background: var(--kit-surface); color: var(--kit-fg); box-shadow: var(--kit-shadow-3); box-sizing: border-box; }
@@ -76,7 +92,13 @@
   .kit-section-split[data-media="image"] .kit-split-figure,
   .kit-section-split[data-media="image"][data-swap] .kit-split-figure { order: -1; }
   .kit-section-split[data-media="card"][data-swap] .kit-split-card { order: 1; }
+  .kit-section-split[data-media="image"] .kit-split-window,
+  .kit-section-split[data-media="image"][data-swap] .kit-split-window { order: -1; }
+  .kit-section-split[data-media="image"] .kit-split-window .kit-split-media { aspect-ratio: auto; }
+  .kit-section-split[data-media="image"] .kit-split-window .kit-split-media[data-empty] { aspect-ratio: 16 / 10; }
+  .kit-split-url { min-inline-size: 0; padding-inline: 0.75rem; }
   .kit-split-card { min-block-size: 0; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-media { block-size: auto; min-block-size: 0; aspect-ratio: 4 / 3; contain: none; }
   .kit-section-split[data-panel][data-media="image"] .kit-split-figure { grid-template-rows: auto; }
 }
+@container kit-split (max-width: 20rem) { .kit-split-url { display: none; } }

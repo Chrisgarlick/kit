@@ -26,5 +26,17 @@
       "caption_left": "The admin: every page, its blocks and their fields.",
       "tone": "dark"
     }
+  },
+  {
+    "title": "In a browser frame, with a proof card",
+    "content": {
+      "frame": "browser",
+      "frame_url": "chrisgarlick.com/admin",
+      "caption_left": "The admin: every page, its blocks and their fields.",
+      "caption_right": "cg-cms · 2026",
+      "proof_label": "Time to first byte",
+      "proof_value": "0.4 ms",
+      "proof_note": "A cached page, on a 1GB server"
+    }
   }
 ]

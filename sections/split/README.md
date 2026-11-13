@@ -26,6 +26,8 @@ The text side has the [text block](/sections/text-block/)'s fields (`eyebrow`, `
 | `media` | `image`, `questions` or `card` | What sits beside the text. `image` by default. |
 | `image` | image | Alt text required. Lazy-loaded: a split is rarely the first section. Empty, it shows a placeholder. |
 | `caption` | text | Optional, up to 160 characters. Set, the image goes in a `<figure>` with the caption as its `<figcaption>`, under it. |
+| `frame` | `none` or `browser` | With an image: `none` by default. `browser` puts the image in a window, so a screenshot reads as the product: a bar on top (three dots and the address), rounded `--kit-radius-2` corners, a 1px `--kit-line` border and `--kit-shadow-2`. The image keeps its own shape under the bar, not cropped square. Not drawn with a text `panel` (the panel and image are already one block). |
+| `frame_url` | text | Optional, up to 80 characters. With the browser frame, the address in the bar ("kritano.com"), in the mono face. |
 | `card_label` | text | With `card`: a short label at the top of the card, in the mono face ("Time to first byte · cg-cms, live 1GB server"). Optional. |
 | `card_title` | rich text | With `card`: the card's main words in the display face; a new line is a line break, `*stars*` for italics ("0.4 ms a page\n6,300 a second"). |
 | `card_text` | text | With `card`: optional, a smaller note under it. |
@@ -38,7 +40,8 @@ The text side has the [text block](/sections/text-block/)'s fields (`eyebrow`, `
 ## Layout
 
 A size container. Below **48rem of its own width** the halves stack: an image always above the
-text, questions and a card always below it.
+text, questions and a card always below it. A browser frame's bar scales down with the section, and
+its address shortens with an ellipsis and is left out below 20rem.
 
 The card is a sheet of `--kit-surface` with a 1px `--kit-line` border and `--kit-shadow-3`, its
 content centred down it: for a figure or a fact the text points to, like a measured number.
@@ -51,6 +54,8 @@ content centred down it: for a figure or a fact the text points to, like a measu
 - A question's number is `aria-hidden`: each summary is read as its question alone.
 - The card is paragraphs, not a heading: it's read after the text, in order, label first.
 - A point marked `excluded` has a cross, and "Not included:" is said first (visually hidden).
+- The browser frame's bar is `aria-hidden`: decoration. The image's alt text carries the meaning,
+  so the address isn't read twice.
 
 ## Design
 

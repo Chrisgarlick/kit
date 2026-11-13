@@ -7,6 +7,9 @@
  *       <figcaption class="kit-figure-caption"> <span class="kit-figure-caption-left"> <span class="kit-figure-caption-right"> </figcaption>
  *     </figure>
  *   </section>
+ * With frame "browser" the image sits in .kit-figure-window[data-frame="browser"]: a bar
+ * (.kit-figure-bar, aria-hidden: three dots and the address in .kit-figure-url) over it,
+ * rounded, bordered and lifted; the image keeps its shape under the bar.
  * The image keeps its own shape (a placeholder is 16:9). The proof card floats
  * over the image's bottom-right corner; below 40rem (the section's own width)
  * it sits under the image instead, and the caption's two halves stack.
@@ -19,6 +22,15 @@
 .kit-figure-media { display: block; inline-size: 100%; block-size: auto; border: 1px solid var(--_line); border-radius: var(--kit-card-radius); background: var(--kit-surface-2); box-sizing: border-box; }
 .kit-figure-media[data-empty] { display: grid; place-items: center; aspect-ratio: 16 / 9; color: var(--kit-fg-3); border: 1px dashed var(--kit-line-strong); }
 .kit-figure-media[data-empty] .kit-icon { inline-size: 36px; block-size: 36px; }
+
+/* The browser frame: a window round the image, a bar on top with three dots (decoration) and
+ * the address in a pill. The bar scales with the section, and the address shortens with an
+ * ellipsis, then goes, on a narrow section. */
+.kit-figure-window { overflow: hidden; border: 1px solid var(--kit-line); border-radius: var(--kit-radius-2); background: var(--kit-surface); box-shadow: var(--kit-shadow-2); }
+.kit-figure-window > .kit-figure-media { border: 0; border-radius: 0; }
+.kit-figure-bar { display: grid; grid-template-columns: 1fr minmax(0, auto) 1fr; align-items: center; gap: var(--kit-space-3); block-size: clamp(1.75rem, 1.25rem + 1.2cqi, 2.25rem); padding-inline: clamp(0.75rem, 0.5rem + 0.6cqi, 1rem); border-block-end: 1px solid var(--kit-line); background: var(--kit-surface-2); font-size: clamp(0.5rem, 0.4rem + 0.3cqi, 0.625rem); box-sizing: border-box; }
+.kit-figure-bar::before { content: ""; inline-size: 1em; block-size: 1em; margin-inline-end: 3.2em; border-radius: 50%; background: var(--kit-line-strong); box-shadow: 1.6em 0 0 var(--kit-line-strong), 3.2em 0 0 var(--kit-line-strong); }
+.kit-figure-url { overflow: hidden; min-inline-size: min(16rem, 100%); padding: 0.25rem 1rem; border-radius: var(--kit-radius-pill); background: var(--kit-surface); color: var(--kit-fg-2); font: var(--kit-text-xs)/1.4 var(--kit-font-mono); letter-spacing: 0.02em; text-align: center; text-overflow: ellipsis; white-space: nowrap; box-sizing: border-box; }
 
 /* The proof card: a small label, a big number and a note, on the surface colour. */
 .kit-figure-proof { position: absolute; inset-block-end: var(--kit-space-5); inset-inline-end: var(--kit-space-5); display: grid; gap: var(--kit-space-1); min-inline-size: 12rem; max-inline-size: 18rem; padding: var(--kit-space-4) var(--kit-space-5); border-radius: var(--kit-card-radius); background: var(--kit-surface); color: var(--kit-fg); box-shadow: var(--kit-shadow-3); }
@@ -34,5 +46,7 @@
   .kit-figure-proof { position: static; max-inline-size: none; margin-block-start: var(--kit-space-3); box-shadow: none; border: 1px solid var(--kit-line); }
   .kit-figure-caption { display: grid; }
   .kit-figure-caption-right { margin-inline-start: 0; text-align: start; }
+  .kit-figure-url { min-inline-size: 0; padding-inline: 0.75rem; }
 }
-@media (forced-colors: active) { .kit-figure-proof { border: 1px solid CanvasText; } }
+@container kit-figure (max-width: 20rem) { .kit-figure-url { display: none; } }
+@media (forced-colors: active) { .kit-figure-proof, .kit-figure-window { border: 1px solid CanvasText; } .kit-figure-bar::before { background: CanvasText; box-shadow: 1.6em 0 0 CanvasText, 3.2em 0 0 CanvasText; } }

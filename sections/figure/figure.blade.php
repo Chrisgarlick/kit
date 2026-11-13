@@ -4,10 +4,17 @@
   <div class="kit-container">
     <figure class="kit-figure">
       <div class="kit-figure-frame">
+@if($content['frame'] === 'browser')
+        <div class="kit-figure-window" data-frame="browser">
+          <div class="kit-figure-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-figure-url">{{ $content['frame_url'] }}</span>@endif</div>
+@endif
 @if($content['image'])
         <img class="kit-figure-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
 @else
         <div class="kit-figure-media" data-empty>{{ kit_icon('image') }}</div>
+@endif
+@if($content['frame'] === 'browser')
+        </div>
 @endif
 @if($content['proof_value'])
         <div class="kit-figure-proof">

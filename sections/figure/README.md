@@ -22,6 +22,8 @@ echo kit_section(__DIR__ . '/kit/figure.php', ['content' => $figure]);
 | Field | Type | Notes |
 |---|---|---|
 | `image` | image | Alt text required. Shown at its own shape, the container's width, lazy-loaded. Empty, it shows a 16:9 placeholder. |
+| `frame` | `none` or `browser` | `none` by default. `browser` puts the image in a window, so a screenshot reads as the product: a bar on top (three dots and the address), rounded `--kit-radius-2` corners, a 1px `--kit-line` border and `--kit-shadow-2`. The image keeps its own shape under the bar. |
+| `frame_url` | text | Optional, up to 80 characters. With the browser frame, the address in the bar ("chrisgarlick.com/admin"), in the mono face. |
 | `caption_left` | text | Optional. What the image shows, on the left of the caption row. |
 | `caption_right` | text | Optional. A short note on the right (a date, a client), in the mono face. |
 | `proof_label` | text | Optional. The card's small label, in the mono face. |
@@ -36,8 +38,10 @@ heading, use the [gallery](/sections/gallery/); for an image beside text, the
 ## Layout
 
 A size container. The proof card floats over the image's bottom-right corner, inside it: keep that corner
-of the image free of anything that matters. Below **40rem of its own width** the card sits under the
-image, full width, and the caption's two halves stack, left over right.
+of the image free of anything that matters (framed, it sits over the window's corner the same way). Below **40rem of its own width** the card sits under the
+image, full width, and the caption's two halves stack, left over right. The browser frame's bar
+scales down with the section (36px tall at desktop, 28px on a phone), the address shortens with an
+ellipsis and is left out below 20rem.
 
 ## Accessibility
 
@@ -45,6 +49,8 @@ image, full width, and the caption's two halves stack, left over right.
   screen reader hears them in that order and the captions name the figure.
 - The card is paragraphs, not a heading; nothing in it is only in colour.
 - The image needs alt text that says what the screenshot shows; the caption can add the context.
+- The browser frame's bar is `aria-hidden`: decoration. The image's alt text carries the meaning,
+  so the address isn't read twice; if the address matters, say it in the alt text or the caption.
 
 ## Design
 
