@@ -9,7 +9,7 @@ return function ($content = [], $variant = 'default'): void {
       <div class="kit-footer-about">
         <p class="kit-footer-brand">
           <?php if ($content['logo']): ?>
-          <img class="kit-footer-logo" src="<?php echo kit_e(kit_url($content['logo']['src'])); ?>" alt="" <?php if (isset($content['logo']['width'])): ?>width="<?php echo kit_e($content['logo']['width']); ?>" height="<?php echo kit_e(($content['logo']['height'] ?? '')); ?>"<?php endif; ?>>
+          <img class="kit-footer-logo" src="<?php echo kit_e(kit_url($content['logo']['src'])); ?>" alt="" aria-hidden="true" <?php if (isset($content['logo']['width'])): ?>width="<?php echo kit_e($content['logo']['width']); ?>" height="<?php echo kit_e(($content['logo']['height'] ?? '')); ?>"<?php endif; ?>>
           <?php else: ?>
           <span class="kit-footer-mark" aria-hidden="true"></span>
           <?php endif; ?>

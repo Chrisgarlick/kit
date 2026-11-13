@@ -6,7 +6,7 @@
       <div class="kit-footer-about">
         <p class="kit-footer-brand">
           @if($content['logo'])
-          <img class="kit-footer-logo" src="{{ kit_url($content['logo']['src']) }}" alt="" @isset($content['logo']['width'])width="{{ $content['logo']['width'] }}" height="{{ $content['logo']['height'] ?? '' }}"@endisset>
+          <img class="kit-footer-logo" src="{{ kit_url($content['logo']['src']) }}" alt="" aria-hidden="true" @isset($content['logo']['width'])width="{{ $content['logo']['width'] }}" height="{{ $content['logo']['height'] ?? '' }}"@endisset>
           @else
           <span class="kit-footer-mark" aria-hidden="true"></span>
           @endif

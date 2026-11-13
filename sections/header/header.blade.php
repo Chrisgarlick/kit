@@ -4,7 +4,7 @@
   <div class="kit-container kit-header-bar">
     <a class="kit-header-brand" href="{{ kit_url($content['home_url']) }}">
       @if($content['logo'])
-      <img class="kit-header-logo" src="{{ kit_url($content['logo']['src']) }}" alt="" @isset($content['logo']['width'])width="{{ $content['logo']['width'] }}" height="{{ $content['logo']['height'] ?? '' }}"@endisset>
+      <img class="kit-header-logo" src="{{ kit_url($content['logo']['src']) }}" alt="" aria-hidden="true" @isset($content['logo']['width'])width="{{ $content['logo']['width'] }}" height="{{ $content['logo']['height'] ?? '' }}"@endisset>
       @else
       <span class="kit-header-mark" aria-hidden="true"></span>
       @endif
