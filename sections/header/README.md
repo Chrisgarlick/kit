@@ -34,6 +34,7 @@ echo kit_section(__DIR__ . '/kit/header.php', ['content' => $header]);
 | `links` | list (up to 7) | `label`, `url`, and `current` for the page you're on (`aria-current="page"`, the accent colour and an underline). |
 | `numbered` | boolean | Shows "01", "02"… before each link, in the mono face. Off by default. The number is `aria-hidden`: the link's name stays its label. |
 | `phone` | text | Linked with `tel:`; below 72rem only the icon shows. Bound to the site's phone. |
+| `secondary_label`, `secondary_url` | text, url | Optional: a plain text link before the button ("Book a call"), and in the phone menu between the links and the button. Left out when either is empty. |
 | `action_label`, `action_url` | text, url | The one primary button. Left out when either is empty. |
 | `tone` | `plain` or `dark` | `plain` (the default) uses the page's colours; `dark` sits on the `--kit-inverse-*` band, like the footer, so the logo must read on it. |
 

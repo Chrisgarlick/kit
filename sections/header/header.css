@@ -6,6 +6,7 @@
  * The section is a size container, so it folds by its own width, not the page's.
  * data-tone="dark" puts it on the inverse band (--kit-inverse-*), like the
  * footer; .kit-header-num is a link's decorative number (numbered links).
+ * .kit-header-secondary is the plain text link before the button (and in the menu).
  */
 .kit-section-header { container: kit-header / inline-size; position: relative; z-index: 10; background: var(--kit-bg); color: var(--kit-fg); font-family: var(--kit-font-ui); }
 .kit-section-header svg { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
@@ -32,6 +33,9 @@
 .kit-header-nav + .kit-header-end { margin-inline-start: 0; }
 .kit-header-phone { display: inline-flex; align-items: center; gap: var(--kit-space-2); font-size: var(--kit-text-md); font-variant-numeric: tabular-nums; color: var(--kit-fg-2); }
 .kit-header-phone:hover { color: var(--kit-fg); }
+.kit-header-secondary { font-size: var(--kit-text-md); font-weight: 500; white-space: nowrap; text-decoration: underline 1px transparent; text-underline-offset: 4px; transition: text-decoration-color var(--kit-duration); }
+.kit-header-secondary:hover { text-decoration-color: currentColor; }
+.kit-header-sheet .kit-header-secondary { justify-self: center; padding-block: var(--kit-space-2); font-size: var(--kit-text-lg); }
 /* Scoped to the section, so these win over kit's button whichever stylesheet loads first. */
 .kit-section-header .kit-header-action { --_h: var(--kit-control-lg); }
 
@@ -55,7 +59,7 @@
 /* Then the links and the button fold into the menu. */
 @container kit-header (max-width: 54rem) {
   .kit-header-bar { min-block-size: 72px; gap: var(--kit-space-4); }
-  .kit-header-nav, .kit-section-header .kit-header-action { display: none; }
+  .kit-header-nav, .kit-section-header .kit-header-action, .kit-header-end > .kit-header-secondary { display: none; }
   .kit-header-menu { display: block; }
   .kit-header-nav + .kit-header-end { margin-inline-start: auto; }
 }
