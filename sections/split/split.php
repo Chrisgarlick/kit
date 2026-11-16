@@ -56,7 +56,7 @@ return function ($content = [], $variant = 'default'): void {
       <div class="kit-split-window" data-frame="browser">
         <div class="kit-split-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-split-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
-      <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
+      <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> <?php if (isset($content['image']['srcset'])): ?>srcset="<?php echo kit_e($content['image']['srcset']); ?>" sizes="(min-width: 48rem) 50vw, 100vw" <?php endif; ?> loading="lazy">
 <?php if (($content['frame'] === 'browser')): ?>
       </div>
 <?php endif; ?>
@@ -67,7 +67,7 @@ return function ($content = [], $variant = 'default'): void {
     <div class="kit-split-window" data-frame="browser">
       <div class="kit-split-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-split-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
-    <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
+    <img class="kit-split-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> <?php if (isset($content['image']['srcset'])): ?>srcset="<?php echo kit_e($content['image']['srcset']); ?>" sizes="(min-width: 48rem) 50vw, 100vw" <?php endif; ?> loading="lazy">
 <?php if (($content['frame'] === 'browser')): ?>
     </div>
 <?php endif; ?>

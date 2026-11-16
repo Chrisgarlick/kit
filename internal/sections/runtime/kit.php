@@ -306,6 +306,21 @@ if (!function_exists('kit_content')) {
                         $img[$k] = (int) $v[$k];
                     }
                 }
+                // Other widths of the same image ("url 800w, url 1600w"), kept
+                // only when every address in it is one kit loads.
+                if (is_string($v['srcset'] ?? null) && $v['srcset'] !== '') {
+                    $ok = true;
+                    foreach (explode(',', $v['srcset']) as $candidate) {
+                        $parts = preg_split('/\s+/', trim($candidate));
+                        if (count($parts) !== 2 || kit_url($parts[0]) === '#' || preg_match('/^\d+w$/', $parts[1]) !== 1) {
+                            $ok = false;
+                            break;
+                        }
+                    }
+                    if ($ok) {
+                        $img['srcset'] = $v['srcset'];
+                    }
+                }
                 return $img;
             case 'list':
                 if (!is_array($v) || !array_is_list($v)) {

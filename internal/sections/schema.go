@@ -389,8 +389,12 @@ func (f *Field) validate(v any, where string) []error {
 				if n, ok := x.(float64); !ok || n <= 0 {
 					errs = append(errs, fmt.Errorf("%s.%s: a size in pixels", where, k))
 				}
+			case "srcset":
+				if _, ok := x.(string); !ok {
+					errs = append(errs, fmt.Errorf("%s.%s: a string (\"url 800w, url 1600w\")", where, k))
+				}
 			default:
-				errs = append(errs, fmt.Errorf("%s.%s: images have src, alt, width and height", where, k))
+				errs = append(errs, fmt.Errorf("%s.%s: images have src, alt, width, height and srcset", where, k))
 			}
 		}
 		if src, _ := m["src"].(string); src == "" {

@@ -76,7 +76,7 @@
       @elseif($block['kind'] === 'figure')
       <figure class="kit-prose-figure" data-size="{{ $block['size'] }}">
         @if($block['image'])
-        <img class="kit-prose-media" src="{{ kit_url($block['image']['src']) }}" alt="{{ $block['image']['alt'] ?? '' }}" @isset($block['image']['width'])width="{{ $block['image']['width'] }}" height="{{ $block['image']['height'] ?? '' }}" @endisset loading="lazy">
+        <img class="kit-prose-media" src="{{ kit_url($block['image']['src']) }}" alt="{{ $block['image']['alt'] ?? '' }}" @isset($block['image']['width'])width="{{ $block['image']['width'] }}" height="{{ $block['image']['height'] ?? '' }}" @endisset @isset($block['image']['srcset'])srcset="{{ $block['image']['srcset'] }}" sizes="(min-width: 64rem) 64rem, 100vw" @endisset loading="lazy">
         @else
         <div class="kit-prose-media" data-empty>{{ kit_icon('image') }}</div>
         @endif

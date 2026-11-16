@@ -9,7 +9,7 @@
           <div class="kit-figure-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-figure-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
 @if($content['image'])
-        <img class="kit-figure-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+        <img class="kit-figure-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset @isset($content['image']['srcset'])srcset="{{ $content['image']['srcset'] }}" sizes="100vw" @endisset loading="lazy">
 @else
         <div class="kit-figure-media" data-empty>{{ kit_icon('image') }}</div>
 @endif

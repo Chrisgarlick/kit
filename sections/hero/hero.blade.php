@@ -28,11 +28,11 @@
     @if($variant !== 'text' && $content['image'])
 @if($content['caption'])
     <figure class="kit-hero-figure">
-      <img class="kit-hero-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset fetchpriority="high">
+      <img class="kit-hero-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset @isset($content['image']['srcset'])srcset="{{ $content['image']['srcset'] }}" sizes="(min-width: 48rem) 50vw, 100vw" @endisset fetchpriority="high">
       <figcaption class="kit-hero-caption">{{ $content['caption'] }}</figcaption>
     </figure>
 @else
-    <img class="kit-hero-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset fetchpriority="high">
+    <img class="kit-hero-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset @isset($content['image']['srcset'])srcset="{{ $content['image']['srcset'] }}" sizes="(min-width: 48rem) 50vw, 100vw" @endisset fetchpriority="high">
 @endif
     @elseif($variant !== 'text')
     <div class="kit-hero-media" data-empty><svg aria-hidden="true" viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>

@@ -79,7 +79,7 @@ return function ($content = [], $variant = 'default'): void {
       <?php elseif (($block['kind'] === 'figure')): ?>
       <figure class="kit-prose-figure" data-size="<?php echo kit_e($block['size']); ?>">
         <?php if ($block['image']): ?>
-        <img class="kit-prose-media" src="<?php echo kit_e(kit_url($block['image']['src'])); ?>" alt="<?php echo kit_e(($block['image']['alt'] ?? '')); ?>" <?php if (isset($block['image']['width'])): ?>width="<?php echo kit_e($block['image']['width']); ?>" height="<?php echo kit_e(($block['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
+        <img class="kit-prose-media" src="<?php echo kit_e(kit_url($block['image']['src'])); ?>" alt="<?php echo kit_e(($block['image']['alt'] ?? '')); ?>" <?php if (isset($block['image']['width'])): ?>width="<?php echo kit_e($block['image']['width']); ?>" height="<?php echo kit_e(($block['image']['height'] ?? '')); ?>" <?php endif; ?> <?php if (isset($block['image']['srcset'])): ?>srcset="<?php echo kit_e($block['image']['srcset']); ?>" sizes="(min-width: 64rem) 64rem, 100vw" <?php endif; ?> loading="lazy">
         <?php else: ?>
         <div class="kit-prose-media" data-empty><?php echo kit_e(kit_icon('image')); ?></div>
         <?php endif; ?>

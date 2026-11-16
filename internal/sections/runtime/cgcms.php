@@ -138,7 +138,9 @@ if (!function_exists('kit_cgcms_block')) {
             // reads it, and a screenshot is a tenth of its PNG. kit prints one
             // <img>, so the source has to be the format everyone can take.
             $src = $img->sources['image/webp'] ?? $img->src;
-            return array_filter(['src' => $src, 'alt' => $img->alt, 'width' => $img->width, 'height' => $img->height], fn ($v) => $v !== null);
+            // The same format's other widths, so a phone takes a smaller file.
+            $srcset = property_exists($img, 'srcsets') ? ($img->srcsets[pathinfo($src, PATHINFO_EXTENSION)] ?? null) : null;
+            return array_filter(['src' => $src, 'alt' => $img->alt, 'width' => $img->width, 'height' => $img->height, 'srcset' => $srcset], fn ($v) => $v !== null);
         };
     }
 

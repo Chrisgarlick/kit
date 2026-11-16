@@ -12,7 +12,7 @@ return function ($content = [], $variant = 'default'): void {
           <div class="kit-figure-bar" aria-hidden="true"><?php if ($content['frame_url']): ?><span class="kit-figure-url"><?php echo kit_e($content['frame_url']); ?></span><?php endif; ?></div>
 <?php endif; ?>
 <?php if ($content['image']): ?>
-        <img class="kit-figure-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> loading="lazy">
+        <img class="kit-figure-media" src="<?php echo kit_e(kit_url($content['image']['src'])); ?>" alt="<?php echo kit_e($content['image']['alt']); ?>" <?php if (isset($content['image']['width'])): ?>width="<?php echo kit_e($content['image']['width']); ?>" height="<?php echo kit_e(($content['image']['height'] ?? '')); ?>" <?php endif; ?> <?php if (isset($content['image']['srcset'])): ?>srcset="<?php echo kit_e($content['image']['srcset']); ?>" sizes="100vw" <?php endif; ?> loading="lazy">
 <?php else: ?>
         <div class="kit-figure-media" data-empty><?php echo kit_e(kit_icon('image')); ?></div>
 <?php endif; ?>

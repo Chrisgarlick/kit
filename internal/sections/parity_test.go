@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -93,6 +94,37 @@ func TestSectionsMatchPHPAndBlade(t *testing.T) {
 			want = append(want, html)
 			names = append(names, s.Name+": "+d.Title)
 		}
+	}
+	compareAll(t, cases, want, names)
+}
+
+// An image with other widths prints srcset and its section's sizes, the same
+// in Go, compiled PHP and Blade. No demo has one (they are static files).
+func TestImageSrcsetMatchesPHPAndBlade(t *testing.T) {
+	secs, err := Load("../../sections")
+	if err != nil {
+		t.Fatal(err)
+	}
+	image := map[string]any{"src": "/media/a/half.webp", "alt": "A screenshot", "width": float64(1200), "height": float64(800),
+		"srcset": "/media/a/half-600w.webp 600w, /media/a/half.webp 1200w"}
+	var cases []phpCase
+	var want, names []string
+	for _, s := range secs {
+		if s.Name != "split" && s.Name != "figure" && s.Name != "hero" {
+			continue
+		}
+		content := s.Schema.Fill(map[string]any{"title": "With an image", "image": image, "media": "image", "variant": "default"})
+		props := map[string]any{"content": content, "variant": s.Schema.Variants[0].Name}
+		html, err := s.Template.Render(props)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if s.Name != "hero" && !strings.Contains(html, `srcset="/media/a/half-600w.webp 600w, /media/a/half.webp 1200w"`) {
+			t.Errorf("%s: no srcset in %s", s.Name, html)
+		}
+		cases = append(cases, phpCase{s.Name, s.Source, s.Template, props})
+		want = append(want, html)
+		names = append(names, s.Name+": srcset")
 	}
 	compareAll(t, cases, want, names)
 }

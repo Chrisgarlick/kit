@@ -53,7 +53,7 @@
       <div class="kit-split-window" data-frame="browser">
         <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
-      <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+      <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset @isset($content['image']['srcset'])srcset="{{ $content['image']['srcset'] }}" sizes="(min-width: 48rem) 50vw, 100vw" @endisset loading="lazy">
 @if($content['frame'] === 'browser')
       </div>
 @endif
@@ -64,7 +64,7 @@
     <div class="kit-split-window" data-frame="browser">
       <div class="kit-split-bar" aria-hidden="true">@if($content['frame_url'])<span class="kit-split-url">{{ $content['frame_url'] }}</span>@endif</div>
 @endif
-    <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset loading="lazy">
+    <img class="kit-split-media" src="{{ kit_url($content['image']['src']) }}" alt="{{ $content['image']['alt'] }}" @isset($content['image']['width'])width="{{ $content['image']['width'] }}" height="{{ $content['image']['height'] ?? '' }}" @endisset @isset($content['image']['srcset'])srcset="{{ $content['image']['srcset'] }}" sizes="(min-width: 48rem) 50vw, 100vw" @endisset loading="lazy">
 @if($content['frame'] === 'browser')
     </div>
 @endif
