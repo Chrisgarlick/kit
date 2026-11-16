@@ -7,7 +7,7 @@ return function ($content = [], $variant = 'default'): void {
   <div class="kit-container kit-header-bar">
     <a class="kit-header-brand" href="<?php echo kit_e(kit_url($content['home_url'])); ?>">
       <?php if ($content['logo']): ?>
-      <img class="kit-header-logo" src="<?php echo kit_e(kit_url($content['logo']['src'])); ?>" alt="" aria-hidden="true" <?php if (isset($content['logo']['width'])): ?>width="<?php echo kit_e($content['logo']['width']); ?>" height="<?php echo kit_e(($content['logo']['height'] ?? '')); ?>"<?php endif; ?>>
+      <img class="kit-header-logo" src="<?php echo kit_e(kit_url($content['logo']['src'])); ?>" alt="" role="presentation" aria-hidden="true" <?php if (isset($content['logo']['width'])): ?>width="<?php echo kit_e($content['logo']['width']); ?>" height="<?php echo kit_e(($content['logo']['height'] ?? '')); ?>"<?php endif; ?>>
       <?php else: ?>
       <span class="kit-header-mark" aria-hidden="true"></span>
       <?php endif; ?>
