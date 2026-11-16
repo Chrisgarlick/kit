@@ -134,7 +134,11 @@ if (!function_exists('kit_cgcms_block')) {
             if ($img === null) {
                 return null;
             }
-            return array_filter(['src' => $img->src, 'alt' => $img->alt, 'width' => $img->width, 'height' => $img->height], fn ($v) => $v !== null);
+            // The WebP variant when cg-cms makes one: every current browser
+            // reads it, and a screenshot is a tenth of its PNG. kit prints one
+            // <img>, so the source has to be the format everyone can take.
+            $src = $img->sources['image/webp'] ?? $img->src;
+            return array_filter(['src' => $src, 'alt' => $img->alt, 'width' => $img->width, 'height' => $img->height], fn ($v) => $v !== null);
         };
     }
 
