@@ -77,6 +77,8 @@ You don't have to write the tokens by hand: `./bin/kit brand <folder>` reads a C
 
 ## Developing
 
+On a fresh clone, run `bin/setup` first: it installs the npm packages and builds `bin/kit`.
+
 Requires Go 1.26, and Node for the browser tests (`npm install` once).
 
 ```sh

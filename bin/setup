@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Gets a fresh clone ready to work on: the browser tests' npm packages and the
+# kit tool (bin/kit). Safe to run again. Starts nothing and deploys nothing.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+need() { command -v "$1" >/dev/null 2>&1 || { echo "bin/setup: $1 not found. $2" >&2; exit 1; }; }
+need go "Install Go 1.26 or newer: brew install go"
+need npm "Install Node (for the browser tests): brew install node"
+
+# npm ci only when package-lock.json has changed since the last install.
+if [ ! -d node_modules ] || [ package-lock.json -nt node_modules/.package-lock.json ]; then
+  echo "== npm packages"
+  npm ci --no-audit --no-fund
+fi
+
+echo "== bin/kit"
+make kit
+
+# Playwright's browsers are a big download, so they aren't fetched here.
+# make browser-test needs Chromium: npx playwright install chromium
+# (KIT_ALL_BROWSERS=1 also needs: npx playwright install firefox webkit)
+ls -d "$HOME/Library/Caches/ms-playwright"/chromium-* >/dev/null 2>&1 ||
+  echo "No Playwright browsers yet: npx playwright install chromium (before make browser-test)"
+
+echo
+echo "Ready. Next: make serve (http://localhost:8150), make test, make browser-test."
