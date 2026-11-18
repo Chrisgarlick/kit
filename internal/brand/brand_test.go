@@ -100,3 +100,30 @@ func TestSiteThemesUpToDate(t *testing.T) {
 		}
 	}
 }
+
+func TestCueTokens(t *testing.T) {
+	get := func(toks []Token) map[string]string {
+		m := map[string]string{}
+		for _, tk := range toks {
+			m[tk.Name] = tk.Value
+		}
+		return m
+	}
+	if toks := cueTokens(nil); toks != nil {
+		t.Errorf("no motion settings: want no cue tokens, got %v", toks)
+	}
+	calm := get(cueTokens(map[string]any{"pace": "calm", "feel": "confident"}))
+	if calm["pace"] != "1.4" || calm["duration"] != "980ms" || calm["distance"] != "24px" {
+		t.Errorf("calm confident: %v", calm)
+	}
+	// The older personality maps: punchy is brisk and playful.
+	p := get(cueTokens(map[string]any{"personality": "punchy"}))
+	if p["pace"] != "0.7" || p["ease"] != "cubic-bezier(0.34, 1.56, 0.64, 1)" || p["distance"] != "32px" {
+		t.Errorf("punchy: %v", p)
+	}
+	// pace and feel win over personality; speed multiplies the pace.
+	w := get(cueTokens(map[string]any{"personality": "punchy", "feel": "confident", "speed": 2.0}))
+	if w["pace"] != "1.4" || w["duration"] != "980ms" || w["distance"] != "24px" {
+		t.Errorf("feel and speed over personality: %v", w)
+	}
+}

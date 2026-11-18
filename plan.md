@@ -355,6 +355,8 @@ The part that makes the kit different.
 ### Phase 6: adoption, then the advanced parts (L, ongoing)
 
 - **Each app adds its theme file** (accent, fonts, radius in light and dark) in its own repo: Kritano's indigo, amber and Outfit; chrisgarlick.com's own palette.
+- **Brand themes carry the motion personality for cue** (the web animation package, ~/dev/chris/cue): `kit brand` writes the brand's `motion.pace` and `motion.feel` (or its older `personality`) as `--cue-pace`, `--cue-duration`, `--cue-ease` and `--cue-distance` in tokens.css, the same values as cue's own presets, so a kit site moves the client's way with nothing to add. Colours need nothing: cue falls back to kit's `--kit-*` tokens.
+  ✅ 18 Nov 2026 (HASH)
 - **Kritano's app first:**
   - replace its hand-built pieces: score chart and sparklines, ⌘K palette, tables, menus, dialogs and tabs;
   - then the Kritano and docs sites through cms themes;

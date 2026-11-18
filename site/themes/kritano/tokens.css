@@ -46,6 +46,10 @@
   --kit-shadow-1: 0 1px 2px rgb(30 27 75 / 0.08);
   --kit-shadow-2: 0 8px 20px -6px rgb(30 27 75 / 0.18);
   --kit-shadow-3: 0 18px 40px -12px rgb(30 27 75 / 0.32);
+  --cue-pace: 1;
+  --cue-duration: 700ms;
+  --cue-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --cue-distance: 24px;
 }
 
 @media (prefers-color-scheme: dark) {

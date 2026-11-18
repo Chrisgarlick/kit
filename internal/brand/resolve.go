@@ -20,6 +20,9 @@ type Theme struct {
 	Shared []Token // the same in every mode: type, radii
 	Light  []Token
 	Dark   []Token
+	// Cue is the brand's motion personality as cue's variables (--cue-*), so
+	// a kit site moves the client's way with no attributes to add.
+	Cue []Token
 	// Problems are failed contrast checks, as "dark: fg-3 on surface-2 is 4.21:1 (needs 4.5)".
 	Problems []string
 }
@@ -39,7 +42,7 @@ func (p *palette) put(name string, c Colour) { p.set[name] = c; p.order = append
 
 // Resolve works out every token for both modes, applies kit.yaml, and checks contrast.
 func Resolve(f *File, o *Overrides) (*Theme, error) {
-	t := &Theme{Name: f.Name}
+	t := &Theme{Name: f.Name, Cue: cueTokens(f.Motion)}
 	shared, err := sharedTokens(f)
 	if err != nil {
 		return nil, err
@@ -229,6 +232,55 @@ func derive(p Palette, dark bool) (*palette, error) {
 	return out, nil
 }
 
+// cueTokens turns the brand's motion personality (motion.pace and
+// motion.feel, or the older motion.personality) into cue's variables, with
+// the same values as cue's data-cue-pace and data-cue-feel presets (cue's
+// SPEC.md section 7.2). motion.speed multiplies the pace. A brand with no
+// motion settings gets none, and cue's defaults apply.
+func cueTokens(m map[string]any) []Token {
+	str := func(k string) string { s, _ := m[k].(string); return s }
+	pace, feel := str("pace"), str("feel")
+	switch str("personality") {
+	case "calm":
+		pace, feel = or(pace, "calm"), or(feel, "confident")
+	case "confident":
+		pace, feel = or(pace, "steady"), or(feel, "confident")
+	case "punchy":
+		pace, feel = or(pace, "brisk"), or(feel, "playful")
+	}
+	speed, _ := m["speed"].(float64)
+	if pace == "" && feel == "" && speed == 0 {
+		return nil
+	}
+	k := map[string]float64{"calm": 1.4, "brisk": 0.7}[pace]
+	if k == 0 {
+		k = 1
+	}
+	if speed > 0 {
+		k *= speed
+	}
+	ease, distance := "cubic-bezier(0.16, 1, 0.3, 1)", "24px"
+	switch feel {
+	case "punchy":
+		ease, distance = "cubic-bezier(0.2, 0.9, 0.1, 1)", "16px"
+	case "playful":
+		ease, distance = "cubic-bezier(0.34, 1.56, 0.64, 1)", "32px"
+	}
+	return []Token{
+		{"pace", fmt.Sprintf("%g", math.Round(k*100)/100)},
+		{"duration", fmt.Sprintf("%gms", math.Round(700*k))},
+		{"ease", ease},
+		{"distance", distance},
+	}
+}
+
+func or(s, def string) string {
+	if s != "" {
+		return s
+	}
+	return def
+}
+
 // sharedTokens: type and radii, the same in both modes.
 func sharedTokens(f *File) ([]Token, error) {
 	var out []Token
@@ -395,6 +447,9 @@ func (t *Theme) CSS() string {
 	}
 	b.WriteString(":root {\n")
 	block("  ", t.Shared, t.Light)
+	for _, tk := range t.Cue {
+		fmt.Fprintf(&b, "  --cue-%s: %s;\n", tk.Name, tk.Value)
+	}
 	b.WriteString("}\n\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme=\"light\"]) {\n    color-scheme: dark;\n")
 	block("    ", t.Dark)
 	b.WriteString("  }\n}\n\n:root[data-theme=\"dark\"] {\n  color-scheme: dark;\n")
