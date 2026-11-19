@@ -66,6 +66,7 @@ print:
   cover: editorial
 
 motion:
-  personality: confident
+  pace: calm
+  feel: confident
   speed: 1.0
   stagger: 60ms
